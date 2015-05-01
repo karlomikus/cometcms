@@ -1,15 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repositories\MatchesRepository;
+use App\Repositories\Contracts\MatchesRepositoryInterface;
 
 class MatchesController extends Controller {
 
     protected $matches;
 
-    public function __construct(MatchesRepository $matches)
+    public function __construct(MatchesRepositoryInterface $matches)
     {
         $this->matches = $matches;
     }

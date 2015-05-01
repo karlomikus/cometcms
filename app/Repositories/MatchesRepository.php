@@ -5,14 +5,14 @@ use App\Match, App\Repositories\Contracts\MatchesRepositoryInterface;
 
 class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface {
 
-    public function __construct()
+    public function __construct(Match $match)
     {
-        parent::__construct(new Match());
+        parent::__construct($match);
     }
 
     public function getMatchRounds($matchID)
     {
-        return $this-> get($matchID)->rounds;
+        return $this->get($matchID)->rounds;
     }
 
     public function getMatchResult($matchID)
