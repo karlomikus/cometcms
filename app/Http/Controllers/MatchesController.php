@@ -9,9 +9,9 @@ class MatchesController extends Controller {
 
     protected $matches;
 
-    public function __construct(MatchesRepository $repo)
+    public function __construct(MatchesRepository $matches)
     {
-        $this->matches = $repo;
+        $this->matches = $matches;
     }
 
 	public function index()
