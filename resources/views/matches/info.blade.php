@@ -11,6 +11,7 @@
                     <tr>
                         <th>Game</th>
                         <th>Versus</th>
+                        <th>Result</th>
                         <th></th>
                     </tr>
                 </thead>

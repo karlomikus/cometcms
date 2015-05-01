@@ -15,11 +15,27 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return $this->get($matchID)->rounds;
     }
 
-    public function getMatchResult($matchID)
+    public function getMatchScore($matchID)
     {
-        $matchRounds = $this->getMatchRounds($matchID);
+        $result = \DB::table('round_scores')
+                ->join('match_rounds', 'round_scores.round_id', '=', 'match_rounds.id')
+                ->select(\DB::raw('sum(score_home) as home, sum(score_guest) as guest'))
+                ->where('match_id', '=', $matchID)
+                ->first();
 
-        return $matchRounds[0]->scores;
+        return $result;
+    }
+
+    public function getMatchOutcome($matchID)
+    {
+        $score = $this->getMatchScore($matchID);
+
+        if ($score->home > $score->guest)
+            return 'win';
+        elseif ($score->home < $score->guest)
+            return 'lose';
+
+        return 'draw';
     }
 
 }
