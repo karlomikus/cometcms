@@ -2,11 +2,10 @@
 
 use App\Game;
 use App\Http\Requests;
-use App\Opponent;
+use App\Repositories\Contracts\GamesRepositoryInterface;
 use App\Repositories\Contracts\MatchesRepositoryInterface;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
-use App\Team;
 
 class MatchesController extends Controller {
 
@@ -31,11 +30,11 @@ class MatchesController extends Controller {
         return view('matches.details', $data);
     }
 
-    public function create()
+    public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games)
     {
-        $data['teams'] = Team::all();
-        $data['opponents'] = Opponent::all();
-        $data['games'] = Game::all();
+        $data['teams'] = $teams->all();
+        $data['opponents'] = $opponents->all();
+        $data['games'] = $games->all();
 
         return view('matches.form', $data);
     }
