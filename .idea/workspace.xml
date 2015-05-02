@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86692888-2fce-4b32-9dca-4c6bca74f4f7" name="Default" comment="Added opponents repository&#10;">
+    <list default="true" id="86692888-2fce-4b32-9dca-4c6bca74f4f7" name="Default" comment="Added missing repository bindings">
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\.name" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\Comet App.iml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\deployment.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\comet\.idea\workspace.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/MatchesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/MatchesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php" afterPath="$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="comet.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
+    <ignored path=".idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,8 +71,8 @@
       <file leaf-file-name="RepositoryServiceProvider.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44596013" vertical-offset="0" max-vertical-offset="953">
-              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.28856245" vertical-offset="0" max-vertical-offset="953">
+              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -131,6 +138,7 @@
         <option value="$PROJECT_DIR$/app/Repositories/OpponentsRepository.php" />
         <option value="$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/MatchesController.php" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
@@ -314,10 +322,10 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="options.lastSelected" value="com.intellij.application.options.emmet.EmmetConfigurableProvider" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Ignored.Files" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
     <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
@@ -462,7 +470,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430582430448</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added missing repository bindings">
+      <created>1430582530805</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1430582530805</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -540,7 +554,8 @@
     <MESSAGE value="Updated new match form" />
     <MESSAGE value="Added teams repository" />
     <MESSAGE value="Added opponents repository&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added opponents repository&#10;" />
+    <MESSAGE value="Added missing repository bindings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added missing repository bindings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -549,14 +564,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Match.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="347" max-vertical-offset="1300">
-          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Repositories/Contracts/MatchesRepositoryInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="875">
@@ -941,8 +948,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44596013" vertical-offset="0" max-vertical-offset="953">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.28856245" vertical-offset="0" max-vertical-offset="953">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
           <folding />
         </state>
       </provider>
