@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Team extends Model {
 
-	//
+	public function roster()
+    {
+        return $this->belongsToMany('App\User', 'team_roster');
+    }
 
 }

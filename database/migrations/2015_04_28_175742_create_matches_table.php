@@ -21,6 +21,7 @@ class CreateMatchesTable extends Migration {
 			$table->foreign('opponent_id')->references('id')->on('opponents');
 			$table->integer('game_id')->unsigned();
 			$table->foreign('game_id')->references('id')->on('games');
+            $table->string('matchlink')->nullable();
 			$table->timestamps();
 		});
 	}

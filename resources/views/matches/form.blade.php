@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Create new match!</h1>
+            <h1>Create new match</h1>
             <form action="/">
                 <div class="form-group">
                     <label for="team">Choose team</label>
@@ -37,6 +37,7 @@
                     <li><a href="#round3" data-toggle="tab">Round 3</a></li>
                     <li><a href="#round4" data-toggle="tab">Round 4</a></li>
                     <li><a href="#round5" data-toggle="tab">Round 5</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-plus"></i> Add round</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="round1">
