@@ -4,8 +4,8 @@ use App\Game;
 use App\Http\Requests;
 use App\Opponent;
 use App\Repositories\Contracts\MatchesRepositoryInterface;
-use App\Repositories\OpponentsRepository;
-use App\Repositories\TeamsRepository;
+use App\Repositories\Contracts\OpponentsRepositoryInterface;
+use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Team;
 
 class MatchesController extends Controller {
@@ -45,7 +45,7 @@ class MatchesController extends Controller {
         return redirect('/matches');
     }
 
-    public function formData(TeamsRepository $teams, OpponentsRepository $opponents)
+    public function formData(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents)
     {
         $data = [
             'teams' => $teams->getTeamRoster(2),
