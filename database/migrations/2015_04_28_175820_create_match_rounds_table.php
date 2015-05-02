@@ -19,6 +19,7 @@ class CreateMatchRoundsTable extends Migration {
 			$table->foreign('match_id')->references('id')->on('matches');
 			$table->integer('map_id')->unsigned()->nullable();
 			$table->foreign('map_id')->references('id')->on('maps');
+            $table->text('notes')->nullable();
 			$table->timestamps();
 		});
 	}

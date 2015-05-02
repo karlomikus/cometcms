@@ -1,7 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Game;
 use App\Http\Requests;
+use App\Opponent;
 use App\Repositories\Contracts\MatchesRepositoryInterface;
+use App\Team;
 
 class MatchesController extends Controller {
 
@@ -28,12 +31,27 @@ class MatchesController extends Controller {
 
     public function create()
     {
-        return view('matches.form');
+        $data['teams'] = Team::all();
+        $data['opponents'] = Opponent::all();
+        $data['games'] = Game::all();
+
+        return view('matches.form', $data);
     }
 
     public function save()
     {
         return redirect('/matches');
+    }
+
+    public function formData()
+    {
+        $data = [
+            'teams' => Team::all(),
+            'opponents' => Opponent::all(),
+            'games' => Game::all()
+        ];
+
+        return response()->json($data);
     }
 
 }
