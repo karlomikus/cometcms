@@ -10,6 +10,23 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         parent::__construct($match);
     }
 
+    public function all()
+    {
+        $query = \DB::table('matches')
+                ->join('teams', 'teams.id', '=', 'matches.team_id')
+                ->join('opponents', 'opponents.id', '=', 'matches.opponent_id')
+                ->join('games', 'games.id', '=', 'matches.game_id')
+                ->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
+                ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
+                ->select(\DB::raw("matches.id, teams.name as team, opponents.name as opponent,
+                 games.name as game, count(match_rounds.match_id) as 'rounds',
+                 sum(round_scores.score_home) as 'score_home', sum(round_scores.score_guest) as 'score_guest'"))
+                ->groupBy('matches.id')
+                ->get();
+
+        return $query;
+    }
+
     public function getMatchRounds($matchID)
     {
         return $this->get($matchID)->rounds;

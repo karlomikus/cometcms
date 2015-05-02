@@ -26,4 +26,14 @@ class MatchesController extends Controller {
         return view('matches.details', $data);
     }
 
+    public function create()
+    {
+        return view('matches.form');
+    }
+
+    public function save()
+    {
+        return redirect('/matches');
+    }
+
 }

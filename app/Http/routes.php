@@ -20,3 +20,5 @@ Route::controllers([
 
 Route::get('/matches', 'MatchesController@index');
 Route::get('/match/{id}', 'MatchesController@show');
+Route::get('/match/new', 'MatchesController@create');
+Route::post('/match/new', 'MatchesController@save');

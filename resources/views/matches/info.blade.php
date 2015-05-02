@@ -11,6 +11,7 @@
                     <tr>
                         <th>Game</th>
                         <th>Versus</th>
+                        <th>Rounds</th>
                         <th>Result</th>
                         <th></th>
                     </tr>
@@ -18,8 +19,10 @@
                 <tbody>
                     @foreach($matches as $match)
                         <tr>
-                            <td>{{ $match->game->name }}</td>
-                            <td>{{ $match->opponent->name }}</td>
+                            <td>{{ $match->game }}</td>
+                            <td>{{ $match->team }} VS. <strong>{{ $match->opponent }}</strong></td>
+                            <td>{{ $match->rounds }}</td>
+                            <td>{{ $match->score_home }} : {{ $match->score_guest  }}</td>
                             <td><a href="/match/{{ $match->id }}">More info</a></td>
                         </tr>
                     @endforeach
