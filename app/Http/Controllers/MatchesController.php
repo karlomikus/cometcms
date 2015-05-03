@@ -20,7 +20,7 @@ class MatchesController extends Controller {
     {
         $data['matches'] = $this->matches->all();
 
-        return view('matches.info', $data);
+        return view('matches.main', $data);
     }
 
     public function show($id)
