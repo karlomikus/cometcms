@@ -12,6 +12,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
     public function all()
     {
+        // TODO: Fix rounds counting!
         $query = \DB::table('matches')
                 ->join('teams', 'teams.id', '=', 'matches.team_id')
                 ->join('opponents', 'opponents.id', '=', 'matches.opponent_id')

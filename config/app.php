@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
         'App\Providers\RepositoryServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 
 	],
 

@@ -12,7 +12,8 @@
 		"phpspec/phpspec": "~2.1",
 		"fzaninotto/Faker": "dev-master",
         "barryvdh/laravel-ide-helper": "dev-master",
-        "doctrine/dbal": "~2.3"
+        "doctrine/dbal": "~2.3",
+        "barryvdh/laravel-debugbar": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
