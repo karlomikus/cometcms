@@ -44,15 +44,4 @@ class MatchesController extends Controller {
         return redirect('/matches');
     }
 
-    public function formData(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents)
-    {
-        $data = [
-            'teams' => $teams->getTeamRoster(2),
-            'opponents' => $opponents->all(),
-            'games' => Game::all()
-        ];
-
-        return response()->json($data);
-    }
-
 }

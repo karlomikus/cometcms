@@ -10,7 +10,7 @@ class UsersTableSeeder extends Seeder {
         $faker = Faker\Factory::create();
 
         User::create([
-            'name' => 'Admin',
+            'name' => 'Karlo',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123')
         ]);

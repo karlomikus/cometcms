@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $id 
  * @property string $name 
  * @property string $code 
- * @property string $image 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
+ * @property string $image
  * @method static \Illuminate\Database\Query\Builder|\App\Game whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Game whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Game whereCode($value)
@@ -20,6 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Game extends Model {
 
-	//
+    public $timestamps = false;
 
 }

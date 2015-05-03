@@ -20,6 +20,11 @@ Route::controllers([
 
 Route::get('/matches', 'MatchesController@index');
 Route::get('/match/{id}', 'MatchesController@show');
-Route::get('/matches/new', 'MatchesController@create');
-Route::post('/matches/new', 'MatchesController@save');
-Route::get('/matches/getFormData', 'MatchesController@formData');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
+{
+    Route::get('/matches', 'MatchesController@todo');
+    Route::get('/matches/new', 'MatchesController@create');
+    Route::post('/matches/new', 'MatchesController@save');
+    Route::get('/matches/form', 'Admin\MatchesController@formData');
+});
