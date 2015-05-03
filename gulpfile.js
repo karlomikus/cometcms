@@ -6,7 +6,7 @@ elixir(function(mix) {
 
 elixir(function(mix) {
     mix.scripts([
-        'angular/angular.min.js'
+        'angular/angular.js'
     ],
         'public/js/dependencies.js',
         'node_modules'

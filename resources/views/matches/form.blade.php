@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container" ng-controller="MatchesController">
     <div class="row">
         <div class="col-md-12">
             <h1>Create new match</h1>
