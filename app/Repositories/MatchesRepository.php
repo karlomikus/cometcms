@@ -21,7 +21,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
                 ->select(\DB::raw("matches.id, teams.name as team, opponents.name as opponent,
                  games.name as game, count(match_rounds.match_id) as 'rounds',
-                 sum(round_scores.score_home) as 'score_home', sum(round_scores.score_guest) as 'score_guest'"))
+                 sum(round_scores.score_home) as 'score_home', sum(round_scores.score_guest) as 'score_guest', matches.created_at"))
                 ->groupBy('matches.id')
                 ->get();
 
