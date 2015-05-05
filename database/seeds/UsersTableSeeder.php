@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder {
             'name' => 'Karlo',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123')
-        ])->attachRole($roleAdmins);
+        ])->attachRoles([$roleAdmins, $roleUsers]);
 
         for ($i=0; $i < 10; $i++) {
             User::create([

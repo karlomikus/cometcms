@@ -34,6 +34,8 @@ Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
 {
+    Route::get('/users', 'Admin\UsersController@index');
+
     Route::get('/matches', 'MatchesController@todo');
     Route::get('/matches/new', 'MatchesController@create');
     Route::post('/matches/new', 'MatchesController@save');
