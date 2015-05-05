@@ -13,13 +13,24 @@
 
 Route::get('/', 'HomeController@index');
 
+/**
+ * TODO: Change this terrible route shorthand to more be readable
+ */
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
 
+/**
+ * Basic routes
+ */
 Route::get('/matches', 'MatchesController@index');
 Route::get('/match/{id}', 'MatchesController@show');
+
+/**
+ * Admin routes
+ */
+Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
 {
