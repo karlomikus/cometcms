@@ -147,6 +147,7 @@ return [
         'App\Providers\RepositoryServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
+        'Zizaco\Entrust\EntrustServiceProvider',
 
 	],
 
@@ -196,6 +197,8 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+        // Aplication specific facades
+        'Entrust'   => 'Zizaco\Entrust\EntrustFacade',
 	],
 
 ];
