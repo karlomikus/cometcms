@@ -148,6 +148,7 @@ return [
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
+        'Illuminate\Html\HtmlServiceProvider',
 
 	],
 
@@ -199,6 +200,8 @@ return [
 
         // Aplication specific facades
         'Entrust'   => 'Zizaco\Entrust\EntrustFacade',
+        'Form'      => 'Illuminate\Html\FormFacade',
+        'HTML'      => 'Illuminate\Html\HtmlFacade',
 	],
 
 ];

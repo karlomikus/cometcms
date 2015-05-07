@@ -10,5 +10,4 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
     {
         parent::__construct($user);
     }
-
 }

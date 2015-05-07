@@ -38,6 +38,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
      * Users
      */
     Route::get('/users', 'Admin\UsersController@index');
+    Route::get('/users/new', 'Admin\UsersController@create');
+    Route::post('/users/new', 'Admin\UsersController@save');
+    Route::get('/users/edit/{id}', 'Admin\UsersController@edit');
+    Route::post('/users/edit/{id}', 'Admin\UsersController@update');
 
     /**
      * Matches
