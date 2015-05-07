@@ -22,10 +22,9 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 ->select(\DB::raw("matches.id, teams.name as team, opponents.name as opponent,
                  games.name as game, count(match_rounds.match_id) as 'rounds',
                  sum(round_scores.score_home) as 'score_home', sum(round_scores.score_guest) as 'score_guest', matches.created_at"))
-                ->groupBy('matches.id')
-                ->get();
+                ->groupBy('matches.id');
 
-        return $query;
+        return $query->get();
     }
 
     public function getMatchRounds($matchID)

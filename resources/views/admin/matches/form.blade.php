@@ -33,10 +33,6 @@
                 </div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#round1" data-toggle="tab">Round 1</a></li>
-                    <li><a href="#round2" data-toggle="tab">Round 2</a></li>
-                    <li><a href="#round3" data-toggle="tab">Round 3</a></li>
-                    <li><a href="#round4" data-toggle="tab">Round 4</a></li>
-                    <li><a href="#round5" data-toggle="tab">Round 5</a></li>
                     <li><a href="#"><i class="glyphicon glyphicon-plus"></i> Add round</a></li>
                 </ul>
                 <div class="tab-content">
@@ -52,10 +48,6 @@
                             <textarea class="form-control" name="round-info" id="round-info" rows="4"></textarea>
                         </div>
                     </div>
-                    <div class="tab-pane" id="round2">Round2</div>
-                    <div class="tab-pane" id="round3">Round3</div>
-                    <div class="tab-pane" id="round4">Round4</div>
-                    <div class="tab-pane" id="round5">Round5</div>
                 </div>
             </form>
         </div>
