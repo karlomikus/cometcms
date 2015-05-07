@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 /**
- * TODO: Change this terrible route shorthand to more be readable
+ * TODO: Change this terrible route shorthand to something more readable
  */
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -34,10 +34,17 @@ Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
 {
+    /**
+     * Users
+     */
     Route::get('/users', 'Admin\UsersController@index');
 
+    /**
+     * Matches
+     */
     Route::get('/matches', 'Admin\MatchesController@index');
+    Route::get('/matches/new', 'Admin\MatchesController@create');
+    Route::post('/matches/new', 'Admin\MatchesController@save');
+    Route::get('/matches/edit/{id}', 'Admin\MatchesController@edit');
     Route::get('/matches/form', 'Admin\MatchesController@formData');
-    Route::get('/matches/new', 'MatchesController@create');
-    Route::post('/matches/new', 'MatchesController@save');
 });

@@ -2,10 +2,7 @@
 
 use App\Game;
 use App\Http\Requests;
-use App\Repositories\Contracts\GamesRepositoryInterface;
 use App\Repositories\Contracts\MatchesRepositoryInterface;
-use App\Repositories\Contracts\OpponentsRepositoryInterface;
-use App\Repositories\Contracts\TeamsRepositoryInterface;
 
 class MatchesController extends Controller {
 
@@ -28,15 +25,6 @@ class MatchesController extends Controller {
         $data['match'] = $this->matches->get($id);
 
         return view('matches.details', $data);
-    }
-
-    public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games)
-    {
-        $data['teams'] = $teams->all();
-        $data['opponents'] = $opponents->all();
-        $data['games'] = $games->all();
-
-        return view('matches.form', $data);
     }
 
     public function save()

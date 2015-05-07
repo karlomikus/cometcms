@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "7fea312417bdb8c5841837099ab54505",
@@ -1825,16 +1825,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "813c5a9c39186b0a84613035824d9929a5467fc9"
+                "reference": "94945bb36e910646fd74740348a762bcaceb70d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/813c5a9c39186b0a84613035824d9929a5467fc9",
-                "reference": "813c5a9c39186b0a84613035824d9929a5467fc9",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/94945bb36e910646fd74740348a762bcaceb70d4",
+                "reference": "94945bb36e910646fd74740348a762bcaceb70d4",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.0.17",
+                "illuminate/support": "~5.0.17|5.1.*",
                 "maximebf/debugbar": "~1.10.2",
                 "php": ">=5.4.0",
                 "symfony/finder": "~2.6"
@@ -1871,7 +1871,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2015-04-21 20:44:35"
+            "time": "2015-05-03 13:59:38"
         },
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1879,18 +1879,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "dac46a081d484af21c989564140ea2d3fd7ddf42"
+                "reference": "bb3bd2645d2878972838b22a96cfcd7ff15f1e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/dac46a081d484af21c989564140ea2d3fd7ddf42",
-                "reference": "dac46a081d484af21c989564140ea2d3fd7ddf42",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/bb3bd2645d2878972838b22a96cfcd7ff15f1e8a",
+                "reference": "bb3bd2645d2878972838b22a96cfcd7ff15f1e8a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "5.0.x",
-                "illuminate/filesystem": "5.0.x",
-                "illuminate/support": "5.0.x",
+                "illuminate/console": "5.0.x|5.1.x",
+                "illuminate/filesystem": "5.0.x|5.1.x",
+                "illuminate/support": "5.0.x|5.1.x",
                 "php": ">=5.4.0",
                 "phpdocumentor/reflection-docblock": "2.0.x",
                 "symfony/class-loader": "~2.3"
@@ -1934,7 +1934,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2015-04-22 15:46:01"
+            "time": "2015-05-06 10:08:42"
         },
         {
             "name": "doctrine/annotations",
