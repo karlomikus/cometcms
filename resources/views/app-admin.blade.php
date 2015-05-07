@@ -31,7 +31,6 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/admin/matches') }}">Matches</a></li>
                 <li><a href="{{ url('/admin/users') }}">Users</a></li>
-                <li><a href="{{ url('/admin/matches/new') }}">New match</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -54,5 +53,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="{{ asset('/js/dependencies.js') }}"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
+@yield('page-scripts')
 </body>
 </html>
