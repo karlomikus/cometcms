@@ -10,4 +10,11 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
     {
         parent::__construct($user);
     }
+
+    public function search($term)
+    {
+        return $this->model->where('name', 'LIKE', '%'. $term .'%')
+                           ->orWhere('email', 'LIKE', '%'. $term .'%');
+    }
+
 }

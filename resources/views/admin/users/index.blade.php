@@ -6,14 +6,14 @@
             <div class="col-md-6">
                 <a href="{{ url('admin/users/new') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> New user</a>
             </div>
-            <div class="col-md-6">
+            <form class="col-md-6" method="get" action="{{ url('admin/users') }}">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter search term...">
+                    <input type="text" class="form-control" name="search" placeholder="Enter search term...">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </span>
                 </div>
-            </div>
+            </form>
         </div>
         <hr>
         <div class="row">
@@ -34,7 +34,7 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     @foreach($user->roles as $role)
-                                        {{ $role->display_name }}<br>
+                                        <a href="{{ url('admin/roles/edit', [$role->id]) }}">{{ $role->display_name }}</a><br>
                                     @endforeach
                                 </td>
                                 <td>
@@ -46,5 +46,6 @@
                 </table>
             </div>
         </div>
+        {!! $users->render() !!}
     </div>
 @endsection

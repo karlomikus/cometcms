@@ -13,9 +13,17 @@ class UsersController extends AdminController {
         $this->users = $users;
     }
 
-	public function index()
+	public function index(Request $request)
     {
-        $data['users'] = $this->users->all();
+        $searchTerm = $request->query('search');
+
+        if (empty($searchTerm))
+            $usersData = $this->users->paginate(10);
+        else
+            $usersData = $this->users->search($searchTerm)->paginate(10);
+
+        $data['users'] = $usersData;
+
         return view('admin.users.index', $data);
     }
 
@@ -28,9 +36,15 @@ class UsersController extends AdminController {
 
     public function save(Request $request)
     {
-        $all = $request->all();
+        $roles = $request->input('roles');
 
-        $this->users->insert($all);
+        $user = $this->users->insert([
+            'email' => $request->input('email'),
+            'password' => \Hash::make($request->input('pwd')),
+            'name' => $request->input('name')
+        ]);
+
+        $user->attachRoles($roles);
 
         return redirect('admin/users');
     }

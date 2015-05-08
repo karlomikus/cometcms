@@ -41,7 +41,7 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      */
     public function insert($data)
     {
-        $this->model->create($data);
+        return $this->model->create($data);
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      */
     public function update($id, $data)
     {
-        $this->model->find($id)->update($data);
+        return $this->model->find($id)->update($data);
     }
 
     /**
@@ -61,6 +61,11 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
     public function delete($id)
     {
         $this->model->find($id)->delete();
+    }
+
+    public function paginate($pages)
+    {
+        return $this->model->paginate($pages);
     }
 
 }
