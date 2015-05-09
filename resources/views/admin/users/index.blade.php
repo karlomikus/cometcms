@@ -8,9 +8,12 @@
             </div>
             <form class="col-md-6" method="get" action="{{ url('admin/users') }}">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Enter search term...">
+                    <input type="text" class="form-control" name="search" placeholder="Enter search term..." value="{{ !empty($searchTerm) ? $searchTerm : "" }}">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        @if(!empty($searchTerm))
+                            <a class="btn btn-primary" href="{{ url('admin/users') }}"><i class="glyphicon glyphicon-remove"></i></a>
+                        @endif
                     </span>
                 </div>
             </form>

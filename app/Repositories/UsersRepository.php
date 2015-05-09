@@ -20,15 +20,17 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
     public function getByPage($page, $limit)
     {
         return $this->model->orderBy('name', 'asc')
-                            ->skip($limit * ($page - 1))
-                            ->take($limit)
-                            ->get();
+            ->skip($limit * ($page - 1))
+            ->take($limit)
+            ->get();
     }
 
     public function search($term)
     {
         return $this->model->where('name', 'LIKE', '%'. $term .'%')
-                           ->orWhere('email', 'LIKE', '%'. $term .'%')->get();
+            ->orWhere('email', 'LIKE', '%'. $term .'%')
+            ->orderBy('name', 'asc')
+            ->get();
     }
 
 }

@@ -10,6 +10,8 @@ class UsersController extends AdminController {
 
     protected $users;
 
+    protected $pageLimit = 15;
+
     public function __construct(UsersRepositoryInterface $users)
     {
         $this->users = $users;
@@ -20,14 +22,19 @@ class UsersController extends AdminController {
         $searchTerm = $request->query('search');
         $page = $request->query('page');
 
-        if (empty($searchTerm))
-            $usersData = $this->users->getByPage($page, 10);
-        else
+        if (empty($searchTerm)) {
+            $usersData = $this->users->getByPage($page, $this->pageLimit);
+            $count = $this->users->countAll();
+        }
+        else {
             $usersData = $this->users->search($searchTerm);
+            $count = 0;
+        }
 
-        $paginator = new LengthAwarePaginator($usersData, $this->users->countAll(), 10, $page, ['path' => $request->getPathInfo()]);
+        $paginator = new LengthAwarePaginator($usersData, $count, $this->pageLimit, $page, ['path' => $request->getPathInfo()]);
 
         $data['users'] = $paginator;
+        $data['searchTerm'] = $searchTerm;
 
         return view('admin.users.index', $data);
     }
