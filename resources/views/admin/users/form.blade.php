@@ -1,7 +1,6 @@
 @extends('app-admin')
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -10,6 +9,7 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
+                        {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                     </div>
                     <div class="form-group">
                         <label for="email">E-mail</label>
@@ -33,5 +33,4 @@
             </div>
         </div>
     </div>
-
 @endsection

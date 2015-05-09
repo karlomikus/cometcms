@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder {
             'password' => Hash::make('admin123')
         ])->attachRoles([$roleAdmins, $roleUsers]);
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 54; $i++) {
             User::create([
                 'name' => $faker->name,
                 'email' => $faker->email,

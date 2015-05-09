@@ -68,4 +68,9 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         return $this->model->paginate($pages);
     }
 
+    public function countAll()
+    {
+        return $this->model->count();
+    }
+
 }

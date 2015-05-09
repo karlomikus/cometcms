@@ -24,6 +24,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Roles</th>
+                            <th>Registered</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
                                         <a href="{{ url('admin/roles/edit', [$role->id]) }}">{{ $role->display_name }}</a><br>
                                     @endforeach
                                 </td>
+                                <td>{{ $user->created_at->format('d.m.Y') }}</td>
                                 <td>
                                     <a href="{{ url('admin/user/delete', [$user->id]) }}" class="btn btn-danger btn-xs">Delete</a>
                                 </td>
