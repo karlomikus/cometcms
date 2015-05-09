@@ -51,6 +51,8 @@
                 </table>
             </div>
         </div>
-        {!! $users->render() !!}
+        @if(empty($searchTerm))
+            {!! $users->render() !!}
+        @endif
     </div>
 @endsection

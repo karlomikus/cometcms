@@ -24,14 +24,12 @@ class UsersController extends AdminController {
 
         if (empty($searchTerm)) {
             $usersData = $this->users->getByPage($page, $this->pageLimit);
-            $count = $this->users->countAll();
         }
         else {
             $usersData = $this->users->search($searchTerm);
-            $count = 0;
         }
 
-        $paginator = new LengthAwarePaginator($usersData, $count, $this->pageLimit, $page, ['path' => $request->getPathInfo()]);
+        $paginator = new LengthAwarePaginator($usersData, $this->users->countAll(), $this->pageLimit, $page, ['path' => $request->getPathInfo()]);
 
         $data['users'] = $paginator;
         $data['searchTerm'] = $searchTerm;
