@@ -24,7 +24,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Name <a href="#"><i class="fa fa-caret-down"></i></a></th>
                             <th>Email</th>
                             <th>Roles</th>
                             <th>Registered</th>
@@ -43,7 +43,7 @@
                                 </td>
                                 <td>{{ $user->created_at->format('d.m.Y') }}</td>
                                 <td>
-                                    <a href="{{ url('admin/user/delete', [$user->id]) }}" class="btn btn-danger btn-xs">Delete</a>
+                                    <a href="{{ url('admin/users/delete', [$user->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/users/new', 'Admin\UsersController@save');
     Route::get('/users/edit/{id}', 'Admin\UsersController@edit');
     Route::post('/users/edit/{id}', 'Admin\UsersController@update');
+    Route::get('/users/delete/{id}', 'Admin\UsersController@delete');
 
     /**
      * Matches

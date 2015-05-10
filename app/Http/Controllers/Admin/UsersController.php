@@ -10,7 +10,7 @@ class UsersController extends AdminController {
 
     protected $users;
 
-    protected $pageLimit = 15;
+    const PAGE_LIMIT = 15;
 
     public function __construct(UsersRepositoryInterface $users)
     {
@@ -23,13 +23,13 @@ class UsersController extends AdminController {
         $page = $request->query('page');
 
         if (empty($searchTerm)) {
-            $usersData = $this->users->getByPage($page, $this->pageLimit);
+            $usersData = $this->users->getByPage($page, self::PAGE_LIMIT);
         }
         else {
             $usersData = $this->users->search($searchTerm);
         }
 
-        $paginator = new LengthAwarePaginator($usersData, $this->users->countAll(), $this->pageLimit, $page, ['path' => $request->getPathInfo()]);
+        $paginator = new LengthAwarePaginator($usersData, $this->users->countAll(), self::PAGE_LIMIT, $page, ['path' => $request->getPathInfo()]);
 
         $data['users'] = $paginator;
         $data['searchTerm'] = $searchTerm;
@@ -40,6 +40,7 @@ class UsersController extends AdminController {
     public function create()
     {
         $data['roles'] = Role::all();
+        $data['user'] = null;
 
         return view('admin.users.form', $data);
     }
@@ -61,12 +62,22 @@ class UsersController extends AdminController {
 
     public function edit($id)
     {
+        $data['roles'] = Role::all();
+        $data['user'] = $this->users->get($id);
+
+        return view('admin.users.form', $data);
+    }
+
+    public function update($id, SaveUserRequest $request)
+    {
 
     }
 
-    public function update($id)
+    public function delete($id)
     {
+        $this->users->delete($id);
 
+        return redirect('admin/users');
     }
 
 }

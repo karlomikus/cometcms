@@ -22,7 +22,8 @@ class SaveUserRequest extends Request {
 		return [
 			'name' => 'required',
             'email' => 'required|email',
-            'pwd' => 'required'
+            'pwd' => 'required',
+            'roles' => 'required'
 		];
 	}
 
