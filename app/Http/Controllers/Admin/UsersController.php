@@ -10,7 +10,7 @@ class UsersController extends AdminController {
 
     protected $users;
 
-    const PAGE_LIMIT = 15;
+    const PAGE_LIMIT = 2;
 
     public function __construct(UsersRepositoryInterface $users)
     {
@@ -20,19 +20,19 @@ class UsersController extends AdminController {
 	public function index(Request $request)
     {
         $searchTerm = $request->query('search');
-        $page = $request->query('page');
+        $page       = $request->query('page');
+        $sortColumn = $request->query('sort');
+        $order      = $request->query('order');
 
-        if (empty($searchTerm)) {
-            $usersData = $this->users->getByPage($page, self::PAGE_LIMIT);
-        }
-        else {
-            $usersData = $this->users->search($searchTerm);
-        }
+        $usersData = $this->users->getByPageGrid($page, self::PAGE_LIMIT, $sortColumn, $order, $searchTerm);
+        $pagedData = new LengthAwarePaginator($usersData, $this->users->countAll(), self::PAGE_LIMIT, $page, ['path' => $request->getPathInfo()]);
+        $icon = $order == 'asc' ? 'down' : 'up';
 
-        $paginator = new LengthAwarePaginator($usersData, $this->users->countAll(), self::PAGE_LIMIT, $page, ['path' => $request->getPathInfo()]);
-
-        $data['users'] = $paginator;
+        $data['users']      = $pagedData;
         $data['searchTerm'] = $searchTerm;
+        $data['sortColumn'] = $sortColumn;
+        $data['order']      = $order;
+        $data['caret']      = '<i class="fa fa-caret-' . $icon . '"></i>';
 
         return view('admin.users.index', $data);
     }

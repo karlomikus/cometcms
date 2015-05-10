@@ -33,4 +33,17 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
             ->get();
     }
 
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+    {
+        $sortColumn !== null ?: $sortColumn = 'name'; // Default order by column
+        $order !== null ?: $order = 'asc'; // Default sorting
+
+        $model = $this->model->orderBy($sortColumn, $order)->skip($limit * ($page - 1))->take($limit);
+
+        if($searchTerm)
+            $model->where('name', 'LIKE', '%'. $searchTerm .'%')->orWhere('email', 'LIKE', '%'. $searchTerm .'%');
+
+        return $model->with('roles')->get();
+    }
+
 }

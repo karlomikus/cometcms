@@ -24,10 +24,10 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Name <a href="#"><i class="fa fa-caret-down"></i></a></th>
-                            <th>Email</th>
-                            <th>Roles</th>
+                            <th><a href="{{ url('admin/users') }}?sort=name&order={{ $order == 'asc' ? 'desc' : 'asc' }}">Name {!! $caret !!}</a></th>
+                            <th><a href="{{ url('admin/users') }}?sort=email&order={{ $order == 'asc' ? 'desc' : 'asc' }}">Email {!! $caret !!}</a></th>
                             <th>Registered</th>
+                            <th>Roles</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -36,12 +36,12 @@
                             <tr>
                                 <td><a href="{{ url('admin/users/edit', [$user->id]) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->created_at->format('d.m.Y') }}</td>
                                 <td>
                                     @foreach($user->roles as $role)
                                         <a href="{{ url('admin/roles/edit', [$role->id]) }}">{{ $role->display_name }}</a><br>
                                     @endforeach
                                 </td>
-                                <td>{{ $user->created_at->format('d.m.Y') }}</td>
                                 <td>
                                     <a href="{{ url('admin/users/delete', [$user->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                                 </td>
@@ -52,7 +52,7 @@
             </div>
         </div>
         @if(empty($searchTerm))
-            {!! $users->render() !!}
+            {!! $users->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
         @endif
     </div>
 @endsection
