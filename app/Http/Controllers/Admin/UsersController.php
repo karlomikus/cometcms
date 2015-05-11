@@ -5,7 +5,6 @@ use App\Http\Requests\SaveUserRequest;
 use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\Role;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class UsersController extends AdminController {
 
