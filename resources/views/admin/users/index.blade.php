@@ -51,8 +51,6 @@
                 </table>
             </div>
         </div>
-        @if(empty($searchTerm))
-            {!! $users->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
-        @endif
+        {!! $users->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
     </div>
 @endsection

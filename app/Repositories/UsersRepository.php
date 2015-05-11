@@ -38,12 +38,15 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
         $sortColumn !== null ?: $sortColumn = 'name'; // Default order by column
         $order !== null ?: $order = 'asc'; // Default sorting
 
-        $model = $this->model->orderBy($sortColumn, $order)->skip($limit * ($page - 1))->take($limit);
+        $model = $this->model->orderBy($sortColumn, $order);
 
         if($searchTerm)
             $model->where('name', 'LIKE', '%'. $searchTerm .'%')->orWhere('email', 'LIKE', '%'. $searchTerm .'%');
 
-        return $model->with('roles')->get();
+        $result['count'] = $model->count();
+        $result['items'] = $model->with('roles')->skip($limit * ($page - 1))->take($limit)->get();
+
+        return $result;
     }
 
 }

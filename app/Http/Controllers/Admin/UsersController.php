@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\CometGridView;
 use App\Http\Requests\SaveUserRequest;
 use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\Role;
@@ -10,7 +11,7 @@ class UsersController extends AdminController {
 
     protected $users;
 
-    const PAGE_LIMIT = 2;
+    const PAGE_LIMIT = 15;
 
     public function __construct(UsersRepositoryInterface $users)
     {
@@ -24,11 +25,17 @@ class UsersController extends AdminController {
         $sortColumn = $request->query('sort');
         $order      = $request->query('order');
 
-        $usersData = $this->users->getByPageGrid($page, self::PAGE_LIMIT, $sortColumn, $order, $searchTerm);
-        $pagedData = new LengthAwarePaginator($usersData, $this->users->countAll(), self::PAGE_LIMIT, $page, ['path' => $request->getPathInfo()]);
+        //$usersData = $this->users->getByPageGrid($page, self::PAGE_LIMIT, $sortColumn, $order, $searchTerm);
+        //$pagedData = new LengthAwarePaginator($usersData['items'], $usersData['count'], self::PAGE_LIMIT, $page, ['path' => $request->getPathInfo()]);
         $icon = $order == 'asc' ? 'down' : 'up';
 
-        $data['users']      = $pagedData;
+        $grid = new CometGridView($this->users);
+        $grid->setOrder($order);
+        $grid->setSearchTerm($searchTerm);
+        $grid->setSortColumn($sortColumn);
+        $grid->setPath($request->getPathInfo());
+
+        $data['users']      = $grid->gridPage($page, 15);
         $data['searchTerm'] = $searchTerm;
         $data['sortColumn'] = $sortColumn;
         $data['order']      = $order;
