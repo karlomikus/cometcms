@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)
+                        @foreach($data as $user)
                             <tr>
                                 <td><a href="{{ url('admin/users/edit', [$user->id]) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
@@ -51,6 +51,6 @@
                 </table>
             </div>
         </div>
-        {!! $users->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
+        {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
     </div>
 @endsection

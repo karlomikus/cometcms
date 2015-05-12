@@ -25,12 +25,20 @@ class CometGridView {
         $this->searchTerm = null;
         $this->path = null;
     }
-
+    
     public function gridPage($page, $limit)
     {
         $data = $this->dataSource->getByPageGrid($page, $limit, $this->sortColumn, $this->order, $this->searchTerm);
 
-        return new LengthAwarePaginator($data['items'], $data['count'], $limit, $page, ['path' => $this->path]);
+        $paginatedData = new LengthAwarePaginator($data['items'], $data['count'], $limit, $page, ['path' => $this->path]);
+
+        $result['page'] = $page;
+        $result['sortColumn'] = $this->sortColumn;
+        $result['order'] = $this->order;
+        $result['searchTerm'] = $this->searchTerm;
+        $result['data'] = $paginatedData;
+
+        return $result;
     }
 
     public function setSearchTerm($term)

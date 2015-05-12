@@ -8,16 +8,10 @@ interface GridViewInterface {
      *
      * @param $page int Current page
      * @param $limit int Page results limit
-     * @return mixed
+     * @param $sortColumn string Column name
+     * @param $searchTerm string Search term
+     * @return array
      */
-    public function getByPage($page, $limit);
-
-    /**
-     * Returns results matching the search term
-     *
-     * @param $term string Search term
-     * @return mixed
-     */
-    public function search($term);
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null);
 
 }

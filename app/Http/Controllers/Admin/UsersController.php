@@ -10,8 +10,6 @@ class UsersController extends AdminController {
 
     protected $users;
 
-    const PAGE_LIMIT = 15;
-
     public function __construct(UsersRepositoryInterface $users)
     {
         $this->users = $users;
@@ -30,11 +28,7 @@ class UsersController extends AdminController {
         $grid->setSortColumn($sortColumn);
         $grid->setPath($request->getPathInfo());
 
-        $data['users']      = $grid->gridPage($page, 15);
-        $data['searchTerm'] = $searchTerm;
-        $data['sortColumn'] = $sortColumn;
-        $data['order']      = $order;
-        $data['page']       = $page;
+        $data = $grid->gridPage($page, 15);
 
         return view('admin.users.index', $data);
     }
