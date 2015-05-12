@@ -63,14 +63,4 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         $this->model->find($id)->delete();
     }
 
-    public function paginate($pages)
-    {
-        return $this->model->paginate($pages);
-    }
-
-    public function countAll()
-    {
-        return $this->model->count();
-    }
-
 }

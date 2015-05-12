@@ -37,6 +37,7 @@ class CometGridView {
         $result['order'] = $this->order;
         $result['searchTerm'] = $this->searchTerm;
         $result['data'] = $paginatedData;
+        $result['totalItems'] = $data['count'];
 
         return $result;
     }

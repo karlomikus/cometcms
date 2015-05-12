@@ -12,11 +12,6 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
         parent::__construct($user);
     }
 
-    public function all()
-    {
-        return $this->model->orderBy('name', 'asc')->get();
-    }
-
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $sortColumn !== null ?: $sortColumn = 'name'; // Default order by column

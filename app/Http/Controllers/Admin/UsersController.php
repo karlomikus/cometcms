@@ -68,7 +68,19 @@ class UsersController extends AdminController {
 
     public function update($id, SaveUserRequest $request)
     {
+        $roles = $request->input('roles');
+        $message = 'User edit failed!';
+        $data = [
+            'email' => $request->input('email'),
+            'password' => \Hash::make($request->input('pwd')),
+            'name' => $request->input('name')
+        ];
 
+        if ($this->users->update($id, $data)) {
+            $message = 'User succesfully edited!';
+        }
+
+        return redirect('admin/users')->with('message', $message);
     }
 
     public function delete($id)

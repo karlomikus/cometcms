@@ -2,13 +2,19 @@
 
 @section('content')
     <div class="container">
+        @if(Session::has('message'))
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                {{ Session::get('message') }}
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-6">
                 <a href="{{ url('admin/users/new') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> New user</a>
             </div>
             <form class="col-md-6" method="get" action="{{ url('admin/users') }}">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Enter search term..." value="{{ !empty($searchTerm) ? $searchTerm : "" }}">
+                    <input type="text" class="form-control" name="search" placeholder="Enter search term..." value="{{ !empty($searchTerm) ? $searchTerm : "" }}" tabindex="1">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         @if(!empty($searchTerm))
@@ -32,6 +38,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if(!$totalItems > 0)
+                            <tr>
+                                <td colspan="5" class="text-center">No results found.</td>
+                            </tr>
+                        @endif
                         @foreach($data as $user)
                             <tr>
                                 <td><a href="{{ url('admin/users/edit', [$user->id]) }}">{{ $user->name }}</a></td>
