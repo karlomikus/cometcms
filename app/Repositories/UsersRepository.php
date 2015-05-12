@@ -1,11 +1,11 @@
 <?php
 namespace App\Repositories;
 
-use App\Contracts\CometListView;
+use App\Contracts\GridViewInterface;
 use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\User;
 
-class UsersRepository extends AbstractRepository implements UsersRepositoryInterface, CometListView {
+class UsersRepository extends AbstractRepository implements UsersRepositoryInterface, GridViewInterface {
 
     public function __construct(User $user)
     {

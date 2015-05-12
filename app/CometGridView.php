@@ -2,11 +2,11 @@
 namespace App;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Contracts\CometListView;
+use App\Contracts\GridViewInterface;
 
 class CometGridView {
 
-    protected $repo;
+    protected $dataSource;
     private $searchTerm;
     private $sortColumn;
     private $order;
@@ -15,11 +15,11 @@ class CometGridView {
     /**
      * Set up data repository
      *
-     * @param $repo mixed Data repository
+     * @param $dataSource mixed Data repository
      */
-    public function __construct(CometListView $repo)
+    public function __construct(GridViewInterface $dataSource)
     {
-        $this->repo = $repo;
+        $this->dataSource = $dataSource;
         $this->sortColumn = 'id';
         $this->order = 'asc';
         $this->searchTerm = null;
@@ -28,7 +28,7 @@ class CometGridView {
 
     public function gridPage($page, $limit)
     {
-        $data = $this->repo->getByPageGrid($page, $limit, $this->sortColumn, $this->order, $this->searchTerm);
+        $data = $this->dataSource->getByPageGrid($page, $limit, $this->sortColumn, $this->order, $this->searchTerm);
 
         return new LengthAwarePaginator($data['items'], $data['count'], $limit, $page, ['path' => $this->path]);
     }

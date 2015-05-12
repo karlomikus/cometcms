@@ -1,7 +1,7 @@
 <?php
 namespace App\Contracts;
 
-interface CometListView {
+interface GridViewInterface {
 
     /**
      * Returns paged results for a specific page
