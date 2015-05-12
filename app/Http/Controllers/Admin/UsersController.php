@@ -46,6 +46,7 @@ class UsersController extends AdminController {
     public function save(SaveUserRequest $request)
     {
         $roles = $request->input('roles');
+        $message = 'User creation failed!';
 
         $user = $this->users->insert([
             'email' => $request->input('email'),
@@ -55,7 +56,11 @@ class UsersController extends AdminController {
 
         $user->attachRoles($roles);
 
-        return redirect('admin/users');
+        if ($user) {
+            $message = 'New user created successfully!';
+        }
+
+        return redirect('admin/users')->with('message', $message);
     }
 
     public function edit($id)
@@ -68,6 +73,7 @@ class UsersController extends AdminController {
 
     public function update($id, SaveUserRequest $request)
     {
+        // TODO: Roles editing
         $roles = $request->input('roles');
         $message = 'User edit failed!';
         $data = [
@@ -85,9 +91,12 @@ class UsersController extends AdminController {
 
     public function delete($id)
     {
-        $this->users->delete($id);
+        $message = 'User deleting failed!';
+        if ($this->users->delete($id)) {
+            $message = 'User deleted succesfully!';
+        }
 
-        return redirect('admin/users');
+        return redirect('admin/users')->with('message', $message);
     }
 
 }

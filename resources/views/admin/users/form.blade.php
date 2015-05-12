@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                         {!! Form::label('roles', 'Choose roles', ['class' => 'control-label']) !!}
-                        {!! Form::select('roles', $roles->lists('display_name', 'id'), !empty($user) ? $user->roles->lists('id') : null, ['class' => 'form-control', 'multiple' => 'multiple']) !!}
+                        {!! Form::select('roles[]', $roles->lists('display_name', 'id'), !empty($user) ? $user->roles->lists('id') : null, ['class' => 'form-control', 'multiple' => 'multiple']) !!}
                         {!! $errors->first('roles', '<span class="help-block">:message</span>') !!}
                     </div>
                     <hr>
