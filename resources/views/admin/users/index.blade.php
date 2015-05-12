@@ -24,9 +24,9 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th><a href="{{ url('admin/users') }}?sort=name&order={{ $order == 'asc' ? 'desc' : 'asc' }}">Name {!! $caret !!}</a></th>
-                            <th><a href="{{ url('admin/users') }}?sort=email&order={{ $order == 'asc' ? 'desc' : 'asc' }}">Email {!! $caret !!}</a></th>
-                            <th>Registered</th>
+                            <th>@include('grid-header', ['action' => 'Admin\UsersController@index', 'name' => 'name', 'label' => 'Name'])</th>
+                            <th>@include('grid-header', ['action' => 'Admin\UsersController@index', 'name' => 'email', 'label' => 'E-mail'])</th>
+                            <th>@include('grid-header', ['action' => 'Admin\UsersController@index', 'name' => 'created_at', 'label' => 'Registered on'])</th>
                             <th>Roles</th>
                             <th>Action</th>
                         </tr>

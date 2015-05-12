@@ -5,3 +5,4 @@ resources/vendor
 .env
 *.js.map
 *.css.map
+_ide_helper.php

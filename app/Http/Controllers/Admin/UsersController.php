@@ -24,10 +24,6 @@ class UsersController extends AdminController {
         $sortColumn = $request->query('sort');
         $order      = $request->query('order');
 
-        //$usersData = $this->users->getByPageGrid($page, self::PAGE_LIMIT, $sortColumn, $order, $searchTerm);
-        //$pagedData = new LengthAwarePaginator($usersData['items'], $usersData['count'], self::PAGE_LIMIT, $page, ['path' => $request->getPathInfo()]);
-        $icon = $order == 'asc' ? 'down' : 'up';
-
         $grid = new CometGridView($this->users);
         $grid->setOrder($order);
         $grid->setSearchTerm($searchTerm);
@@ -38,7 +34,7 @@ class UsersController extends AdminController {
         $data['searchTerm'] = $searchTerm;
         $data['sortColumn'] = $sortColumn;
         $data['order']      = $order;
-        $data['caret']      = '<i class="fa fa-caret-' . $icon . '"></i>';
+        $data['page']       = $page;
 
         return view('admin.users.index', $data);
     }
