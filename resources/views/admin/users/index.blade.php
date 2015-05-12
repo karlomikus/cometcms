@@ -36,7 +36,7 @@
                             <tr>
                                 <td><a href="{{ url('admin/users/edit', [$user->id]) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at->format('d.m.Y') }}</td>
+                                <td>{{ $user->created_at->format('d.m.Y - H:i:s') }}</td>
                                 <td>
                                     @foreach($user->roles as $role)
                                         <a href="{{ url('admin/roles/edit', [$role->id]) }}">{{ $role->display_name }}</a><br>

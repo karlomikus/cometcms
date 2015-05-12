@@ -3,6 +3,7 @@
 use App\CometGridView;
 use App\Http\Requests\SaveUserRequest;
 use App\Repositories\Contracts\UsersRepositoryInterface;
+use App\Repositories\Contracts\RolesRepositoryInterface;
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,10 @@ class UsersController extends AdminController {
 
     protected $users;
 
-    public function __construct(UsersRepositoryInterface $users)
+    public function __construct(UsersRepositoryInterface $users, RolesRepositoryInterface $roles)
     {
         $this->users = $users;
+        $this->roles = $roles;
     }
 
 	public function index(Request $request)
@@ -35,7 +37,7 @@ class UsersController extends AdminController {
 
     public function create()
     {
-        $data['roles'] = Role::all();
+        $data['roles'] = $this->roles->all();
         $data['user'] = null;
 
         return view('admin.users.form', $data);
