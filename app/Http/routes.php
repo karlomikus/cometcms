@@ -45,6 +45,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/users/delete/{id}', 'Admin\UsersController@delete');
 
     /**
+     * Opponents
+     */
+    Route::get('/opponents', 'Admin\OpponentsController@index');
+    Route::get('/opponents/new', 'Admin\OpponentsController@create');
+    Route::post('/opponents/new', 'Admin\OpponentsController@save');
+    Route::get('/opponents/edit/{id}', 'Admin\OpponentsController@edit');
+    Route::post('/opponents/edit/{id}', 'Admin\OpponentsController@update');
+    Route::get('/opponents/delete/{id}', 'Admin\OpponentsController@delete');
+
+    /**
      * Matches
      */
     Route::get('/matches', 'Admin\MatchesController@index');

@@ -82,9 +82,13 @@ class UsersController extends AdminController {
             'name' => $request->input('name')
         ];
 
+        $user = $this->users->get($id);
+        $usersRoles = $user->roles;
+
         if ($this->users->update($id, $data)) {
             $message = 'User succesfully edited!';
         }
+        //$user->attachRoles(array_diff($usersRoles, $roles));
 
         return redirect('admin/users')->with('message', $message);
     }
