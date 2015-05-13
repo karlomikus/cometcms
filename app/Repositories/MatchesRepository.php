@@ -1,9 +1,9 @@
 <?php
 namespace App\Repositories;
 
-use App\Match, App\Repositories\Contracts\MatchesRepositoryInterface;
+use App\Match, App\Repositories\Contracts\MatchesRepositoryInterface, App\Contracts\GridViewInterface;
 
-class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface {
+class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface, GridViewInterface {
 
     public function __construct(Match $match)
     {
@@ -53,6 +53,22 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             return 'lose';
 
         return 'draw';
+    }
+
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+    {
+        $sortColumn !== null ?: $sortColumn = 'created_at'; // Default order by column
+        $order !== null ?: $order = 'asc'; // Default sorting
+
+        $model = $this->model->orderBy($sortColumn, $order);
+
+        if($searchTerm)
+            $model->where('opponent', 'LIKE', '%'. $searchTerm .'%');
+
+        $result['count'] = $model->count();
+        $result['items'] = $model->with('team', 'game', 'opponent')->skip($limit * ($page - 1))->take($limit)->get();
+
+        return $result;
     }
 
 }

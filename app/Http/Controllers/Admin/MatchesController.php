@@ -5,6 +5,8 @@ use App\Repositories\Contracts\GamesRepositoryInterface;
 use App\Repositories\Contracts\MatchesRepositoryInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
+use Illuminate\Http\Request;
+use App\CometGridView;
 
 class MatchesController extends AdminController {
 
@@ -15,9 +17,22 @@ class MatchesController extends AdminController {
         $this->matches = $matches;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data['matches'] = $this->matches->all();
+        $searchTerm = $request->query('search');
+        $page       = $request->query('page');
+        $sortColumn = $request->query('sort');
+        $order      = $request->query('order');
+
+        //$data['matches'] = $this->matches->all();
+
+        $grid = new CometGridView($this->matches);
+        $grid->setOrder($order);
+        $grid->setSearchTerm($searchTerm);
+        $grid->setSortColumn($sortColumn);
+        $grid->setPath($request->getPathInfo());
+
+        $data = $grid->gridPage($page, 15);
 
         return view('admin.matches.index', $data);
     }
