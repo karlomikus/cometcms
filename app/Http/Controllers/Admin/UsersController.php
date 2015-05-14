@@ -25,9 +25,9 @@ class UsersController extends AdminController {
         $order      = $request->query('order');
 
         $grid = new GridView($this->users);
-        $grid->setOrder($order);
+        $grid->setOrder($order, 'asc');
+        $grid->setSortColumn($sortColumn, 'name');
         $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn);
         $grid->setPath($request->getPathInfo());
 
         $data = $grid->gridPage($page, 15);

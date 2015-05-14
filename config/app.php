@@ -149,6 +149,7 @@ return [
         'Barryvdh\Debugbar\ServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
+        'App\Libraries\GridView\GridViewServiceProvider',
 
 	],
 

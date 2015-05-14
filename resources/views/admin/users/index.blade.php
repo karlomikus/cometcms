@@ -30,9 +30,9 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>@include('grid-header', ['action' => 'Admin\UsersController@index', 'name' => 'name', 'label' => 'Name'])</th>
-                            <th>@include('grid-header', ['action' => 'Admin\UsersController@index', 'name' => 'email', 'label' => 'E-mail'])</th>
-                            <th>@include('grid-header', ['action' => 'Admin\UsersController@index', 'name' => 'created_at', 'label' => 'Registered on'])</th>
+                            <th>{!! Form::gridHeader('Name', 'name', 'Admin\UsersController@index', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('E-mail', 'email', 'Admin\UsersController@index', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('Registered on', 'created_at', 'Admin\UsersController@index', $headerAttr) !!}</th>
                             <th>Roles</th>
                             <th>Action</th>
                         </tr>

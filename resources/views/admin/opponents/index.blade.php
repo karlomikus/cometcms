@@ -30,7 +30,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>@include('grid-header', ['action' => 'Admin\OpponentsController@index', 'name' => 'name', 'label' => 'Name'])</th>
+                            <th>{!! Form::gridHeader('Name', 'name', 'Admin\OpponentsController@index', $headerAttr) !!}</th>
                             <th>Description</th>
                             <th>Action</th>
                         </tr>

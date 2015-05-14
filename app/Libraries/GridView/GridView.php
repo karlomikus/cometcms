@@ -13,7 +13,8 @@ class GridView {
     private $path;
 
     /**
-     * Set up data repository
+     * Set up data repository. Data repository must implement
+     * GridViewInterface.
      *
      * @param $dataSource mixed Data repository
      */
@@ -25,7 +26,14 @@ class GridView {
         $this->searchTerm = null;
         $this->path = null;
     }
-    
+
+    /**
+     * Returns an array of paged data limited by $limit parameter.
+     *
+     * @param $page int Current page number
+     * @param $limit int Limit of records per page
+     * @return array
+     */
     public function gridPage($page, $limit)
     {
         $data = $this->dataSource->getByPageGrid($page, $limit, $this->sortColumn, $this->order, $this->searchTerm);
@@ -39,6 +47,13 @@ class GridView {
         $result['data'] = $paginatedData;
         $result['totalItems'] = $data['count'];
 
+        $result['headerAttr'] = [
+            'page' => $page,
+            'column' => $this->sortColumn,
+            'order' => $this->order,
+            'search' => $this->searchTerm
+        ];
+
         return $result;
     }
 
@@ -47,14 +62,24 @@ class GridView {
         $this->searchTerm = $term;
     }
 
-    public function setSortColumn($sortColumn)
+    public function setSortColumn($sortColumn, $default = null)
     {
-        $this->sortColumn = $sortColumn;
+        if (!isset($sortColumn)) {
+            $this->sortColumn = $default;
+        }
+        else {
+            $this->sortColumn = $sortColumn;
+        }
     }
 
-    public function setOrder($order)
+    public function setOrder($order, $default = null)
     {
-        $this->order = $order;
+        if (!isset($order)) {
+            $this->order = $default;
+        }
+        else {
+            $this->order = $order;
+        }
     }
 
     public function setPath($path)
