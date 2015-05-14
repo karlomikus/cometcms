@@ -3,7 +3,7 @@ namespace App\Repositories;
 
 use App\Opponent;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
-use App\Contracts\GridViewInterface;
+use App\Libraries\GridView\GridViewInterface;
 
 class OpponentsRepository extends AbstractRepository implements OpponentsRepositoryInterface, GridViewInterface {
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 
-use App\Contracts\GridViewInterface;
+use App\Libraries\GridView\GridViewInterface;
 use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\User;
 

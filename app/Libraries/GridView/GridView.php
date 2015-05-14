@@ -1,10 +1,10 @@
 <?php
-namespace App;
+namespace App\Libraries\GridView;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Contracts\GridViewInterface;
+use App\Libraries\GridView\GridViewInterface;
 
-class CometGridView {
+class GridView {
 
     protected $dataSource;
     private $searchTerm;

@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\CometGridView;
+use App\Libraries\GridView\GridView;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveOpponentRequest;
@@ -21,7 +21,7 @@ class OpponentsController extends AdminController {
         $sortColumn = $request->query('sort');
         $order      = $request->query('order');
 
-        $grid = new CometGridView($this->opponents);
+        $grid = new GridView($this->opponents);
         $grid->setOrder($order);
         $grid->setSearchTerm($searchTerm);
         $grid->setSortColumn($sortColumn);

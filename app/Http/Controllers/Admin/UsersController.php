@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\CometGridView;
+use App\Libraries\GridView\GridView;
 use App\Http\Requests\SaveUserRequest;
 use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\Repositories\Contracts\RolesRepositoryInterface;
@@ -24,7 +24,7 @@ class UsersController extends AdminController {
         $sortColumn = $request->query('sort');
         $order      = $request->query('order');
 
-        $grid = new CometGridView($this->users);
+        $grid = new GridView($this->users);
         $grid->setOrder($order);
         $grid->setSearchTerm($searchTerm);
         $grid->setSortColumn($sortColumn);
