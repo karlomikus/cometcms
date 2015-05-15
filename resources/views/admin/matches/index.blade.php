@@ -39,14 +39,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if(!$totalItems > 0)
+                            <tr>
+                                <td colspan="6" class="text-center">No results found.</td>
+                            </tr>
+                        @endif
                         @foreach($data as $match)
                             <tr>
                                 <td><a href="{{ url('admin/matches/edit', [$match->id]) }}">{{ $match->created_at->format('d.m.Y H:i:s') }}</a></td>
                                 <td>{{ $match->team->name }}</td>
                                 <td>{{ $match->opponent->name }}</td>
                                 <td>{{ $match->game->name }}</td>
-                                <td>WIN</td>
+                                <td><strong data-toggle="tooltip" data-placement="top" title="{{ $match->score->home }} : {{ $match->score->guest }}">{{ $match->outcome }}</strong></td>
                                 <td>
+                                    <a href="{{ url('match', [$match->id]) }}" class="btn btn-default btn-xs" target="_blank">View</a>
                                     <a href="{{ url('admin/matches/delete', [$match->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this match?');">Delete</a>
                                 </td>
                             </tr>
@@ -57,4 +63,10 @@
         </div>
         {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
     </div>
+@endsection
+
+@section('page-scripts')
+    <script>
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
 @endsection

@@ -34,6 +34,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
     public function getMatchScore($matchID)
     {
+        // TODO: Remove these score methods from interface, they are now in App\Match model
         $result = \DB::table('round_scores')
                 ->join('match_rounds', 'round_scores.round_id', '=', 'match_rounds.id')
                 ->select(\DB::raw('sum(score_home) as home, sum(score_guest) as guest'))
@@ -67,10 +68,12 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             ->select('matches.*');
 
         if($searchTerm)
-            $model->where('opponent', 'LIKE', '%'. $searchTerm .'%');
+            $model->where('opponents.name', 'LIKE', '%'. $searchTerm .'%')
+                ->orWhere('teams.name', 'LIKE', '%'. $searchTerm .'%')
+                ->orWhere('games.name', 'LIKE', '%'. $searchTerm .'%');
 
         $result['count'] = $model->count();
-        $result['items'] = $model->orderBy($sortColumn, $order)->with('team', 'game', 'opponent')->skip($limit * ($page - 1))->take($limit)->get();
+        $result['items'] = $model->orderBy($sortColumn, $order)->with('team', 'opponent', 'game')->skip($limit * ($page - 1))->take($limit)->get();
 
         return $result;
     }

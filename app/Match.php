@@ -44,4 +44,28 @@ class Match extends Model {
         return $this->belongsTo('App\Game');
     }
 
+    public function getScoreAttribute()
+    {
+        // TODO: Optimize number of queries for matches scores, maybe use eloquent join...
+        $result = \DB::table('round_scores')
+            ->join('match_rounds', 'round_scores.round_id', '=', 'match_rounds.id')
+            ->select(\DB::raw('sum(score_home) as home, sum(score_guest) as guest'))
+            ->where('match_id', '=', $this->id)
+            ->first();
+
+        return $result;
+    }
+
+    public function getOutcomeAttribute()
+    {
+        $score = $this->getScoreAttribute();
+
+        if ($score->home > $score->guest)
+            return 'win';
+        elseif ($score->home < $score->guest)
+            return 'lose';
+
+        return 'draw';
+    }
+
 }
