@@ -6,3 +6,4 @@ resources/vendor
 *.js.map
 *.css.map
 _ide_helper.php
+.phpstorm.meta.php
