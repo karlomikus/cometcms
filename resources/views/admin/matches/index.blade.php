@@ -30,10 +30,10 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>@include('grid-header', ['action' => 'Admin\MatchesController@index', 'name' => 'created_at', 'label' => 'Played on'])</th>
-                            <th>@include('grid-header', ['action' => 'Admin\MatchesController@index', 'name' => 'team', 'label' => 'Team'])</th>
-                            <th>@include('grid-header', ['action' => 'Admin\MatchesController@index', 'name' => 'opponent', 'label' => 'Versus'])</th>
-                            <th>@include('grid-header', ['action' => 'Admin\MatchesController@index', 'name' => 'game', 'label' => 'Game'])</th>
+                            <th>{!! Form::gridHeader('Played on', 'created_at', 'Admin\MatchesController@index', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('Team', 'teams.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('Opponent', 'opponents.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('Game', 'games.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
                             <th>Outcome</th>
                             <th>Action</th>
                         </tr>

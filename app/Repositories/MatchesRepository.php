@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 
-use App\Match, App\Repositories\Contracts\MatchesRepositoryInterface, App\Contracts\GridViewInterface;
+use App\Match, App\Repositories\Contracts\MatchesRepositoryInterface, App\Libraries\GridView\GridViewInterface;
 
 class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface, GridViewInterface {
 
@@ -60,13 +60,17 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         $sortColumn !== null ?: $sortColumn = 'created_at'; // Default order by column
         $order !== null ?: $order = 'asc'; // Default sorting
 
-        $model = $this->model->orderBy($sortColumn, $order);
+        $model = $this->model
+            ->join('teams', 'teams.id', '=', 'matches.team_id')
+            ->join('opponents', 'opponents.id', '=', 'matches.opponent_id')
+            ->join('games', 'games.id', '=', 'matches.game_id')
+            ->select('matches.*');
 
         if($searchTerm)
             $model->where('opponent', 'LIKE', '%'. $searchTerm .'%');
 
         $result['count'] = $model->count();
-        $result['items'] = $model->with('team', 'game', 'opponent')->skip($limit * ($page - 1))->take($limit)->get();
+        $result['items'] = $model->orderBy($sortColumn, $order)->with('team', 'game', 'opponent')->skip($limit * ($page - 1))->take($limit)->get();
 
         return $result;
     }

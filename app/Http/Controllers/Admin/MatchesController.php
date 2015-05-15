@@ -6,7 +6,7 @@ use App\Repositories\Contracts\MatchesRepositoryInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
 use Illuminate\Http\Request;
-use App\CometGridView;
+use App\Libraries\GridView\GridView;
 
 class MatchesController extends AdminController {
 
@@ -24,12 +24,10 @@ class MatchesController extends AdminController {
         $sortColumn = $request->query('sort');
         $order      = $request->query('order');
 
-        //$data['matches'] = $this->matches->all();
-
-        $grid = new CometGridView($this->matches);
-        $grid->setOrder($order);
+        $grid = new GridView($this->matches);
+        $grid->setOrder($order, 'asc');
         $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn);
+        $grid->setSortColumn($sortColumn, 'created_at');
         $grid->setPath($request->getPathInfo());
 
         $data = $grid->gridPage($page, 15);
