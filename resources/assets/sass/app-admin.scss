@@ -1,20 +1,53 @@
+// Colors
 $brand-success: #2ec4b6;
 $brand-danger: #e71d36;
 $brand-warning: #ff9f1c;
 $brand-primary: #2274a5;
+$link-hover-color: $brand-danger;
 
+$color-light-bg: #f8f9fe;
+
+// Fonts
 $font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+
+// Tables
+$table-bg-accent: $color-light-bg;
+$table-border-color: darken($color-light-bg, 4%);
+
+// User specific
+$page-bar-height: 70px;
 
 @import "bootstrap/bootstrap";
 
 body {
   font-weight: 300;
-  padding-top: 70px;
+  padding-top: 140px;
 }
 
+// CONTEXTBAR
+.pagebar {
+  background: $color-light-bg;
+  margin-bottom: 20px;
+  height: $page-bar-height;
+  line-height: $page-bar-height;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 1020;
+  border-bottom: 1px solid darken($color-light-bg, 4%);
+  .page-title {
+    margin: 0;
+    padding: 0;
+    line-height: inherit;
+  }
+}
+
+// NAVBAR
 .navbar-admin {
   background: #2d3142;
   border-color: #2d3142;
+  margin-bottom: 0;
 
   .navbar-brand {
     color: #eae8ff;

@@ -32,6 +32,8 @@ class UsersController extends AdminController {
 
         $data = $grid->gridPage($page, 15);
 
+        $data['pageTitle'] = 'Users';
+
         return view('admin.users.index', $data);
     }
 
@@ -39,6 +41,8 @@ class UsersController extends AdminController {
     {
         $data['roles'] = $this->roles->all();
         $data['user'] = null;
+
+        $data['pageTitle'] = 'Create new user';
 
         return view('admin.users.form', $data);
     }
@@ -67,6 +71,8 @@ class UsersController extends AdminController {
     {
         $data['roles'] = Role::all();
         $data['user'] = $this->users->get($id);
+
+        $data['pageTitle'] = 'Editing user: ' . $data['user']->name;
 
         return view('admin.users.form', $data);
     }

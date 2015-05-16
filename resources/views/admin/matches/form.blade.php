@@ -4,8 +4,7 @@
 
 <div class="container" ng-controller="MatchesController">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Create new match</h1>
+        <div class="col-md-8">
             <form action="/">
                 <div class="form-group">
                     <label for="team">Choose team</label>
@@ -50,6 +49,11 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="col-md-4">
+            <div class="well">
+                <h2>Score caluclated</h2>
+            </div>
         </div>
     </div>
 </div>

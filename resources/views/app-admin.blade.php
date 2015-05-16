@@ -25,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/admin') }}">CometAdmin</a>
+            <a class="navbar-brand" href="{{ url('/admin') }}">Comet</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -73,10 +73,21 @@
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
                 </li>
+                <li><a href="#"><i class="fa fa-fw fa-navicon"></i></a></li>
             </ul>
         </div>
     </div>
 </nav>
+
+<section class="pagebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="page-title">{{ $pageTitle or 'Page title' }}</h3>
+            </div>
+        </div>
+    </div>
+</section>
 
 @yield('content')
 

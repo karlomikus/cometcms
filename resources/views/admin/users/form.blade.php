@@ -4,13 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="page-header">
-                    @if(!empty($user))
-                        <h2>Editing user: {{ $user->name }}</h2>
-                    @else
-                        <h2>Create new user</h2>
-                    @endif
-                </div>
                 {!! Form::model($user) !!}
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
