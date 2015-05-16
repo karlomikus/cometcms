@@ -7,7 +7,7 @@
 
 	<title>CometCMS App</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/css/dependencies.css') }}">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -54,7 +54,6 @@
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<script src="{{ asset('/js/dependencies.js') }}"></script>
 	<script src="{{ asset('/js/main.js') }}"></script>
 </body>

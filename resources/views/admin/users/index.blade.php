@@ -27,7 +27,7 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered table-striped">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>{!! Form::gridHeader('Name', 'name', 'Admin\UsersController@index', $headerAttr) !!}</th>

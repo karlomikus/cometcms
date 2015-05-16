@@ -1,12 +1,13 @@
 var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
-    mix.less('app.less');
+    mix.sass('app-admin.scss');
 });
 
 elixir(function(mix) {
     mix.scripts([
-        'angular/angular.js'
+        'angular/angular.js',
+        'bootstrap/dist/js/bootstrap.js'
     ],
         'public/js/dependencies.js',
         'node_modules'
@@ -16,5 +17,12 @@ elixir(function(mix) {
     ],
         'public/js/main.js',
         'resources/js/'
+    );
+
+    mix.styles([
+        'bootstrap/dist/css/bootstrap.css'
+    ],
+        'public/css/dependencies.css',
+        'node_modules'
     );
 });

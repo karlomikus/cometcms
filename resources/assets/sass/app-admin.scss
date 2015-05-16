@@ -1,0 +1,57 @@
+$brand-success: #2ec4b6;
+$brand-danger: #e71d36;
+$brand-warning: #ff9f1c;
+$brand-primary: #2274a5;
+
+$font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+
+@import "bootstrap/bootstrap";
+
+body {
+  font-weight: 300;
+  padding-top: 70px;
+}
+
+.navbar-admin {
+  background: #2d3142;
+  border-color: #2d3142;
+
+  .navbar-brand {
+    color: #eae8ff;
+    &:hover,
+    &:focus {
+      color: #eae8ff;
+    }
+  }
+
+  .navbar-nav {
+    > li > a {
+      color: #eae8ff;
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: #ef233c;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: #ef233c;
+      }
+    }
+  }
+
+  .navbar-nav {
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: #ef233c;
+        color: #fff;
+      }
+    }
+  }
+}

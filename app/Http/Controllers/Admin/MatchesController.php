@@ -44,6 +44,21 @@ class MatchesController extends AdminController {
         return view('admin.matches.form', $data);
     }
 
+    public function save()
+    {
+
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update($id, Request $request)
+    {
+
+    }
+
     public function formData(TeamsRepositoryInterface $teams, GamesRepositoryInterface $games)
     {
         $data = [

@@ -7,8 +7,7 @@
 
     <title>CometCMS App</title>
 
-    {{--<link href="{{ asset('/css/app.css') }}" rel="stylesheet">--}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('/css/app-admin.css') }}">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <!--[if lt IE 9]>
@@ -17,7 +16,7 @@
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-admin navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -26,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/admin') }}">Administration</a>
+            <a class="navbar-brand" href="{{ url('/admin') }}">CometAdmin</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -83,7 +82,6 @@
 
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="{{ asset('/js/dependencies.js') }}"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
 @yield('page-scripts')
