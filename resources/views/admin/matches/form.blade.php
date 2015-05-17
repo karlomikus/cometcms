@@ -51,8 +51,14 @@
             </form>
         </div>
         <div class="col-md-4">
-            <div class="well">
-                <h2>Score caluclated</h2>
+            <div class="block">
+                <h3>
+                    Text block help
+                    <small>Subtitle of text block</small>
+                </h3>
+                <div class="block-body">
+                    Note that views which extend a Blade layout simply override sections from the layout. Content of the layout can be included in a child view using the directive in a section, allowing you to append to the contents of a layout section such as a sidebar or footer.
+                </div>
             </div>
         </div>
     </div>

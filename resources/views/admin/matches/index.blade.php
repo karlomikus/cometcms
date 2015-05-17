@@ -27,7 +27,7 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered table-striped">
+                <table class="table table-striped table-grid">
                     <thead>
                         <tr>
                             <th>{!! Form::gridHeader('Played on', 'created_at', 'Admin\MatchesController@index', $headerAttr) !!}</th>
@@ -35,7 +35,7 @@
                             <th>{!! Form::gridHeader('Opponent', 'opponents.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
                             <th>{!! Form::gridHeader('Game', 'games.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
                             <th>Outcome</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                                 <td>{{ $match->team->name }}</td>
                                 <td>{{ $match->opponent->name }}</td>
                                 <td>{{ $match->game->name }}</td>
-                                <td><strong data-toggle="tooltip" data-placement="top" title="{{ $match->score->home }} : {{ $match->score->guest }}">{{ $match->outcome }}</strong></td>
+                                <td><strong data-toggle="tooltip" data-placement="top" title="{{ $match->score->home }} : {{ $match->score->guest }}" class="match-{{ $match->outcome }}">{{ $match->outcome }}</strong></td>
                                 <td>
                                     <a href="{{ url('match', [$match->id]) }}" class="btn btn-default btn-xs" target="_blank">View</a>
                                     <a href="{{ url('admin/matches/delete', [$match->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this match?');">Delete</a>
@@ -61,7 +61,14 @@
                 </table>
             </div>
         </div>
-        {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
+        <div class="row">
+            <div class="col-md-6">
+                {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
+            </div>
+            <div class="col-md-6 text-right">
+                Found total <strong>{{ $totalItems }}</strong> results.
+            </div>
+        </div>
     </div>
 @endsection
 

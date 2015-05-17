@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 {!! Form::model($user) !!}
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
@@ -28,6 +28,17 @@
                     <hr>
                     <button class="btn btn-success" type="submit">Save</button>
                 {!! Form::close() !!}
+            </div>
+            <div class="col-md-5">
+                <div class="block">
+                    <h3>
+                        Text block help
+                        <small>Subtitle of text block</small>
+                    </h3>
+                    <div class="block-body">
+                        Note that views which extend a Blade layout simply override sections from the layout. Content of the layout can be included in a child view using the directive in a section, allowing you to append to the contents of a layout section such as a sidebar or footer.
+                    </div>
+                </div>
             </div>
         </div>
     </div>

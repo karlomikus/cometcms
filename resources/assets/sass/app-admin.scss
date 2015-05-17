@@ -6,22 +6,85 @@ $brand-primary: #2274a5;
 $link-hover-color: $brand-danger;
 
 $color-light-bg: #f8f9fe;
+$color-navbar-bg: #2d3142;
+$color-accent: #ef233c;
 
 // Fonts
 $font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+$font-family-accent: "Montserrat", sans-serif;
 
 // Tables
 $table-bg-accent: $color-light-bg;
 $table-border-color: darken($color-light-bg, 4%);
 
+// Inputs
+$input-height-base: 40px;
+$input-border-radius: 2px;
+$input-border: lighten(#2d3142, 60%);
+$padding-base-vertical: 9px;
+$padding-base-horizontal: 14px;
+
 // User specific
 $page-bar-height: 70px;
 
+$match-lose-color: #f25f5c;
+$match-win-color: #70c1b3;
+$match-draw-color: #ffe066;
+
 @import "bootstrap/bootstrap";
+
+@mixin block($color) {
+  background: $color;
+  border: 1px solid darken($color, 4%);
+  padding: 20px;
+  color: darken($color, 70%);
+  h3 {
+    margin: 0 0 20px 0;
+    small {
+      color: darken($color, 30%);
+      display: block;
+      margin-top: 5px;
+    }
+  }
+}
 
 body {
   font-weight: 300;
   padding-top: 140px;
+}
+
+th {
+  font-family: $font-family-accent;
+  font-weight: 400;
+  line-height: 2 !important;
+}
+
+.table-grid td:last-child, .table-grid th:last-child {
+  text-align: right;
+}
+
+label {
+  font-family: $font-family-accent;
+  font-weight: 300;
+  color: $color-navbar-bg;
+}
+
+.form-control {
+  box-shadow: none;
+  font-size: 16px;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.btn {
+  font-family: $font-family-accent;
+  font-weight: 300;
+}
+
+// BLOCKS
+.block {
+  @include block($color-light-bg);
 }
 
 // CONTEXTBAR
@@ -40,6 +103,8 @@ body {
     margin: 0;
     padding: 0;
     line-height: inherit;
+    font-weight: 200;
+    display: inline-block;
   }
 }
 
@@ -87,4 +152,18 @@ body {
       }
     }
   }
+
+  .badge {
+    background-color: $color-accent;
+  }
+}
+
+.match-win {
+  color: $match-win-color;
+}
+.match-draw {
+  color: $match-draw-color;
+}
+.match-lose {
+  color: $match-lose-color;
 }
