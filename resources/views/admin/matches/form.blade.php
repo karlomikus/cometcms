@@ -2,11 +2,12 @@
 
 @section('content')
 
-<div class="container" ng-controller="MatchesController">
+<div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8" id="match-form">
             {!! Form::open() !!}
                 <h3>1. Match information</h3>
+                <hr/>
                 <div class="form-group">
                     <label for="team">Choose team</label>
                     <select class="form-control" id="team" name="team">
@@ -32,17 +33,18 @@
                     </select>
                 </div>
                 <h3>2. Match Rounds</h3>
-                <a href="#" ng-click="addRound()"><i class="fa fa-fw fa-plus-circle"></i> Add a round</a>
+                <hr/>
+                <a href="#"><i class="fa fa-fw fa-plus-circle"></i> Add a round</a>
                 <ul class="nav nav-pills" id="rounds">
-                    <li ng-repeat="round in match.rounds"><a href="#round<% ($index + 1) %>" data-toggle="tab">Round <% ($index + 1) %></a></li>
+                    <li><a href="#round" data-toggle="tab">Round 1</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane" id="round<% ($index + 1) %>" ng-repeat="round in match.rounds">
+                    <div class="tab-pane" id="round">
                         <br/>
                         <div class="form-inline">
-                            <div class="form-group" ng-repeat="score in round.scores">
-                                <input type="text" class="form-control" placeholder="Team score" ng-model="score.score_home" />
-                                <input type="text" class="form-control" placeholder="Opponent score" ng-model="score.score_guest" />
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Team score" />
+                                <input type="text" class="form-control" placeholder="Opponent score" />
                                 <select class="form-control" name="map">
                                     @foreach($maps as $map)
                                         <option value="{{ $map->id }}">{{ $map->name }}</option>
@@ -55,11 +57,12 @@
                         <br/>
                         <div class="form-group">
                             <label for="round-info">Round notes</label>
-                            <textarea class="form-control" name="round-info" id="round-info" rows="4" ng-model="round.notes"></textarea>
+                            <textarea class="form-control" name="round-info" id="round-info" rows="4"></textarea>
                         </div>
                     </div>
                 </div>
                 <h3>3. Match links</h3>
+                <hr/>
             {!! Form::close() !!}
         </div>
         <div class="col-md-4">

@@ -6,7 +6,7 @@ elixir(function(mix) {
 
 elixir(function(mix) {
     mix.scripts([
-        'angular/angular.js',
+        'knockout/build/output/knockout-latest.debug.js',
         'bootstrap/dist/js/bootstrap.js'
     ],
         'public/js/dependencies.js',
