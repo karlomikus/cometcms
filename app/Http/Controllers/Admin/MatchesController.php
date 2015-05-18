@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Contracts\GamesRepositoryInterface;
+use App\Repositories\Contracts\MapsRepositoryInterface;
 use App\Repositories\Contracts\MatchesRepositoryInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
@@ -32,14 +33,19 @@ class MatchesController extends AdminController {
 
         $data = $grid->gridPage($page, 15);
 
+        $data['pageTitle'] = 'Matches';
+
         return view('admin.matches.index', $data);
     }
 
-    public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games)
+    public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
     {
         $data['teams'] = $teams->all();
         $data['opponents'] = $opponents->all();
         $data['games'] = $games->all();
+        $data['maps'] = $maps->all();
+
+        $data['pageTitle'] = 'Create new match';
 
         return view('admin.matches.form', $data);
     }
@@ -51,7 +57,9 @@ class MatchesController extends AdminController {
 
     public function edit($id)
     {
+        $match = $this->matches->getMatchJson($id);
 
+        return response()->json($match);
     }
 
     public function update($id, Request $request)

@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MatchRounds extends Model {
 
+    protected $hidden = ['created_at', 'updated_at'];
+
     public function scores()
     {
         return $this->hasMany('App\RoundScores', 'round_id');

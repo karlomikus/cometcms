@@ -94,6 +94,7 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="{{ asset('/js/dependencies.js') }}"></script>
+<script src="http://jsblocks.com/blocks/0.3.1/blocks.js"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
 @yield('page-scripts')
 </body>

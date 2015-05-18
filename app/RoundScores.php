@@ -19,5 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereUpdatedAt($value)
  */
 class RoundScores extends Model {
+
+    protected $hidden = ['created_at', 'updated_at'];
     
 }

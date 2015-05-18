@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Team extends Model {
 
+    protected $hidden = ['created_at', 'updated_at'];
+
 	public function roster()
     {
         return $this->belongsToMany('App\User', 'team_roster');

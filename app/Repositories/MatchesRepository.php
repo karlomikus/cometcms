@@ -56,6 +56,13 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return 'draw';
     }
 
+    public function getMatchJson($matchID)
+    {
+        $model = $this->model->where('id', '=', $matchID);
+
+        return $model->with('team', 'opponent', 'game', 'rounds', 'rounds.scores')->first();
+    }
+
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $sortColumn !== null ?: $sortColumn = 'created_at'; // Default order by column
