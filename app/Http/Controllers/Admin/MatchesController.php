@@ -50,9 +50,18 @@ class MatchesController extends AdminController {
         return view('admin.matches.form', $data);
     }
 
-    public function save()
+    public function save(Request $request)
     {
+        $data = $request->input('data');
+        $match = [
+            'game_id' => $request->json('game_id'),
+            'opponent_id' => $request->input('game_id'),
+            'team_id' => $request->input('game_id')
+        ];
 
+        $this->matches->insert($match);
+
+        return redirect('admin/matches');
     }
 
     public function edit($id)
