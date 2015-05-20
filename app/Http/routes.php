@@ -61,5 +61,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/matches/new', 'Admin\MatchesController@create');
     Route::post('/matches/new', 'Admin\MatchesController@save');
     Route::get('/matches/edit/{id}', 'Admin\MatchesController@edit');
-    Route::get('/matches/form', 'Admin\MatchesController@formData');
+    Route::get('/matches/api/edit/{id}', 'Admin\MatchesController@getMatchJson');
 });

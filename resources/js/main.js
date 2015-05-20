@@ -11,8 +11,8 @@ var MatchViewModel = function (matchData) {
     self.rounds = ko.observableArray();
 
     // Fill in the rounds
-    if(matchData.rounds.length > 0) {
-        $.each(matchData.rounds, function(key, val) {
+    if (matchData.rounds.length > 0) {
+        $.each(matchData.rounds, function (key, val) {
             self.rounds.push(new RoundViewModel(this, val));
         });
     }
@@ -23,6 +23,10 @@ var MatchViewModel = function (matchData) {
     // Viewmodel methods
     self.addRound = function () {
         self.rounds.push(new RoundViewModel(self, {scores: []}));
+    };
+
+    self.removeRound = function (round) {
+        self.rounds.remove(round);
     };
 };
 
@@ -36,8 +40,8 @@ var RoundViewModel = function (parent, roundsData) {
     self.notes = ko.observable(roundsData.notes);
 
     // Fill in the scores
-    if(roundsData.scores.length > 0) {
-        $.each(roundsData.scores, function(key, val) {
+    if (roundsData.scores.length > 0) {
+        $.each(roundsData.scores, function (key, val) {
             self.scores.push(new ScoreViewModel(self, val));
         });
     }
@@ -65,23 +69,25 @@ var ScoreViewModel = function (parent, scoreData) {
 };
 
 /**
- * Resource data
- */
-$.getJSON("/admin/matches/edit/3", function (data) {
-   console.log(data);
-
-   //  var matchViewModel = new MatchViewModel(data);
-   //  ko.applyBindings(matchViewModel, document.getElementById('match-form'));
-
-   // console.log(matchViewModel);
-});
-
-/**
  * Data binding
  */
-var matchViewModel = new MatchViewModel({rounds: [{scores: []}]});
-ko.applyBindings(matchViewModel, document.getElementById('match-form'));
+var defaultModelData = {rounds: [{scores: []}]};
+var matchParams = (window.location.pathname).split("/");
+var matchID = matchParams[matchParams.length - 1];
+if ($.isNumeric(matchID)) {
+    $.getJSON("/admin/matches/api/edit/" + matchID, function (data) {
+        var matchViewModel = new MatchViewModel(data);
+        ko.applyBindings(matchViewModel, document.getElementById('match-form'));
+    });
+}
+else {
+    var matchViewModel = new MatchViewModel(defaultModelData);
+    ko.applyBindings(matchViewModel, document.getElementById('match-form'));
+}
 
+/**
+ * Events
+ */
 $('#match-form').submit(function (ev) {
     ev.preventDefault();
     $.ajaxSetup({

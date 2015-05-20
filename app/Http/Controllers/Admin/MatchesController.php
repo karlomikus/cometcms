@@ -64,11 +64,16 @@ class MatchesController extends AdminController {
         return redirect('admin/matches');
     }
 
-    public function edit($id)
+    public function edit($id, TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
     {
-        $match = $this->matches->getMatchJson($id);
+        $data['teams'] = $teams->all();
+        $data['opponents'] = $opponents->all();
+        $data['games'] = $games->all();
+        $data['maps'] = $maps->all();
 
-        return response()->json($match);
+        $data['pageTitle'] = 'Editing a match';
+
+        return view('admin.matches.form', $data);
     }
 
     public function update($id, Request $request)
@@ -76,14 +81,11 @@ class MatchesController extends AdminController {
 
     }
 
-    public function formData(TeamsRepositoryInterface $teams, GamesRepositoryInterface $games)
+    public function getMatchJson($matchID)
     {
-        $data = [
-            'teams' => $teams->all(),
-            'games' => $games->all()
-        ];
+        $match = $this->matches->getMatchJson($matchID);
 
-        return response()->json($data);
+        return response()->json($match);
     }
 
 } 
