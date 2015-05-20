@@ -45,14 +45,14 @@
 
                         <div class="form-inline" data-bind="foreach: scores">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Team score"/>
-                                <input type="text" class="form-control" placeholder="Opponent score"/>
+                                <input type="text" class="form-control" placeholder="Team score" data-bind="value: home"/>
+                                <input type="text" class="form-control" placeholder="Opponent score" data-bind="value: guest"/>
                                 <select class="form-control" name="map">
                                     @foreach($maps as $map)
                                         <option value="{{ $map->id }}">{{ $map->name }}</option>
                                     @endforeach
                                 </select>
-                                <button class="btn btn-danger" data-bind="click: removeScore"><i
+                                <button class="btn btn-danger" data-bind="click: $parent.removeScore"><i
                                             class="fa fa-fw fa-minus-circle"></i></button>
                             </div>
                         </div>

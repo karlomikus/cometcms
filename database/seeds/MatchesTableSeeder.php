@@ -19,7 +19,8 @@ class MatchesTableSeeder extends Seeder {
             for ($j=1; $j <= 2; $j++) {
                 $round = MatchRounds::create([
                     'match_id' => $i,
-                    'map_id' => $faker->numberBetween(1, 4)
+                    'map_id' => $faker->numberBetween(1, 4),
+                    'notes' => $faker->paragraph()
                 ]);
 
                 for ($k=1; $k <= 2; $k++) {
