@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" id="match-form">
-                {!! Form::open(['id' => 'match-form']) !!}
+                {!! Form::open(['id' => 'match-form', 'class' => 'admin-form']) !!}
                 <div class="row">
                     <div class="col-md-2">
                         <h4 class="form-subtitle">Match information</h4>

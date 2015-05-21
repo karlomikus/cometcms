@@ -74,8 +74,15 @@ label {
 .form-control {
   box-shadow: none;
   font-size: 16px;
+  box-sizing: border-box;
   &:focus {
     box-shadow: none;
+  }
+}
+
+.admin-form {
+  hr {
+    margin: 40px 0;
   }
 }
 
