@@ -17,6 +17,8 @@ class CreateMapsTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('image')->nullable();
+			$table->integer('game_id')->unsigned();
+			$table->foreign('game_id')->references('id')->on('games');
 			$table->timestamps();
 		});
 	}
