@@ -4,13 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="page-header">
-                    @if(!empty($opponent))
-                        <h2>Editing opponent: {{ $opponent->name }}</h2>
-                    @else
-                        <h2>Create new opponent</h2>
-                    @endif
-                </div>
                 {!! Form::model($opponent) !!}
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
@@ -19,7 +12,7 @@
                     </div>
                     <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                         {!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
-                        {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+                        {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => '3']) !!}
                         {!! $errors->first('description', '<span class="help-block">:message</span>') !!}
                     </div>
                     <hr>

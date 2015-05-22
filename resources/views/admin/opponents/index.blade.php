@@ -2,12 +2,6 @@
 
 @section('content')
     <div class="container">
-        @if(Session::has('message'))
-            <div class="alert alert-info alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                {{ Session::get('message') }}
-            </div>
-        @endif
         <div class="row">
             <div class="col-md-6">
                 <a href="{{ url('admin/opponents/new') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> New opponent</a>
@@ -27,7 +21,7 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered table-striped">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>{!! Form::gridHeader('Name', 'name', 'Admin\OpponentsController@index', $headerAttr) !!}</th>

@@ -89,6 +89,17 @@
     </div>
 </section>
 
+@if(Session::has('alerts'))
+    <div class="container">
+    @foreach(Session::get('alerts') as $alert)
+        <div class="alert alert-{{ $alert['type'] }} alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            {{ $alert['message'] }}
+        </div>
+    @endforeach
+    </div>
+@endif
+
 @yield('content')
 
 <!-- Scripts -->

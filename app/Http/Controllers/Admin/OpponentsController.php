@@ -29,62 +29,70 @@ class OpponentsController extends AdminController {
 
         $data = $grid->gridPage($page, 15);
 
+        $data['pageTitle'] = 'Opponents';
+
         return view('admin.opponents.index', $data);
     }
 
     public function create()
     {
         $data['opponent'] = null;
+        $data['pageTitle'] = 'Create new opponent';
 
         return view('admin.opponents.form', $data);
     }
 
     public function save(SaveOpponentRequest $request)
     {
-        $message = 'Opponent creation failed!';
-
         $opponent = $this->opponents->insert([
             'name' => $request->input('name'),
             'description' => $request->input('description')
         ]);
 
-        if ($opponent) {
-            $message = 'New opponent created successfully!';
-        }
+        if ($opponent)
+            $this->alertSuccess('New opponent created successfully!', 'success');
+        else
+            $this->alertError('Opponent creation failed!');
 
-        return redirect('admin/opponents')->with('message', $message);
+        return redirect('admin/opponents')->with('alerts', $this->getAlerts());
     }
 
     public function edit($id)
     {
         $data['opponent'] = $this->opponents->get($id);
+        $data['pageTitle'] = 'Editing an opponent';
 
         return view('admin.opponents.form', $data);
     }
 
     public function update($id, SaveOpponentRequest $request)
     {
-        $message = 'Opponent edit failed!';
         $data = [
             'name' => $request->input('name'),
             'description' => $request->input('description')
         ];
 
         if ($this->opponents->update($id, $data)) {
-            $message = 'Opponent succesfully edited!';
+            $this->alertSuccess('Opponent succesfully edited!');
+        }
+        else {
+            $this->alertError('Failed to edit an opponent!');
         }
 
-        return redirect('admin/opponents')->with('message', $message);
+        return redirect('admin/opponents')->with('message', $this->getAlerts());
     }
 
     public function delete($id)
     {
-        $message = 'Opponent deleting failed!';
-        if ($this->opponents->delete($id)) {
-            $message = 'Opponent deleted succesfully!';
+        try {
+            $this->opponents->delete($id);
+            $this->alertSuccess('Opponent deleted succesfully!');
+        }
+        catch (Exception $e) {
+            $this->alertError('Unable to delete an opponent due to an exception!');
         }
 
-        return redirect('admin/opponents')->with('message', $message);
+        return redirect('admin/opponents')->with('alerts', $this->getAlerts());
     }
 
 }
