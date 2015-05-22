@@ -1,7 +1,6 @@
 @extends('app-admin')
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-md-12" id="match-form">
@@ -29,15 +28,36 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="game">Choose game</label>
-                            <select class="form-control" id="game" name="game" data-bind="value: game_id">
-                                @foreach($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="game">Choose game</label>
+                                    <select class="form-control" id="game" name="game" data-bind="value: game_id">
+                                        @foreach($games as $game)
+                                            <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event">Select event</label>
+                                    <select class="form-control" id="event" name="event">
+                                        <option value="0">The International 2015</option>
+                                        <option value="0">The Summit 3</option>
+                                        <option value="0">Dreamhack</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <hr/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><h4 class="form-subtitle">Participants</h4></div>
+                    <div class="col-md-10">
+                        TODO
+                        <hr>
                     </div>
                 </div>
                 <div class="row">
@@ -99,5 +119,4 @@
             </div>
         </div>
     </div>
-
 @endsection
