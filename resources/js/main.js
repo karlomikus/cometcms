@@ -71,7 +71,7 @@ var ScoreViewModel = function (parent, scoreData) {
 /**
  * Data binding
  */
-var defaultModelData = {rounds: [{scores: []}]};
+var defaultModelData = {rounds: [{scores: [], notes: null}]};
 var matchParams = (window.location.pathname).split("/");
 var matchID = matchParams[matchParams.length - 1];
 

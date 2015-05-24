@@ -68,11 +68,11 @@
                         <a href="#" class="btn btn-success" data-bind="click: addRound"><i
                                     class="fa fa-fw fa-plus-circle"></i> Add a round</a>
                         <ul class="nav nav-pills nav-rounds" id="rounds" data-bind="foreach: rounds">
-                            <li><a data-toggle="tab"
+                            <li data-bind="attr: {class: $index() == 0 ? 'active' : ''}"><a data-toggle="tab"
                                    data-bind="text: 'Round ' + ($index() + 1), attr: { href: '#round' + $index() }"></a></li>
                         </ul>
                         <div class="tab-content rounds-content" data-bind="foreach: rounds">
-                            <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }">
+                            <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }, css: $index() == 0 ? 'active' : ''">
                                 <div class="form-group">
                                     <label for="map">Map</label>
                                     <select class="form-control" name="map" id="map" data-bind="value: map_id">
@@ -82,22 +82,20 @@
                                     </select>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3"><label>Home score</label></div>
-                                    <div class="col-md-3"><label>Opponent score</label></div>
-                                    <div class="col-md-4"><label>TODO</label></div>
+                                    <div class="col-md-5"><label>Home score</label></div>
+                                    <div class="col-md-5"><label>Opponent score</label></div>
                                     <div class="col-md-2"></div>
                                 </div>
                                 <div data-bind="foreach: scores">
                                     <div class="row row-score">
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Team score"
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Team score"
                                                                      data-bind="value: home"/></div>
-                                        <div class="col-md-3"><input type="text" class="form-control"
+                                        <div class="col-md-5"><input type="text" class="form-control"
                                                                      placeholder="Opponent score"
                                                                      data-bind="value: guest"/></div>
-                                        <div class="col-md-4">TODO</div>
                                         <div class="col-md-2 text-right">
                                             <button class="btn btn-danger" data-bind="click: $parent.removeScore"><i
-                                                        class="fa fa-fw fa-minus-circle"></i></button>
+                                                        class="fa fa-fw fa-lg fa-minus-circle"></i></button>
                                         </div>
                                     </div>
                                 </div>
