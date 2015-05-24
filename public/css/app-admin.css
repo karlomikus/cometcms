@@ -4945,5 +4945,11 @@ label {
   border: 1px solid #e6eafb;
   padding: 10px; }
 
+.match-form-info {
+  background: #f8f9fe;
+  border: 1px solid #dde2fa;
+  border-bottom: 0;
+  padding: 10px; }
+
 
 /*# sourceMappingURL=app-admin.css.map */

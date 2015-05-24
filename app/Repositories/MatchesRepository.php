@@ -101,7 +101,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 'team_id' => $data->team_id,
                 'opponent_id' => $data->opponent_id,
                 'game_id' => $data->game_id,
-                'matchlink' => 'TODO'
+                'matchlink' => isset($data->notes) ?: null
             ]);
 
             // Create match rounds

@@ -28,6 +28,46 @@ var MatchViewModel = function (matchData) {
     self.removeRound = function (round) {
         self.rounds.remove(round);
     };
+
+    self.matchRounds = ko.computed(function () {
+        return '(BO' + self.rounds().length + ')';
+    });
+
+    self.getScore = ko.computed(function () {
+        var homeScore = 0;
+        var guestScore = 0;
+
+        ko.utils.arrayForEach(self.rounds(), function (round) {
+            ko.utils.arrayForEach(round.scores(), function (score) {
+                homeScore += parseInt(isNaN(score.home()) ? 0 : score.home());
+                guestScore += parseInt(isNaN(score.guest()) ? 0 : score.guest());
+            });
+        });
+
+        return [homeScore, guestScore];
+    });
+
+    self.finalScore = ko.computed(function () {
+        return self.getScore()[0] + ':' + self.getScore()[1];
+    });
+
+    self.outcome = ko.computed(function () {
+        if(self.getScore()[0] > self.getScore()[1])
+            return 'win';
+        else if(self.getScore()[0] < self.getScore()[1])
+            return 'lose';
+        else
+            return 'draw';
+    });
+
+    self.outcomeClass = ko.computed(function () {
+        if(self.getScore()[0] > self.getScore()[1])
+            return 'label-success';
+        else if(self.getScore()[0] < self.getScore()[1])
+            return 'label-danger';
+        else
+            return 'label-warning';
+    });
 };
 
 var RoundViewModel = function (parent, roundsData) {
@@ -97,8 +137,8 @@ $('#match-form').submit(function (ev) {
         }
     });
     var data = ko.toJSON(matchViewModel);
-    var posting = $.post("/admin/matches/new", { data: data });
-    posting.done(function(resp) {
+    var posting = $.post("/admin/matches/new", {data: data});
+    posting.done(function (resp) {
         console.log(resp.alerts[0].message);
         window.location.href = resp.location;
     });

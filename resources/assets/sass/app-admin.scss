@@ -211,3 +211,10 @@ label {
   border: 1px solid darken($color-light-bg, 4%);
   padding: 10px;
 }
+
+.match-form-info {
+  background: $color-light-bg;
+  border: 1px solid darken($color-light-bg, 6%);
+  border-bottom: 0;
+  padding: 10px;
+}

@@ -65,11 +65,20 @@
                         <h4 class="form-subtitle">Match games</h4>
                     </div>
                     <div class="col-md-10">
-                        <a href="#" class="btn btn-success" data-bind="click: addRound"><i
-                                    class="fa fa-fw fa-plus-circle"></i> Add a round</a>
+                        <div class="match-form-info">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5><span class="label" data-bind="text: outcome, css: outcomeClass"></span> <!--ko text: finalScore--><!--/ko--> <small data-bind="text: matchRounds"></small></h5>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="#" class="btn btn-sm btn-success" data-bind="click: addRound"><i
+                                                class="fa fa-fw fa-plus-circle"></i> Add game</a>
+                                </div>
+                            </div>
+                        </div>
                         <ul class="nav nav-pills nav-rounds" id="rounds" data-bind="foreach: rounds">
                             <li data-bind="attr: {class: $index() == 0 ? 'active' : ''}"><a data-toggle="tab"
-                                   data-bind="text: 'Round ' + ($index() + 1), attr: { href: '#round' + $index() }"></a></li>
+                                   data-bind="text: 'Game ' + ($index() + 1), attr: { href: '#round' + $index() }"></a></li>
                         </ul>
                         <div class="tab-content rounds-content" data-bind="foreach: rounds">
                             <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }, css: $index() == 0 ? 'active' : ''">
@@ -114,9 +123,19 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
                     </div>
                 </div>
-                <button class="btn btn-success" type="submit">Save</button>
+                <div class="row">
+                    <div class="col-md-2"><h4 class="form-subtitle">Media</h4></div>
+                    <div class="col-md-10">
+                        TODO
+                        <hr>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-success" type="submit">Save</button>
+                </div>
                 {!! Form::close() !!}
             </div>
         </div>
