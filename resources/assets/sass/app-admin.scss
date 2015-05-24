@@ -32,6 +32,8 @@ $match-win-color: #70c1b3;
 $match-draw-color: #ffe066;
 
 $nav-pills-border-radius: 0;
+$nav-link-hover-bg: darken($color-light-bg, 6%);
+$nav-pills-active-link-hover-bg: #2d3142;
 
 @import "bootstrap/bootstrap";
 

@@ -2913,7 +2913,7 @@ tbody.collapse.in {
       padding: 10px 15px; }
       .nav > li > a:hover, .nav > li > a:focus {
         text-decoration: none;
-        background-color: #eeeeee; }
+        background-color: #dde2fa; }
     .nav > li.disabled > a {
       color: #777777; }
       .nav > li.disabled > a:hover, .nav > li.disabled > a:focus {
@@ -2922,7 +2922,7 @@ tbody.collapse.in {
         background-color: transparent;
         cursor: false; }
   .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-    background-color: #eeeeee;
+    background-color: #dde2fa;
     border-color: #2274a5; }
   .nav .nav-divider {
     height: 1px;
@@ -2959,7 +2959,7 @@ tbody.collapse.in {
     margin-left: 2px; }
   .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: #fff;
-    background-color: #2274a5; }
+    background-color: #2d3142; }
 
 .nav-stacked > li {
   float: none; }
