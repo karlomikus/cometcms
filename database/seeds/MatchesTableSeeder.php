@@ -26,8 +26,8 @@ class MatchesTableSeeder extends Seeder {
                 for ($k=1; $k <= 2; $k++) {
                     RoundScores::create([
                         'round_id' => $round->id,
-                        'score_home' => $faker->numberBetween(1, 5),
-                        'score_guest' => $faker->numberBetween(1, 5)
+                        'home' => $faker->numberBetween(1, 5),
+                        'guest' => $faker->numberBetween(1, 5)
                     ]);
                 }
             }

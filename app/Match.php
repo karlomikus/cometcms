@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Match extends Model {
 
+    protected $guarded = ['id'];
+
     public function opponent()
     {
         return $this->belongsTo('App\Opponent');
@@ -49,7 +51,7 @@ class Match extends Model {
         // TODO: Optimize number of queries for matches scores, maybe use eloquent join...
         $result = \DB::table('round_scores')
             ->join('match_rounds', 'round_scores.round_id', '=', 'match_rounds.id')
-            ->select(\DB::raw('sum(score_home) as home, sum(score_guest) as guest'))
+            ->select(\DB::raw('sum(home) as home, sum(guest) as guest'))
             ->where('match_id', '=', $this->id)
             ->first();
 

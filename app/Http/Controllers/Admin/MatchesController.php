@@ -52,16 +52,18 @@ class MatchesController extends AdminController {
 
     public function save(Request $request)
     {
-        $data = $request->input('data');
-        $match = [
-            'game_id' => $request->json('game_id'),
-            'opponent_id' => $request->input('game_id'),
-            'team_id' => $request->input('game_id')
-        ];
+        $data = json_decode($request->input('data'));
 
-        $this->matches->insert($match);
+        if($this->matches->insert($data))
+            $this->alertSuccess('Match saved successfully!');
+        else
+            $this->alertError('Unable to save a match!');
 
-        return redirect('admin/matches');
+        \Session::flash('alerts', $this->getAlerts());
+
+        // Browsers are dumb and can't follow 302 redirect from ajax call
+        //return redirect('admin/matches')->with('alerts', $this->getAlerts());
+        return response()->json(['location' => '/admin/matches', 'alerts' => $this->getAlerts()]);
     }
 
     public function edit($id, TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
@@ -79,6 +81,19 @@ class MatchesController extends AdminController {
     public function update($id, Request $request)
     {
 
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->matches->delete($id);
+            $this->alertSuccess('Match deleted succesfully!');
+        }
+        catch (Exception $e) {
+            $this->alertError('Unable to delete a match due to an exception: ' . $e->getMessage());
+        }
+
+        return redirect('admin/matches')->with('alerts', $this->getAlerts());
     }
 
     public function getMatchJson($matchID)

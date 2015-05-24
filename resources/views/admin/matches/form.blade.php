@@ -73,10 +73,18 @@
                         </ul>
                         <div class="tab-content rounds-content" data-bind="foreach: rounds">
                             <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }">
+                                <div class="form-group">
+                                    <label for="map">Map</label>
+                                    <select class="form-control" name="map" id="map" data-bind="value: map_id">
+                                        @foreach($maps as $map)
+                                            <option value="{{ $map->id }}">{{ $map->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-3"><label>Home score</label></div>
                                     <div class="col-md-3"><label>Opponent score</label></div>
-                                    <div class="col-md-4"><label>Map</label></div>
+                                    <div class="col-md-4"><label>TODO</label></div>
                                     <div class="col-md-2"></div>
                                 </div>
                                 <div data-bind="foreach: scores">
@@ -86,11 +94,7 @@
                                         <div class="col-md-3"><input type="text" class="form-control"
                                                                      placeholder="Opponent score"
                                                                      data-bind="value: guest"/></div>
-                                        <div class="col-md-4"><select class="form-control" name="map">
-                                                @foreach($maps as $map)
-                                                    <option value="{{ $map->id }}">{{ $map->name }}</option>
-                                                @endforeach
-                                            </select></div>
+                                        <div class="col-md-4">TODO</div>
                                         <div class="col-md-2 text-right">
                                             <button class="btn btn-danger" data-bind="click: $parent.removeScore"><i
                                                         class="fa fa-fw fa-minus-circle"></i></button>
@@ -107,8 +111,8 @@
 
                                 <div class="form-group">
                                     <label for="round-info">Round notes</label>
-                            <textarea class="form-control" name="round-info" id="round-info" rows="3"
-                                      data-bind="text: notes"></textarea>
+                                    <textarea class="form-control" name="round-info" id="round-info" rows="3"
+                                      data-bind="value: notes"></textarea>
                                 </div>
                             </div>
                         </div>

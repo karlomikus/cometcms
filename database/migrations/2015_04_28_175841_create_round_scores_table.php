@@ -16,9 +16,9 @@ class CreateRoundScoresTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('round_id')->unsigned();
-			$table->foreign('round_id')->references('id')->on('match_rounds');
-			$table->integer('score_home');
-			$table->integer('score_guest');
+			$table->foreign('round_id')->references('id')->on('match_rounds')->onDelete('cascade');
+			$table->integer('home');
+			$table->integer('guest');
 			$table->timestamps();
 		});
 	}

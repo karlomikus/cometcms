@@ -64,8 +64,8 @@ var ScoreViewModel = function (parent, scoreData) {
 
     self.score_id = ko.observable(scoreData.id);
     self.round_id = ko.observable(parent.round_id);
-    self.home = ko.observable(scoreData.score_home);
-    self.guest = ko.observable(scoreData.score_guest);
+    self.home = ko.observable(scoreData.home);
+    self.guest = ko.observable(scoreData.guest);
 };
 
 /**
@@ -74,6 +74,7 @@ var ScoreViewModel = function (parent, scoreData) {
 var defaultModelData = {rounds: [{scores: []}]};
 var matchParams = (window.location.pathname).split("/");
 var matchID = matchParams[matchParams.length - 1];
+
 if ($.isNumeric(matchID)) {
     $.getJSON("/admin/matches/api/edit/" + matchID, function (data) {
         var matchViewModel = new MatchViewModel(data);
@@ -96,7 +97,9 @@ $('#match-form').submit(function (ev) {
         }
     });
     var data = ko.toJSON(matchViewModel);
-    $.post("/admin/matches/new", data, function (response) {
-        console.log(response);
+    var posting = $.post("/admin/matches/new", { data: data });
+    posting.done(function(resp) {
+        console.log(resp.alerts[0].message);
+        window.location.href = resp.location;
     });
 });
