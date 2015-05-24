@@ -1,3 +1,12 @@
+/*
+* Override variables
+*/
+/*
+* User variables
+*/
+/*
+* User Mixins
+*/
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -4834,6 +4843,9 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+/*
+* CSS Defaults
+*/
 body {
   font-weight: 300;
   padding-top: 140px; }
@@ -4858,31 +4870,9 @@ label {
   .form-control:focus {
     box-shadow: none; }
 
-.admin-form hr {
-  margin: 40px 0; }
-
-.btn {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  box-shadow: inset 0 -4px 7px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2); }
-
-.form-subtitle {
-  font-weight: 200;
-  margin-top: 0; }
-
-.block {
-  background: #f8f9fe;
-  border: 1px solid #e6eafb;
-  padding: 20px;
-  color: #12247f; }
-  .block h3 {
-    margin: 0 0 20px 0; }
-    .block h3 small {
-      color: #7286eb;
-      display: block;
-      margin-top: 5px; }
-
+/*
+* Admin styles
+*/
 .pagebar {
   background: #f8f9fe;
   margin-bottom: 20px;
@@ -4950,6 +4940,22 @@ label {
   border: 1px solid #dde2fa;
   border-bottom: 0;
   padding: 10px; }
+
+.admin-form hr {
+  margin: 40px 0; }
+
+.form-subtitle {
+  font-weight: 200;
+  margin-top: 0; }
+
+/*
+* Bootstrap overrides
+*/
+.btn {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  box-shadow: inset 0 -4px 7px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2); }
 
 
 /*# sourceMappingURL=app-admin.css.map */
