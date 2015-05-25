@@ -10,6 +10,14 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     protected $rounds;
     protected $scores;
 
+    /**
+     * Initiate the repository with given models. We also need rounds and scores models
+     * since the match is dependent on them, but they don't need a sepearete repository.
+     * 
+     * @param $match Match Match model
+     * @param $rounds MatchRounds Rounds model
+     * @param $scores RoundScores Scores model
+     */
     public function __construct(Match $match, MatchRounds $rounds, RoundScores $scores)
     {
         parent::__construct($match);
@@ -18,6 +26,11 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         $this->scores = $scores;
     }
 
+    /**
+     * Custom query for all matches
+     * 
+     * @return mixed
+     */
     public function all()
     {
         // TODO: Fix rounds counting!
@@ -35,6 +48,12 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return $query->get();
     }
 
+    /**
+     * Gets rounds model from specified match ID
+     * 
+     * @param $matchID int ID of the match
+     * @return mixed Rounds model
+     */
     public function getMatchRounds($matchID)
     {
         return $this->get($matchID)->rounds;
