@@ -17,7 +17,12 @@ class MatchesController extends AdminController {
     {
         $this->matches = $matches;
     }
-
+    /**
+     * Show matches list
+     * 
+     * @param $request Request
+     * @return void
+     */
     public function index(Request $request)
     {
         $searchTerm = $request->query('search');
@@ -26,7 +31,7 @@ class MatchesController extends AdminController {
         $order      = $request->query('order');
 
         $grid = new GridView($this->matches);
-        $grid->setOrder($order, 'asc');
+        $grid->setOrder($order, 'desc');
         $grid->setSearchTerm($searchTerm);
         $grid->setSortColumn($sortColumn, 'created_at');
         $grid->setPath($request->getPathInfo());
@@ -38,6 +43,15 @@ class MatchesController extends AdminController {
         return view('admin.matches.index', $data);
     }
 
+    /**
+     * Show match create form
+     * 
+     * @param $teams TeamsRepositoryInterface
+     * @param $opponents OpponentsRepositoryInterface
+     * @param $games GamesRepositoryInterface
+     * @param $maps MapsRepositoryInterface
+     * @return void
+     */
     public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
     {
         $data['teams'] = $teams->all();
@@ -50,19 +64,26 @@ class MatchesController extends AdminController {
         return view('admin.matches.form', $data);
     }
 
+    /**
+     * Read json request and save match to database
+     * 
+     * @param $request Request
+     * @return string JSON response containing redirect location and alert messages
+     */
     public function save(Request $request)
     {
         $data = json_decode($request->input('data'));
 
         if($this->matches->insert($data))
-            $this->alertSuccess('Match saved successfully!');
+            $this->alertSuccess('Match saved successfully.');
         else
-            $this->alertError('Unable to save a match!');
+            $this->alertError('Unable to save a match.');
 
         \Session::flash('alerts', $this->getAlerts());
 
         // Browsers are dumb and can't follow 302 redirect from ajax call
-        //return redirect('admin/matches')->with('alerts', $this->getAlerts());
+        // return redirect('admin/matches')->with('alerts', $this->getAlerts());
+        // So we return JSON response containing location which we redirect to with js
         return response()->json(['location' => '/admin/matches', 'alerts' => $this->getAlerts()]);
     }
 
@@ -80,7 +101,19 @@ class MatchesController extends AdminController {
 
     public function update($id, Request $request)
     {
+        $data = json_decode($request->input('data'));
 
+        if($this->matches->update($id, $data))
+            $this->alertSuccess('Match updated successfully.');
+        else
+            $this->alertError('Unable to update a match.');
+
+        \Session::flash('alerts', $this->getAlerts());
+
+        // Browsers are dumb and can't follow 302 redirect from ajax call
+        // return redirect('admin/matches')->with('alerts', $this->getAlerts());
+        // So we return JSON response containing location which we redirect to with js
+        return response()->json(['location' => '/admin/matches', 'alerts' => $this->getAlerts()]);
     }
 
     public function delete($id)
