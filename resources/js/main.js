@@ -52,18 +52,18 @@ var MatchViewModel = function (matchData) {
     });
 
     self.outcome = ko.computed(function () {
-        if(self.getScore()[0] > self.getScore()[1])
+        if (self.getScore()[0] > self.getScore()[1])
             return 'win';
-        else if(self.getScore()[0] < self.getScore()[1])
+        else if (self.getScore()[0] < self.getScore()[1])
             return 'lose';
         else
             return 'draw';
     });
 
     self.outcomeClass = ko.computed(function () {
-        if(self.getScore()[0] > self.getScore()[1])
+        if (self.getScore()[0] > self.getScore()[1])
             return 'label-success';
-        else if(self.getScore()[0] < self.getScore()[1])
+        else if (self.getScore()[0] < self.getScore()[1])
             return 'label-danger';
         else
             return 'label-warning';
@@ -114,17 +114,21 @@ var ScoreViewModel = function (parent, scoreData) {
 var defaultModelData = {rounds: [{scores: [], notes: null}]};
 var matchParams = (window.location.pathname).split("/");
 var matchID = matchParams[matchParams.length - 1];
+var matchViewModel = null;
 
 if ($.isNumeric(matchID)) {
-    $.getJSON("/admin/matches/api/edit/" + matchID, function (data) {
-        var matchViewModel = new MatchViewModel(data);
+    var getData = $.getJSON("/admin/matches/api/edit/" + matchID);
+    getData.done(function (data) {
+        matchViewModel = new MatchViewModel(data);
         ko.applyBindings(matchViewModel, document.getElementById('match-form'));
     });
 }
 else {
-    var matchViewModel = new MatchViewModel(defaultModelData);
+    matchViewModel = new MatchViewModel(defaultModelData);
     ko.applyBindings(matchViewModel, document.getElementById('match-form'));
 }
+
+console.log(matchViewModel);
 
 /**
  * Events
@@ -137,7 +141,15 @@ $('#match-form').submit(function (ev) {
         }
     });
     var data = ko.toJSON(matchViewModel);
-    var posting = $.post("/admin/matches/new", {data: data});
+    var posting = null;
+
+    if ($.isNumeric(matchID)) {
+        posting = $.post("/admin/matches/edit/" + matchID, {data: data});
+    }
+    else {
+        posting = $.post("/admin/matches/new", {data: data});
+    }
+
     posting.done(function (resp) {
         console.log(resp.alerts[0].message);
         window.location.href = resp.location;

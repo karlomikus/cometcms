@@ -147,7 +147,29 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         }
 
         return true;
+    }
 
+    public function update($id, $data)
+    {
+        $match = $this->model->find($id);
+
+        $match->team_id = $data->team_id;
+        $match->opponent_id = $data->opponent_id;
+        $match->game_id = $data->game_id;
+        //$match->matchlink = $data->matchlink;
+
+        $match->save();
+
+        $rounds = $this->rounds->where('match_id', '=', $match->id)->get();
+
+        // TODO: Fuck this, remove old, add new
+        foreach ($rounds as $round) {
+            if(!in_array($round->id, array_pluck($data->rounds, 'round_id'))) {
+                var_dump($round->id);
+            }
+        }
+
+        $scores = $this->scores->where('round_id', '=', $rounds->id)->get();
     }
 
 }
