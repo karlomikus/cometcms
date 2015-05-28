@@ -81,10 +81,10 @@
                             <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }, css: $index() == 0 ? 'active' : ''">
                                 <div class="form-group">
                                     <label for="map">Map</label>
-                                    <select class="form-control" name="map" id="map" data-bind="value: map_id">
-                                        @foreach($maps as $map)
-                                            <option value="{{ $map->id }}">{{ $map->name }}</option>
-                                        @endforeach
+                                    <select class="form-control" name="map" id="map" data-bind="value: map_id, options: maps, optionsText: 'name'">
+                                        {{--@foreach($maps as $map)--}}
+                                            {{--<option value="{{ $map->id }}">{{ $map->name }}</option>--}}
+                                        {{--@endforeach--}}
                                     </select>
                                 </div>
                                 <div class="row">
@@ -137,14 +137,11 @@
             </div>
         </div>
     </div>
-<script>
-// TODO: add pre script and post script...
-    var matchData = {!! $matchJSON !!};
-    var metaData = {!! $metaData !!};
-    var matchViewModel = null;
-</script>
 @endsection
-
-@section('page-scripts')
-
+@section('page-scripts-before')
+    <script>
+        // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
+        var matchData = {!! $matchJSON !!};
+        var metaData = {!! $metaData !!};
+    </script>
 @endsection

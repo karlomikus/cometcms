@@ -1,5 +1,8 @@
 "use strict";
 
+var matchViewModel = null;
+var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}]};
+
 /**
  * Match viewmodels
  */
@@ -13,7 +16,7 @@ var MatchViewModel = function (matchData, metaData) {
     self.rounds = ko.observableArray();
     self.games = ko.observableArray();
 
-    // Fill in games and maps
+    // Fill in games
     $.each(metaData, function (key, val) {
         self.games.push(new GameViewModel(val));
     });
@@ -82,12 +85,30 @@ var MatchViewModel = function (matchData, metaData) {
 var RoundViewModel = function (parent, roundsData) {
     var self = this;
 
+    // Get maps by game ID.
+    self.getMaps = function(id) {
+        return parent.games().filter(function (game) {
+            return game.game_id() == id;
+        })[0].maps();
+    };
+
+    // We have to manually sub to game_id changes, and update the maps
+    // TODO: Rewrite this probably, optimize, currently removing all maps. Maybe save old states on game changes...
+    parent.game_id.subscribe(function(newGameID) {
+        var gameMaps = self.getMaps(newGameID);
+        self.maps.removeAll();
+        $.each(gameMaps, function(key, val) {
+            var map = ko.toJS(val); // Cast to JS object since the source is ko observables
+            self.maps.push(new MapViewModel(self, map));
+        });
+    });
+
     self.round_id = ko.observable(roundsData.id);
     self.match_id = ko.observable(parent.match_id);
     self.map_id = ko.observable(roundsData.map_id);
     self.scores = ko.observableArray();
     self.notes = ko.observable(roundsData.notes);
-    self.maps = ko.observableArray(parent.games().filter(function(game) { return game.game_id() == 3; })[0].maps());
+    self.maps = ko.observableArray(self.getMaps(parent.game_id()));
 
     // Fill in the scores
     if (roundsData.scores.length > 0) {
@@ -118,7 +139,7 @@ var ScoreViewModel = function (parent, scoreData) {
     self.guest = ko.observable(scoreData.guest);
 };
 
-var GameViewModel = function(data) {
+var GameViewModel = function (data) {
     var self = this;
 
     self.game_id = ko.observable(data.id);
@@ -132,32 +153,27 @@ var GameViewModel = function(data) {
     });
 };
 
-var MapViewModel = function(parent, data) {
+var MapViewModel = function (parent, data) {
     var self = this;
 
     self.game_id = parent.game_id;
     self.map_id = ko.observable(data.id);
     self.image = ko.observable(data.image);
     self.name = ko.observable(data.name);
-}
+};
 
-$(document).ready(function ()
-{
+$(document).ready(function () {
     /**
      * Data binding
      */
-    var defaultModelData = {rounds: [{scores: [], notes: null}]};
-    
     console.log('Loading viewmodel...');
     if (matchData) {
         matchViewModel = new MatchViewModel(matchData, metaData);
-        
     }
     else {
         matchViewModel = new MatchViewModel(defaultModelData, metaData);
     }
     console.log('Viewmodel loaded!');
-    console.log(matchViewModel);
 
     ko.applyBindings(matchViewModel, document.getElementById('match-form'));
 
@@ -174,15 +190,14 @@ $(document).ready(function ()
         var data = ko.toJSON(matchViewModel);
         var posting = null;
 
-        if ($.isNumeric(matchID)) {
-            posting = $.post("/admin/matches/edit/" + matchID, {data: data});
+        if (matchData) {
+            posting = $.post("/admin/matches/edit/" + matchData.id, {data: data});
         }
         else {
             posting = $.post("/admin/matches/new", {data: data});
         }
 
         posting.done(function (resp) {
-            console.log(resp.alerts[0].message);
             window.location.href = resp.location;
         });
     });
