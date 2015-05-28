@@ -93,6 +93,8 @@ class MatchesController extends AdminController {
         $data['opponents'] = $opponents->all();
         $data['games'] = $games->all();
         $data['maps'] = $maps->all();
+        $data['matchJSON'] = $this->matches->getMatchJson($id)->toJson();
+        $data['metaData'] = $games->allWithMaps()->toJson();
 
         $data['pageTitle'] = 'Editing a match';
 

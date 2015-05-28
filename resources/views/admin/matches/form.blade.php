@@ -32,10 +32,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="game">Choose game</label>
-                                    <select class="form-control" id="game" name="game" data-bind="value: game_id">
-                                        @foreach($games as $game)
-                                            <option value="{{ $game->id }}">{{ $game->name }}</option>
-                                        @endforeach
+                                    <select class="form-control" id="game" name="game" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'game_id'">
                                     </select>
                                 </div>
                             </div>
@@ -140,4 +137,14 @@
             </div>
         </div>
     </div>
+<script>
+// TODO: add pre script and post script...
+    var matchData = {!! $matchJSON !!};
+    var metaData = {!! $metaData !!};
+    var matchViewModel = null;
+</script>
+@endsection
+
+@section('page-scripts')
+
 @endsection
