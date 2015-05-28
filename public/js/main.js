@@ -14,12 +14,7 @@ var MatchViewModel = function (matchData, metaData) {
     self.team_id = ko.observable(matchData.team_id);
     self.game_id = ko.observable(matchData.game_id);
     self.rounds = ko.observableArray();
-    self.games = ko.observableArray();
-
-    // Fill in games
-    $.each(metaData, function (key, val) {
-        self.games.push(new GameViewModel(val));
-    });
+    self.games = ko.observableArray(metaData);
 
     // Fill in the rounds
     if (matchData.rounds.length > 0) {
@@ -88,19 +83,15 @@ var RoundViewModel = function (parent, roundsData) {
     // Get maps by game ID.
     self.getMaps = function(id) {
         return parent.games().filter(function (game) {
-            return game.game_id() == id;
-        })[0].maps();
+            return game.id == id;
+        })[0].maps;
     };
 
     // We have to manually sub to game_id changes, and update the maps
-    // TODO: Rewrite this probably, optimize, currently removing all maps. Maybe save old states on game changes...
-    parent.game_id.subscribe(function(newGameID) {
-        var gameMaps = self.getMaps(newGameID);
+    // TODO: Rewrite this probably, Maybe save old states on game changes...
+    parent.game_id.subscribe(function (newGameID) {
         self.maps.removeAll();
-        $.each(gameMaps, function(key, val) {
-            var map = ko.toJS(val); // Cast to JS object since the source is ko observables
-            self.maps.push(new MapViewModel(self, map));
-        });
+        ko.utils.arrayPushAll(self.maps, self.getMaps(newGameID))
     });
 
     self.round_id = ko.observable(roundsData.id);
@@ -137,29 +128,6 @@ var ScoreViewModel = function (parent, scoreData) {
     self.round_id = ko.observable(parent.round_id);
     self.home = ko.observable(scoreData.home);
     self.guest = ko.observable(scoreData.guest);
-};
-
-var GameViewModel = function (data) {
-    var self = this;
-
-    self.game_id = ko.observable(data.id);
-    self.name = ko.observable(data.name);
-    self.code = ko.observable(data.code);
-    self.image = ko.observable(data.image);
-    self.maps = ko.observableArray();
-
-    $.each(data.maps, function (key, val) {
-        self.maps.push(new MapViewModel(self, val));
-    });
-};
-
-var MapViewModel = function (parent, data) {
-    var self = this;
-
-    self.game_id = parent.game_id;
-    self.map_id = ko.observable(data.id);
-    self.image = ko.observable(data.image);
-    self.name = ko.observable(data.name);
 };
 
 $(document).ready(function () {

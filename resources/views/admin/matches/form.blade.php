@@ -32,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="game">Choose game</label>
-                                    <select class="form-control" id="game" name="game" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'game_id'">
+                                    <select class="form-control" id="game" name="game" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'id'">
                                     </select>
                                 </div>
                             </div>
@@ -81,10 +81,7 @@
                             <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }, css: $index() == 0 ? 'active' : ''">
                                 <div class="form-group">
                                     <label for="map">Map</label>
-                                    <select class="form-control" name="map" id="map" data-bind="value: map_id, options: maps, optionsText: 'name'">
-                                        {{--@foreach($maps as $map)--}}
-                                            {{--<option value="{{ $map->id }}">{{ $map->name }}</option>--}}
-                                        {{--@endforeach--}}
+                                    <select class="form-control" name="map" id="map" data-bind="value: map_id, options: maps, optionsText: 'name', optionsValue: 'id'">
                                     </select>
                                 </div>
                                 <div class="row">
