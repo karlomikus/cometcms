@@ -11,4 +11,9 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
         parent::__construct($game);
     }
 
+    public function allWithMaps()
+    {
+        return $this->model->with('maps')->get();
+    }
+
 } 

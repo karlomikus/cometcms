@@ -1,7 +1,9 @@
 /**
  * Match viewmodels
  */
-var MatchViewModel = function (matchData) {
+'use strict';
+
+var MatchViewModel = function MatchViewModel(matchData) {
     var self = this;
 
     self.match_id = ko.observable(matchData.id);
@@ -15,14 +17,13 @@ var MatchViewModel = function (matchData) {
         $.each(matchData.rounds, function (key, val) {
             self.rounds.push(new RoundViewModel(this, val));
         });
-    }
-    else {
-        self.rounds.push(new RoundViewModel(self, {}))
+    } else {
+        self.rounds.push(new RoundViewModel(self, {}));
     }
 
     // Viewmodel methods
     self.addRound = function () {
-        self.rounds.push(new RoundViewModel(self, {scores: []}));
+        self.rounds.push(new RoundViewModel(self, { scores: [] }));
     };
 
     self.removeRound = function (round) {
@@ -52,25 +53,15 @@ var MatchViewModel = function (matchData) {
     });
 
     self.outcome = ko.computed(function () {
-        if (self.getScore()[0] > self.getScore()[1])
-            return 'win';
-        else if (self.getScore()[0] < self.getScore()[1])
-            return 'lose';
-        else
-            return 'draw';
+        if (self.getScore()[0] > self.getScore()[1]) return 'win';else if (self.getScore()[0] < self.getScore()[1]) return 'lose';else return 'draw';
     });
 
     self.outcomeClass = ko.computed(function () {
-        if (self.getScore()[0] > self.getScore()[1])
-            return 'label-success';
-        else if (self.getScore()[0] < self.getScore()[1])
-            return 'label-danger';
-        else
-            return 'label-warning';
+        if (self.getScore()[0] > self.getScore()[1]) return 'label-success';else if (self.getScore()[0] < self.getScore()[1]) return 'label-danger';else return 'label-warning';
     });
 };
 
-var RoundViewModel = function (parent, roundsData) {
+var RoundViewModel = function RoundViewModel(parent, roundsData) {
     var self = this;
 
     self.round_id = ko.observable(roundsData.id);
@@ -84,9 +75,8 @@ var RoundViewModel = function (parent, roundsData) {
         $.each(roundsData.scores, function (key, val) {
             self.scores.push(new ScoreViewModel(self, val));
         });
-    }
-    else {
-        self.scores.push(new ScoreViewModel(self, {}))
+    } else {
+        self.scores.push(new ScoreViewModel(self, {}));
     }
 
     // Viewmodel methods
@@ -99,7 +89,7 @@ var RoundViewModel = function (parent, roundsData) {
     };
 };
 
-var ScoreViewModel = function (parent, scoreData) {
+var ScoreViewModel = function ScoreViewModel(parent, scoreData) {
     var self = this;
 
     self.score_id = ko.observable(scoreData.id);
@@ -111,19 +101,18 @@ var ScoreViewModel = function (parent, scoreData) {
 /**
  * Data binding
  */
-var defaultModelData = {rounds: [{scores: [], notes: null}]};
-var matchParams = (window.location.pathname).split("/");
+var defaultModelData = { rounds: [{ scores: [], notes: null }] };
+var matchParams = window.location.pathname.split('/');
 var matchID = matchParams[matchParams.length - 1];
 var matchViewModel = null;
 
 if ($.isNumeric(matchID)) {
-    var getData = $.getJSON("/admin/matches/api/edit/" + matchID);
+    var getData = $.getJSON('/admin/matches/api/edit/' + matchID);
     getData.done(function (data) {
         matchViewModel = new MatchViewModel(data);
         ko.applyBindings(matchViewModel, document.getElementById('match-form'));
     });
-}
-else {
+} else {
     matchViewModel = new MatchViewModel(defaultModelData);
     ko.applyBindings(matchViewModel, document.getElementById('match-form'));
 }
@@ -144,10 +133,9 @@ $('#match-form').submit(function (ev) {
     var posting = null;
 
     if ($.isNumeric(matchID)) {
-        posting = $.post("/admin/matches/edit/" + matchID, {data: data});
-    }
-    else {
-        posting = $.post("/admin/matches/new", {data: data});
+        posting = $.post('/admin/matches/edit/' + matchID, { data: data });
+    } else {
+        posting = $.post('/admin/matches/new', { data: data });
     }
 
     posting.done(function (resp) {

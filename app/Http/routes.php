@@ -34,6 +34,8 @@ Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
 {
+    Route::get('/', 'Admin\DashboardController@index');
+
     /**
      * Users
      */
@@ -55,6 +57,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/opponents/delete/{id}', 'Admin\OpponentsController@delete');
 
     /**
+     * Teams
+     */
+    Route::get('/teams', 'Admin\TeamsController@index');
+    Route::get('/teams/new', 'Admin\TeamsController@create');
+    Route::post('/teams/new', 'Admin\TeamsController@save');
+    Route::get('/teams/edit/{id}', 'Admin\TeamsController@edit');
+    Route::post('/teams/edit/{id}', 'Admin\TeamsController@update');
+    Route::get('/teams/delete/{id}', 'Admin\TeamsController@delete');
+
+    /**
      * Matches
      */
     Route::get('/matches', 'Admin\MatchesController@index');
@@ -64,4 +76,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/matches/edit/{id}', 'Admin\MatchesController@update');
     Route::get('/matches/delete/{id}', 'Admin\MatchesController@delete');
     Route::get('/matches/api/edit/{id}', 'Admin\MatchesController@getMatchJson');
+    Route::get('/matches/api/meta', 'Admin\MatchesController@getMetaJson');
 });

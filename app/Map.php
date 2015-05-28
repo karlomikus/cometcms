@@ -18,6 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Map extends Model {
 
-	//
+	protected $hidden = ['created_at', 'updated_at'];
 
 }

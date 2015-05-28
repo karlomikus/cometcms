@@ -149,6 +149,13 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return true;
     }
 
+    /**
+     * Update match on edit
+     * 
+     * @param  int   $id    Match ID
+     * @param  array $data  Data to insert
+     * @return mixed
+     */
     public function update($id, $data)
     {
         $match = $this->model->find($id);

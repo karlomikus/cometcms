@@ -136,4 +136,11 @@ class MatchesController extends AdminController {
         return response()->json($match);
     }
 
+    public function getMetaJson(GamesRepositoryInterface $games)
+    {
+        $data = $games->allWithMaps();
+
+        return response()->json($data);
+    }
+
 } 
