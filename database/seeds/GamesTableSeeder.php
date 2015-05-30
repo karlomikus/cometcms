@@ -19,7 +19,7 @@ class GamesTableSeeder extends Seeder {
         
         Game::create([
             'name' => 'Call of Duty 4: Modern Warfare',
-            'code' => 'heartstone'
+            'code' => 'cod4'
         ]);
         
         Game::create([

@@ -6,7 +6,7 @@ var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}]};
 /**
  * Match viewmodels
  */
-var MatchViewModel = function (matchData, metaData) {
+var MatchViewModel = function (matchData, addonData) {
     var self = this;
 
     self.match_id = ko.observable(matchData.id);
@@ -14,7 +14,7 @@ var MatchViewModel = function (matchData, metaData) {
     self.team_id = ko.observable(matchData.team_id);
     self.game_id = ko.observable(matchData.game_id);
     self.rounds = ko.observableArray();
-    self.games = ko.observableArray(metaData);
+    self.games = ko.observableArray(addonData);
 
     // Fill in the rounds
     if (matchData.rounds.length > 0) {
@@ -73,7 +73,12 @@ var MatchViewModel = function (matchData, metaData) {
     };
 
     self.removeRound = function (round) {
-        self.rounds.remove(round);
+        if(self.rounds().length == 1) {
+            alert('You can\'t delete the last game.');
+            return;
+        }
+        if(confirm('Are you sure you want to delete this game?'))
+            self.rounds.remove(round);
     };
 };
 
@@ -87,19 +92,20 @@ var RoundViewModel = function (parent, roundsData) {
         })[0].maps;
     };
 
-    // We have to manually sub to game_id changes, and update the maps
-    // TODO: Rewrite this probably, Maybe save old states on game changes...
-    parent.game_id.subscribe(function (newGameID) {
-        self.maps.removeAll();
-        ko.utils.arrayPushAll(self.maps, self.getMaps(newGameID))
-    });
-
     self.round_id = ko.observable(roundsData.id);
     self.match_id = ko.observable(parent.match_id);
     self.map_id = ko.observable(roundsData.map_id);
     self.scores = ko.observableArray();
     self.notes = ko.observable(roundsData.notes);
-    self.maps = ko.observableArray(self.getMaps(parent.game_id()));
+    self.maps = ko.observableArray();
+
+    ko.utils.arrayPushAll(self.maps, self.getMaps(parent.game_id()));
+
+    // We have to manually sub to game_id changes, and update the maps
+    parent.game_id.subscribe(function (newGameID) {
+        self.maps.removeAll();
+        ko.utils.arrayPushAll(self.maps, self.getMaps(newGameID));
+    });
 
     // Fill in the scores
     if (roundsData.scores.length > 0) {
@@ -117,6 +123,10 @@ var RoundViewModel = function (parent, roundsData) {
     };
 
     self.removeScore = function (score) {
+        if(self.scores().length == 1) {
+            alert('You can\'t delete the last score.');
+            return;
+        }
         self.scores.remove(score);
     };
 };

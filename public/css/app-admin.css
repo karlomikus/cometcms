@@ -4850,6 +4850,13 @@ body {
   font-weight: 300;
   padding-top: 140px; }
 
+.table-admin th {
+  border-color: #f6f6f6 !important; }
+.table-admin td {
+  background: #fff;
+  border-bottom: 1px solid #f6f6f6;
+  padding: 10px !important; }
+
 th {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
@@ -4874,7 +4881,7 @@ label {
 * Admin styles
 */
 .pagebar {
-  background: #f8f9fe;
+  background: #424860;
   margin-bottom: 20px;
   height: 70px;
   line-height: 70px;
@@ -4882,14 +4889,14 @@ label {
   top: 50px;
   left: 0;
   right: 0;
-  z-index: 1020;
-  border-bottom: 1px solid #e6eafb; }
+  z-index: 1020; }
   .pagebar .page-title {
     margin: 0;
     padding: 0;
     line-height: inherit;
     font-weight: 200;
-    display: inline-block; }
+    display: inline-block;
+    color: #eae8ff; }
 
 .navbar-admin {
   background: #2d3142;

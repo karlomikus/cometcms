@@ -69,6 +69,17 @@ body {
 }
 
 // Tables
+.table-admin {
+  th {
+    border-color: #f6f6f6 !important;
+  }
+  td {
+    background: #fff;
+    border-bottom: 1px solid #f6f6f6;
+    padding: 10px !important;
+  }
+}
+
 th {
   font-family: $font-family-accent;
   font-weight: 400;
@@ -100,7 +111,7 @@ label {
 */
 // Pagebar
 .pagebar {
-  background: $color-light-bg;
+  background: lighten($color-navbar-bg, 10%);
   margin-bottom: 20px;
   height: $page-bar-height;
   line-height: $page-bar-height;
@@ -109,20 +120,20 @@ label {
   left: 0;
   right: 0;
   z-index: 1020;
-  border-bottom: 1px solid darken($color-light-bg, 4%);
   .page-title {
     margin: 0;
     padding: 0;
     line-height: inherit;
     font-weight: 200;
     display: inline-block;
+    color: #eae8ff;
   }
 }
 
 // NAVBAR
 .navbar-admin {
-  background: #2d3142;
-  border-color: #2d3142;
+  background: $color-navbar-bg;
+  border-color: $color-navbar-bg;
   margin-bottom: 0;
 
   .navbar-brand {
@@ -140,7 +151,7 @@ label {
       &:hover,
       &:focus {
         color: #fff;
-        background-color: #ef233c;
+        background-color: $color-accent;
       }
     }
     > .active > a {
@@ -148,7 +159,7 @@ label {
       &:hover,
       &:focus {
         color: #fff;
-        background-color: #ef233c;
+        background-color: $color-accent;
       }
     }
   }
@@ -158,7 +169,7 @@ label {
       &,
       &:hover,
       &:focus {
-        background-color: #ef233c;
+        background-color: $color-accent;
         color: #fff;
       }
     }

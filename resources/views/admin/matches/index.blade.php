@@ -27,7 +27,7 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped table-grid">
+                <table class="table table-admin table-grid">
                     <thead>
                         <tr>
                             <th>{!! Form::gridHeader('Played on', 'created_at', 'Admin\MatchesController@index', $headerAttr) !!}</th>
@@ -52,8 +52,8 @@
                                 <td>{{ $match->game->name }}</td>
                                 <td><strong data-toggle="tooltip" data-placement="top" title="{{ $match->score->home }} : {{ $match->score->guest }}" class="match-{{ $match->outcome }}">{{ $match->outcome }}</strong></td>
                                 <td>
-                                    <a href="{{ url('match', [$match->id]) }}" class="btn btn-default btn-xs" target="_blank">View</a>
-                                    <a href="{{ url('admin/matches/delete', [$match->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this match?');">Delete</a>
+                                    <a href="{{ url('match', [$match->id]) }}" class="" target="_blank"><i class="fa fa-fw fa-eye"></i></a>
+                                    <a href="{{ url('admin/matches/delete', [$match->id]) }}" class="" onclick="return confirm('Are you sure you want to delete this match?');"><i class="fa fa-fw fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach

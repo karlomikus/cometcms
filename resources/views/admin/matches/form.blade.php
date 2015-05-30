@@ -53,7 +53,10 @@
                 <div class="row">
                     <div class="col-md-2"><h4 class="form-subtitle">Participants</h4></div>
                     <div class="col-md-10">
-                        TODO
+                        <div class="row">
+                            <div class="col-md-6">Home</div>
+                            <div class="col-md-6">Opponent</div>
+                        </div>
                         <hr>
                     </div>
                 </div>
@@ -75,10 +78,11 @@
                         </div>
                         <ul class="nav nav-pills nav-rounds" id="rounds" data-bind="foreach: rounds">
                             <li data-bind="attr: {class: $index() == 0 ? 'active' : ''}"><a data-toggle="tab"
-                                   data-bind="text: 'Game ' + ($index() + 1), attr: { href: '#round' + $index() }"></a></li>
+                                   data-bind="attr: { href: '#round' + $index() }"><!--ko text: 'Game ' + ($index() + 1)--><!--/ko--></a></li>
                         </ul>
                         <div class="tab-content rounds-content" data-bind="foreach: rounds">
                             <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }, css: $index() == 0 ? 'active' : ''">
+                                <a class="btn btn-sm btn-danger" href="#" data-bind="click: $parent.removeRound">Remove this game <i class="fa fa-fw fa-remove"></i></a>
                                 <div class="form-group">
                                     <label for="map">Map</label>
                                     <select class="form-control" name="map" id="map" data-bind="value: map_id, options: maps, optionsText: 'name', optionsValue: 'id'">
@@ -91,20 +95,20 @@
                                 </div>
                                 <div data-bind="foreach: scores">
                                     <div class="row row-score">
-                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Team score"
+                                        <div class="col-md-5"><input type="number" class="form-control" placeholder="Team score"
                                                                      data-bind="value: home"/></div>
-                                        <div class="col-md-5"><input type="text" class="form-control"
+                                        <div class="col-md-5"><input type="number" class="form-control"
                                                                      placeholder="Opponent score"
                                                                      data-bind="value: guest"/></div>
                                         <div class="col-md-2 text-right">
-                                            <button class="btn btn-danger" data-bind="click: $parent.removeScore"><i
+                                            <button class="btn btn-sm btn-danger" data-bind="click: $parent.removeScore"><i
                                                         class="fa fa-fw fa-lg fa-minus-circle"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="btn btn-info pull-right" data-bind="click: addScore"><i
+                                        <button class="btn btn-sm btn-info pull-right" data-bind="click: addScore"><i
                                                     class="fa fa-fw fa-plus-circle"></i> Add score
                                         </button>
                                     </div>
@@ -138,7 +142,7 @@
 @section('page-scripts-before')
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
-        var matchData = {!! $matchJSON !!};
-        var metaData = {!! $metaData !!};
+        const matchData = {!! $matchJSON !!};
+        const metaData = {!! $metaData !!};
     </script>
 @endsection
