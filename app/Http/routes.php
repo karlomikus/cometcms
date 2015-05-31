@@ -37,6 +37,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/', 'Admin\DashboardController@index');
 
     /**
+     * Opponents
+     */
+    Route::get('/maps', 'Admin\MapsController@index');
+    Route::get('/maps/new', 'Admin\MapsController@create');
+    Route::post('/maps/new', 'Admin\MapsController@save');
+    Route::get('/maps/edit/{id}', 'Admin\MapsController@edit');
+    Route::post('/maps/edit/{id}', 'Admin\MapsController@update');
+    Route::get('/maps/delete/{id}', 'Admin\MapsController@delete');
+
+    /**
      * Users
      */
     Route::get('/users', 'Admin\UsersController@index');

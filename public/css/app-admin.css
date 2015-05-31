@@ -5,8 +5,8 @@
 * User variables
 */
 /*
-* User Mixins
-*/
+  * User Mixins
+  */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -4224,13 +4224,13 @@ button.close {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: #000; }
+  background-color: #2d3142; }
   .modal-backdrop.fade {
     opacity: 0;
     filter: alpha(opacity=0); }
   .modal-backdrop.in {
-    opacity: 0.5;
-    filter: alpha(opacity=50); }
+    opacity: 0.8;
+    filter: alpha(opacity=80); }
 
 .modal-header {
   padding: 15px;

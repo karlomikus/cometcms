@@ -142,10 +142,15 @@
         </div>
     </div>
 @endsection
+
 @section('page-scripts-before')
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
         const matchData = {!! $matchJSON !!};
         const metaData = {!! $metaData !!};
     </script>
+@endsection
+
+@section('page-scripts')
+    <script src="{{ asset('/js/admin/matches.js') }}"></script>
 @endsection

@@ -39,9 +39,12 @@ $nav-link-hover-bg: darken($color-light-bg, 6%);
 $nav-pills-active-link-hover-bg: #2d3142;
 $color-accent: #ef233c;
 
-/*
-* User Mixins
-*/
+$modal-backdrop-bg: #2d3142;
+$modal-backdrop-opacity: .8;
+
+  /*
+  * User Mixins
+  */
 @mixin block($color) {
   background: $color;
   border: 1px solid darken($color, 4%);
