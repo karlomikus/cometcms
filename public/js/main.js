@@ -163,7 +163,9 @@ $(document).ready(function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            }
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
         });
         var data = ko.toJSON(matchViewModel);
         var posting = null;
@@ -172,8 +174,14 @@ $(document).ready(function () {
             posting = $.post("/admin/matches/edit/" + matchData.id, {data: data});
         }
         else {
-            posting = $.post("/admin/matches/new", {data: data});
+            posting = $.post("/admin/matches/new", data, 'json');
         }
+
+        posting.fail(function(response) {
+            $.each(response.responseJSON, function(key, val) {
+                console.log(val[0]);
+            });
+        });
 
         posting.done(function (resp) {
             window.location.href = resp.location;

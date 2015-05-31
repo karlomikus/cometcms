@@ -82,35 +82,38 @@
                         </ul>
                         <div class="tab-content rounds-content" data-bind="foreach: rounds">
                             <div class="tab-pane" data-bind="attr: { id: 'round' + $index() }, css: $index() == 0 ? 'active' : ''">
-                                <a class="btn btn-sm btn-danger" href="#" data-bind="click: $parent.removeRound">Remove this game <i class="fa fa-fw fa-remove"></i></a>
+                                <div class="round-options">
+                                    <button class="btn btn-sm btn-danger" data-bind="click: $parent.removeRound">Remove this game <i class="fa fa-fw fa-remove"></i></button>
+                                    <button class="btn btn-sm btn-info pull-right" data-bind="click: addScore"><i
+                                                class="fa fa-fw fa-plus-circle"></i> Add score
+                                    </button>
+                                </div>
                                 <div class="form-group">
                                     <label for="map">Map</label>
                                     <select class="form-control" name="map" id="map" data-bind="value: map_id, options: maps, optionsText: 'name', optionsValue: 'id'">
                                     </select>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-5"><label>Home score</label></div>
-                                    <div class="col-md-5"><label>Opponent score</label></div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div data-bind="foreach: scores">
-                                    <div class="row row-score">
-                                        <div class="col-md-5"><input type="number" class="form-control" placeholder="Team score"
-                                                                     data-bind="value: home"/></div>
-                                        <div class="col-md-5"><input type="number" class="form-control"
-                                                                     placeholder="Opponent score"
-                                                                     data-bind="value: guest"/></div>
-                                        <div class="col-md-2 text-right">
-                                            <button class="btn btn-sm btn-danger" data-bind="click: $parent.removeScore"><i
-                                                        class="fa fa-fw fa-lg fa-minus-circle"></i></button>
+                                <div class="clearfix scores" data-bind="foreach: scores">
+                                    <div class="score-item">
+                                        <div class="score-item-body">
+                                            <div class="form-group">
+                                                <label>TEAM SCORE</label>
+                                                <input type="number" class="form-control" placeholder="Team score"
+                                                       data-bind="value: home"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>OPPONENT SCORE</label>
+                                                <input type="number" class="form-control"
+                                                       placeholder="Opponent score"
+                                                       data-bind="value: guest"/>
+                                            </div>
                                         </div>
+                                        <button class="btn-remove-score" data-bind="click: $parent.removeScore">Remove score</button>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button class="btn btn-sm btn-info pull-right" data-bind="click: addScore"><i
-                                                    class="fa fa-fw fa-plus-circle"></i> Add score
-                                        </button>
+
                                     </div>
                                 </div>
 

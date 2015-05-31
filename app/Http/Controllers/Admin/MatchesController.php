@@ -7,6 +7,7 @@ use App\Repositories\Contracts\MatchesRepositoryInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveMatchRequest;
 use App\Libraries\GridView\GridView;
 
 class MatchesController extends AdminController {
@@ -21,7 +22,7 @@ class MatchesController extends AdminController {
      * Show matches list
      * 
      * @param $request Request
-     * @return void
+     * @return mixed
      */
     public function index(Request $request)
     {
@@ -50,7 +51,7 @@ class MatchesController extends AdminController {
      * @param $opponents OpponentsRepositoryInterface
      * @param $games GamesRepositoryInterface
      * @param $maps MapsRepositoryInterface
-     * @return void
+     * @return mixed
      */
     public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
     {
@@ -69,17 +70,19 @@ class MatchesController extends AdminController {
     /**
      * Read json request and save match to database
      * 
-     * @param $request Request
+     * @param $request SaveMatchRequest
      * @return string JSON response containing redirect location and alert messages
      */
-    public function save(Request $request)
+    public function save(SaveMatchRequest $request)
     {
-        $data = json_decode($request->input('data'));
+        $data = $request->all();
 
         if($this->matches->insert($data))
             $this->alertSuccess('Match saved successfully.');
         else
+        {
             $this->alertError('Unable to save a match.');
+        }
 
         \Session::flash('alerts', $this->getAlerts());
 

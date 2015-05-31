@@ -9,7 +9,7 @@ class AdminController extends Controller {
 
     public function alertError($message)
     {
-        return $this->alert($message, 'error');
+        return $this->alert($message, 'danger');
     }
 
     public function alertSuccess($message)

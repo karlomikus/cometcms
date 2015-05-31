@@ -1021,7 +1021,7 @@ a {
   color: #2274a5;
   text-decoration: none; }
   a:hover, a:focus {
-    color: #e71d36;
+    color: #fe5f55;
     text-decoration: underline; }
   a:focus {
     outline: thin dotted;
@@ -2487,19 +2487,19 @@ textarea.input-lg, .input-group-lg > textarea.form-control, .input-group-lg > te
 
 .btn-danger {
   color: #fff;
-  background-color: #e71d36;
-  border-color: #d4172e; }
+  background-color: #fe5f55;
+  border-color: #fe473c; }
   .btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
     color: #fff;
-    background-color: #bd1429;
-    border-color: #9d1122; }
+    background-color: #fe2f22;
+    border-color: #fb1001; }
   .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
     background-image: none; }
   .btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled.focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled].focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger.focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
-    background-color: #e71d36;
-    border-color: #d4172e; }
+    background-color: #fe5f55;
+    border-color: #fe473c; }
   .btn-danger .badge {
-    color: #e71d36;
+    color: #fe5f55;
     background-color: #fff; }
 
 .btn-link {
@@ -2512,7 +2512,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control, .input-group-lg > te
   .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
     border-color: transparent; }
   .btn-link:hover, .btn-link:focus {
-    color: #e71d36;
+    color: #fe5f55;
     text-decoration: underline;
     background-color: transparent; }
   .btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
@@ -3429,7 +3429,7 @@ tbody.collapse.in {
       border-bottom-right-radius: 4px;
       border-top-right-radius: 4px; }
   .pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus {
-    color: #e71d36;
+    color: #fe5f55;
     background-color: #eeeeee;
     border-color: #ddd; }
   .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
@@ -3542,9 +3542,9 @@ a.label:hover, a.label:focus {
     background-color: #e88600; }
 
 .label-danger {
-  background-color: #e71d36; }
+  background-color: #fe5f55; }
   .label-danger[href]:hover, .label-danger[href]:focus {
-    background-color: #bd1429; }
+    background-color: #fe2f22; }
 
 .badge {
   display: inline-block;
@@ -3747,7 +3747,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
 .progress-bar-danger {
-  background-color: #e71d36; }
+  background-color: #fe5f55; }
   .progress-striped .progress-bar-danger {
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
@@ -4947,6 +4947,35 @@ label {
   border: 1px solid #dde2fa;
   border-bottom: 0;
   padding: 10px; }
+
+.round-options {
+  border-bottom: 1px solid #dde2fa;
+  padding-bottom: 10px;
+  margin-bottom: 5px; }
+
+.scores .score-item {
+  width: 200px;
+  background: #fff;
+  border: 1px solid #c8cbd9;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px; }
+  .scores .score-item .score-item-body {
+    padding: 10px 10px 0 10px; }
+    .scores .score-item .score-item-body label {
+      font-size: 12px;
+      color: #6d769b; }
+  .scores .score-item .btn-remove-score {
+    background: #6d769b;
+    border: 0;
+    color: #fff;
+    width: 100%;
+    display: block;
+    font-size: 14px;
+    height: 30px; }
+    .scores .score-item .btn-remove-score:focus, .scores .score-item .btn-remove-score:hover, .scores .score-item .btn-remove-score:active {
+      border: 0;
+      background: #fe5f55; }
 
 .admin-form hr {
   margin: 40px 0; }

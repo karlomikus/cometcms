@@ -115,36 +115,41 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     public function insert($data)
     {
         try {
+            \DB::beginTransaction();
+
             // Create a new match
             $matchModel = $this->model->create([
-                'team_id' => $data->team_id,
-                'opponent_id' => $data->opponent_id,
-                'game_id' => $data->game_id,
-                'matchlink' => isset($data->notes) ?: null
+                'team_id' => $data['team_id'],
+                'opponent_id' => $data['opponent_id'],
+                'game_id' => $data['game_id'],
+                'matchlink' => isset($data['notes']) ?: null
             ]);
 
             // Create match rounds
-            foreach ($data->rounds as $round) {
+            foreach ($data['rounds'] as $round) {
                 $roundModel = $this->rounds->create([
-                    'match_id' => $matchModel->id,
-                    'map_id' => $round->map_id,
-                    'notes' => $round->notes,
+                    'match_id' => $matchModel['id'],
+                    'map_id' => $round['map_id'],
+                    'notes' => $round['notes'],
                 ]);
 
                 // Create round scores
-                foreach ($round->scores as $score) {
+                foreach ($round['scores'] as $score) {
                     $this->scores->create([
-                        'round_id' => $roundModel->id,
-                        'home' => $score->home,
-                        'guest' => $score->guest
+                        'round_id' => $roundModel['id'],
+                        'home' => $score['home'],
+                        'guest' => $score['guest']
                     ]);
                 }
 
             }
         }
-        catch (Exception $e) {
+        catch (\Exception $e) {
+            \DB::rollback();
+
             return false;
         }
+        \DB::commit();
 
         return true;
     }
