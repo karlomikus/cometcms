@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <a href="{{ url('admin/opponents/new') }}" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus-sign"></i> New opponent</a>
+                <a href="{{ url('admin/opponents/new') }}" class="btn btn-success" data-popup="true"><i class="glyphicon glyphicon-plus-sign"></i> New opponent</a>
             </div>
             <form class="col-md-6" method="get" action="{{ url('admin/opponents') }}">
                 <div class="input-group">
@@ -37,7 +37,7 @@
                         @endif
                         @foreach($data as $opponent)
                             <tr>
-                                <td><a href="{{ url('admin/opponents/edit', [$opponent->id]) }}">{{ $opponent->name }}</a></td>
+                                <td><a href="{{ url('admin/opponents/edit', [$opponent->id]) }}" data-popup="true">{{ $opponent->name }}</a></td>
                                 <td>{{ $opponent->description }}</td>
                                 <td>
                                     <a href="{{ url('admin/opponents/delete', [$opponent->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this opponent?');">Delete</a>
@@ -51,15 +51,5 @@
         {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
     </div>
 
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+@include('popup')
 @endsection
