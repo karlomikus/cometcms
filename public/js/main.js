@@ -1,43 +1,52 @@
 "use strict";
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-    $("a[data-popup=\"true\"]").click(function (e) {
+    $('a[data-popup="true"]').click(function (e) {
         $("#modal-loader").show();
 
         e.preventDefault();
         var url = $(this).attr("href");
-        var modalElement = $("#popup-form-dialog");
-        var modalContent = modalElement.find(".modal-content");
+        var modalElement = $('#popup-form-dialog');
+        var modalContent = modalElement.find('.modal-content');
 
         modalContent.empty();
-        modalElement.modal("toggle");
+        modalElement.modal('toggle');
         modalContent.load(url, function () {
             $("#modal-loader").hide();
         });
     });
 
-    $("a[data-confirm]").click(function (e) {
+    $('a[data-confirm]').click(function(e) {
         e.preventDefault();
-        var message = $(this).data("confirm");
+        var message = $(this).data('confirm');
         var url = $(this).attr("href");
 
-        var modalHTML = "<div class=\"modal fade\" id=\"confirm-modal\" tabindex=\"-1\">" + "<div class=\"modal-dialog modal-dialog-confirmation modal-sm\"><div class=\"modal-content\">" + "<div class=\"modal-body\">" + "<i class=\"fa fa-fw fa-2x fa-warning pull-left text-danger\"></i>" + message + "</div>" + "<div class=\"modal-footer text-center\"><button type=\"button\" class=\"btn btn-sm btn-default\" data-dismiss=\"modal\">Cancel</button>" + "<button type=\"button\" class=\"btn btn-sm btn-danger\">Delete</button></div>" + "</div></div></div>";
+        var modalHTML = '<div class="modal fade" id="confirm-modal" tabindex="-1">'
+            + '<div class="modal-dialog modal-dialog-confirmation modal-sm"><div class="modal-content">'
+            + '<div class="modal-body">'
+                + '<i class="fa fa-fw fa-2x fa-warning pull-left text-danger"></i>' + message
+            + '</div>'
+            + '<div class="modal-footer text-center"><div class="row"><div class="col-md-6"><button type="button" class="btn btn-block btn-sm btn-primary" data-dismiss="modal">Cancel</button></div>'
+            + '<div class="col-md-6"><button type="button" class="btn btn-block btn-sm btn-danger">Delete</button></div></div></div>'
+            + '</div></div></div>';
 
         var $modal = $(modalHTML);
         var existingModal = $("#confirm-modal");
 
-        if (existingModal.length) {
-            existingModal.modal("show");
-            existingModal.find(".btn-danger").click(function () {
+        if(existingModal.length) {
+            existingModal.modal('show');
+            existingModal.find('.btn-danger').click(function () {
                 window.location.href = url;
             });
-        } else {
-            $modal.modal("show");
-            $modal.find(".btn-danger").click(function () {
+        }
+        else {
+            $modal.modal('show');
+            $modal.find('.btn-danger').click(function () {
                 window.location.href = url;
             });
         }
     });
+
 });
 //# sourceMappingURL=main.js.map

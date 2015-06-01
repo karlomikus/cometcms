@@ -88,8 +88,8 @@ class OpponentsController extends AdminController {
             $this->opponents->delete($id);
             $this->alertSuccess('Opponent deleted succesfully!');
         }
-        catch (Exception $e) {
-            $this->alertError('Unable to delete an opponent due to an exception!');
+        catch (\Exception $e) {
+            $this->alertError('Unable to delete an opponent due to an exception: ' . $e->getMessage());
         }
 
         return redirect('admin/opponents')->with('alerts', $this->getAlerts());

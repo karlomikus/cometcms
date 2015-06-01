@@ -298,6 +298,12 @@ label {
   border-color: $input-border;
 }
 
+#confirm-modal {
+  .modal-footer {
+    padding: 5px;
+  }
+}
+
 .close-modal {
   background: rgba(0,0,0,.3) !important;
   color: lighten($brand-primary, 60%);
@@ -311,6 +317,24 @@ label {
     color: #fff;
     background: rgba(0,0,0,.45) !important;
   }
+}
+
+.alert {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-left: 5px solid #ccc;
+  box-shadow: 0 2px 3px #ccc;
+  border-radius: 0;
+}
+
+.alert-danger {
+  border-left-color: $brand-danger;
+  color: $color-primary-dark;
+}
+
+.alert-success {
+  border-left-color: $brand-success;
+  color: $color-primary-dark;
 }
 
 

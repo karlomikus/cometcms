@@ -27,8 +27,8 @@ $(document).ready(function() {
             + '<div class="modal-body">'
                 + '<i class="fa fa-fw fa-2x fa-warning pull-left text-danger"></i>' + message
             + '</div>'
-            + '<div class="modal-footer text-center"><button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>'
-            + '<button type="button" class="btn btn-sm btn-danger">Delete</button></div>'
+            + '<div class="modal-footer text-center"><div class="row"><div class="col-md-6"><button type="button" class="btn btn-block btn-sm btn-primary" data-dismiss="modal">Cancel</button></div>'
+            + '<div class="col-md-6"><button type="button" class="btn btn-block btn-sm btn-danger">Delete</button></div></div></div>'
             + '</div></div></div>';
 
         var $modal = $(modalHTML);
