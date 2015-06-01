@@ -40,7 +40,7 @@
                                 <td><a href="{{ url('admin/opponents/edit', [$opponent->id]) }}" data-popup="true">{{ $opponent->name }}</a></td>
                                 <td>{{ $opponent->description }}</td>
                                 <td>
-                                    <a href="{{ url('admin/opponents/delete', [$opponent->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this opponent?');">Delete</a>
+                                    <a href="{{ url('admin/opponents/delete', [$opponent->id]) }}" class="btn btn-danger btn-xs" data-confirm="Are you sure that you want to delete this opponent?">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

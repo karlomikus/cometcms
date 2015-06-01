@@ -2,13 +2,16 @@
 * Override variables
 */
 // Default colors
+$color-accent: #ef233c;
+$color-primary-dark: #2d3142;
+
 $brand-success: #2ec4b6;
 $brand-danger: #fe5f55;
 $brand-warning: #ff9f1c;
-$brand-primary: #2274a5;
-$link-hover-color: $brand-danger;
+$brand-primary: #456990;
+$link-hover-color: $color-accent;
 $color-light-bg: #f8f9fe;
-$color-navbar-bg: #2d3142;
+$color-navbar-bg: $color-primary-dark;
 
 // Fonts
 $font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
@@ -21,7 +24,7 @@ $table-border-color: darken($color-light-bg, 4%);
 // Inputs
 $input-height-base: 40px;
 $input-border-radius: 2px;
-$input-border: lighten(#2d3142, 60%);
+$input-border: lighten($color-primary-dark, 60%);
 $padding-base-vertical: 9px;
 $padding-base-horizontal: 14px;
 
@@ -36,10 +39,10 @@ $match-draw-color: #ffe066;
 
 $nav-pills-border-radius: 0;
 $nav-link-hover-bg: darken($color-light-bg, 6%);
-$nav-pills-active-link-hover-bg: #2d3142;
+$nav-pills-active-link-hover-bg: $color-primary-dark;
 $color-accent: #ef233c;
 
-$modal-backdrop-bg: #2d3142;
+$modal-backdrop-bg: $color-primary-dark;
 $modal-backdrop-opacity: .8;
 
   /*
@@ -285,7 +288,7 @@ label {
 }
 
 .modal-header {
-  background: $brand-primary;
+  background: lighten($color-primary-dark, 10%);
   border: 0;
   color: #fff;
 }
@@ -325,7 +328,7 @@ vertical-align: middle;
 width: 10px;
 height: 10px;
 margin: 25px auto;
-background: #2d3142;
+background: $color-primary-dark;
 -moz-border-radius: 50px;
 -moz-animation: bubblingG 0.7s infinite alternate;
 -webkit-border-radius: 50px;
@@ -366,7 +369,7 @@ animation-delay: 0.42s;
 0% {
 width: 10px;
 height: 10px;
-background-color:#2d3142;
+background-color:$color-primary-dark;
 -moz-transform: translateY(0);
 }
 
@@ -383,7 +386,7 @@ background-color:#FFFFFF;
 0% {
 width: 10px;
 height: 10px;
-background-color:#2d3142;
+background-color:$color-primary-dark;
 -webkit-transform: translateY(0);
 }
 
@@ -400,7 +403,7 @@ background-color:#FFFFFF;
 0% {
 width: 10px;
 height: 10px;
-background-color:#2d3142;
+background-color:$color-primary-dark;
 -ms-transform: translateY(0);
 }
 
@@ -417,7 +420,7 @@ background-color:#FFFFFF;
 0% {
 width: 10px;
 height: 10px;
-background-color:#2d3142;
+background-color:$color-primary-dark;
 -o-transform: translateY(0);
 }
 
@@ -434,7 +437,7 @@ background-color:#FFFFFF;
 0% {
 width: 10px;
 height: 10px;
-background-color:#2d3142;
+background-color:$color-primary-dark;
 transform: translateY(0);
 }
 

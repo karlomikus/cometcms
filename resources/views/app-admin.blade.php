@@ -90,11 +90,24 @@
 </section>
 
 @if(Session::has('alerts'))
+    <!-- Custom alerts -->
     <div class="container">
     @foreach(Session::get('alerts') as $alert)
         <div class="alert alert-{{ $alert['type'] }} alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             {{ $alert['message'] }}
+        </div>
+    @endforeach
+    </div>
+@endif
+
+@if($errors->any())
+    <!-- Framework errors -->
+    <div class="container">
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            {{ $error }}
         </div>
     @endforeach
     </div>

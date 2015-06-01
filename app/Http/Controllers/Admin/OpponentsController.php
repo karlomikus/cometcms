@@ -50,7 +50,7 @@ class OpponentsController extends AdminController {
         ]);
 
         if ($opponent)
-            $this->alertSuccess('New opponent created successfully!', 'success');
+            $this->alertSuccess('New opponent created successfully!');
         else
             $this->alertError('Opponent creation failed!');
 
