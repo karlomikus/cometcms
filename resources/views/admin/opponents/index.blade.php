@@ -21,12 +21,12 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table table-grid table-admin">
                     <thead>
                         <tr>
                             <th>{!! Form::gridHeader('Name', 'name', 'Admin\OpponentsController@index', $headerAttr) !!}</th>
                             <th>Description</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +40,7 @@
                                 <td><a href="{{ url('admin/opponents/edit', [$opponent->id]) }}" data-popup="true">{{ $opponent->name }}</a></td>
                                 <td>{{ $opponent->description }}</td>
                                 <td>
-                                    <a href="{{ url('admin/opponents/delete', [$opponent->id]) }}" class="btn btn-danger btn-xs" data-confirm="Are you sure that you want to delete this opponent?">Delete</a>
+                                    <a href="{{ url('admin/opponents/delete', [$opponent->id]) }}" class="btn btn-default btn-xs" data-confirm="Are you sure that you want to delete this opponent?"><i class="fa fa-remove"></i></a>
                                 </td>
                             </tr>
                         @endforeach

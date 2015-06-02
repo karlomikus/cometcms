@@ -22,10 +22,10 @@ class OpponentsController extends AdminController {
         $order      = $request->query('order');
 
         $grid = new GridView($this->opponents);
-        $grid->setOrder($order, 'asc');
         $grid->setSearchTerm($searchTerm);
         $grid->setSortColumn($sortColumn, 'name');
         $grid->setPath($request->getPathInfo());
+        $grid->setOrder($order, 'asc');
 
         $data = $grid->gridPage($page, 15);
 

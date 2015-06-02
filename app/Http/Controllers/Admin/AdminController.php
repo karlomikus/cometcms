@@ -34,6 +34,7 @@ class AdminController extends Controller {
 
     public function getAlerts()
     {
+        
         return $this->alerts;
     }
 

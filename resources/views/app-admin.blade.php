@@ -95,6 +95,11 @@
     @foreach(Session::get('alerts') as $alert)
         <div class="alert alert-{{ $alert['type'] }} alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            @if($alert['type'] == 'success')
+                <h3>Success!</h3>
+            @else
+                <h3>An error occured!</h3>
+            @endif
             {{ $alert['message'] }}
         </div>
     @endforeach
@@ -107,6 +112,7 @@
     @foreach($errors->all() as $error)
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+            <h3>An error occured!</h3>
             {{ $error }}
         </div>
     @endforeach

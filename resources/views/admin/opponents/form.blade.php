@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-close"></i> Cancel</button>
-        <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-check"></i> Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
+        <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
     </div>
 {!! Form::close() !!}
