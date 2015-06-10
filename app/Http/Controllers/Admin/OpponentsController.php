@@ -17,9 +17,9 @@ class OpponentsController extends AdminController {
     public function index(Request $request)
     {
         $searchTerm = $request->query('search');
-        $page       = $request->query('page');
+        $page = $request->query('page');
         $sortColumn = $request->query('sort');
-        $order      = $request->query('order');
+        $order = $request->query('order');
 
         $grid = new GridView($this->opponents);
         $grid->setSearchTerm($searchTerm);
@@ -45,14 +45,19 @@ class OpponentsController extends AdminController {
     public function save(SaveOpponentRequest $request)
     {
         $opponent = $this->opponents->insert([
-            'name' => $request->input('name'),
-            'description' => $request->input('description')
+            'name'        => $request->input('name'),
+            'description' => $request->input('description'),
+            'image'       => null
         ]);
 
-        if ($opponent)
+        if ($opponent) {
+            if ($request->hasFile('image')) {
+                $this->opponents->insertFile($opponent->id, $request->file('image'));
+            }
             $this->alertSuccess('New opponent created successfully!');
-        else
+        } else {
             $this->alertError('Opponent creation failed!');
+        }
 
         return redirect('admin/opponents')->with('alerts', $this->getAlerts());
     }
@@ -68,14 +73,13 @@ class OpponentsController extends AdminController {
     public function update($id, SaveOpponentRequest $request)
     {
         $data = [
-            'name' => $request->input('name'),
+            'name'        => $request->input('name'),
             'description' => $request->input('description')
         ];
 
         if ($this->opponents->update($id, $data)) {
             $this->alertSuccess('Opponent succesfully edited!');
-        }
-        else {
+        } else {
             $this->alertError('Failed to edit an opponent!');
         }
 
@@ -87,8 +91,7 @@ class OpponentsController extends AdminController {
         try {
             $this->opponents->delete($id);
             $this->alertSuccess('Opponent deleted succesfully!');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->alertError('Unable to delete an opponent due to an exception: ' . $e->getMessage());
         }
 

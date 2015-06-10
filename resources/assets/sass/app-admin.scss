@@ -117,6 +117,17 @@ label {
   }
 }
 
+.uploaded-file {
+  border: 1px solid $input-border;
+  padding: 5px;
+  display: block;
+  width: 200px;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 /*
 * Admin styles
 */
