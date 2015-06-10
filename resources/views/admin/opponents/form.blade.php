@@ -1,4 +1,4 @@
-{!! Form::model($opponent) !!}
+{!! Form::model($opponent, ['files' => true]) !!}
     <div class="modal-header">
         <button type="button" class="close close-modal" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">{{ $pageTitle }}</h4>
@@ -13,6 +13,10 @@
             {!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
             {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => '3']) !!}
             {!! $errors->first('description', '<span class="help-block">:message</span>') !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
+            {!! Form::file('image') !!}
         </div>
     </div>
     <div class="modal-footer">

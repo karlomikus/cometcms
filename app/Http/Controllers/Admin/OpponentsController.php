@@ -7,7 +7,8 @@ use App\Http\Requests\SaveOpponentRequest;
 
 class OpponentsController extends AdminController {
 
-    protected $opponents;
+    private $opponents;
+    private $uploadPath;
 
     public function __construct(OpponentsRepositoryInterface $opponents)
     {
