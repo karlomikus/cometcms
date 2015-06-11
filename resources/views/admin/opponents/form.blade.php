@@ -18,7 +18,7 @@
             {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
             @if(!empty($opponent->image))
                 <div class="uploaded-file">
-                    <img src="/uploads/opponents/{{ $opponent->image }}" alt="Image"/>
+                    <a href="#todoRemove"><img src="/uploads/opponents/{{ $opponent->image }}" alt="Image"/></a>
                 </div>
             @endif
             {!! Form::file('image') !!}

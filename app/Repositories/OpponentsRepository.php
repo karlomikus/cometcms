@@ -31,11 +31,27 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
         }
     }
 
+    public function deleteFile($opponentID)
+    {
+        $opponent = $this->get($opponentID);
+        $filename = $this->uploadPath . $opponent->image;
+        
+        if (file_exists($filename) && is_file($filename)) {
+            return unlink($filename);
+        }
+
+        return false;
+    }
+
+    public function delete($opponentID)
+    {
+        $this->deleteFile($opponentID);
+
+        return parent::delete($opponentID);
+    }
+
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
-        $sortColumn !== null ?: $sortColumn = 'name'; // Default order by column
-        $order !== null ?: $order = 'asc'; // Default sorting
-
         $model = $this->model->orderBy($sortColumn, $order);
 
         if ($searchTerm)

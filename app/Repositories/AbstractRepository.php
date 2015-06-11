@@ -28,11 +28,12 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
     /**
      * Get single item
      * @param $id
+     * @param $columns
      * @return mixed
      */
-    public function get($id)
+    public function get($id, $columns = ['*'])
     {
-        return $this->model->find($id);
+        return $this->model->find($id, $columns);
     }
 
     /**

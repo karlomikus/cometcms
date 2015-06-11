@@ -8,3 +8,4 @@ resources/vendor
 _ide_helper.php
 .phpstorm.meta.php
 .sass-cache/
+public/uploads/*

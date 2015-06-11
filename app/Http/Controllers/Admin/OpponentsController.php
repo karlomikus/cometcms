@@ -79,12 +79,15 @@ class OpponentsController extends AdminController {
         ];
 
         if ($this->opponents->update($id, $data)) {
+            if ($request->hasFile('image')) {
+                $this->opponents->insertFile($id, $request->file('image'));
+            }
             $this->alertSuccess('Opponent succesfully edited!');
         } else {
             $this->alertError('Failed to edit an opponent!');
         }
 
-        return redirect('admin/opponents')->with('message', $this->getAlerts());
+        return redirect('admin/opponents')->with('alerts', $this->getAlerts());
     }
 
     public function delete($id)
@@ -97,6 +100,11 @@ class OpponentsController extends AdminController {
         }
 
         return redirect('admin/opponents')->with('alerts', $this->getAlerts());
+    }
+
+    public function removeImage($id)
+    {
+        // TODO AJAX REQUEST
     }
 
 }
