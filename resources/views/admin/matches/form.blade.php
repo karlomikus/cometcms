@@ -47,6 +47,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="match-date">Match date:</label>
+                                    <input type="text" id="match-date" class="form-control" placeholder="Played on date..." />
+                                </div>
+                            </div>
+                        </div>
                         <hr/>
                     </div>
                 </div>

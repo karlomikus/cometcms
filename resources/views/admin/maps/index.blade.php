@@ -21,11 +21,12 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table table-hover table-grid table-admin">
                     <thead>
                     <tr>
-                        <th>{!! Form::gridHeader('Name', 'name', 'Admin\OpponentsController@index', $headerAttr) !!}</th>
-                        <th>Description</th>
+                        <th>{!! Form::gridHeader('Name', 'name', 'Admin\MapsController@index', $headerAttr) !!}</th>
+                        <th>Game</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -35,12 +36,13 @@
                             <td colspan="5" class="text-center">No results found.</td>
                         </tr>
                     @endif
-                    @foreach($data as $opponent)
+                    @foreach($data as $map)
                         <tr>
-                            <td><a href="{{ url('admin/opponents/edit', [$opponent->id]) }}">{{ $opponent->name }}</a></td>
-                            <td>{{ $opponent->description }}</td>
+                            <td><a href="{{ url('admin/maps/edit', [$map->id]) }}">{{ $map->name }}</a></td>
+                            <td>{{ $map->game->name }}</td>
+                            <td>{{ $map->image }}</td>
                             <td>
-                                <a href="{{ url('admin/opponents/delete', [$opponent->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this opponent?');">Delete</a>
+                                <a href="{{ url('admin/maps/delete', [$map->id]) }}" class="text-danger" data-confirm="Are you sure you want to delete this map?">Delete</a>
                             </td>
                         </tr>
                     @endforeach

@@ -20,4 +20,9 @@ class Map extends Model {
 
 	protected $hidden = ['created_at', 'updated_at'];
 
+    public function game()
+    {
+        return $this->belongsTo('App\Game');
+    }
+
 }

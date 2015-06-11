@@ -19,7 +19,8 @@ $font-family-accent: "Montserrat", sans-serif;
 
 // Tables
 $table-bg-accent: $color-light-bg;
-$table-border-color: darken($color-light-bg, 4%);
+$table-border-color: $color-light-bg;
+$table-bg-hover: $table-border-color;
 
 // Inputs
 $input-height-base: 40px;
@@ -27,6 +28,11 @@ $input-border-radius: 2px;
 $input-border: lighten($color-primary-dark, 60%);
 $padding-base-vertical: 9px;
 $padding-base-horizontal: 14px;
+
+// Dropdowns
+$dropdown-link-hover-color: #fff;
+$dropdown-link-hover-bg: darken($color-accent, 5%);
+$dropdown-border: $color-primary-dark;
 
 /*
 * User variables
@@ -84,7 +90,7 @@ body {
     border-color: #f6f6f6 !important;
   }
   td {
-    background: #fff;
+    //background: #fff;
     border-bottom: 1px solid #f6f6f6;
     padding: 10px !important;
   }
@@ -359,6 +365,14 @@ label {
   }
 }
 
+.dropdown-menu {
+  border-radius: 0;
+  border-width: 2px;
+  > li > a {
+    padding: 5px 20px;
+    //border-bottom: 1px solid #ccc;
+  }
+}
 
 
 

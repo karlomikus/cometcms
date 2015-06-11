@@ -22,12 +22,14 @@ final class MapsController extends AdminController {
         $order = $request->query('order');
 
         $grid = new GridView($this->maps);
-        $grid->setOrder($order, 'desc');
+        $grid->setOrder($order, 'asc');
         $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'created_at');
+        $grid->setSortColumn($sortColumn, 'name');
         $grid->setPath($request->getPathInfo());
 
         $data = $grid->gridPage($page, 15);
+
+        $data['pageTitle'] = 'Game maps';
 
         return view('admin.maps.index', $data);
     }

@@ -46,7 +46,7 @@
                         @endif
                         @foreach($data as $match)
                             <tr>
-                                <td><a href="{{ url('admin/matches/edit', [$match->id]) }}">{{ $match->created_at->format('d.m.Y H:i:s') }}</a></td>
+                                <td><a href="{{ url('admin/matches/edit', [$match->id]) }}">{{ $match->created_at->format('d.m.Y') }}</a></td>
                                 <td>{{ $match->team->name }}</td>
                                 <td>{{ $match->opponent->name }}</td>
                                 <td>{{ $match->game->name }}</td>
