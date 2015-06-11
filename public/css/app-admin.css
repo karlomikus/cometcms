@@ -5805,6 +5805,16 @@ body {
   font-weight: 300;
   padding-top: 140px; }
 
+a.text-delete {
+  color: #fe5f55;
+  border-bottom: 1px dashed #fe5f55;
+  text-decoration: none;
+  padding: 0 5px; }
+  a.text-delete:hover, a.text-delete:focus, a.text-delete:active {
+    color: #fff;
+    background: #fe5f55;
+    border-bottom: 1px solid #fe5f55; }
+
 #modal-loader {
   display: none; }
 

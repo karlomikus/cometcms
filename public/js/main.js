@@ -39,5 +39,22 @@ $(document).ready(function () {
             });
         }
     });
+
+    $(document).on("click", "a[data-ajax]", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+        var method = $(this).data("ajax");
+        var callbackSuccess = $(this).data("ajax-success");
+
+        if (method == "get") {
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json"
+            }).done(callbackSuccess()).fail(function () {
+                alert("Error while handling ajax request!");
+            });
+        }
+    });
 });
 //# sourceMappingURL=main.js.map

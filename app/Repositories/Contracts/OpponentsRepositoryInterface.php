@@ -8,10 +8,18 @@ interface OpponentsRepositoryInterface {
     /**
      * Uploads and inserts filename to database
      *
-     * @param $id Opponent id
+     * @param int $id Opponent ID
      * @param UploadedFile $file File request
      * @return bool
      */
     public function insertFile($id, UploadedFile $file);
+
+    /**
+     * Deletes the file from disk and database
+     * 
+     * @param  int $id Opponent ID
+     * @return bool     Is the file deleted
+     */
+    public function deleteFile($id);
 
 } 

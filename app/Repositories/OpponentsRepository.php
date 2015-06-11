@@ -17,6 +17,13 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
         $this->uploadPath = base_path() . '/public/uploads/opponents/';
     }
 
+    /**
+     * Uploads and inserts filename to database
+     *
+     * @param int $id Opponent ID
+     * @param UploadedFile $file File request
+     * @return bool
+     */
     public function insertFile($opponentID, UploadedFile $file)
     {
         $imageName = $opponentID . '.' . $file->getClientOriginalExtension();
@@ -31,18 +38,30 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
         }
     }
 
+    /**
+     * Deletes the file from disk and database
+     * 
+     * @param  int $id Opponent ID
+     * @return bool     Is the file deleted
+     */
     public function deleteFile($opponentID)
     {
         $opponent = $this->get($opponentID);
         $filename = $this->uploadPath . $opponent->image;
         
         if (file_exists($filename) && is_file($filename)) {
+            parent::update($opponentID, ['image' => null]);
             return unlink($filename);
         }
 
         return false;
     }
 
+    /**
+     * Delete a single opponent
+     * 
+     * @param $id
+     */
     public function delete($opponentID)
     {
         $this->deleteFile($opponentID);
@@ -50,6 +69,15 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
         return parent::delete($opponentID);
     }
 
+    /**
+     * Returns paged results for a specific page
+     *
+     * @param $page int Current page
+     * @param $limit int Page results limit
+     * @param $sortColumn string Column name
+     * @param $searchTerm string Search term
+     * @return array
+     */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $model = $this->model->orderBy($sortColumn, $order);

@@ -80,6 +80,18 @@ body {
   padding-top: 140px;
 }
 
+a.text-delete {
+  color: $brand-danger;
+  border-bottom: 1px dashed $brand-danger;
+  text-decoration: none;
+  padding: 0 5px;
+  &:hover, &:focus, &:active {
+    color: #fff;
+    background: $brand-danger;
+    border-bottom: 1px solid $brand-danger;
+  }
+}
+
 #modal-loader {
   display: none;
 }

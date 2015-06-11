@@ -102,9 +102,10 @@ class OpponentsController extends AdminController {
         return redirect('admin/opponents')->with('alerts', $this->getAlerts());
     }
 
-    public function removeImage($id)
+    public function deleteImage($id)
     {
-        // TODO AJAX REQUEST
+        $fileDeleted = $this->opponents->deleteFile($id);
+        return response()->json(['success' => $fileDeleted]);
     }
 
 }

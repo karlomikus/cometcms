@@ -18,7 +18,8 @@
             {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
             @if(!empty($opponent->image))
                 <div class="uploaded-file">
-                    <a href="#todoRemove"><img src="/uploads/opponents/{{ $opponent->image }}" alt="Image"/></a>
+                    <a class="btn-image-delete" href="/admin/opponents/delete-image/{{ $opponent->id }}" data-ajax="get" data-ajax-success="deleteImage"><i class="fa fa-fw fa-remove"></i></a>
+                    <img src="/uploads/opponents/{{ $opponent->image }}" alt="Image"/>
                 </div>
             @endif
             {!! Form::file('image') !!}
@@ -29,3 +30,14 @@
         <button class="btn btn-success" type="submit"><i class="fa fa-check"></i> Save</button>
     </div>
 {!! Form::close() !!}
+
+<script>
+    function deleteImage(data) {
+        if(data.success == "true") {
+            alert('SUCCESS !!!!!');
+        }
+        else {
+            alert('Unable to delte fifle');
+        }
+    }
+</script>
