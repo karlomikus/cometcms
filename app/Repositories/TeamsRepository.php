@@ -18,8 +18,13 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
      * @param $teamID
      * @return mixed
      */
+    public function getTeamData($teamID)
+    {
+        return $this->model->where('id', '=', $teamID)->with('roster')->first();
+    }
+
     public function getTeamRoster($teamID)
     {
-        return $this->get($teamID)->roster;
+
     }
 }

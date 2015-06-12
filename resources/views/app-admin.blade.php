@@ -42,11 +42,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team management <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url('/admin/teams') }}">Teams</a></li>
-                        <li><a href="{{ url('/admin/roster') }}">Roster</a></li>
-                    </ul>
+                    <a href="{{ url('/admin/teams') }}">Team management</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site <span class="caret"></span></a>

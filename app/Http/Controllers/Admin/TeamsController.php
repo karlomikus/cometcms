@@ -2,6 +2,7 @@
 
 use App\Libraries\GridView\GridView;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
+use App\Repositories\Contracts\GamesRepositoryInterface;
 use Illuminate\Http\Request;
 
 class TeamsController extends AdminController {
@@ -37,10 +38,13 @@ class TeamsController extends AdminController {
         
     }
 
-    public function edit($id)
+    public function edit($id, GamesRepositoryInterface $games)
     {
         $data['team'] = $this->teams->get($id);
         $data['pageTitle'] = 'Editing an squad';
+
+        $data['modelData'] = $this->teams->getTeamData($id);
+        $data['games'] = $games->all();
 
         return view('admin.teams.form', $data);
     }
@@ -52,7 +56,9 @@ class TeamsController extends AdminController {
 
     public function getRoster($teamID)
     {
-        $this->teams->all();
+        $data = $this->teams->getTeamData($teamID);
+
+        return response()->json(['data' => $data]);
     }
 
 }
