@@ -105,7 +105,12 @@ class OpponentsController extends AdminController {
     public function deleteImage($id)
     {
         $fileDeleted = $this->opponents->deleteFile($id);
-        return response()->json(['success' => $fileDeleted]);
+
+        $message = 'Error on file delete!';
+        if($fileDeleted) {
+            $message = 'File deleted successfully!';
+        }
+        return response()->json(['success' => $fileDeleted, 'message' => $message]);
     }
 
 }

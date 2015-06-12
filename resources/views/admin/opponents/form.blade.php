@@ -18,7 +18,7 @@
             {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
             @if(!empty($opponent->image))
                 <div class="uploaded-file">
-                    <a class="btn-image-delete" href="/admin/opponents/delete-image/{{ $opponent->id }}" data-ajax="get" data-ajax-success="deleteImage"><i class="fa fa-fw fa-remove"></i></a>
+                    <a class="btn-image-delete" href="/admin/opponents/delete-image/{{ $opponent->id }}" data-ajax="get"><i class="fa fa-fw fa-remove"></i></a>
                     <img src="/uploads/opponents/{{ $opponent->image }}" alt="Image"/>
                 </div>
             @endif
@@ -32,12 +32,12 @@
 {!! Form::close() !!}
 
 <script>
-    function deleteImage(data) {
-        if(data.success == "true") {
-            alert('SUCCESS !!!!!');
+    function ajaxCallbackSuccess(data) {
+        if(data.success == true) {
+            $(".uploaded-file").remove();
         }
         else {
-            alert('Unable to delte fifle');
+            console.log(data.message);
         }
     }
 </script>
