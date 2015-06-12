@@ -21,33 +21,29 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>{!! Form::gridHeader('Name', 'name', 'Admin\TeamsController@index', $headerAttr) !!}</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if(!$totalItems > 0)
-                            <tr>
-                                <td colspan="4" class="text-center">No results found.</td>
-                            </tr>
-                        @endif
-                        @foreach($data as $team)
-                            <tr>
-                                <td><a href="{{ url('admin/teams/edit', [$team->id]) }}">{{ $team->name }}</a></td>
-                                <td>{{ $team->description }}</td>
-                                <td>
-                                    <a href="{{ url('admin/teams/delete', [$team->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this team?');">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                @if(!$data)
+                    <div class="alert alert-info">There are no squads defined yet!</div>
+                @endif
+                <div class="list-group">
+                    @foreach($data as $team)
+                        <a href="{{ url('admin/teams/edit', [$team->id]) }}" class="list-group-item">
+                            <h4 class="list-group-item-heading">{{ $team->name }}</h4>
+                            <p class="list-group-item-text">{{ $team->description }}</p>
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
-        {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
     </div>
+@endsection
+
+@section('page-scripts-before')
+    <script>
+        // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
+        const squadData = null;
+    </script>
+@endsection
+
+@section('page-scripts')
+    <script src="{{ asset('/js/admin/squads.js') }}"></script>
 @endsection

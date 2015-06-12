@@ -19,6 +19,9 @@ class CreateTeamRosterTable extends Migration {
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('team_id')->unsigned();
 			$table->foreign('team_id')->references('id')->on('teams');
+			$table->string('position')->nullable();
+			$table->string('status')->nullable();
+			$table->tinyInteger('captain')->default(0);
 		});
 	}
 

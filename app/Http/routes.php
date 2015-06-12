@@ -76,6 +76,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/teams/edit/{id}', 'Admin\TeamsController@edit');
     Route::post('/teams/edit/{id}', 'Admin\TeamsController@update');
     Route::get('/teams/delete/{id}', 'Admin\TeamsController@delete');
+    Route::get('/teams/api/team/{id}', 'Admin\TeamsController@getRoster');
 
     /**
      * Matches

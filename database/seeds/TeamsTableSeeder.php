@@ -19,7 +19,10 @@ class TeamsTableSeeder extends Seeder {
         for ($i=0; $i < 15; $i++) {
             DB::table('team_roster')->insert([
                 'user_id' => $faker->randomElement([2, 3, 4, 5, 6, 7, 8, 9]),
-                'team_id' => $faker->numberBetween(1, 5)
+                'team_id' => $faker->numberBetween(1, 5),
+                'position' => $faker->randomElement(['Mid', 'Offlane', 'Support 4', 'Support 5']),
+                'status' => 'Test status',
+                'captain' => $faker->randomElement([0, 1]),
             ]);
         }
     }
