@@ -52,8 +52,7 @@
                                 <td>{{ $match->game->name }}</td>
                                 <td><strong data-toggle="tooltip" data-placement="top" title="{{ $match->score->home }} : {{ $match->score->guest }}" class="match-{{ $match->outcome }}">{{ $match->outcome }}</strong></td>
                                 <td>
-                                    <a href="{{ url('match', [$match->id]) }}" class="" target="_blank"><i class="fa fa-fw fa-eye"></i></a>
-                                    <a href="{{ url('admin/matches/delete', [$match->id]) }}" class="" onclick="return confirm('Are you sure you want to delete this match?');"><i class="fa fa-fw fa-trash"></i></a>
+                                    <a href="{{ url('admin/matches/delete', [$match->id]) }}" class="text-delete" data-confirm="Are you sure you want to delete this match?">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

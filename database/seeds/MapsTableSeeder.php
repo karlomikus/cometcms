@@ -14,27 +14,33 @@ class MapsTableSeeder extends Seeder {
         
         Map::create([
             'name' => 'Dust 2',
-            'game_id' => 2
+            'game_id' => 2,
+            'image' => '2.png'
         ]);
         Map::create([
             'name' => 'Cache',
-            'game_id' => 2
+            'game_id' => 2,
+            'image' => '3.png'
         ]);
         Map::create([
             'name' => 'Train',
-            'game_id' => 2
+            'game_id' => 2,
+            'image' => '4.png'
         ]);
         Map::create([
             'name' => 'Mirage',
-            'game_id' => 2
+            'game_id' => 2,
+            'image' => '5.png'
         ]);
         Map::create([
             'name' => 'Inferno',
-            'game_id' => 2
+            'game_id' => 2,
+            'image' => '6.png'
         ]);
         Map::create([
             'name' => 'Cobblestone',
-            'game_id' => 2
+            'game_id' => 2,
+            'image' => '1.png'
         ]);
         
         Map::create([

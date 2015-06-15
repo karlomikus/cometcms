@@ -14,9 +14,6 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
 
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
-        $sortColumn !== null ?: $sortColumn = 'name'; // Default order by column
-        $order !== null ?: $order = 'asc'; // Default sorting
-
         $model = $this->model->orderBy($sortColumn, $order);
 
         if($searchTerm)

@@ -60,6 +60,9 @@
                                         </ul>
                                     </li>
                                 </ul>
+                                <div class="add-member">
+                                    <input type="text" placeholder="Search users...">
+                                </div>
                             </div>
                         </div>
                         <hr>

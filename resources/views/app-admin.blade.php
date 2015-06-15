@@ -30,25 +30,24 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ url('/admin/teams') }}">Team management</a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('/admin/posts') }}">Posts</a></li>
-                        <li><a href="{{ url('/admin/opponents') }}">Opponents</a></li>
+                        <li class="disabled"><a href="{{ url('/admin/posts') }}">Posts</a></li>
                         <li><a href="{{ url('/admin/games') }}">Games</a></li>
-                        <li><a href="{{ url('/admin/maps') }}">Maps</a></li>
-                        <li><a href="{{ url('/admin/events') }}">Events</a></li>
+                        <li><a href="{{ url('/admin/opponents') }}">Opponents</a></li>
                         <li><a href="{{ url('/admin/matches') }}">Matches</a></li>
+                        <li class="disabled"><a href="{{ url('/admin/events') }}">Events</a></li>
                     </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="{{ url('/admin/teams') }}">Team management</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('/admin/settings') }}">Settings</a></li>
-                        <li><a href="{{ url('/admin/navigation') }}">Navigation</a></li>
+                        <li class="disabled"><a href="{{ url('/admin/settings') }}">Settings</a></li>
+                        <li class="disabled"><a href="{{ url('/admin/navigation') }}">Navigation</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

@@ -37,14 +37,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/', 'Admin\DashboardController@index');
 
     /**
-     * Opponents
+     * Games
      */
-    Route::get('/maps', 'Admin\MapsController@index');
-    Route::get('/maps/new', 'Admin\MapsController@create');
-    Route::post('/maps/new', 'Admin\MapsController@save');
-    Route::get('/maps/edit/{id}', 'Admin\MapsController@edit');
-    Route::post('/maps/edit/{id}', 'Admin\MapsController@update');
-    Route::get('/maps/delete/{id}', 'Admin\MapsController@delete');
+    Route::get('/games', 'Admin\GamesController@index');
+    Route::get('/games/new', 'Admin\GamesController@create');
+    Route::post('/games/new', 'Admin\GamesController@save');
+    Route::get('/games/edit/{id}', 'Admin\GamesController@edit');
+    Route::post('/games/edit/{id}', 'Admin\GamesController@update');
+    Route::get('/games/delete/{id}', 'Admin\GamesController@delete');
 
     /**
      * Users
