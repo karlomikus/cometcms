@@ -5845,6 +5845,16 @@ label {
   .form-control:focus {
     box-shadow: none; }
 
+.form-control-dark {
+  padding: 5px 10px;
+  border-color: #373c51;
+  background: #2d3142;
+  height: 30px;
+  font-size: 14px;
+  color: #6d769b; }
+  .form-control-dark:focus {
+    color: #fff; }
+
 .uploaded-file {
   border: 1px solid #c8cbd9;
   padding: 5px;
@@ -5857,6 +5867,16 @@ label {
 /*
 * Admin styles
 */
+.btn-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  color: #fff;
+  text-shadow: none !important;
+  box-shadow: none !important; }
+  .btn-overlay:hover, .btn-overlay:focus, .btn-overlay:active {
+    background: #fe5f55;
+    color: #fff; }
+
 .pagebar {
   background: #424860;
   margin-bottom: 20px;
@@ -5959,6 +5979,40 @@ label {
     .scores .score-item .btn-remove-score:focus, .scores .score-item .btn-remove-score:hover, .scores .score-item .btn-remove-score:active {
       border: 0;
       background: #fe5f55; }
+
+.squad-member {
+  background: #2d3142;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 180px;
+  position: relative; }
+  .squad-member .btn-corner {
+    position: absolute;
+    top: 5px;
+    right: 5px; }
+  .squad-member .btn-captain {
+    padding: 5px 10px;
+    border-color: #373c51;
+    background: #2d3142;
+    height: 30px;
+    font-size: 14px;
+    color: #6d769b;
+    box-shadow: none;
+    text-shadow: none;
+    font-family: "Roboto", Helvetica, Arial, sans-serif; }
+    .squad-member .btn-captain:hover, .squad-member .btn-captain:active, .squad-member .btn-captain:focus {
+      color: #fff;
+      border-color: #66afe9; }
+  .squad-member img {
+    width: 100%;
+    height: auto; }
+  .squad-member .squad-member-info {
+    padding: 10px; }
+    .squad-member .squad-member-info h4 {
+      text-align: center;
+      margin-top: 0;
+      color: #fff; }
 
 .admin-form hr {
   margin: 40px 0; }

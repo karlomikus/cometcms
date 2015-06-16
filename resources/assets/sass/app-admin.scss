@@ -135,6 +135,18 @@ label {
   }
 }
 
+.form-control-dark {
+  padding: 5px 10px;
+  border-color: lighten($color-primary-dark, 5%);
+  background: $color-primary-dark;
+  height: 30px;
+  font-size: 14px;
+  color: lighten($color-primary-dark, 30%);
+  &:focus {
+    color: #fff;
+  }
+}
+
 .uploaded-file {
   border: 1px solid $input-border;
   padding: 5px;
@@ -149,6 +161,18 @@ label {
 /*
 * Admin styles
 */
+.btn-overlay {
+  background: rgba(0,0,0,.5);
+  border: 0;
+  color: #fff;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  &:hover, &:focus, &:active {
+    background: $brand-danger;
+    color: #fff;
+  }
+}
+
 // Pagebar
 .pagebar {
   background: lighten($color-navbar-bg, 10%);
@@ -287,6 +311,48 @@ label {
         border: 0;
         background: $brand-danger;
       }
+    }
+  }
+}
+
+// Squads
+.squad-member {
+  background: $color-primary-dark;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 180px;
+  position: relative;
+  .btn-corner {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  .btn-captain {
+    padding: 5px 10px;
+    border-color: lighten($color-primary-dark, 5%);
+    background: $color-primary-dark;
+    height: 30px;
+    font-size: 14px;
+    color: lighten($color-primary-dark, 30%);
+    box-shadow: none;
+    text-shadow: none;
+    font-family: $font-family-sans-serif;
+    &:hover, &:active, &:focus {
+      color: #fff;
+      border-color: $input-border-focus;
+    }
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .squad-member-info {
+    padding: 10px;
+    h4 {
+      text-align: center;
+      margin-top: 0;
+      color: #fff;
     }
   }
 }

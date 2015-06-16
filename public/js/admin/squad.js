@@ -32,16 +32,16 @@ var SquadViewModel = function (squadData) {
             contentType: 'application/json',
             type: "GET",
             success: function (result) {
-                self.found_users(result);
+                self.found_users.removeAll();
+                $.each(result, function(key, val) {
+                    val.pivot = {user_id: val.id};
+                    self.found_users.push(new SquadMemberViewModel(self, val))
+                });
             },
             error: function (jqXHR) {
                 console.log(jqXHR.statusText);
             }
         });
-    };
-
-    self.addToMembers = function(data) {
-        self.members.push(self, {member_id: 0, pivot: {user_id: id}});
     };
 };
 
@@ -55,6 +55,14 @@ var SquadMemberViewModel = function (parent, memberData) {
     self.position = ko.observable(memberData.pivot.position);
     self.status = ko.observable(memberData.pivot.status);
     self.captain = ko.observable(memberData.pivot.captain);
+
+    self.addToMembers = function() {
+        parent.members.push(self);
+    };
+
+    self.removeFromMembers = function (member) {
+        parent.members.remove(member);
+    };
 };
 
 $(document).ready(function () {
