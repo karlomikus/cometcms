@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="form-group">
                                             <button class="btn btn-captain btn-block">
-                                                <i class="fa fa-fw fa-star"></i> Make captain
+                                                <i class="fa fa-star"></i> Make captain
                                             </button>
                                         </div>
                                     </div>
