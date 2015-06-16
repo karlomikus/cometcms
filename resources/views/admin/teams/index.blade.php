@@ -36,14 +36,3 @@
         </div>
     </div>
 @endsection
-
-@section('page-scripts-before')
-    <script>
-        // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
-        const squadData = null;
-    </script>
-@endsection
-
-@section('page-scripts')
-    <script src="{{ asset('/js/admin/squads.js') }}"></script>
-@endsection
