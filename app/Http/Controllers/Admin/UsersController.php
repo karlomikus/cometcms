@@ -109,4 +109,13 @@ class UsersController extends AdminController {
         return redirect('admin/users')->with('message', $message);
     }
 
+    public function searchUsers($searchString)
+    {
+        $result = [];
+        if(strlen($searchString) >= 3) {
+            $result = $this->users->searchUsersByName($searchString);
+        }
+        return response()->json($result);
+    }
+
 }

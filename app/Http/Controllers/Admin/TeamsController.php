@@ -25,9 +25,12 @@ class TeamsController extends AdminController {
         return view('admin.teams.index', $data);
     }
 
-    public function create()
+    public function create(GamesRepositoryInterface $games)
     {
         $data['team'] = null;
+        $data['modelData'] = null;
+        $data['games'] = $games->all();
+
         $data['pageTitle'] = 'Create new squad';
 
         return view('admin.teams.form', $data);

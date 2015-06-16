@@ -12,6 +12,10 @@ var SquadViewModel = function (squadData) {
     self.game_id = ko.observable(squadData.game_id);
     self.members = ko.observableArray();
 
+    // User search
+    self.found_users = ko.observableArray();
+    self.search_string = ko.observable();
+
     if (squadData.roster.length > 0) {
         $.each(squadData.roster, function (key, val) {
             self.members.push(new SquadMemberViewModel(self, val));
@@ -20,6 +24,25 @@ var SquadViewModel = function (squadData) {
     else {
         self.members.push(new SquadMemberViewModel(self, {}))
     }
+
+    self.findUsers = function() {
+        $.ajax({
+            url: '/admin/users/api/user/' + self.search_string(),
+            cache: false,
+            contentType: 'application/json',
+            type: "GET",
+            success: function (result) {
+                self.found_users(result);
+            },
+            error: function (jqXHR) {
+                console.log(jqXHR.statusText);
+            }
+        });
+    };
+
+    self.addToMembers = function(data) {
+        self.members.push(self, {member_id: 0, pivot: {user_id: id}});
+    };
 };
 
 var SquadMemberViewModel = function (parent, memberData) {

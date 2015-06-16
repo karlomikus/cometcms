@@ -14,9 +14,6 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
 
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
-        $sortColumn !== null ?: $sortColumn = 'name'; // Default order by column
-        $order !== null ?: $order = 'asc'; // Default sorting
-
         $model = $this->model->orderBy($sortColumn, $order);
 
         if($searchTerm)
@@ -26,6 +23,13 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
         $result['items'] = $model->with('roles')->skip($limit * ($page - 1))->take($limit)->get();
 
         return $result;
+    }
+
+    public function searchUsersByName($string)
+    {
+        $model = $this->model->orderBy('name');
+
+        return $model->where('name', 'LIKE', '%'. $string .'%')->get();
     }
 
 }

@@ -58,11 +58,4 @@ class GamesController extends AdminController {
         
     }
 
-    public function getRoster($teamID)
-    {
-        $data = $this->teams->getTeamData($teamID);
-
-        return response()->json(['data' => $data]);
-    }
-
 }

@@ -61,7 +61,10 @@
                                     </li>
                                 </ul>
                                 <div class="add-member">
-                                    <input type="text" placeholder="Search users...">
+                                    <input type="text" placeholder="Search users..." data-bind="value: search_string"> <button class="btn btn-primary" data-bind="click: findUsers">find!</button>
+                                    <ul data-bind="foreach: found_users">
+                                        <a href="#" data-bind="text: name, click: addToMembers($data)"></a>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
