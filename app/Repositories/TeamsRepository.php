@@ -7,11 +7,23 @@ use App\Team;
 
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface {
 
+    /**
+     * Initiate the repository with team model
+     * 
+     * @param Team $team Model
+     */
     public function __construct(Team $team)
     {
         parent::__construct($team);
     }
 
+    /**
+     * Add members to specefied team
+     * 
+     * @param  array $data    Array with member data
+     * @param  int   $teamID  ID of the team we are adding members to
+     * @return void           Void since we use transaction in insert() method
+     */
     public function insertMembers($data, $teamID)
     {
         // We go through each element since we need to get rid of garbage properties from client JSON
@@ -26,6 +38,12 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         }
     }
 
+    /**
+     * Add new team and team members. Uses transactions, if transaction commits returns true.
+     * 
+     * @param  array $data Array of data
+     * @return bool        Was transaction commited
+     */
     public function insert($data)
     {
         try {

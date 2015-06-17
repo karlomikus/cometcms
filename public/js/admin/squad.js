@@ -107,7 +107,6 @@ $(document).ready(function () {
         }
 
         posting.fail(function (response) {
-            console.log(response);
             $.each(response.responseJSON, function (key, val) {
                 console.log(val[0]);
             });
