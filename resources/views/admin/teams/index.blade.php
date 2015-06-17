@@ -26,7 +26,12 @@
                 @endif
                 <div class="list-group">
                     @foreach($data as $team)
-                        <a href="{{ url('admin/teams/edit', [$team->id]) }}" class="list-group-item">
+                        <a href="{{ url('admin/teams/edit', [$team->id]) }}" class="list-group-item clearfix">
+                            @if($team->image)
+                                <img class="pic-50 pic-left" src="/uploads/teams/{{ $team->image }}" alt="Image"/>
+                            @else
+                                <img class="pic-50 pic-left" src="/uploads/nopic.jpg" alt="No picture"/>
+                            @endif
                             <h4 class="list-group-item-heading">{{ $team->name }}</h4>
                             <p class="list-group-item-text">{{ $team->description }}</p>
                         </a>
