@@ -54,7 +54,7 @@
                                     <div class="input-group">
                                         <input class="form-control" type="text" placeholder="Add new member..." data-bind="value: search_string">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" data-bind="click: findUsers">Find!</button>
+                                            <button class="btn btn-default" type="button" data-bind="click: findUsers">Find! <i class="fa fa-spinner fa-pulse" data-bind="css: {hide: !searching()}"></i></button>
                                         </span>
                                     </div>
                                     <hr>

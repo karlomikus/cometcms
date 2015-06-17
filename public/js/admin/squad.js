@@ -11,6 +11,7 @@ var SquadViewModel = function (squadData) {
     self.description = ko.observable(squadData.description);
     self.game_id = ko.observable(squadData.game_id);
     self.members = ko.observableArray();
+    self.searching = ko.observable(false);
 
     // User search
     self.found_users = ko.observableArray();
@@ -27,6 +28,7 @@ var SquadViewModel = function (squadData) {
     }
 
     self.findUsers = function() {
+        self.searching(true);
         $.ajax({
             url: '/admin/users/api/user/' + self.search_string(),
             cache: false,
@@ -38,6 +40,7 @@ var SquadViewModel = function (squadData) {
                     val.pivot = {user_id: val.id};
                     self.found_users.push(new SquadMemberViewModel(self, val))
                 });
+                self.searching(false);
             },
             error: function (jqXHR) {
                 console.log(jqXHR.statusText);
