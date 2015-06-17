@@ -353,6 +353,11 @@ label {
       border-color: $input-border-focus;
     }
   }
+  .btn-captain-active {
+    color: #fff;
+    background: $input-border-focus;
+    border-color: $input-border-focus;
+  }
   img {
     width: 100%;
     height: auto;

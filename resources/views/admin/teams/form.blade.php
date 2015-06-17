@@ -78,8 +78,8 @@
                                             <input type="text" class="form-control form-control-dark" data-bind="value: status">
                                         </div>
                                         <div class="form-group">
-                                            <button class="btn btn-captain btn-block">
-                                                <i class="fa fa-star"></i> Make captain
+                                            <button class="btn btn-captain btn-block" data-bind="css: {'btn-captain-active': captain}, click: toggleCaptain">
+                                                <i class="fa fa-star"></i> Captain
                                             </button>
                                         </div>
                                     </div>

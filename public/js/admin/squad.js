@@ -63,6 +63,14 @@ var SquadMemberViewModel = function (parent, memberData) {
     self.removeFromMembers = function (member) {
         parent.members.remove(member);
     };
+
+    self.toggleCaptain = function (member) {
+        if(member.captain()) {
+            member.captain(0);
+        } else {
+            member.captain(1);
+        }
+    };
 };
 
 $(document).ready(function () {
