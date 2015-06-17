@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {!! Form::open(['id' => 'squad-form']) !!}
+                {!! Form::open(['id' => 'squad-form', 'files' => true]) !!}
                 <div class="row">
                     <div class="col-md-2">
                         <h4 class="form-subtitle">Squad information</h4>
@@ -34,14 +34,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" name="image" id="image">
+                                    <input id="file-image" type="file" name="image" id="image">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <hr/>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                                     <div class="input-group">
                                         <input class="form-control" type="text" placeholder="Add new member..." data-bind="value: search_string">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" data-bind="click: findUsers">Find! <i class="fa fa-spinner fa-pulse" data-bind="css: {hide: !searching()}"></i></button>
+                                            <button class="btn btn-info" type="button" data-bind="click: findUsers">Find! <i class="fa fa-spinner fa-pulse" data-bind="css: {hide: !searching()}"></i></button>
                                         </span>
                                     </div>
                                     <hr>

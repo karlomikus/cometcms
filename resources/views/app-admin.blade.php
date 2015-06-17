@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{{ url('/admin/teams') }}">Team management</a>
+                    <a href="{{ url('/admin/teams') }}">Squad management</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Content <span class="caret"></span></a>

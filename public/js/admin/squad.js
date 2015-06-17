@@ -47,6 +47,17 @@ var SquadViewModel = function (squadData) {
             }
         });
     };
+
+    // self.prepareImage = function () {
+    //     var input = $("#file-image")[0];
+    //     if(input.files && input.files[0]) {
+    //         var fileReader = new FileReader();
+    //         fileReader.onload = function (e) {
+    //             console.log(e.target.result);
+    //         }
+    //         fileReader.readAsDataURL(input.files[0]);
+    //     }
+    // };
 };
 
 var SquadMemberViewModel = function (parent, memberData) {
@@ -61,7 +72,10 @@ var SquadMemberViewModel = function (parent, memberData) {
     self.captain = ko.observable(memberData.pivot.captain);
 
     self.addToMembers = function() {
-        parent.members.push(self);
+        // Check if member is already added to team
+        var exists = $.grep(parent.members(), function(e) { return e.user_id() === self.user_id(); });
+        if(exists.length === 0)
+            parent.members.push(self);
     };
 
     self.removeFromMembers = function (member) {
@@ -99,8 +113,15 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         });
+
+        // Image
+        // var imgData = new FormData(document.getElementById("squad-form"));
+        // squadViewModel.image = imgData.get("image");
+
         var data = ko.toJSON(squadViewModel);
         var posting = null;
+
+        console.log(data);
 
         if (modelData) {
             posting = $.post("/admin/teams/edit/" + modelData.id, {data: data});

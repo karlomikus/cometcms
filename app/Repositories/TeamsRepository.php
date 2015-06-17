@@ -4,9 +4,11 @@ namespace App\Repositories;
 use App\Libraries\GridView\GridViewInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Team;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface {
 
+    private $uploadPath;
     /**
      * Initiate the repository with team model
      * 
@@ -15,6 +17,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     public function __construct(Team $team)
     {
         parent::__construct($team);
+
+        $this->uploadPath = base_path() . '/public/uploads/squads/';
     }
 
     /**
@@ -62,6 +66,20 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         \DB::commit();
 
         return true;
+    }
+
+    public function updateImage(UploadedFile $file, $teamID)
+    {
+        $imageName = $teamID . '.' . $file->getClientOriginalExtension();
+
+        try {
+            $file->move($this->uploadPath, $imageName);
+            $this->update($teamID, ['image' => $imageName]);
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     /**
