@@ -28,7 +28,7 @@ class TeamsController extends AdminController {
     public function create(GamesRepositoryInterface $games)
     {
         $data['team'] = null;
-        $data['modelData'] = '{roster:[{pivot: {}}]}';
+        $data['modelData'] = 'null';
         $data['games'] = $games->all();
 
         $data['pageTitle'] = 'Create new squad';

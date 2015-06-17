@@ -72,10 +72,10 @@
                                     <div class="squad-member-info">
                                         <h4 data-bind="text: name"></h4>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-dark" data-bind="value: position">
+                                            <input type="text" class="form-control form-control-dark" placeholder="Player position..." data-bind="value: position">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-dark" data-bind="value: status">
+                                            <input type="text" class="form-control form-control-dark" placeholder="Player status..." data-bind="value: status">
                                         </div>
                                         <div class="form-group">
                                             <button class="btn btn-captain btn-block" data-bind="css: {'btn-captain-active': captain}, click: toggleCaptain">

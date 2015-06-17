@@ -1,7 +1,7 @@
 "use strict";
 
 var squadViewModel = null;
-var defaultModelData = {};
+var defaultModelData = {roster:[{pivot: {}}]};
 
 var SquadViewModel = function (squadData) {
     var self = this;
@@ -18,7 +18,8 @@ var SquadViewModel = function (squadData) {
 
     if (squadData.roster.length > 0) {
         $.each(squadData.roster, function (key, val) {
-            self.members.push(new SquadMemberViewModel(self, val));
+            if(!jQuery.isEmptyObject(val.pivot))
+                self.members.push(new SquadMemberViewModel(self, val));
         });
     }
     else {
