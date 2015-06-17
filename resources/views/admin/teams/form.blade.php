@@ -3,8 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12" id="squad-form">
-                {!! Form::open() !!}
+            <div class="col-md-12">
+                {!! Form::open(['id' => 'squad-form']) !!}
                 <div class="row">
                     <div class="col-md-2">
                         <h4 class="form-subtitle">Squad information</h4>

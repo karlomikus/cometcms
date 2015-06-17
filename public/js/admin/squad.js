@@ -52,7 +52,7 @@ var SquadMemberViewModel = function (parent, memberData) {
     self.member_id = ko.observable(memberData.id);
     self.user_id = ko.observable(memberData.pivot.user_id);
     self.name = ko.observable(memberData.name);
-    self.squad_id = ko.observable(parent.squad_id);
+    self.team_id = ko.observable(parent.team_id);
     self.position = ko.observable(memberData.pivot.position);
     self.status = ko.observable(memberData.pivot.status);
     self.captain = ko.observable(memberData.pivot.captain);
@@ -86,6 +86,37 @@ $(document).ready(function () {
         squadViewModel = new SquadViewModel(defaultModelData);
     }
     console.log('Viewmodel loaded!');
+
+    $('#squad-form').submit(function (ev) {
+        ev.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+        var data = ko.toJSON(squadViewModel);
+        var posting = null;
+
+        if (modelData) {
+            posting = $.post("/admin/teams/edit/" + modelData.id, {data: data});
+        }
+        else {
+            posting = $.post("/admin/teams/new", data, 'json');
+        }
+
+        posting.fail(function (response) {
+            console.log(response);
+            $.each(response.responseJSON, function (key, val) {
+                console.log(val[0]);
+            });
+        });
+
+        posting.done(function (resp) {
+            window.location.href = resp.location;
+        });
+    });
 
     ko.applyBindings(squadViewModel, document.getElementById('squad-form'));
 });

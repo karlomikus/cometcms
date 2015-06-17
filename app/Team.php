@@ -20,6 +20,8 @@ class Team extends Model {
 
     protected $hidden = ['created_at', 'updated_at'];
 
+    protected $fillable = ['name', 'description', 'image', 'game_id'];
+
 	public function roster()
     {
         return $this->belongsToMany('App\User', 'team_roster')->withPivot('position', 'captain', 'status');;
