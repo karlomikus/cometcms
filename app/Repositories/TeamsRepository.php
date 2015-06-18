@@ -22,7 +22,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     }
 
     /**
-     * Add members to specefied team
+     * Add members to specific team
      * 
      * @param  array $data    Array with member data
      * @param  int   $teamID  ID of the team we are adding members to
@@ -91,7 +91,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     }
 
     /**
-     * Uploads the image and updated database reference
+     * Uploads the image and updates database reference
      * 
      * @param  UploadedFile $file   File
      * @param  int       $teamID ID of the team
@@ -112,11 +112,17 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         }
     }
 
+    /**
+     * Delete all members from specific team
+     * 
+     * @param  int $teamID Team ID
+     * @return bool
+     */
     public function deleteAllMembers($teamID)
     {
         return \DB::table('team_roster')->where('team_id', '=', $teamID)->delete();
     }
-
+    
     public function delete($teamID)
     {
         try {

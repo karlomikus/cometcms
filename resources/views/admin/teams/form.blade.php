@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="game">Choose game</label>
+                                    <label for="game">Primary game</label>
                                     <select class="form-control" id="game" name="game" data-bind="value: game_id">
                                         @foreach($games as $game)
                                         <option value="{{ $game->id }}">{{ $game->name }}</option>

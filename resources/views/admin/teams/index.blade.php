@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-md-12">
                 @if(!$data)
-                    <div class="alert alert-info">There are no squads defined yet!</div>
+                    <div class="alert alert-info">There are no squads created yet!</div>
                 @endif
                 <div class="list-group">
                     @foreach($data as $team)
