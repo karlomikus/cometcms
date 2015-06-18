@@ -151,7 +151,7 @@ label {
   background: $color-primary-dark;
   height: 30px;
   font-size: 14px;
-  color: lighten($color-primary-dark, 30%);
+  color: lighten($color-primary-dark, 40%);
   &:focus {
     color: #fff;
   }
@@ -297,8 +297,7 @@ label {
 .scores {
   .score-item {
     width: 200px;
-    background: #fff;
-    border: 1px solid $input-border;
+    background: $color-primary-dark;
     float: left;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -465,140 +464,4 @@ label {
     padding: 5px 20px;
     //border-bottom: 1px solid #ccc;
   }
-}
-
-
-
-.bubblingG {
-text-align: center;
-width:80px;
-height:50px;
-}
-
-.bubblingG span {
-display: inline-block;
-vertical-align: middle;
-width: 10px;
-height: 10px;
-margin: 25px auto;
-background: $color-primary-dark;
--moz-border-radius: 50px;
--moz-animation: bubblingG 0.7s infinite alternate;
--webkit-border-radius: 50px;
--webkit-animation: bubblingG 0.7s infinite alternate;
--ms-border-radius: 50px;
--ms-animation: bubblingG 0.7s infinite alternate;
--o-border-radius: 50px;
--o-animation: bubblingG 0.7s infinite alternate;
-border-radius: 50px;
-animation: bubblingG 0.7s infinite alternate;
-}
-
-#bubblingG_1 {
--moz-animation-delay: 0s;
--webkit-animation-delay: 0s;
--ms-animation-delay: 0s;
--o-animation-delay: 0s;
-animation-delay: 0s;
-}
-
-#bubblingG_2 {
--moz-animation-delay: 0.21s;
--webkit-animation-delay: 0.21s;
--ms-animation-delay: 0.21s;
--o-animation-delay: 0.21s;
-animation-delay: 0.21s;
-}
-
-#bubblingG_3 {
--moz-animation-delay: 0.42s;
--webkit-animation-delay: 0.42s;
--ms-animation-delay: 0.42s;
--o-animation-delay: 0.42s;
-animation-delay: 0.42s;
-}
-
-@-moz-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:$color-primary-dark;
--moz-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--moz-transform: translateY(-21px);
-}
-
-}
-
-@-webkit-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:$color-primary-dark;
--webkit-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--webkit-transform: translateY(-21px);
-}
-
-}
-
-@-ms-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:$color-primary-dark;
--ms-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--ms-transform: translateY(-21px);
-}
-
-}
-
-@-o-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:$color-primary-dark;
--o-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--o-transform: translateY(-21px);
-}
-
-}
-
-@keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:$color-primary-dark;
-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
-transform: translateY(-21px);
-}
-
 }

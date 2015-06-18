@@ -4903,7 +4903,7 @@ label {
   background: #2d3142;
   height: 30px;
   font-size: 14px;
-  color: #6d769b; }
+  color: #8b92b0; }
   .form-control-dark:focus {
     color: #fff; }
 
@@ -5004,8 +5004,7 @@ label {
 
 .scores .score-item {
   width: 200px;
-  background: #fff;
-  border: 1px solid #c8cbd9;
+  background: #2d3142;
   float: left;
   margin-right: 10px;
   margin-bottom: 10px; }
@@ -5135,86 +5134,6 @@ label {
   border-width: 2px; }
   .dropdown-menu > li > a {
     padding: 5px 20px; }
-
-.bubblingG {
-  text-align: center;
-  width: 80px;
-  height: 50px; }
-
-.bubblingG span {
-  display: inline-block;
-  vertical-align: middle;
-  width: 10px;
-  height: 10px;
-  margin: 25px auto;
-  background: #2d3142;
-  -moz-border-radius: 50px;
-  -moz-animation: bubblingG 0.7s infinite alternate;
-  -webkit-border-radius: 50px;
-  -webkit-animation: bubblingG 0.7s infinite alternate;
-  -ms-border-radius: 50px;
-  -ms-animation: bubblingG 0.7s infinite alternate;
-  -o-border-radius: 50px;
-  -o-animation: bubblingG 0.7s infinite alternate;
-  border-radius: 50px;
-  -webkit-animation: bubblingG 0.7s infinite alternate;
-          animation: bubblingG 0.7s infinite alternate; }
-
-#bubblingG_1 {
-  -webkit-animation-delay: 0s;
-  -ms-animation-delay: 0s;
-  animation-delay: 0s; }
-
-#bubblingG_2 {
-  -webkit-animation-delay: 0.21s;
-  -ms-animation-delay: 0.21s;
-  animation-delay: 0.21s; }
-
-#bubblingG_3 {
-  -webkit-animation-delay: 0.42s;
-  -ms-animation-delay: 0.42s;
-  animation-delay: 0.42s; }
-
-@-webkit-keyframes bubblingG {
-  0% {
-    width: 10px;
-    height: 10px;
-    background-color: #2d3142;
-    -webkit-transform: translateY(0); }
-
-  100% {
-    width: 24px;
-    height: 24px;
-    background-color: #FFFFFF;
-    -webkit-transform: translateY(-21px); } }
-
-@-ms-keyframes bubblingG {
-  0% {
-    width: 10px;
-    height: 10px;
-    background-color: #2d3142;
-    -ms-transform: translateY(0); }
-
-  100% {
-    width: 24px;
-    height: 24px;
-    background-color: #FFFFFF;
-    -ms-transform: translateY(-21px); } }
-
-@keyframes bubblingG {
-  0% {
-    width: 10px;
-    height: 10px;
-    background-color: #2d3142;
-    -webkit-transform: translateY(0);
-            transform: translateY(0); }
-
-  100% {
-    width: 24px;
-    height: 24px;
-    background-color: #FFFFFF;
-    -webkit-transform: translateY(-21px);
-            transform: translateY(-21px); } }
 
 
 /*# sourceMappingURL=app-admin.css.map */

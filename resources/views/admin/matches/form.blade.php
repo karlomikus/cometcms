@@ -106,12 +106,12 @@
                                         <div class="score-item-body">
                                             <div class="form-group">
                                                 <label>TEAM SCORE</label>
-                                                <input type="number" class="form-control" placeholder="Team score"
+                                                <input type="number" class="form-control form-control-dark" placeholder="Team score"
                                                        data-bind="value: home"/>
                                             </div>
                                             <div class="form-group">
                                                 <label>OPPONENT SCORE</label>
-                                                <input type="number" class="form-control"
+                                                <input type="number" class="form-control form-control-dark"
                                                        placeholder="Opponent score"
                                                        data-bind="value: guest"/>
                                             </div>
