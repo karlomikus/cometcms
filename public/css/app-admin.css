@@ -4988,7 +4988,7 @@ label {
 
 .rounds-content {
   background: #f8f9fe;
-  border: 1px solid #e6eafb;
+  border: 1px solid #dde2fa;
   padding: 10px; }
 
 .match-form-info {
@@ -5024,6 +5024,44 @@ label {
     .scores .score-item .btn-remove-score:focus, .scores .score-item .btn-remove-score:hover, .scores .score-item .btn-remove-score:active {
       border: 0;
       background: #fe5f55; }
+
+.match-info-box {
+  border: 1px solid #dde2fa;
+  background: #f8f9fe; }
+  .match-info-box .match-info-box-home {
+    float: left;
+    padding: 10px;
+    border-right: 1px solid #dde2fa;
+    width: 50%; }
+    .match-info-box .match-info-box-home img {
+      float: left;
+      margin-right: 10px; }
+  .match-info-box .match-info-box-guest {
+    float: left;
+    padding: 10px; }
+  .match-info-box .match-info-box-vs {
+    float: left;
+    border: 1px solid #dde2fa;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: -15px;
+    margin-top: 50px;
+    background: #fff; }
+  .match-info-box .match-info-box-players {
+    list-style: none;
+    margin: auto;
+    padding: 0;
+    line-height: 32px;
+    width: 50%; }
+    .match-info-box .match-info-box-players li {
+      background: #fff;
+      margin-bottom: 1px;
+      width: 100%;
+      display: block; }
 
 .squad-member {
   background: #2d3142;

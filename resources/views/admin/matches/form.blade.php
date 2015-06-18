@@ -39,10 +39,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event">Select event</label>
-                                    <select class="form-control" id="event" name="event">
-                                        <option value="0">The International 2015</option>
-                                        <option value="0">The Summit 3</option>
-                                        <option value="0">Dreamhack</option>
+                                    <select class="form-control" id="event" name="event" disabled>
+                                        <option value="0" selected>Coming soon!</option>
                                     </select>
                                 </div>
                             </div>
@@ -61,9 +59,26 @@
                 <div class="row">
                     <div class="col-md-2"><h4 class="form-subtitle">Participants</h4></div>
                     <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-md-6">Home</div>
-                            <div class="col-md-6">Opponent</div>
+                        <div class="match-info-box clearfix">
+                            <div class="match-info-box-home clearfix">
+                                <img src="http://placehold.it/100x100" alt="img"/>
+                                <ul class="match-info-box-players pull-left">
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                </ul>
+                            </div>
+                            <div class="match-info-box-vs">VS</div>
+                            <div class="match-info-box-guest clearfix">
+                                <img src="http://placehold.it/100x100" alt="img"/>
+                                <ul>
+                                    <li>Player 1</li>
+                                    <li>Player 1</li>
+                                    <li>Player 1</li>
+                                    <li>Player 1</li>
+                                </ul>
+                            </div>
                         </div>
                         <hr>
                     </div>
