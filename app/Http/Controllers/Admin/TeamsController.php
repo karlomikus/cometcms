@@ -4,6 +4,7 @@ use App\Libraries\GridView\GridView;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Repositories\Contracts\GamesRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveTeamRequest;
 
 class TeamsController extends AdminController {
 
@@ -36,7 +37,7 @@ class TeamsController extends AdminController {
         return view('admin.teams.form', $data);
     }
 
-    public function save(Request $request)
+    public function save(SaveTeamRequest $request)
     {
         $data = $request->all();
         $team = $this->teams->insert($data);
@@ -66,7 +67,7 @@ class TeamsController extends AdminController {
         return view('admin.teams.form', $data);
     }
 
-    public function update($id, Request $request)
+    public function update($id, SaveTeamRequest $request)
     {
         
     }

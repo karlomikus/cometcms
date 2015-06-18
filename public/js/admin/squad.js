@@ -83,6 +83,10 @@ var SquadMemberViewModel = function (parent, memberData) {
     };
 
     self.toggleCaptain = function (member) {
+        ko.utils.arrayForEach(parent.members(), function (m) {
+            m.captain(0);
+        });
+
         if(member.captain()) {
             member.captain(0);
         } else {
@@ -120,8 +124,6 @@ $(document).ready(function () {
 
         var data = ko.toJSON(squadViewModel);
         var posting = null;
-
-        console.log(data);
 
         if (modelData) {
             posting = $.post("/admin/teams/edit/" + modelData.id, {data: data});
