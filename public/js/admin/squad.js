@@ -126,7 +126,7 @@ $(document).ready(function () {
         var posting = null;
 
         if (modelData) {
-            posting = $.post("/admin/teams/edit/" + modelData.id, {data: data});
+            posting = $.post("/admin/teams/edit/" + modelData.id, data, 'json');
         }
         else {
             posting = $.post("/admin/teams/new", data, 'json');

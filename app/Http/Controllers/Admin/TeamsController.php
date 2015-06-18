@@ -69,7 +69,21 @@ class TeamsController extends AdminController {
 
     public function update($id, SaveTeamRequest $request)
     {
-        
+        $data = $request->all();
+        $team = $this->teams->update($id, $data);
+
+        if ($team) {
+            $this->alertSuccess('Squad edited successfully.');
+        }
+        else {
+            $this->alertError('Unable to edit a squad.');
+        }
+
+        \Session::flash('alerts', $this->getAlerts());
+
+        // Browsers are dumb and can't follow 302 redirect from ajax call
+        // So we return JSON response containing location which we redirect to with js
+        return response()->json(['location' => '/admin/teams', 'alerts' => $this->getAlerts()]);
     }
 
     public function getRoster($teamID)

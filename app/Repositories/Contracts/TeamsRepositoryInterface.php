@@ -9,6 +9,6 @@ interface TeamsRepositoryInterface {
      * @param $teamID
      * @return mixed
      */
-    public function getTeamRoster($teamID);
+    public function getTeamData($teamID);
 
 } 

@@ -35,9 +35,9 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             \DB::table('team_roster')->insert([
                 'user_id' => $member['user_id'],
                 'team_id' => $teamID,
-                'position' => isset($member['position']) ?: null,
-                'status' => isset($member['status']) ?: null,
-                'captain' => isset($member['captain']) ?: 0
+                'position' => isset($member['position']) ? $member['position'] : null,
+                'status' => isset($member['status']) ? $member['status'] : null,
+                'captain' => isset($member['captain']) ? $member['captain'] : 0
             ]);
         }
     }
@@ -68,6 +68,35 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         return true;
     }
 
+    public function update($id, $data)
+    {
+        try {
+            \DB::beginTransaction();
+            //dd($data);
+            $teamModel = parent::update($id, $data);
+
+            if ($teamModel) {
+                $this->deleteAllMembers($id);
+                $this->insertMembers($data['members'], $id);
+            }
+        }
+        catch (\Exception $e) {
+            \DB::rollback();
+
+            return false;
+        }
+        \DB::commit();
+
+        return true;
+    }
+
+    /**
+     * Uploads the image and updated database reference
+     * 
+     * @param  UploadedFile $file   File
+     * @param  int       $teamID ID of the team
+     * @return bool               Was file uploaded or not
+     */
     public function updateImage(UploadedFile $file, $teamID)
     {
         $imageName = $teamID . '.' . $file->getClientOriginalExtension();
@@ -82,6 +111,11 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         }
     }
 
+    public function deleteAllMembers($teamID)
+    {
+        return \DB::table('team_roster')->where('team_id', '=', $teamID)->delete();
+    }
+
     /**
      * Get members of a specific team
      *
@@ -91,10 +125,5 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     public function getTeamData($teamID)
     {
         return $this->model->where('id', '=', $teamID)->with('roster')->first();
-    }
-
-    public function getTeamRoster($teamID)
-    {
-
     }
 }
