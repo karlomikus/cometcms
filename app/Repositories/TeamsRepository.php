@@ -9,9 +9,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface {
 
     private $uploadPath;
+
     /**
      * Initiate the repository with team model
-     * 
+     *
      * @param Team $team Model
      */
     public function __construct(Team $team)
@@ -23,9 +24,9 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
 
     /**
      * Add members to specific team
-     * 
-     * @param  array $data    Array with member data
-     * @param  int   $teamID  ID of the team we are adding members to
+     *
+     * @param  array $data Array with member data
+     * @param  int $teamID ID of the team we are adding members to
      * @return void           Void since we use transaction in insert() method
      */
     public function insertMembers($data, $teamID)
@@ -33,18 +34,18 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         // We go through each element since we need to get rid of garbage properties from client JSON
         foreach ($data as $member) {
             \DB::table('team_roster')->insert([
-                'user_id' => $member['user_id'],
-                'team_id' => $teamID,
+                'user_id'  => $member['user_id'],
+                'team_id'  => $teamID,
                 'position' => isset($member['position']) ? $member['position'] : null,
-                'status' => isset($member['status']) ? $member['status'] : null,
-                'captain' => isset($member['captain']) ? $member['captain'] : 0
+                'status'   => isset($member['status']) ? $member['status'] : null,
+                'captain'  => isset($member['captain']) ? $member['captain'] : 0
             ]);
         }
     }
 
     /**
      * Add new team and team members. Uses transactions, if transaction commits returns true.
-     * 
+     *
      * @param  array $data Array of data
      * @return bool        Was transaction commited
      */
@@ -57,8 +58,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             if ($teamModel) {
                 $this->insertMembers($data['members'], $teamModel->id);
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollback();
 
             return false;
@@ -79,8 +79,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
                 $this->deleteAllMembers($id);
                 $this->insertMembers($data['members'], $id);
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollback();
 
             return false;
@@ -92,9 +91,9 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
 
     /**
      * Uploads the image and updates database reference
-     * 
-     * @param  UploadedFile $file   File
-     * @param  int       $teamID ID of the team
+     *
+     * @param  UploadedFile $file File
+     * @param  int $teamID ID of the team
      * @return bool               Was file uploaded or not
      */
     public function updateImage(UploadedFile $file, $teamID)
@@ -106,15 +105,14 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             $this->update($teamID, ['image' => $imageName]);
 
             return true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
 
     /**
      * Delete all members from specific team
-     * 
+     *
      * @param  int $teamID Team ID
      * @return bool
      */
@@ -122,20 +120,19 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     {
         return \DB::table('team_roster')->where('team_id', '=', $teamID)->delete();
     }
-    
+
     public function delete($teamID)
     {
         try {
             \DB::beginTransaction();
             $this->deleteAllMembers($teamID);
             parent::delete($teamID);
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollback();
 
             return false;
         }
-        
+
         \DB::commit();
 
         return true;

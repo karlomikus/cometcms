@@ -15,10 +15,8 @@ class TeamsController extends AdminController {
         $this->teams = $teams;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $searchTerm = $request->query('search');
-
         $data['data'] = $this->teams->all();
 
         $data['pageTitle'] = 'Squads';
@@ -44,8 +42,7 @@ class TeamsController extends AdminController {
 
         if ($team) {
             $this->alertSuccess('Squad saved successfully.');
-        }
-        else {
+        } else {
             $this->alertError('Unable to save a squad.');
         }
 
@@ -74,8 +71,7 @@ class TeamsController extends AdminController {
 
         if ($team) {
             $this->alertSuccess('Squad edited successfully.');
-        }
-        else {
+        } else {
             $this->alertError('Unable to edit a squad.');
         }
 
@@ -88,7 +84,7 @@ class TeamsController extends AdminController {
 
     public function delete($id)
     {
-        if($this->teams->delete($id))
+        if ($this->teams->delete($id))
             $this->alertSuccess('Squad deleted succesfully!');
         else
             $this->alertError('Unable to delete squad!');
