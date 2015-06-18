@@ -86,6 +86,16 @@ class TeamsController extends AdminController {
         return response()->json(['location' => '/admin/teams', 'alerts' => $this->getAlerts()]);
     }
 
+    public function delete($id)
+    {
+        if($this->teams->delete($id))
+            $this->alertSuccess('Squad deleted succesfully!');
+        else
+            $this->alertError('Unable to delete squad!');
+
+        return redirect('admin/teams')->with('alerts', $this->getAlerts());
+    }
+
     public function getRoster($teamID)
     {
         $data = $this->teams->getTeamData($teamID);

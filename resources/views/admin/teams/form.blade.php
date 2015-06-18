@@ -90,6 +90,9 @@
                     </div>
                 </div>
                 <div class="text-right">
+                    @if($team)
+                    <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
+                    @endif
                     <button class="btn btn-success" type="submit">Save</button>
                 </div>
                 {!! Form::close() !!}

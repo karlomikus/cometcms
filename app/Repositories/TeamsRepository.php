@@ -106,7 +106,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             $this->update($teamID, ['image' => $imageName]);
 
             return true;
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             return false;
         }
     }
@@ -114,6 +115,24 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     public function deleteAllMembers($teamID)
     {
         return \DB::table('team_roster')->where('team_id', '=', $teamID)->delete();
+    }
+
+    public function delete($teamID)
+    {
+        try {
+            \DB::beginTransaction();
+            $this->deleteAllMembers($teamID);
+            parent::delete($teamID);
+        }
+        catch(\Exception $e) {
+            \DB::rollback();
+
+            return false;
+        }
+        
+        \DB::commit();
+
+        return true;
     }
 
     /**
