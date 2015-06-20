@@ -11,24 +11,6 @@
                     </div>
                     <div class="col-md-10">
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="team">Choose team</label>
-                                <select class="form-control" id="team" name="team" data-bind="value: team_id">
-                                    @foreach($teams as $team)
-                                        <option value="{{ $team->id }}">{{ $team->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="opponent">Choose opponent</label>
-                                <select class="form-control" id="opponent" name="opponent" data-bind="value: opponent_id">
-                                    @foreach($opponents as $opponent)
-                                        <option value="{{ $opponent->id }}">{{ $opponent->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="game">Choose game</label>
@@ -59,25 +41,42 @@
                 <div class="row">
                     <div class="col-md-2"><h4 class="form-subtitle">Participants</h4></div>
                     <div class="col-md-10">
-                        <div class="match-info-box clearfix">
-                            <div class="match-info-box-home clearfix">
-                                <img src="http://placehold.it/100x100" alt="img"/>
-                                <ul class="match-info-box-players pull-left">
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="team">Choose team</label>
+                                <select class="form-control" id="team" name="team" data-bind="value: team_id, event: {change: fetchTeamMembers}">
+                                    @foreach($teams as $team)
+                                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="opponent">Choose opponent</label>
+                                <select class="form-control" id="opponent" name="opponent" data-bind="value: opponent_id">
+                                    @foreach($opponents as $opponent)
+                                        <option value="{{ $opponent->id }}">{{ $opponent->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="players-list" data-bind="foreach: home_team">
+                                    <li data-bind="css: {active: active}"><a href="#" data-bind="text: name, click: toggleActiveHomeParticipant"></a></li>
                                 </ul>
                             </div>
-                            <div class="match-info-box-vs">VS</div>
-                            <div class="match-info-box-guest clearfix">
-                                <img src="http://placehold.it/100x100" alt="img"/>
-                                <ul>
-                                    <li>Player 1</li>
-                                    <li>Player 1</li>
-                                    <li>Player 1</li>
-                                    <li>Player 1</li>
+                            <div class="col-md-6">
+                                <ul class="players-list">
+                                    <li class="active"><a href="#">Dendi</a></li>
+                                    <li class="active"><a href="#">XBOCT</a></li>
+                                    <li class="active"><a href="#">IceX3</a></li>
                                 </ul>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Type opponent's name...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="button">Add!</button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <hr>
@@ -154,6 +153,31 @@
                     <div class="col-md-2"><h4 class="form-subtitle">Media</h4></div>
                     <div class="col-md-10">
                         TODO
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><h4 class="form-subtitle">Preview</h4></div>
+                    <div class="col-md-10">
+                        <div class="match-info-box clearfix">
+                            <div class="match-info-box-home clearfix">
+                                <ul class="match-info-box-players pull-left">
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
+                                </ul>
+                            </div>
+                            <div class="match-info-box-vs">VS</div>
+                            <div class="match-info-box-guest clearfix">
+                                <ul>
+                                    <li>Player 1</li>
+                                    <li>Player 1</li>
+                                    <li>Player 1</li>
+                                    <li>Player 1</li>
+                                </ul>
+                            </div>
+                        </div>
                         <hr>
                     </div>
                 </div>

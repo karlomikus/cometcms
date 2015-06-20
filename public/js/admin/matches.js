@@ -16,6 +16,9 @@ var MatchViewModel = function (matchData, addonData) {
     self.rounds = ko.observableArray();
     self.games = ko.observableArray(addonData);
 
+    self.home_team = ko.observableArray();
+    self.guest_team = ko.observableArray();
+
     // Fill in the rounds
     if (matchData.rounds.length > 0) {
         $.each(matchData.rounds, function (key, val) {
@@ -80,6 +83,23 @@ var MatchViewModel = function (matchData, addonData) {
         if (confirm('Are you sure you want to delete this game?'))
             self.rounds.remove(round);
     };
+
+    self.fetchTeamMembers = function () {
+        $.ajax({
+            url: '/admin/teams/api/team/' + self.team_id(),
+            contentType: 'application/json',
+            type: "GET",
+            success: function (result) {
+                self.home_team.removeAll();
+                ko.utils.arrayForEach(result.data.roster, function (item) {
+                    self.home_team.push(new ParticipantViewModel(self, item));
+                });
+            },
+            error: function (jqXHR) {
+                console.log(jqXHR.statusText);
+            }
+        });
+    };
 };
 
 var RoundViewModel = function (parent, roundsData) {
@@ -138,6 +158,21 @@ var ScoreViewModel = function (parent, scoreData) {
     self.round_id = ko.observable(parent.round_id);
     self.home = ko.observable(scoreData.home);
     self.guest = ko.observable(scoreData.guest);
+};
+
+var ParticipantViewModel = function(parent, data) {
+    var self = this;
+
+    self.user_id = ko.observable(data.pivot.user_id);
+    self.name = ko.observable(data.name);
+    self.active = ko.observable(1);
+
+    self.toggleActiveHomeParticipant = function (participant) {
+        if(participant.active())
+            participant.active(0);
+        else
+            participant.active(1);
+    };
 };
 
 $(document).ready(function () {

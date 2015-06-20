@@ -92,6 +92,7 @@ a.text-delete {
   }
 }
 
+// SHARED
 #modal-loader {
   display: none;
 }
@@ -104,6 +105,35 @@ a.text-delete {
 .pic-left {
   float: left;
   margin-right: 15px;
+}
+
+/**
+<div class="panel-loader">
+    <div class="panel-loader-icon"><i class="fa fa-spinner fa-2x fa-pulse"></i></div>
+</div>
+**/
+.panel-loader {
+  background: rgba(18, 16, 66, 0.50);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6000;
+  .panel-loader-icon {
+    color: #fff;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 7000;
+    display: table;
+    height: 100%;
+    i {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }
 
 // Tables
@@ -367,6 +397,28 @@ $match-games-border-color: darken($color-light-bg, 6%);
       margin-bottom: 1px;
       width: 100%;
       display: block;
+    }
+  }
+}
+
+.players-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    margin-bottom: 2px;
+    a {
+      display: block;
+      background: #fcfcfc;
+      border: 1px solid #ccc;
+      line-height: 30px;
+      padding: 0 10px;
+      outline: none;
+    }
+    &.active a {
+      background: lighten($brand-success, 50%);
+      color: $brand-success;
+      border: 1px solid $brand-success;
     }
   }
 }
