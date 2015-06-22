@@ -1,7 +1,7 @@
 "use strict";
 
 var matchViewModel = null;
-var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}]};
+var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}], participants: []};
 
 /**
  * Match viewmodels
@@ -17,7 +17,8 @@ var MatchViewModel = function (matchData, addonData) {
     self.games = ko.observableArray(addonData);
 
     self.home_team = ko.observableArray();
-    self.guest_team = ko.observableArray();
+    self.guest_team = ko.observableArray(matchData.participants.opponent);
+    self.guest_team_name = ko.observable();
 
     // Fill in the rounds
     if (matchData.rounds.length > 0) {
@@ -100,6 +101,11 @@ var MatchViewModel = function (matchData, addonData) {
             }
         });
     };
+
+    self.addOpponentTeamMember = function () {
+        self.guest_team.push(self.guest_team_name());
+        self.guest_team_name('');
+    };
 };
 
 var RoundViewModel = function (parent, roundsData) {
@@ -163,6 +169,7 @@ var ScoreViewModel = function (parent, scoreData) {
 var ParticipantViewModel = function(parent, data) {
     var self = this;
 
+    self.roster_id = ko.observable(data.pivot.id);
     self.user_id = ko.observable(data.pivot.user_id);
     self.name = ko.observable(data.name);
     self.active = ko.observable(1);

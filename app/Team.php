@@ -24,7 +24,7 @@ class Team extends Model {
 
     public function roster()
     {
-        return $this->belongsToMany('App\User', 'team_roster')->withPivot('position', 'captain', 'status');;
+        return $this->belongsToMany('App\User', 'team_roster')->withPivot('position', 'captain', 'status', 'id');
     }
 
 }

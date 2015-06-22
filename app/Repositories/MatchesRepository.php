@@ -117,12 +117,18 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         try {
             \DB::beginTransaction();
 
+            $opponentParticipants = null;
+            if(isset($data['guest_team'])) {
+                $opponentParticipants = implode("\t", $data['guest_team']);
+            }
+
             // Create a new match
             $matchModel = $this->model->create([
                 'team_id' => $data['team_id'],
                 'opponent_id' => $data['opponent_id'],
                 'game_id' => $data['game_id'],
-                'matchlink' => isset($data['notes']) ?: null
+                'matchlink' => isset($data['notes']) ?: null,
+                'opponent_participants' => $opponentParticipants
             ]);
 
             // Create match rounds

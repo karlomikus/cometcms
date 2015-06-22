@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
 class Match extends Model {
 
     protected $guarded = ['id'];
+    protected $appends = ['participants'];
 
     public function opponent()
     {
@@ -39,6 +40,20 @@ class Match extends Model {
     public function rounds()
     {
         return $this->hasMany('App\MatchRounds');
+    }
+
+    public function getParticipantsAttribute()
+    {
+        $teamParticipants = \DB::table('matches')
+            ->select('team_roster.*')
+            ->join('match_participants', 'match_participants.match_id', '=', 'matches.id')
+            ->join('team_roster', 'team_roster.id', '=', 'match_participants.roster_id')
+            ->where('matches.id', '=', $this->id)
+            ->get();
+
+        $opponentParticipants = preg_split("/[\t]/", $this->opponent_participants);
+
+        return ['team' => $teamParticipants, 'opponent' => $opponentParticipants];
     }
 
     public function game()

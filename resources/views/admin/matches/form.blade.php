@@ -64,17 +64,21 @@
                                 <ul class="players-list" data-bind="foreach: home_team">
                                     <li data-bind="css: {active: active}"><a href="#" data-bind="text: name, click: toggleActiveHomeParticipant"></a></li>
                                 </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="players-list">
-                                    <li class="active"><a href="#">Dendi</a></li>
-                                    <li class="active"><a href="#">XBOCT</a></li>
-                                    <li class="active"><a href="#">IceX3</a></li>
-                                </ul>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Type opponent's name...">
+                                    <input type="text" class="form-control" placeholder="Add standin...">
                                     <span class="input-group-btn">
                                         <button class="btn btn-success" type="button">Add!</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="players-list" data-bind="foreach: guest_team">
+                                    <li class="active"><a href="#" data-bind="text: $data"></a></li>
+                                </ul>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Type member name..." data-bind="value: guest_team_name">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="button" data-bind="click: addOpponentTeamMember">Add!</button>
                                     </span>
                                 </div>
                             </div>
