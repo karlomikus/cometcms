@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12" id="match-form">
+            <div class="col-md-12" id="match-form" style="display: none;">
                 {!! Form::open(['id' => 'match-form', 'class' => 'admin-form']) !!}
                 <div class="row">
                     <div class="col-md-2">

@@ -183,6 +183,9 @@ var ParticipantViewModel = function(parent, data) {
 };
 
 $(document).ready(function () {
+
+    var form = $('#match-form');
+
     /**
      * Data binding
      */
@@ -197,10 +200,12 @@ $(document).ready(function () {
 
     ko.applyBindings(matchViewModel, document.getElementById('match-form'));
 
+    form.show();
+
     /**
      * Events
      */
-    $('#match-form').submit(function (ev) {
+    form.submit(function (ev) {
         ev.preventDefault();
         $.ajaxSetup({
             headers: {
