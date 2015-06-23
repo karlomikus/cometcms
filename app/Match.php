@@ -45,9 +45,10 @@ class Match extends Model {
     public function getParticipantsAttribute()
     {
         $teamParticipants = \DB::table('matches')
-            ->select('team_roster.*')
+            ->select('team_roster.*', 'users.name')
             ->join('match_participants', 'match_participants.match_id', '=', 'matches.id')
             ->join('team_roster', 'team_roster.id', '=', 'match_participants.roster_id')
+            ->join('users', 'users.id', '=', 'team_roster.user_id')
             ->where('matches.id', '=', $this->id)
             ->get();
 

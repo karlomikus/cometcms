@@ -117,6 +117,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         try {
             \DB::beginTransaction();
 
+            // Insert tab delimited opponent team participants
             $opponentParticipants = null;
             if(isset($data['guest_team'])) {
                 $opponentParticipants = implode("\t", $data['guest_team']);
@@ -148,6 +149,17 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                     ]);
                 }
 
+            }
+
+            // Insert team participants
+            $teamParticipants = $data['home_team'];
+            foreach ($teamParticipants as $participant) {
+                if ($participant['active'] == 1) {
+                    \DB::table('match_participants')->insert([
+                        'match_id' => $matchModel['id'],
+                        'roster_id' => $participant['roster_id']
+                    ]);
+                }
             }
         }
         catch (\Exception $e) {

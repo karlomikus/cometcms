@@ -30,6 +30,17 @@ var MatchViewModel = function (matchData, addonData) {
         self.rounds.push(new RoundViewModel(self, {}))
     }
 
+    // Fill in the team participants
+    if (matchData.participants.team.length > 0) {
+        $.each(matchData.participants.team, function (key, val) {
+            var transformedData = {pivot: {id: val.id, user_id: val.user_id}, name: val.name};
+            self.home_team.push(new ParticipantViewModel(self, transformedData));
+        });
+    }
+    else {
+        self.home_team.push(new ParticipantViewModel(self, {}))
+    }
+
     // Viewmodel computed properties
     self.matchRounds = ko.computed(function () {
         return '(BO' + self.rounds().length + ')';
