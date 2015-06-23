@@ -19,6 +19,7 @@ var MatchViewModel = function (matchData, addonData) {
     self.home_team = ko.observableArray();
     self.guest_team = ko.observableArray(matchData.participants.opponent);
     self.guest_team_name = ko.observable();
+    self.searchingTeamMembers = ko.observable(0);
 
     // Fill in the rounds
     if (matchData.rounds.length > 0) {
@@ -97,18 +98,21 @@ var MatchViewModel = function (matchData, addonData) {
     };
 
     self.fetchTeamMembers = function () {
+        self.home_team.removeAll();
+        self.searchingTeamMembers(1);
         $.ajax({
             url: '/admin/teams/api/team/' + self.team_id(),
             contentType: 'application/json',
             type: "GET",
             success: function (result) {
-                self.home_team.removeAll();
                 ko.utils.arrayForEach(result.data.roster, function (item) {
                     self.home_team.push(new ParticipantViewModel(self, item));
                 });
+                self.searchingTeamMembers(0);
             },
             error: function (jqXHR) {
                 console.log(jqXHR.statusText);
+                self.searchingTeamMembers(0);
             }
         });
     };

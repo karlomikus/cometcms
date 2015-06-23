@@ -61,6 +61,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
+                                <i class="fa fa-lg fa-spinner fa-pulse" data-bind="css: {hide: !searchingTeamMembers()}"></i>
                                 <ul class="players-list" data-bind="foreach: home_team">
                                     <li data-bind="css: {active: active}"><a href="#" data-bind="text: name, click: toggleActiveHomeParticipant"></a></li>
                                 </ul>
