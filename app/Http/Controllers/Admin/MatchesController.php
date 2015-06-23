@@ -106,9 +106,9 @@ class MatchesController extends AdminController {
         return view('admin.matches.form', $data);
     }
 
-    public function update($id, Request $request)
+    public function update($id, SaveMatchRequest $request)
     {
-        $data = json_decode($request->input('data'));
+        $data = $request->all();
 
         if($this->matches->update($id, $data))
             $this->alertSuccess('Match updated successfully.');

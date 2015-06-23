@@ -128,7 +128,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 'team_id' => $data['team_id'],
                 'opponent_id' => $data['opponent_id'],
                 'game_id' => $data['game_id'],
-                'matchlink' => isset($data['notes']) ?: null,
+                'matchlink' => isset($data['matchlink']) ?: null,
                 'opponent_participants' => $opponentParticipants
             ]);
 
@@ -148,7 +148,6 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                         'guest' => $score['guest']
                     ]);
                 }
-
             }
 
             // Insert team participants
@@ -181,25 +180,66 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
      */
     public function update($id, $data)
     {
-        $match = $this->model->find($id);
+        try {
+            \DB::beginTransaction();
 
-        $match->team_id = $data->team_id;
-        $match->opponent_id = $data->opponent_id;
-        $match->game_id = $data->game_id;
-        //$match->matchlink = $data->matchlink;
+            $match = $this->model->find($id);
 
-        $match->save();
+            // Insert tab delimited opponent team participants
+            $opponentParticipants = null;
+            if(isset($data['guest_team'])) {
+                $opponentParticipants = implode("\t", $data['guest_team']);
+            }
 
-        $rounds = $this->rounds->where('match_id', '=', $match->id)->get();
+            $match->team_id = $data['team_id'];
+            $match->opponent_id = $data['opponent_id'];
+            $match->game_id = $data['game_id'];
+            $match->matchlink = isset($data['matchlink']) ?: null;
+            $match->opponent_participants = $opponentParticipants;
 
-        // TODO: Fuck this, remove old, add new
-        foreach ($rounds as $round) {
-            if(!in_array($round->id, array_pluck($data->rounds, 'round_id'))) {
-                var_dump($round->id);
+            $match->save();
+
+            $this->rounds->where('match_id', '=', $match->id)->delete();
+
+            // Create match rounds
+            foreach ($data['rounds'] as $round) {
+                $roundModel = $this->rounds->create([
+                    'match_id' => $match->id,
+                    'map_id' => $round['map_id'],
+                    'notes' => $round['notes'],
+                ]);
+
+                // Create round scores
+                foreach ($round['scores'] as $score) {
+                    $this->scores->create([
+                        'round_id' => $roundModel['id'],
+                        'home' => $score['home'],
+                        'guest' => $score['guest']
+                    ]);
+                }
+            }
+
+            // Insert team participants
+            \DB::table('match_participants')->where('match_id', '=', $match->id)->delete();
+            $teamParticipants = $data['home_team'];
+            foreach ($teamParticipants as $participant) {
+                if ($participant['active'] == 1) {
+                    \DB::table('match_participants')->insert([
+                        'match_id' => $match->id,
+                        'roster_id' => $participant['roster_id']
+                    ]);
+                }
             }
         }
+        catch (\Exception $e) {
+            \DB::rollback();
 
-        $scores = $this->scores->where('round_id', '=', $rounds->id)->get();
+            return false;
+        }
+
+        \DB::commit();
+
+        return true;
     }
 
 }

@@ -229,7 +229,7 @@ $(document).ready(function () {
         var posting = null;
 
         if (matchData) {
-            posting = $.post("/admin/matches/edit/" + matchData.id, {data: data});
+            posting = $.post("/admin/matches/edit/" + matchData.id, data, 'json');
         }
         else {
             posting = $.post("/admin/matches/new", data, 'json');
