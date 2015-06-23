@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" id="squad-form">
-                {!! Form::open() !!}
+                {!! Form::open(['files' => true]) !!}
                 <div class="row">
                     <div class="col-md-2">
                         <h4 class="form-subtitle">Game information</h4>
@@ -13,11 +13,11 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control" data-bind="value: name">
+                                <input type="text" id="name" name="name" class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="shortcode">Short code</label>
-                                <input type="text" id="shortcode" name="shortcode" class="form-control" data-bind="value: shortcode">
+                                <input type="text" id="shortcode" name="shortcode" class="form-control">
                             </div>
                         </div>
                         <div class="row">
@@ -37,10 +37,27 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul>
-                                    <li>Maps #1</li>
-                                    <li>Maps #2</li>
-                                    <li>Maps #3</li>
-                                    <li><a href="#">Add map</a></li>
+                                    @if($maps)
+                                        @foreach($maps as $map)
+                                            <li>{{ $map->image }} - {{ $map->name }}</li>
+                                        @endforeach
+                                    @endif
+                                    <li>
+                                        <input type="text" name="mapname[0]" class="form-control" placeholder="Map name here...">
+                                        <input type="file" name="mapimage[0]">
+                                    </li>
+                                    <li>
+                                        <input type="text" name="mapname[1]" class="form-control" placeholder="Map name here...">
+                                        <input type="file" name="mapimage[1]">
+                                    </li>
+                                    <li>
+                                        <input type="text" name="mapname[2]" class="form-control" placeholder="Map name here...">
+                                        <input type="file" name="mapimage[2]">
+                                    </li>
+                                    <li>
+                                        <input type="text" name="mapname[3]" class="form-control" placeholder="Map name here...">
+                                        <input type="file" name="mapimage[3]">
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -64,5 +81,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('/js/admin/squad.js') }}"></script>
+    <script src="{{ asset('/js/admin/games.js') }}"></script>
 @endsection

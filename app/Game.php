@@ -19,7 +19,10 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model {
 
     public $timestamps = false;
+
     protected $hidden = ['created_at', 'updated_at'];
+
+    protected $fillable = ['name', 'code', 'image', 'game_id'];
 
     public function maps()
     {
