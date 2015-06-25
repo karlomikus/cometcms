@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12" id="squad-form">
+            <div class="col-md-12" id="game-form">
                 {!! Form::open(['files' => true]) !!}
                 <div class="row">
                     <div class="col-md-2">
@@ -76,7 +76,7 @@
 @section('page-scripts-before')
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
-        const modelData = {* $modelData *};
+        const modelData = null;
     </script>
 @endsection
 

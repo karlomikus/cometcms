@@ -4,7 +4,10 @@ var matchViewModel = null;
 var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}], participants: []};
 
 /**
- * Match viewmodels
+ * Main match viewmodel. Depends on other viewmodels.
+ * @param matchData Existing match data
+ * @param addonData Contains meta data like games, teams, opponents
+ * @constructor
  */
 var MatchViewModel = function (matchData, addonData) {
     var self = this;
@@ -32,14 +35,11 @@ var MatchViewModel = function (matchData, addonData) {
     }
 
     // Fill in the team participants
-    if (matchData.participants.team.length > 0) {
+    if (matchData.participants.length > 0) {
         $.each(matchData.participants.team, function (key, val) {
             var transformedData = {pivot: {id: val.id, user_id: val.user_id}, name: val.name};
             self.home_team.push(new ParticipantViewModel(self, transformedData));
         });
-    }
-    else {
-        self.home_team.push(new ParticipantViewModel(self, {}))
     }
 
     // Viewmodel computed properties
@@ -117,9 +117,21 @@ var MatchViewModel = function (matchData, addonData) {
         });
     };
 
+    /**
+     * Add opponent participant name to array and reset the input box
+     */
     self.addOpponentTeamMember = function () {
         self.guest_team.push(self.guest_team_name());
         self.guest_team_name('');
+    };
+
+    /**
+     * Set game icon data attribute used by select2 plugin
+     * @param option
+     * @param item
+     */
+    self.setGameIcons = function (option, item) {
+        ko.applyBindingsToNode(option, {attr: {'data-icon': item.image}}, item);
     };
 };
 
@@ -197,13 +209,14 @@ var ParticipantViewModel = function(parent, data) {
     };
 };
 
+/**
+ * Main form processing
+ */
 $(document).ready(function () {
 
     var form = $('#match-form');
 
-    /**
-     * Data binding
-     */
+    // ---------------------------- Data Binding ---------------------------- //
     console.log('Loading viewmodel...');
     if (matchData) {
         matchViewModel = new MatchViewModel(matchData, metaData);
@@ -212,14 +225,22 @@ $(document).ready(function () {
         matchViewModel = new MatchViewModel(defaultModelData, metaData);
     }
     console.log('Viewmodel loaded!');
-
     ko.applyBindings(matchViewModel, document.getElementById('match-form'));
-
     form.show();
 
-    /**
-     * Events
-     */
+    // ---------------------------- Select box formatting ---------------------------- //
+    function formatGame (game) {
+        if (!game.id) { return game.text; }
+        return $(
+            '<span><img src="/uploads/games/' + game.element.dataset.icon + '" class="img-game" /> ' + game.text + '</span>'
+        );
+    }
+
+    $("#game").select2({
+        templateResult: formatGame
+    });
+
+    // ---------------------------- Form submit ---------------------------- //
     form.submit(function (ev) {
         ev.preventDefault();
         $.ajaxSetup({

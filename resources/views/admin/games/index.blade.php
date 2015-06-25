@@ -25,7 +25,6 @@
                     <thead>
                     <tr>
                         <th>{!! Form::gridHeader('Name', 'name', 'Admin\GamesController@index', $headerAttr) !!}</th>
-                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -37,8 +36,7 @@
                     @endif
                     @foreach($data as $game)
                         <tr>
-                            <td><a href="{{ url('admin/games/edit', [$game->id]) }}">{{ $game->name }}</a></td>
-                            <td><img src="{{ url('uploads/games/' . $game->image) }}" alt="missing"></td>
+                            <td><img src="{{ url('uploads/games/' . $game->image) }}" alt="missing"> <a href="{{ url('admin/games/edit', [$game->id]) }}">{{ $game->name }}</a></td>
                             <td>
                                 <a href="{{ url('admin/games/delete', [$game->id]) }}" class="text-delete" data-confirm="Are you sure you want to delete this game?">Delete</a>
                             </td>

@@ -14,7 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="game">Choose game</label>
-                                    <select class="form-control" id="game" name="game" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'id'">
+                                    <select class="form-control" id="game" name="game" style="width: 100%" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'id', optionsAfterRender: setGameIcons">
                                     </select>
                                 </div>
                             </div>
@@ -196,6 +196,7 @@
 @endsection
 
 @section('page-scripts-before')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
         const matchData = {!! $matchJSON !!};
