@@ -17,24 +17,25 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         $this->uploadPath = base_path() . '/public/uploads/maps/';
     }
 
-    public function insertMap($mapName, $gameID, UploadedFile $file)
+    public function insertMap($mapName, $gameID, $file)
     {
         try {
             $map = $this->model->create([
-                'name' => $mapName,
-                'game_id' => $gameID
+                'name'    => $mapName,
+                'game_id' => $gameID,
+                'image'   => null
             ]);
 
-            $imageName = $map->id . '_' . $gameID . '.' . $file->getClientOriginalExtension();
-            $file->move($this->uploadPathMaps, $imageName);
+            if ($file !== null) {
+                $imageName = $map->id . '_' . $gameID . '.' . $file->getClientOriginalExtension();
+                $file->move($this->uploadPath, $imageName);
 
-            $newMap = $this->map->get($map->id);
-            $newMap->image = $imageName;
-            $newMap->save();
+                $map->image = $imageName;
+                $map->save();
+            }
 
             return true;
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return false;
         }
     }
@@ -43,8 +44,8 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
     {
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if($searchTerm)
-            $model->where('name', 'LIKE', '%'. $searchTerm .'%');
+        if ($searchTerm)
+            $model->where('name', 'LIKE', '%' . $searchTerm . '%');
 
         $result['count'] = $model->count();
         $result['items'] = $model->skip($limit * ($page - 1))->take($limit)->get();

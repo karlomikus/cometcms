@@ -23,6 +23,7 @@ class CreateMatchesTable extends Migration {
 			$table->foreign('game_id')->references('id')->on('games');
             $table->string('matchlink')->nullable();
             $table->text('opponent_participants')->nullable();
+            $table->text('standins')->nullable();
 			$table->timestamps();
 		});
 	}

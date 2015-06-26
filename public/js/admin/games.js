@@ -37,36 +37,36 @@ $(document).ready(function () {
     }
     console.log('Viewmodel loaded!');
 
-    $('#game-form').submit(function (ev) {
-        ev.preventDefault();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
-        });
-
-        var data = ko.toJSON(gameViewModel);
-        var posting = null;
-
-        if (modelData) {
-            posting = $.post("/admin/games/edit/" + modelData.id, data, 'json');
-        }
-        else {
-            posting = $.post("/admin/games/new", data, 'json');
-        }
-
-        posting.fail(function (response) {
-            $.each(response.responseJSON, function (key, val) {
-                console.log(val[0]);
-            });
-        });
-
-        posting.done(function (resp) {
-            window.location.href = resp.location;
-        });
-    });
+    //$('#game-form').submit(function (ev) {
+    //    ev.preventDefault();
+    //    $.ajaxSetup({
+    //        headers: {
+    //            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+    //        },
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json"
+    //    });
+    //
+    //    var data = ko.toJSON(gameViewModel);
+    //    var posting = null;
+    //
+    //    if (modelData) {
+    //        posting = $.post("/admin/games/edit/" + modelData.id, data, 'json');
+    //    }
+    //    else {
+    //        posting = $.post("/admin/games/new", data, 'json');
+    //    }
+    //
+    //    posting.fail(function (response) {
+    //        $.each(response.responseJSON, function (key, val) {
+    //            console.log(val[0]);
+    //        });
+    //    });
+    //
+    //    posting.done(function (resp) {
+    //        window.location.href = resp.location;
+    //    });
+    //});
 
     ko.applyBindings(gameViewModel, document.getElementById('game-form'));
 });

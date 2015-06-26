@@ -40,7 +40,7 @@
                                 <ul>
                                     @if($maps)
                                         @foreach($maps as $map)
-                                            <li>{{ $map->image }} - {{ $map->name }}</li>
+                                            <li><img src="/uploads/maps/{{ $map->image }}" alt="Test"/> - {{ $map->name }}</li>
                                         @endforeach
                                     @endif
                                 </ul>
@@ -52,7 +52,7 @@
                                         </a>
                                       </div>
                                       <div class="media-body">
-                                        <h4 class="media-heading"><input type="text" class="form-control" placeholder="Map name here..." data-bind="value: $index, attr: {name: 'mapname['+$index()+']'}"> <button class="btn btn-danger" type="button" data-bind="click: removeMap"><i class="fa fa-remove"></i></button></h4>
+                                        <h4 class="media-heading"><input type="text" class="form-control" placeholder="Map name here..." data-bind="value: name, attr: {name: 'mapname['+$index()+']'}"> <button class="btn btn-danger" type="button" data-bind="click: removeMap"><i class="fa fa-remove"></i></button></h4>
                                         <input type="file" data-bind="attr: {name: 'mapimage['+$index()+']'}">
                                       </div>
                                     </div>

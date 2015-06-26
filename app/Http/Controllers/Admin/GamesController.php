@@ -45,21 +45,24 @@ class GamesController extends AdminController {
     public function save(Request $request, MapsRepositoryInterface $maps)
     {
         $game = $this->games->insert([
-            'name'    => $request->input('name'),
-            'code'    => $request->input('shortcode'),
-            'image'   => null
+            'name'  => $request->input('name'),
+            'code'  => $request->input('shortcode'),
+            'image' => null
         ]);
 
         if ($game) {
+            if ($request->has('image')) {
+                // TODO
+            }
             if ($request->has('mapname')) {
                 $mapNames = $request->input('mapname');
                 $totalMaps = count($mapNames);
-                for ($i=0; $i < $totalMaps; $i++) { 
+                for ($i = 0; $i < $totalMaps; $i ++) {
                     if (!empty($mapNames[$i]))
                         $maps->insertMap($mapNames[$i], $game->id, $request->file('mapimage')[$i]);
                 }
             }
-            
+
             $this->alertSuccess('New game created successfully!');
         } else {
             $this->alertError('Game creation failed!');
@@ -79,7 +82,7 @@ class GamesController extends AdminController {
 
     public function update($id, Request $request)
     {
-        
+
     }
 
 }

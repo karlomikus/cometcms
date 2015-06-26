@@ -20,6 +20,8 @@ class Map extends Model {
 
 	protected $hidden = ['created_at', 'updated_at'];
 
+    protected $fillable = ['name', 'image', 'game_id'];
+
     public function game()
     {
         return $this->belongsTo('App\Game');
