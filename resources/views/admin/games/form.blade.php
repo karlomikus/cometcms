@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" id="game-form">
-                {!! Form::open(['files' => true]) !!}
+                {!! Form::open(['files' => true, 'id' => 'game-form']) !!}
                 <div class="row">
                     <div class="col-md-2">
                         <h4 class="form-subtitle">Game information</h4>
@@ -36,29 +36,27 @@
                     <div class="col-md-10">
                         <div class="row">
                             <div class="col-md-12">
+                            <button class="btn btn-success" type="button" data-bind="click: addMap"><i class="fa fa-plus"></i> Add map</button>
                                 <ul>
                                     @if($maps)
                                         @foreach($maps as $map)
                                             <li>{{ $map->image }} - {{ $map->name }}</li>
                                         @endforeach
                                     @endif
-                                    <li>
-                                        <input type="text" name="mapname[0]" class="form-control" placeholder="Map name here...">
-                                        <input type="file" name="mapimage[0]">
-                                    </li>
-                                    <li>
-                                        <input type="text" name="mapname[1]" class="form-control" placeholder="Map name here...">
-                                        <input type="file" name="mapimage[1]">
-                                    </li>
-                                    <li>
-                                        <input type="text" name="mapname[2]" class="form-control" placeholder="Map name here...">
-                                        <input type="file" name="mapimage[2]">
-                                    </li>
-                                    <li>
-                                        <input type="text" name="mapname[3]" class="form-control" placeholder="Map name here...">
-                                        <input type="file" name="mapimage[3]">
-                                    </li>
                                 </ul>
+                                <div class="map-list" data-bind="foreach: maps">
+                                    <div class="media">
+                                      <div class="media-left">
+                                        <a href="#">
+                                          <img class="media-object" src="http://placehold.it/50x50" alt="Map image">
+                                        </a>
+                                      </div>
+                                      <div class="media-body">
+                                        <h4 class="media-heading"><input type="text" class="form-control" placeholder="Map name here..." data-bind="value: $index, attr: {name: 'mapname['+$index()+']'}"> <button class="btn btn-danger" type="button" data-bind="click: removeMap"><i class="fa fa-remove"></i></button></h4>
+                                        <input type="file" data-bind="attr: {name: 'mapimage['+$index()+']'}">
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr>

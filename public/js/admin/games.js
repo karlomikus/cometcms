@@ -3,19 +3,25 @@
 var gameViewModel = null;
 var defaultModelData = {};
 
-var GameViewModel = function (gamesData) {
+var GameViewModel = function () {
     var self = this;
 
     self.maps = ko.observableArray();
 
+    self.addMap = function () {
+        self.maps.push(new MapViewModel(self));
+    };
 };
 
-var MapViewModel = function (parent, mapData) {
+var MapViewModel = function (parent) {
     var self = this;
 
-    self.id = ko.observable(mapData.id);
-    self.name = ko.observable(mapData.name);
-    self.game_id = ko.observable(mapData.game_id);
+    self.name = ko.observable();
+    self.image = ko.observable();
+
+    self.removeMap = function (map) {
+        parent.maps.remove(map);
+    };
 };
 
 $(document).ready(function () {

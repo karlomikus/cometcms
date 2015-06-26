@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="team">Choose team</label>
-                                <select class="form-control" id="team" name="team" data-bind="value: team_id, event: {change: fetchTeamMembers}">
+                                <select class="form-control" id="team" name="team" data-bind="value: team_id, event: {change: fetchTeamMembers}, disable: searchingTeamMembers()">
                                     @foreach($teams as $team)
                                         <option value="{{ $team->id }}">{{ $team->name }}</option>
                                     @endforeach
