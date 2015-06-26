@@ -137,7 +137,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 $roundModel = $this->rounds->create([
                     'match_id' => $matchModel['id'],
                     'map_id' => $round['map_id'],
-                    'notes' => $round['notes'],
+                    'notes' => isset($round['notes']) ? $round['notes'] : null,
                 ]);
 
                 // Create round scores
@@ -163,6 +163,8 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         }
         catch (\Exception $e) {
             \DB::rollback();
+
+            dd($e->getMessage());
 
             return false;
         }

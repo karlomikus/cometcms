@@ -1,7 +1,7 @@
 "use strict";
 
 var matchViewModel = null;
-var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}], participants: []};
+var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}], participants: {team: []}};
 
 /**
  * Main match viewmodel. Depends on other viewmodels.
@@ -35,7 +35,7 @@ var MatchViewModel = function (matchData, addonData) {
     }
 
     // Fill in the team participants
-    if (matchData.participants.length > 0) {
+    if (matchData.participants.team.length > 0) {
         $.each(matchData.participants.team, function (key, val) {
             var transformedData = {pivot: {id: val.id, user_id: val.user_id}, name: val.name};
             self.home_team.push(new ParticipantViewModel(self, transformedData));
