@@ -22,7 +22,7 @@ class Game extends Model {
 
     protected $hidden = ['created_at', 'updated_at'];
 
-    protected $fillable = ['name', 'code', 'image', 'game_id'];
+    protected $fillable = ['name', 'code', 'image'];
 
     public function maps()
     {

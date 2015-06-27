@@ -3,21 +3,33 @@
 var gameViewModel = null;
 var defaultModelData = {};
 
-var GameViewModel = function () {
+var GameViewModel = function (initData) {
     var self = this;
 
     self.maps = ko.observableArray();
 
+    if (initData.length > 0) {
+        $.each(initData, function (key, val) {
+            self.maps.push(new MapViewModel(self, val));
+        });
+    }
+
     self.addMap = function () {
-        self.maps.push(new MapViewModel(self));
+        self.maps.push(new MapViewModel(self, {}));
     };
 };
 
-var MapViewModel = function (parent) {
+var MapViewModel = function (parent, initData) {
     var self = this;
 
-    self.name = ko.observable();
-    self.image = ko.observable();
+    self.name = ko.observable(initData.name);
+
+    if(initData.image === undefined) {
+        self.image = ko.observable('nopic.jpg');
+    }
+    else {
+        self.image = ko.observable(initData.image);
+    }
 
     self.removeMap = function (map) {
         parent.maps.remove(map);

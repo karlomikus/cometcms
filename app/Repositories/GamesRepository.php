@@ -22,6 +22,20 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
         return $this->model->with('maps')->get();
     }
 
+    public function insertImage($gameID, UploadedFile $file)
+    {
+        $imageName = $gameID . '.' . $file->getClientOriginalExtension();
+
+        try {
+            $file->move($this->uploadPath, $imageName);
+            $this->update($gameID, ['image' => $imageName]);
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $model = $this->model->orderBy($sortColumn, $order);

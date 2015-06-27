@@ -78,7 +78,7 @@
                                             <input type="text" class="form-control form-control-dark" placeholder="Player status..." data-bind="value: status">
                                         </div>
                                         <div class="form-group">
-                                            <button class="btn btn-captain btn-block" data-bind="css: {'btn-captain-active': captain}, click: toggleCaptain">
+                                            <button class="btn btn-dark btn-block" data-bind="css: {'btn-captain-active': captain}, click: toggleCaptain">
                                                 <i class="fa fa-star"></i> Captain
                                             </button>
                                         </div>

@@ -37,7 +37,8 @@ class GamesController extends AdminController {
     public function create()
     {
         $data['pageTitle'] = 'Create new game';
-        $data['maps'] = null;
+        $data['maps'] = 'null';
+        $data['model'] = null;
 
         return view('admin.games.form', $data);
     }
@@ -51,8 +52,8 @@ class GamesController extends AdminController {
         ]);
 
         if ($game) {
-            if ($request->has('image')) {
-                // TODO
+            if ($request->hasFile('image')) {
+                $this->games->insertImage($game->id, $request->file('image'));
             }
             if ($request->has('mapname')) {
                 $mapNames = $request->input('mapname');
@@ -71,11 +72,11 @@ class GamesController extends AdminController {
         return redirect('admin/games')->with('alerts', $this->getAlerts());
     }
 
-    public function edit($id, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
+    public function edit($id, MapsRepositoryInterface $maps)
     {
-        $data['game'] = $this->games->get($id);
         $data['pageTitle'] = 'Editing a game';
-        $data['maps'] = $maps->getByGame($id);
+        $data['maps'] = $maps->getByGame($id)->toJson();
+        $data['model'] = $this->games->get($id);
 
         return view('admin.games.form', $data);
     }

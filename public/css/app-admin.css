@@ -4939,7 +4939,7 @@ label {
   display: block;
   width: 200px; }
   .uploaded-file img {
-    width: 100%;
+    max-width: 100%;
     height: auto; }
 
 /*
@@ -5118,19 +5118,6 @@ label {
     position: absolute;
     top: 5px;
     right: 5px; }
-  .squad-member .btn-captain {
-    padding: 5px 10px;
-    border-color: #373c51;
-    background: #2d3142;
-    height: 30px;
-    font-size: 14px;
-    color: #6d769b;
-    box-shadow: none;
-    text-shadow: none;
-    font-family: "Roboto", Helvetica, Arial, sans-serif; }
-    .squad-member .btn-captain:hover, .squad-member .btn-captain:active, .squad-member .btn-captain:focus {
-      color: #fff;
-      border-color: #66afe9; }
   .squad-member .btn-captain-active {
     color: #fff;
     background: #66afe9;
@@ -5143,6 +5130,26 @@ label {
     .squad-member .squad-member-info h4 {
       text-align: center;
       margin-top: 0;
+      color: #fff; }
+
+.map-list .map {
+  background: #2d3142;
+  margin-bottom: 10px; }
+  .map-list .map .map-image {
+    float: left;
+    margin-right: 10px;
+    position: relative; }
+    .map-list .map .map-image .btn {
+      position: absolute;
+      top: 10px;
+      left: 10px; }
+    .map-list .map .map-image img {
+      width: 150px;
+      height: auto; }
+  .map-list .map .map-form {
+    float: left;
+    padding: 10px; }
+    .map-list .map .map-form input[type="file"] {
       color: #fff; }
 
 .admin-form hr {
@@ -5160,6 +5167,20 @@ label {
   font-weight: 300;
   box-shadow: inset 0 -4px 7px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2); }
+
+.btn-dark {
+  padding: 5px 10px;
+  border-color: #373c51;
+  background: #2d3142;
+  height: 30px;
+  font-size: 14px;
+  color: #6d769b;
+  box-shadow: none;
+  text-shadow: none;
+  font-family: "Roboto", Helvetica, Arial, sans-serif; }
+  .btn-dark:hover, .btn-dark:active, .btn-dark:focus {
+    color: #fff;
+    border-color: #66afe9; }
 
 .modal-content {
   border-radius: 0; }
