@@ -107,6 +107,11 @@ a.text-delete {
   margin-right: 15px;
 }
 
+.img-map {
+  width: 50px;
+  height: auto;
+}
+
 /**
 <div class="panel-loader">
     <div class="panel-loader-icon"><i class="fa fa-spinner fa-2x fa-pulse"></i></div>
@@ -594,3 +599,5 @@ $match-games-border-color: darken($color-light-bg, 6%);
     //border-bottom: 1px solid #ccc;
   }
 }
+
+@import "select2";

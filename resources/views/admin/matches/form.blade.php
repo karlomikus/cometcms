@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="map">Map</label>
-                                    <select class="form-control" name="map" id="map" data-bind="value: map_id, options: maps, optionsText: 'name', optionsValue: 'id'">
+                                    <select class="form-control map-input" name="map" id="map" style="width: 100%" data-bind="value: map_id, options: maps, optionsText: 'name', optionsValue: 'id', optionsAfterRender: setMapIcons">
                                     </select>
                                 </div>
                                 <div class="clearfix scores" data-bind="foreach: scores">

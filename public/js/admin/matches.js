@@ -182,6 +182,10 @@ var RoundViewModel = function (parent, roundsData) {
         }
         self.scores.remove(score);
     };
+
+    self.setMapIcons = function (option, item) {
+        ko.applyBindingsToNode(option, {attr: {'data-icon': item.image}}, item);
+    };
 };
 
 var ScoreViewModel = function (parent, scoreData) {
@@ -236,8 +240,19 @@ $(document).ready(function () {
         );
     }
 
+    function formatMap (map) {
+        if (!map.id) { return map.text; }
+        return $(
+            '<span><img src="/uploads/maps/' + map.element.dataset.icon + '" class="img-map" /> ' + map.text + '</span>'
+        );
+    }
+
     $("#game").select2({
         templateResult: formatGame
+    });
+
+    $(".map-input").select2({
+        templateResult: formatMap
     });
 
     // ---------------------------- Form submit ---------------------------- //
