@@ -16,8 +16,8 @@
                                 {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) !!}
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="shortcode">Short code</label>
-                                {!! Form::text('code', null, ['class' => 'form-control', 'id' => 'shortcode']) !!}
+                                <label for="code">Short code</label>
+                                {!! Form::text('code', null, ['class' => 'form-control', 'id' => 'code']) !!}
                             </div>
                         </div>
                         <div class="row">

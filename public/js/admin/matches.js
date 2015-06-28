@@ -241,7 +241,7 @@ $(document).ready(function () {
     }
 
     function formatMap (map) {
-        if (!map.id) { return map.text; }
+        if (!map.id || !map.element.dataset.icon) { return map.text; }
         return $(
             '<span><img src="/uploads/maps/' + map.element.dataset.icon + '" class="img-map" /> ' + map.text + '</span>'
         );

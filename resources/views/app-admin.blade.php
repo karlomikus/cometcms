@@ -105,13 +105,14 @@
 @if($errors->any())
     <!-- Framework errors -->
     <div class="container">
-    @foreach($errors->all() as $error)
+
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             <h3>An error occured!</h3>
-            {{ $error }}
+            @foreach($errors->all() as $error)
+                {{ $error }}<br/>
+            @endforeach
         </div>
-    @endforeach
     </div>
 @endif
 

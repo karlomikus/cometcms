@@ -4,6 +4,7 @@ use App\Libraries\GridView\GridView;
 use App\Repositories\Contracts\GamesRepositoryInterface;
 use App\Repositories\Contracts\MapsRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveGameRequest;
 
 class GamesController extends AdminController {
 
@@ -43,11 +44,11 @@ class GamesController extends AdminController {
         return view('admin.games.form', $data);
     }
 
-    public function save(Request $request, MapsRepositoryInterface $maps)
+    public function save(SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
         $game = $this->games->insert([
             'name'  => $request->input('name'),
-            'code'  => $request->input('shortcode'),
+            'code'  => $request->input('code'),
             'image' => null
         ]);
 
@@ -55,6 +56,7 @@ class GamesController extends AdminController {
             if ($request->hasFile('image')) {
                 $this->games->insertImage($game->id, $request->file('image'));
             }
+            // Insert maps
             if ($request->has('mapname')) {
                 $mapNames = $request->input('mapname');
                 $totalMaps = count($mapNames);
@@ -81,9 +83,20 @@ class GamesController extends AdminController {
         return view('admin.games.form', $data);
     }
 
-    public function update($id, Request $request)
+    public function update($id, SaveGameRequest $request)
     {
+        $game = $this->games->update($id, [
+            'name' => $request->input('name'),
+            'code' => $request->input('code')
+        ]);
 
+        if ($game) {
+            $this->alertSuccess('Game edited successfully!');
+        } else {
+            $this->alertError('Game edit failed!');
+        }
+
+        return redirect('admin/games')->with('alerts', $this->getAlerts());
     }
 
 }
