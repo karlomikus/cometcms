@@ -91,6 +91,10 @@ class GamesController extends AdminController {
         ]);
 
         if ($game) {
+            if ($request->hasFile('image')) {
+                $this->games->updateImage($id, $request->file('image'));
+            }
+
             $this->alertSuccess('Game edited successfully!');
         } else {
             $this->alertError('Game edit failed!');

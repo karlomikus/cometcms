@@ -36,6 +36,39 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
         }
     }
 
+    public function updateImage($gameID, UploadedFile $file)
+    {
+        $currentImage = $this->model->find($gameID)->image;
+
+        if ($currentImage !== null) {
+            $this->deleteImage($gameID);
+        }
+
+        $imageName = $gameID . '.' . $file->getClientOriginalExtension();
+
+        try {
+            $file->move($this->uploadPath, $imageName);
+            $this->update($gameID, ['image' => $imageName]);
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public function deleteImage($gameID)
+    {
+        $game = $this->get($gameID);
+        $filename = $this->uploadPath . $game->image;
+
+        if (file_exists($filename) && is_file($filename)) {
+            parent::update($gameID, ['image' => null]);
+            return unlink($filename);
+        }
+
+        return false;
+    }
+
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $model = $this->model->orderBy($sortColumn, $order);
