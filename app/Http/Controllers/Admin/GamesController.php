@@ -85,6 +85,7 @@ class GamesController extends AdminController {
 
     public function update($id, SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
+        //dd(array_diff(array_filter($request->input('mapid')), [1,2,3]));
         $game = $this->games->update($id, [
             'name' => $request->input('name'),
             'code' => $request->input('code')
@@ -96,7 +97,7 @@ class GamesController extends AdminController {
             }
 
             if ($request->has('mapname')) {
-                $maps->updateMaps($request->input('mapname'), $id, $request->file('mapimage'));
+                $maps->updateMaps($request->input('mapname'), $request->input('mapid'), $id, $request->file('mapimage'));
             }
 
             $this->alertSuccess('Game edited successfully!');

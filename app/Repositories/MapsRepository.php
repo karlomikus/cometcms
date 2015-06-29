@@ -40,15 +40,21 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         }
     }
 
-    public function updateMaps($maps, $gameID, $file)
+    public function updateMaps($maps, $mapIDs, $gameID, $file)
     {
-        $this->deleteMaps($gameID);
+        $mapIDs = array_filter($mapIDs);
+        $currentMaps = array_values(array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray()));
+        $mapsToDelete = array_diff($mapIDs, $currentMaps);
 
-        $totalMaps = count($maps);
-        for ($i = 0; $i < $totalMaps; $i ++) {
-            if (!empty($maps[$i]))
-                $this->insertMap($maps[$i], $gameID, $file[$i]);
-        }
+        dd($mapsToDelete);
+
+        $this->model->delete($mapsToDelete);
+
+        // $totalMaps = count($maps);
+        // for ($i = 0; $i < $totalMaps; $i ++) {
+        //     if (!empty($maps[$i]))
+        //         $this->insertMap($maps[$i], $gameID, $file[$i]);
+        // }
     }
 
     public function deleteMaps($gameID)
