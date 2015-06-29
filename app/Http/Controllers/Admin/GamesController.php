@@ -83,7 +83,7 @@ class GamesController extends AdminController {
         return view('admin.games.form', $data);
     }
 
-    public function update($id, SaveGameRequest $request)
+    public function update($id, SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
         $game = $this->games->update($id, [
             'name' => $request->input('name'),
@@ -93,6 +93,10 @@ class GamesController extends AdminController {
         if ($game) {
             if ($request->hasFile('image')) {
                 $this->games->updateImage($id, $request->file('image'));
+            }
+
+            if ($request->has('mapname')) {
+                $maps->updateMaps($request->input('mapname'), $id, $request->file('mapimage'));
             }
 
             $this->alertSuccess('Game edited successfully!');

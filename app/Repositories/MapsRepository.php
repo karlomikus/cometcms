@@ -40,6 +40,31 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         }
     }
 
+    public function updateMaps($maps, $gameID, $file)
+    {
+        $this->deleteMaps($gameID);
+
+        $totalMaps = count($maps);
+        for ($i = 0; $i < $totalMaps; $i ++) {
+            if (!empty($maps[$i]))
+                $this->insertMap($maps[$i], $gameID, $file[$i]);
+        }
+    }
+
+    public function deleteMaps($gameID)
+    {
+        $maps = $this->model->where('game_id', '=', $gameID)->get();
+
+        foreach ($maps as $map) {
+            $filename = $this->uploadPath . $map->image;
+        
+            if (file_exists($filename) && is_file($filename)) {
+                parent::delete($map->id);
+                unlink($filename);
+            }
+        }
+    }
+
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $model = $this->model->orderBy($sortColumn, $order);
