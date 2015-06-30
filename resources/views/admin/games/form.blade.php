@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="file" data-bind="attr: {name: 'mapimage['+$index()+']'}">
-                                                <input type="hidden" name="mapid[]" data-bind="value: id">
+                                                <input type="hidden" data-bind="value: id, attr: {name: 'mapid['+$index()+']'}">
                                             </div>
                                         </div>
                                     </div>

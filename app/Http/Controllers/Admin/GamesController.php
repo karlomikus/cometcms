@@ -85,7 +85,6 @@ class GamesController extends AdminController {
 
     public function update($id, SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
-        //dd(array_diff(array_filter($request->input('mapid')), [1,2,3]));
         $game = $this->games->update($id, [
             'name' => $request->input('name'),
             'code' => $request->input('code')

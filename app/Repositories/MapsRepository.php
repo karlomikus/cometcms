@@ -40,32 +40,35 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         }
     }
 
-    public function updateMaps($maps, $mapIDs, $gameID, $file)
+    public function updateMaps($maps, $formMapIDs, $gameID, $files)
     {
-        $mapIDs = array_filter($mapIDs);
-        $currentMaps = array_values(array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray()));
-        $mapsToDelete = array_diff($mapIDs, $currentMaps);
+        $formMapIDs = array_map('intval', $formMapIDs); // Convert string values to integer
+        $currentMaps = array_values(array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray())); // Get current map values
+        $totalMaps = count($formMapIDs);
 
-        dd($mapsToDelete);
+        // Update maps and insert new ones if any
+        for ($i=0; $i < $totalMaps; $i++) {
+            if (empty($formMapIDs[$i])) {
+                $this->insertMap($maps[$i], $gameID, $files[$i]);
+            }
+            else {
+                $this->update($formMapIDs[$i], ['name' => $maps[$i]]);
+            }
+        }
 
-        $this->model->delete($mapsToDelete);
-
-        // $totalMaps = count($maps);
-        // for ($i = 0; $i < $totalMaps; $i ++) {
-        //     if (!empty($maps[$i]))
-        //         $this->insertMap($maps[$i], $gameID, $file[$i]);
-        // }
+        // Delete maps
+        $mapsToDelete = array_diff($currentMaps, array_filter($formMapIDs)); // Check missing map IDs
+        $this->deleteMaps($mapsToDelete);
     }
 
-    public function deleteMaps($gameID)
+    public function deleteMaps(array $mapIDs)
     {
-        $maps = $this->model->where('game_id', '=', $gameID)->get();
+        $maps = $this->model->whereIn('id', $mapIDs)->get();
 
         foreach ($maps as $map) {
             $filename = $this->uploadPath . $map->image;
-        
+            parent::delete($map->id);
             if (file_exists($filename) && is_file($filename)) {
-                parent::delete($map->id);
                 unlink($filename);
             }
         }
