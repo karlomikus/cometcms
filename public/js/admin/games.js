@@ -25,7 +25,7 @@ var MapViewModel = function (parent, initData) {
     self.name = ko.observable(initData.name);
     self.id = ko.observable(initData.id);
 
-    if(initData.image === undefined) {
+    if(initData.image === undefined || initData.image == null) {
         self.image = ko.observable('nopic.jpg');
     }
     else {

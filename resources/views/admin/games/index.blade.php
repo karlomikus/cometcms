@@ -25,6 +25,7 @@
                     <thead>
                     <tr>
                         <th colspan="2">{!! Form::gridHeader('Name', 'name', 'Admin\GamesController@index', $headerAttr) !!}</th>
+                        <th>Maps</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -38,6 +39,7 @@
                         <tr>
                             <td style="width: 28px;"><img src="{{ url('uploads/games/' . $game->image) }}" alt="missing" style="max-width: 25px; heght: auto;"></td>
                             <td><a href="{{ url('admin/games/edit', [$game->id]) }}">{{ $game->name }}</a></td>
+                            <td>{{ $game->maps->count() }}</td>
                             <td>
                                 <a href="{{ url('admin/games/delete', [$game->id]) }}" class="text-delete" data-confirm="Are you sure you want to delete this game?">Delete</a>
                             </td>

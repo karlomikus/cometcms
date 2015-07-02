@@ -52,6 +52,16 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
                 $this->insertMap($maps[$i], $gameID, $files[$i]);
             }
             else {
+                $mapImage = $this->get($formMapIDs[$i])->image;
+                if ($files[$i]) {
+                    if ($mapImage) {
+                        unlink($this->uploadPath . $mapImage);
+                    }
+                    $imageName = $formMapIDs[$i] . '_' . $gameID . '.' . $files[$i]->getClientOriginalExtension();
+                    $files[$i]->move($this->uploadPath, $imageName);
+
+                    $this->update($formMapIDs[$i], ['image' => $imageName]);
+                }
                 $this->update($formMapIDs[$i], ['name' => $maps[$i]]);
             }
         }
