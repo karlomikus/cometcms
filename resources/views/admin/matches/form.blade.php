@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-md-6">
                                 <ul class="players-list" data-bind="foreach: guest_team">
-                                    <li class="active"><a href="#" data-bind="text: $data"></a></li>
+                                    <li class="active"><!--ko text: $data--><!--/ko--><a href="#" data-bind="click: $parent.removeOpponentTeamMember"><i class="fa fa-remove"></i></a></li>
                                 </ul>
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Type member name..." data-bind="value: guest_team_name">
@@ -162,7 +162,7 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-success" type="submit" id="match-submit">Save</button>
                 </div>
                 {!! Form::close() !!}
             </div>

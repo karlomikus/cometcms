@@ -139,6 +139,10 @@ var MatchViewModel = function (matchData, addonData) {
         self.guest_team_name('');
     };
 
+    self.removeOpponentTeamMember = function (member) {
+        self.guest_team.remove(member);
+    }
+
     /**
      * Set game icon data attribute used by select2 plugin
      * @param option
@@ -263,6 +267,9 @@ $(document).ready(function () {
     // ---------------------------- Form submit ---------------------------- //
     form.submit(function (ev) {
         ev.preventDefault();
+        var $button = $("#match-submit");
+
+        $button.attr("disabled", true);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
@@ -281,9 +288,13 @@ $(document).ready(function () {
         }
 
         posting.fail(function (response) {
+            var error = "";
             $.each(response.responseJSON, function (key, val) {
-                console.log(val[0]);
+                error += val[0];
+                error += "\n";
             });
+            alert(error);
+            $button.attr("disabled", false);
         });
 
         posting.done(function (resp) {
