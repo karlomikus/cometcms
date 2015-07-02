@@ -264,6 +264,10 @@ $(document).ready(function () {
 
     setMapsDropdown();
 
+    // $('#match-date').datepicker({
+    //     format: "yyyy/mm/dd"
+    // });
+
     // ---------------------------- Form submit ---------------------------- //
     form.submit(function (ev) {
         ev.preventDefault();
