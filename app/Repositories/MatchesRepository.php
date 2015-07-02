@@ -59,30 +59,6 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return $this->get($matchID)->rounds;
     }
 
-    public function getMatchScore($matchID)
-    {
-        // TODO: Remove these score methods from interface, they are now in App\Match model
-        $result = \DB::table('round_scores')
-            ->join('match_rounds', 'round_scores.round_id', '=', 'match_rounds.id')
-            ->select(\DB::raw('sum(home) as home, sum(guest) as guest'))
-            ->where('match_id', '=', $matchID)
-            ->first();
-
-        return $result;
-    }
-
-    public function getMatchOutcome($matchID)
-    {
-        $score = $this->getMatchScore($matchID);
-
-        if ($score->home > $score->guest)
-            return 'win';
-        elseif ($score->home < $score->guest)
-            return 'lose';
-
-        return 'draw';
-    }
-
     public function getMatchJson($matchID)
     {
         $model = $this->model->where('id', '=', $matchID);
@@ -174,6 +150,23 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     }
 
     /**
+     * Deletes all rounds and it's scores for a given match ID
+     * 
+     * @param  int $matchID Match ID
+     * @return void
+     */
+    public function deleteRoundsAndScores($matchID)
+    {
+        $rounds = $this->getMatchRounds($matchID);
+        foreach ($rounds as $round) {
+            foreach ($round->scores as $score) {
+                $score->delete();
+            }
+            $round->delete();
+        }
+    }
+
+    /**
      * Update match on edit
      * 
      * @param  int   $id    Match ID
@@ -202,10 +195,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             $match->save();
 
             // Delete old records
-            $scores = $this->model->rounds;
-            dd($scores);
-            $rounds->scores()->delete();
-            // $rounds->delete();
+            $this->deleteRoundsAndScores($id);
 
             // Create match rounds
             foreach ($data['rounds'] as $round) {
@@ -240,12 +230,8 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         catch (\Exception $e) {
             \DB::rollback();
 
-            dd($e->getMessage());
-
             return false;
         }
-
-        throw new \Exception("Error Processing Request", 1);
         
         \DB::commit();
 
