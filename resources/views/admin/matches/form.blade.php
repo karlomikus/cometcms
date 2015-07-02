@@ -157,32 +157,7 @@
                 <div class="row">
                     <div class="col-md-2"><h4 class="form-subtitle">Media</h4></div>
                     <div class="col-md-10">
-                        TODO
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2"><h4 class="form-subtitle">Preview</h4></div>
-                    <div class="col-md-10">
-                        <div class="match-info-box clearfix">
-                            <div class="match-info-box-home clearfix">
-                                <ul class="match-info-box-players pull-left">
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
-                                    <li><button class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i></button> Player 1</li>
-                                </ul>
-                            </div>
-                            <div class="match-info-box-vs">VS</div>
-                            <div class="match-info-box-guest clearfix">
-                                <ul>
-                                    <li>Player 1</li>
-                                    <li>Player 1</li>
-                                    <li>Player 1</li>
-                                    <li>Player 1</li>
-                                </ul>
-                            </div>
-                        </div>
+                        Coming soon!
                         <hr>
                     </div>
                 </div>

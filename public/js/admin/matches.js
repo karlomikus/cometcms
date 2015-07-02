@@ -3,6 +3,19 @@
 var matchViewModel = null;
 var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}], participants: {team: []}};
 
+function formatMap (map) {
+    if (!map.id || !map.element.dataset.icon) { return map.text; }
+    return $(
+        '<span><img src="/uploads/maps/' + map.element.dataset.icon + '" class="img-map" /> ' + map.text + '</span>'
+    );
+}
+    
+function setMapsDropdown () {
+    $(".map-input").select2({
+        templateResult: formatMap
+    });
+}
+
 /**
  * Main match viewmodel. Depends on other viewmodels.
  * @param matchData Existing match data
@@ -86,6 +99,7 @@ var MatchViewModel = function (matchData, addonData) {
     // Viewmodel methods
     self.addRound = function () {
         self.rounds.push(new RoundViewModel(self, {scores: []}));
+        setMapsDropdown();
     };
 
     self.removeRound = function (round) {
@@ -240,20 +254,11 @@ $(document).ready(function () {
         );
     }
 
-    function formatMap (map) {
-        if (!map.id || !map.element.dataset.icon) { return map.text; }
-        return $(
-            '<span><img src="/uploads/maps/' + map.element.dataset.icon + '" class="img-map" /> ' + map.text + '</span>'
-        );
-    }
-
     $("#game").select2({
         templateResult: formatGame
     });
 
-    $(".map-input").select2({
-        templateResult: formatMap
-    });
+    setMapsDropdown();
 
     // ---------------------------- Form submit ---------------------------- //
     form.submit(function (ev) {

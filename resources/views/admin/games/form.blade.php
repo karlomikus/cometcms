@@ -26,7 +26,6 @@
                                     <label for="image">Image</label>
                                     @if(!empty($model->image))
                                         <div class="uploaded-file">
-                                            <a class="btn-image-delete" href="/admin/games/delete-image/{{ $model->id }}" data-ajax="get"><i class="fa fa-fw fa-remove"></i></a>
                                             <img src="/uploads/games/{{ $model->image }}" alt="Image"/>
                                         </div>
                                     @endif

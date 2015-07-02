@@ -201,14 +201,18 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
             $match->save();
 
-            $this->rounds->where('match_id', '=', $match->id)->delete();
+            // Delete old records
+            $scores = $this->model->rounds;
+            dd($scores);
+            $rounds->scores()->delete();
+            // $rounds->delete();
 
             // Create match rounds
             foreach ($data['rounds'] as $round) {
                 $roundModel = $this->rounds->create([
                     'match_id' => $match->id,
                     'map_id' => $round['map_id'],
-                    'notes' => $round['notes'],
+                    'notes' => isset($round['notes']) ? $round['notes'] : null,
                 ]);
 
                 // Create round scores
@@ -236,9 +240,13 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         catch (\Exception $e) {
             \DB::rollback();
 
+            dd($e->getMessage());
+
             return false;
         }
 
+        throw new \Exception("Error Processing Request", 1);
+        
         \DB::commit();
 
         return true;
