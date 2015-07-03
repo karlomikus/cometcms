@@ -60,6 +60,12 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return $this->get($matchID)->rounds;
     }
 
+    /**
+     * Render JSON for use in knockout
+     * 
+     * @param  int $matchID Match ID
+     * @return mixed
+     */
     public function getMatchJson($matchID)
     {
         $model = $this->model->where('id', '=', $matchID);
@@ -67,6 +73,15 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return $model->with('team', 'opponent', 'game', 'rounds', 'rounds.scores')->first();
     }
 
+    /**
+    * Returns paged results for a specific page
+    *
+    * @param $page int Current page
+    * @param $limit int Page results limit
+    * @param $sortColumn string Column name
+    * @param $searchTerm string Search term
+    * @return array
+    */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $sortColumn !== null ?: $sortColumn = 'created_at'; // Default order by column
@@ -89,6 +104,12 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return $result;
     }
 
+    /**
+     * Gets data from JSON request and inserts match, round and scores into database
+     * 
+     * @param  array $data Array of data
+     * @return bool       Insert successful
+     */
     public function insert($data)
     {
         try {
@@ -173,7 +194,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     }
 
     /**
-     * Update match on edit
+     * Update match on edit. Deletes old scores and rounds before inserting new ones
      * 
      * @param  int   $id    Match ID
      * @param  array $data  Data to insert
