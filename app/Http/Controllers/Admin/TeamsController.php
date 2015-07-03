@@ -17,22 +17,24 @@ class TeamsController extends AdminController {
 
     public function index()
     {
-        $data['data'] = $this->teams->all();
+        $template = [
+            'data' => $this->teams->all(),
+            'pageTitle' => 'Squads'
+        ];
 
-        $data['pageTitle'] = 'Squads';
-
-        return view('admin.teams.index', $data);
+        return view('admin.teams.index', $template);
     }
 
     public function create(GamesRepositoryInterface $games)
     {
-        $data['team'] = null;
-        $data['modelData'] = 'null';
-        $data['games'] = $games->all();
+        $template = [
+            'team' => null,
+            'modelData' => 'null',
+            'games' => $games->all(),
+            'pageTitle' => 'Create new squad'
+        ];
 
-        $data['pageTitle'] = 'Create new squad';
-
-        return view('admin.teams.form', $data);
+        return view('admin.teams.form', $template);
     }
 
     public function save(SaveTeamRequest $request)
@@ -40,16 +42,12 @@ class TeamsController extends AdminController {
         $data = $request->all();
         $team = $this->teams->insert($data);
 
-        if ($team) {
+        if (!$team) {
             $this->alertSuccess('Squad saved successfully.');
         } else {
             $this->alertError('Unable to save a squad.');
         }
 
-        \Session::flash('alerts', $this->getAlerts());
-
-        // Browsers are dumb and can't follow 302 redirect from ajax call
-        // So we return JSON response containing location which we redirect to with js
         return response()->json(['location' => '/admin/teams', 'alerts' => $this->getAlerts()]);
     }
 

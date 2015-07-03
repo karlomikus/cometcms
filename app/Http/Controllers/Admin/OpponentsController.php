@@ -12,6 +12,7 @@ class OpponentsController extends AdminController {
 
     public function __construct(OpponentsRepositoryInterface $opponents)
     {
+        parent::__construct();
         $this->opponents = $opponents;
     }
 

@@ -2,10 +2,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Session;
 
 class AdminController extends Controller {
 
     private $alerts = [];
+
+    public function __construct()
+    {
+        Session::flash('alerts', $this->getAlerts());
+    }
 
     public function alertError($message)
     {
@@ -34,7 +40,6 @@ class AdminController extends Controller {
 
     public function getAlerts()
     {
-        
         return $this->alerts;
     }
 
