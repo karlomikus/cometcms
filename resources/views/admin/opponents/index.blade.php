@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <a href="{{ url('admin/opponents/new') }}" class="btn btn-success" data-popup="true"><i class="glyphicon glyphicon-plus-sign"></i> New opponent</a>
+                <a href="{{ url('admin/opponents/new') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> New opponent</a>
             </div>
             <form class="col-md-6" method="get" action="{{ url('admin/opponents') }}">
                 <div class="input-group">
@@ -37,7 +37,7 @@
                         @endif
                         @foreach($data as $opponent)
                             <tr>
-                                <td><a href="{{ url('admin/opponents/edit', [$opponent->id]) }}" data-popup="true">{{ $opponent->name }}</a></td>
+                                <td><a href="{{ url('admin/opponents/edit', [$opponent->id]) }}">{{ $opponent->name }}</a></td>
                                 <td>{{ $opponent->description }}</td>
                                 <td>
                                     <a href="{{ url('admin/opponents/delete', [$opponent->id]) }}" class="text-delete" data-confirm="Are you sure that you want to delete this opponent?">Delete</a>
@@ -51,5 +51,4 @@
         {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
     </div>
 
-@include('popup')
 @endsection
