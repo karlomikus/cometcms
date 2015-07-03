@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Match, App\Repositories\Contracts\MatchesRepositoryInterface, App\Libraries\GridView\GridViewInterface;
 use App\MatchRounds;
 use App\RoundScores;
+use Carbon\Carbon;
 
 class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface, GridViewInterface {
 
@@ -99,13 +100,18 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 $opponentParticipants = implode("\t", $data['guest_team']);
             }
 
+            // Parse date
+            $formDate = $data['match_date'] . ' ' . $data['match_time'];
+            $matchDate = Carbon::parse($formDate)->toDateTimeString();
+
             // Create a new match
             $matchModel = $this->model->create([
                 'team_id' => $data['team_id'],
                 'opponent_id' => $data['opponent_id'],
                 'game_id' => $data['game_id'],
-                'matchlink' => isset($data['matchlink']) ?: null,
-                'opponent_participants' => $opponentParticipants
+                'matchlink' => isset($data['matchlink']) ? $data['matchlink'] : null,
+                'opponent_participants' => $opponentParticipants,
+                'date' => $matchDate
             ]);
 
             // Create match rounds
@@ -186,10 +192,15 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 $opponentParticipants = implode("\t", $data['guest_team']);
             }
 
+            // Parse date
+            $formDate = $data['match_date'] . ' ' . $data['match_time'];
+            $matchDate = Carbon::parse($formDate)->toDateTimeString();
+
             $match->team_id = $data['team_id'];
             $match->opponent_id = $data['opponent_id'];
             $match->game_id = $data['game_id'];
-            $match->matchlink = isset($data['matchlink']) ?: null;
+            $match->matchlink = isset($data['matchlink']) ? $data['matchlink'] : null;
+            $match->date = $matchDate;
             $match->opponent_participants = $opponentParticipants;
 
             $match->save();

@@ -24,6 +24,7 @@ class CreateMatchesTable extends Migration {
             $table->string('matchlink')->nullable();
             $table->text('opponent_participants')->nullable();
             $table->text('standins')->nullable();
+            $table->datetime('date');
 			$table->timestamps();
 		});
 	}

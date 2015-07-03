@@ -32,6 +32,12 @@ var MatchViewModel = function (matchData, addonData) {
     self.rounds = ko.observableArray();
     self.games = ko.observableArray(addonData);
 
+    var matchDate = moment(matchData.date);
+    self.match_date = ko.observable(matchDate.format("YYYY-MM-DD"));
+    self.match_time = ko.observable(matchDate.format("hh:mm"));
+
+    self.matchlink = ko.observable(matchData.matchlink);
+
     self.home_team = ko.observableArray();
     self.guest_team = ko.observableArray(matchData.participants.opponent);
     self.guest_team_name = ko.observable();
@@ -292,13 +298,13 @@ $(document).ready(function () {
         }
 
         posting.fail(function (response) {
+            $button.attr("disabled", false);
             var error = "";
             $.each(response.responseJSON, function (key, val) {
                 error += val[0];
                 error += "\n";
             });
             alert(error);
-            $button.attr("disabled", false);
         });
 
         posting.done(function (resp) {

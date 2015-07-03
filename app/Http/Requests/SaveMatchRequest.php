@@ -23,7 +23,10 @@ class SaveMatchRequest extends Request {
         $rules = [
             'team_id'     => 'required|integer',
             'game_id'     => 'required|integer',
-            'opponent_id' => 'required|integer'
+            'opponent_id' => 'required|integer',
+            'matchlink'   => 'URL',
+            'match_date'  => 'date_format:Y-m-d',
+            'match_time'  => 'date_format:H:i'
         ];
 
         foreach ($this->request->get('rounds') as $key => $round) {

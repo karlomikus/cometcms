@@ -28,10 +28,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="match-date">Match date:</label>
-                                    <input type="text" id="match-date" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" placeholder="Played on date..." />
+                                    <label for="match-date">Match date</label>
+                                    <input type="text" id="match-date" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" placeholder="Played on date..." data-bind="value: match_date" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="match-time">Match time</label>
+                                    <input type="text" id="match-time" class="form-control" placeholder="h:m" data-bind="value: match_time" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="matchlink">Match link</label>
+                                    <input type="url" id="matchlink" class="form-control" placeholder="http://" data-bind="value: matchlink" />
                                 </div>
                             </div>
                         </div>
