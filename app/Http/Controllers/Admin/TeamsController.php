@@ -42,7 +42,7 @@ class TeamsController extends AdminController {
         $data = $request->all();
         $team = $this->teams->insert($data);
 
-        if (!$team) {
+        if ($team) {
             $this->alertSuccess('Squad saved successfully.');
         } else {
             $this->alertError('Unable to save a squad.');

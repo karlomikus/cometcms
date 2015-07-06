@@ -2,21 +2,27 @@
 
 $(document).ready(function() {
 
-    $('a[data-popup="true"]').click(function (e) {
-        $("#modal-loader").show();
+    /**
+     * Ajax modal dialog
+     */
+    // $('a[data-popup="true"]').click(function (e) {
+    //     $("#modal-loader").show();
 
-        e.preventDefault();
-        var url = $(this).attr("href");
-        var modalElement = $('#popup-form-dialog');
-        var modalContent = modalElement.find('.modal-content');
+    //     e.preventDefault();
+    //     var url = $(this).attr("href");
+    //     var modalElement = $('#popup-form-dialog');
+    //     var modalContent = modalElement.find('.modal-content');
 
-        modalContent.empty();
-        modalElement.modal('toggle');
-        modalContent.load(url, function () {
-            $("#modal-loader").hide();
-        });
-    });
-
+    //     modalContent.empty();
+    //     modalElement.modal('toggle');
+    //     modalContent.load(url, function () {
+    //         $("#modal-loader").hide();
+    //     });
+    // });
+    
+    /**
+     * Custom confirm dialog
+     */
     $('a[data-confirm]').click(function(e) {
         e.preventDefault();
         var message = $(this).data('confirm');
@@ -47,7 +53,10 @@ $(document).ready(function() {
             });
         }
     });
-
+    
+    /**
+     * Ajax request handler
+     */
     $(document).on('click', 'a[data-ajax]', function(e) {
         e.preventDefault();
         var url = $(this).attr("href");
@@ -63,6 +72,17 @@ $(document).ready(function() {
                 console.log('Error while handling ajax request! (data-ajax)');
             });
         }
+    });
+
+    function formatGame (game) {
+        if (!game.id) { return game.text; }
+        return $(
+            '<span><img src="/uploads/games/' + game.element.dataset.icon + '" class="img-game" /> ' + game.text + '</span>'
+        );
+    }
+
+    $(".games-dropdown").select2({
+        templateResult: formatGame
     });
 
 });

@@ -14,7 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="game">Choose game</label>
-                                    <select class="form-control" id="game" name="game" style="width: 100%" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'id', optionsAfterRender: setGameIcons">
+                                    <select class="form-control games-dropdown" id="game" name="game" style="width: 100%" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'id', optionsAfterRender: setGameIcons">
                                     </select>
                                 </div>
                             </div>

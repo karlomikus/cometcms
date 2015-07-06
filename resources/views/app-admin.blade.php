@@ -37,6 +37,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li class="disabled"><a href="{{ url('/admin/pages') }}">Pages</a></li>
                         <li class="disabled"><a href="{{ url('/admin/posts') }}">Posts</a></li>
                         <li><a href="{{ url('/admin/games') }}">Games</a></li>
                         <li><a href="{{ url('/admin/opponents') }}">Opponents</a></li>
@@ -62,7 +63,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-fw fa-bell"></i> <span class="badge">42</span></a></li>
+                {{-- <li><a href="#"><i class="fa fa-fw fa-bell"></i> <span class="badge">42</span></a></li> --}}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">

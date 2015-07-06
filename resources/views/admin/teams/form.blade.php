@@ -18,9 +18,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="game">Primary game</label>
-                                    <select class="form-control" id="game" name="game" data-bind="value: game_id">
+                                    <select class="form-control games-dropdown" id="game" name="game" data-bind="value: game_id">
                                         @foreach($games as $game)
-                                        <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                        <option value="{{ $game->id }}" data-icon="{{ $game->image }}">{{ $game->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -102,6 +102,7 @@
 @endsection
 
 @section('page-scripts-before')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
         const modelData = {!! $modelData !!};
