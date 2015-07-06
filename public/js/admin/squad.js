@@ -108,6 +108,10 @@ $(document).ready(function () {
     }
     console.log('Viewmodel loaded!');
 
+    $("#game").select2({
+        templateResult: formatGame
+    });
+
     $('#squad-form').submit(function (ev) {
         ev.preventDefault();
         $.ajaxSetup({

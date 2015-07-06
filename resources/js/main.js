@@ -1,5 +1,12 @@
 "use strict";
 
+function formatGame (game) {
+    if (!game.id) { return game.text; }
+    return $(
+        '<span><img src="/uploads/games/' + game.element.dataset.icon + '" class="img-game" /> ' + game.text + '</span>'
+    );
+}
+
 $(document).ready(function() {
 
     $('a[data-popup="true"]').click(function (e) {

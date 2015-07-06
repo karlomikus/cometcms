@@ -42,8 +42,8 @@
                         <div class="row">
                             <div class="col-md-12">
                             <button class="btn btn-sm btn-success" type="button" data-bind="click: addMap"><i class="fa fa-plus"></i> Add map</button>
-                                <div class="map-list" data-bind="foreach: maps">
-                                    <div class="map clearfix">
+                                <div class="map-list clearfix" data-bind="foreach: maps">
+                                    <div class="map">
                                         <div class="map-image">
                                             <img class="media-object" alt="Map image" data-bind="attr: {src: '/uploads/maps/' + image()}">
                                             <button class="btn btn-corner btn-overlay btn-sm" type="button" data-bind="click: removeMap"><i class="fa fa-remove"></i></button>

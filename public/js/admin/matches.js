@@ -259,6 +259,10 @@ $(document).ready(function () {
     // ---------------------------- Select box formatting ---------------------------- //
     setMapsDropdown();
 
+    $("#game").select2({
+        templateResult: formatGame
+    });
+
     // $('#match-date').datepicker({
     //     format: "yyyy/mm/dd"
     // });
