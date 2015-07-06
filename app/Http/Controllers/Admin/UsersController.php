@@ -13,6 +13,8 @@ class UsersController extends AdminController {
 
     public function __construct(UsersRepositoryInterface $users, RolesRepositoryInterface $roles)
     {
+        parent::__construct();
+
         $this->users = $users;
         $this->roles = $roles;
     }
@@ -50,7 +52,6 @@ class UsersController extends AdminController {
     public function save(SaveUserRequest $request)
     {
         $roles = $request->input('roles');
-        $message = 'User creation failed!';
 
         $user = $this->users->insert([
             'email' => $request->input('email'),
@@ -61,10 +62,15 @@ class UsersController extends AdminController {
         $user->attachRoles($roles);
 
         if ($user) {
-            $message = 'New user created successfully!';
+            if ($request->hasFile('image')) {
+                $this->users->insertImage($user->id, $request->file('image'));
+            }
+            $this->alertSuccess('New user created successfully!');
+        } else {
+            $this->alertError('User creation failed!');
         }
 
-        return redirect('admin/users')->with('message', $message);
+        return redirect('admin/users')->with('alerts', $this->getAlerts());
     }
 
     public function edit($id)
@@ -81,7 +87,6 @@ class UsersController extends AdminController {
     {
         // TODO: Roles editing
         $roles = $request->input('roles');
-        $message = 'User edit failed!';
         $data = [
             'email' => $request->input('email'),
             'password' => \Hash::make($request->input('pwd')),
@@ -92,11 +97,13 @@ class UsersController extends AdminController {
         $usersRoles = $user->roles;
 
         if ($this->users->update($id, $data)) {
-            $message = 'User succesfully edited!';
+            $this->alertSuccess('User edited!');
         }
-        //$user->attachRoles(array_diff($usersRoles, $roles));
+        else {
+            $this->alertError('Error while updating the user!');
+        }
 
-        return redirect('admin/users')->with('message', $message);
+        return redirect('admin/users')->with('alerts', $this->getAlerts());
     }
 
     public function delete($id)

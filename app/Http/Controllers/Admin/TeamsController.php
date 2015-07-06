@@ -53,13 +53,14 @@ class TeamsController extends AdminController {
 
     public function edit($id, GamesRepositoryInterface $games)
     {
-        $data['team'] = $this->teams->get($id);
-        $data['pageTitle'] = 'Editing an squad';
+        $template = [
+            'team' => $this->teams->get($id),
+            'pageTitle' => 'Editing an squad',
+            'modelData' => $this->teams->getTeamData($id),
+            'games' => $games->all(),
+        ];
 
-        $data['modelData'] = $this->teams->getTeamData($id);
-        $data['games'] = $games->all();
-
-        return view('admin.teams.form', $data);
+        return view('admin.teams.form', $template);
     }
 
     public function update($id, SaveTeamRequest $request)
@@ -72,11 +73,7 @@ class TeamsController extends AdminController {
         } else {
             $this->alertError('Unable to edit a squad.');
         }
-
-        \Session::flash('alerts', $this->getAlerts());
-
-        // Browsers are dumb and can't follow 302 redirect from ajax call
-        // So we return JSON response containing location which we redirect to with js
+        
         return response()->json(['location' => '/admin/teams', 'alerts' => $this->getAlerts()]);
     }
 

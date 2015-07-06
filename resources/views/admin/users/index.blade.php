@@ -2,12 +2,6 @@
 
 @section('content')
     <div class="container">
-        @if(Session::has('message'))
-            <div class="alert alert-info alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                {{ Session::get('message') }}
-            </div>
-        @endif
         <div class="row">
             <div class="col-md-6">
                 <a href="{{ url('admin/users/new') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> New user</a>
@@ -27,7 +21,7 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table table-hover table-grid table-admin">
                     <thead>
                         <tr>
                             <th>{!! Form::gridHeader('Name', 'name', 'Admin\UsersController@index', $headerAttr) !!}</th>
@@ -41,6 +35,7 @@
                         @if(!$totalItems > 0)
                             <tr>
                                 <td colspan="5" class="text-center">No results found.</td>
+                                <td></td>
                             </tr>
                         @endif
                         @foreach($data as $user)
@@ -54,7 +49,7 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{ url('admin/users/delete', [$user->id]) }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                                    <a href="{{ url('admin/users/delete', [$user->id]) }}" class="text-delete" data-confirm="Are you sure that you want to delete this user?">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
