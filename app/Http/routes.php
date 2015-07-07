@@ -55,7 +55,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/users/edit/{id}', 'Admin\UsersController@edit');
     Route::post('/users/edit/{id}', 'Admin\UsersController@update');
     Route::get('/users/delete/{id}', 'Admin\UsersController@delete');
-    Route::get('/users/api/user/{search}', 'Admin\UsersController@searchUsers');
+    Route::get('/users/api/user', 'Admin\UsersController@searchUsers');
 
     /**
      * Opponents

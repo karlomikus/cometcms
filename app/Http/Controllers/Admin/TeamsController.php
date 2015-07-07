@@ -12,6 +12,7 @@ class TeamsController extends AdminController {
 
     public function __construct(TeamsRepositoryInterface $teams)
     {
+        parent::__construct();
         $this->teams = $teams;
     }
 

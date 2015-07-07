@@ -30,10 +30,11 @@ var SquadViewModel = function (squadData) {
     self.findUsers = function() {
         self.searching(true);
         $.ajax({
-            url: '/admin/users/api/user/' + self.search_string(),
+            url: '/admin/users/api/user',
             cache: false,
             contentType: 'application/json',
             type: "GET",
+            data: { q: self.search_string() },
             success: function (result) {
                 self.found_users.removeAll();
                 $.each(result, function(key, val) {
@@ -114,6 +115,10 @@ $(document).ready(function () {
 
     $('#squad-form').submit(function (ev) {
         ev.preventDefault();
+
+        var $button = $("#save-squad");
+        $button.attr('disabled', true);
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
@@ -137,6 +142,7 @@ $(document).ready(function () {
         }
 
         posting.fail(function (response) {
+            $button.attr('disabled', false);
             $.each(response.responseJSON, function (key, val) {
                 console.log(val[0]);
             });

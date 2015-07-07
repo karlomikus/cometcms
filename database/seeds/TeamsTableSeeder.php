@@ -10,21 +10,21 @@ class TeamsTableSeeder extends Seeder {
         $faker = Faker\Factory::create();
 
         for ($i=0; $i < 5; $i++) {
-            Team::create([
+            $team = Team::create([
                 'name' => ucfirst($faker->word),
                 'description' => $faker->sentence(12),
                 'game_id' => 1
             ]);
-        }
 
-        for ($i=0; $i < 15; $i++) {
-            DB::table('team_roster')->insert([
-                'user_id' => $faker->randomElement([2, 3, 4, 5, 6, 7, 8, 9]),
-                'team_id' => $faker->numberBetween(1, 5),
-                'position' => $faker->randomElement(['Mid', 'Offlane', 'Support 4', 'Support 5']),
-                'status' => 'Test status',
-                'captain' => $faker->randomElement([0, 1]),
-            ]);
+            for ($j=0; $j < 4; $j++) {
+                DB::table('team_roster')->insert([
+                    'user_id' => $faker->randomElement([2, 3, 4, 5, 6, 7, 8, 9]),
+                    'team_id' => $team->id,
+                    'position' => $faker->randomElement(['Mid', 'Offlane', 'Support 4', 'Support 5']),
+                    'status' => 'Test status',
+                    'captain' => $j === 0 ? 1 : 0,
+                ]);
+            }
         }
     }
 

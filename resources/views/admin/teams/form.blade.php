@@ -52,9 +52,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="Add new member..." data-bind="value: search_string">
+                                        <input class="form-control" type="text" placeholder="Search users..." data-bind="value: search_string">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-info" type="button" data-bind="click: findUsers">Find! <i class="fa fa-spinner fa-pulse" data-bind="css: {hide: !searching()}"></i></button>
+                                            <button class="btn btn-info" type="button" data-bind="click: findUsers, attr: {disabled: searching()}">Find! <i class="fa fa-spinner fa-pulse" data-bind="css: {hide: !searching()}"></i></button>
                                         </span>
                                     </div>
                                     <hr>
@@ -93,7 +93,7 @@
                     @if($team)
                     <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
                     @endif
-                    <button class="btn btn-success" type="submit">Save</button>
+                    <button id="save-squad" class="btn btn-success" type="submit">Save</button>
                 </div>
                 {!! Form::close() !!}
             </div>
