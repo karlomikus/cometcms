@@ -8,7 +8,7 @@ $color-primary-dark: #2d3142;
 $brand-success: #2ec4b6;
 $brand-danger: #fe5f55;
 $brand-warning: #ff9f1c;
-$brand-primary: #456990;
+$brand-primary: lighten($color-primary-dark, 15%);
 $link-hover-color: $color-accent;
 $color-light-bg: #f8f9fe;
 $color-navbar-bg: $color-primary-dark;
@@ -78,6 +78,7 @@ $modal-backdrop-opacity: .8;
 body {
   font-weight: 300;
   padding-top: 140px;
+  //background: #F8F7FD;
 }
 
 a.text-delete {
@@ -90,6 +91,10 @@ a.text-delete {
     background: $brand-danger;
     border-bottom: 1px solid $brand-danger;
   }
+}
+
+a {
+  color: #3680C3;
 }
 
 // SHARED
@@ -143,8 +148,29 @@ a.text-delete {
 
 // Tables
 .table-admin {
+  //box-shadow: 0 2px 4px rgba(0,0,0,.1); #F8F7FD
+  // background: #fff;
+  // th:first-child {
+  //   -webkit-border-top-left-radius: 5px;
+  //   -moz-border-radius-topleft: 5px;
+  //   border-top-left-radius: 5px;
+  // }
+  // th:last-child {
+  //   -webkit-border-top-right-radius: 5px;
+  //   -moz-border-radius-topright: 5px;
+  //   border-top-right-radius: 5px;
+  // }
   th {
-    border-color: #f6f6f6 !important;
+    // border: 0 !important;
+    border-color: $brand-primary !important;
+    //background: lighten($color-navbar-bg, 10%);
+    //color: #fff;
+    a {
+      color: $brand-primary;
+      i {
+        color: $color-accent;
+      }
+    }
   }
   td {
     //background: #fff;
@@ -162,6 +188,10 @@ th {
 
 .table-grid td:last-child, .table-grid th:last-child {
   text-align: right;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #FFF7E4;
 }
 
 // Forms
@@ -508,7 +538,7 @@ $match-games-border-color: darken($color-light-bg, 6%);
 .btn {
   font-family: $font-family-accent;
   font-weight: 300;
-  box-shadow: inset 0 -4px 7px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
   text-shadow: 0 2px 1px rgba(0,0,0,.20);
 }
 
