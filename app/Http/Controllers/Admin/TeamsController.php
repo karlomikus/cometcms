@@ -9,10 +9,12 @@ use App\Http\Requests\SaveTeamRequest;
 class TeamsController extends AdminController {
 
     protected $teams;
+    private $alerts;
 
     public function __construct(TeamsRepositoryInterface $teams)
     {
-        parent::__construct();
+        //parent::__construct();
+        $this->alerts = new \App\Services\AlertsService();
         $this->teams = $teams;
     }
 
@@ -44,12 +46,12 @@ class TeamsController extends AdminController {
         $team = $this->teams->insert($data);
 
         if ($team) {
-            $this->alertSuccess('Squad saved successfully.');
+            $this->alerts->alertSuccess('Squad saved successfully.');
         } else {
-            $this->alertError('Unable to save a squad.');
+            $this->alerts->alertError('Unable to save a squad.');
         }
 
-        return response()->json(['location' => '/admin/teams', 'alerts' => $this->getAlerts()]);
+        return response()->json(['location' => '/admin/teams', 'alerts' => $this->alerts->getAlerts()]);
     }
 
     public function edit($id, GamesRepositoryInterface $games)
@@ -70,22 +72,24 @@ class TeamsController extends AdminController {
         $team = $this->teams->update($id, $data);
 
         if ($team) {
-            $this->alertSuccess('Squad edited successfully.');
+            $this->alerts->alertSuccess('Squad edited successfully.');
         } else {
-            $this->alertError('Unable to edit a squad.');
+            $this->alerts->alertError('Unable to edit a squad.');
         }
         
-        return response()->json(['location' => '/admin/teams', 'alerts' => $this->getAlerts()]);
+        return response()->json(['location' => '/admin/teams', 'alerts' => $this->alerts->getAlerts()]);
     }
 
     public function delete($id)
     {
         if ($this->teams->delete($id))
-            $this->alertSuccess('Squad deleted succesfully!');
+            $this->alerts->alertSuccess('Squad deleted succesfully!');
         else
-            $this->alertError('Unable to delete squad!');
+            $this->alerts->alertError('Unable to delete squad!');
 
-        return redirect('admin/teams')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+        
+        return redirect('admin/teams');
     }
 
     public function getRoster($teamID)

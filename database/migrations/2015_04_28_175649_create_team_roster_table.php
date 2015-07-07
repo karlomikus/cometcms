@@ -22,6 +22,7 @@ class CreateTeamRosterTable extends Migration {
 			$table->string('position')->nullable();
 			$table->string('status')->nullable();
 			$table->tinyInteger('captain')->default(0);
+			$table->softDeletes();
 		});
 	}
 

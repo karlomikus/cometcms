@@ -61,6 +61,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         } catch (\Exception $e) {
             \DB::rollback();
 
+            \Session::flash('exception', $e->getMessage());
+
             return false;
         }
         \DB::commit();
@@ -81,6 +83,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             }
         } catch (\Exception $e) {
             \DB::rollback();
+
+            \Session::flash('exception', $e->getMessage());
 
             return false;
         }
@@ -106,6 +110,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
 
             return true;
         } catch (\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+
             return false;
         }
     }
@@ -129,6 +135,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             parent::delete($teamID);
         } catch (\Exception $e) {
             \DB::rollback();
+
+            \Session::flash('exception', $e->getMessage());
 
             return false;
         }

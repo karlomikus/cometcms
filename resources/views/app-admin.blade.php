@@ -98,6 +98,11 @@
                 <h3>An error occured!</h3>
             @endif
             {{ $alert['message'] }}
+            @if($alert['exception'])
+                <hr>
+                <strong class="text-danger">Related exception message <i class="fa fa-caret-down"></i></strong><br>
+                {{ $alert['exception'] }}
+            @endif
         </div>
     @endforeach
     </div>
