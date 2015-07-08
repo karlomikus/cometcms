@@ -124,9 +124,11 @@ $(document).ready(function () {
     $('#squad-form').submit(function (ev) {
         ev.preventDefault();
 
+        // Disabled save button while processing form
         var $button = $("#save-squad");
         $button.attr('disabled', true);
 
+        // Setup ajax, added CSRF token
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
@@ -134,10 +136,6 @@ $(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         });
-
-        // Image
-        // var imgData = new FormData(document.getElementById("squad-form"));
-        // squadViewModel.image = imgData.get("image");
 
         var data = ko.toJSON(squadViewModel);
         var posting = null;
@@ -151,9 +149,7 @@ $(document).ready(function () {
 
         posting.fail(function (response) {
             $button.attr('disabled', false);
-            $.each(response.responseJSON, function (key, val) {
-                console.log(val[0]);
-            });
+            console.log(response.statusText);
         });
 
         posting.done(function (resp) {

@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="game">Primary game</label>
+                                    <label for="game" class="control-label">Primary game</label>
                                     <select class="form-control games-dropdown" id="game" name="game" data-bind="value: game_id">
                                         @foreach($games as $game)
                                         <option value="{{ $game->id }}" data-icon="{{ $game->image }}">{{ $game->name }}</option>
@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description" class="control-label">Description</label>
                                     <textarea name="description" id="description" rows="4" class="form-control" data-bind="value: description"></textarea>
                                 </div>
                             </div>
