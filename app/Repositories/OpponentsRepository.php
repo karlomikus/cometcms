@@ -5,8 +5,11 @@ use App\Opponent;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
 use App\Libraries\GridView\GridViewInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Libraries\ImageUploadTrait as ImageUpload;
 
 class OpponentsRepository extends AbstractRepository implements OpponentsRepositoryInterface, GridViewInterface {
+
+    use ImageUpload;
 
     private $uploadPath;
 
@@ -14,57 +17,17 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
     {
         parent::__construct($opponent);
 
-        $this->uploadPath = base_path() . '/public/uploads/opponents/';
+        $this->setUploadPath(base_path() . '/public/uploads/opponents/');
     }
 
     /**
-     * Uploads and inserts filename to database
-     *
-     * @param int $id Opponent ID
-     * @param UploadedFile $file File request
-     * @return bool
-     */
-    public function insertFile($opponentID, UploadedFile $file)
-    {
-        $imageName = $opponentID . '.' . $file->getClientOriginalExtension();
-
-        try {
-            $file->move($this->uploadPath, $imageName);
-            $this->update($opponentID, ['image' => $imageName]);
-
-            return true;
-        } catch (\Exception $e) {
-            return false;
-        }
-    }
-
-    /**
-     * Deletes the file from disk and database
-     * 
-     * @param  int $id Opponent ID
-     * @return bool     Is the file deleted
-     */
-    public function deleteFile($opponentID)
-    {
-        $opponent = $this->get($opponentID);
-        $filename = $this->uploadPath . $opponent->image;
-        
-        if (file_exists($filename) && is_file($filename)) {
-            parent::update($opponentID, ['image' => null]);
-            return unlink($filename);
-        }
-
-        return false;
-    }
-
-    /**
-     * Delete a single opponent
+     * Delete a single opponent and it's image
      * 
      * @param $id
      */
     public function delete($opponentID)
     {
-        $this->deleteFile($opponentID);
+        $this->deleteImage($opponentID);
 
         return parent::delete($opponentID);
     }

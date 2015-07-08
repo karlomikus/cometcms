@@ -8,7 +8,6 @@ use App\Http\Requests\SaveOpponentRequest;
 class OpponentsController extends AdminController {
 
     private $opponents;
-    private $uploadPath;
 
     public function __construct(OpponentsRepositoryInterface $opponents)
     {
@@ -38,10 +37,12 @@ class OpponentsController extends AdminController {
 
     public function create()
     {
-        $data['opponent'] = null;
-        $data['pageTitle'] = 'Create new opponent';
+        $template = [
+            'opponent' => null,
+            'pageTitle' => 'Create new opponent'
+        ];
 
-        return view('admin.opponents.form', $data);
+        return view('admin.opponents.form', $template);
     }
 
     public function save(SaveOpponentRequest $request)
@@ -54,22 +55,26 @@ class OpponentsController extends AdminController {
 
         if ($opponent) {
             if ($request->hasFile('image')) {
-                $this->opponents->insertFile($opponent->id, $request->file('image'));
+                $this->opponents->insertImage($opponent->id, $request->file('image'));
             }
-            $this->alertSuccess('New opponent created successfully!');
+            $this->alerts->alertSuccess('New opponent created successfully!');
         } else {
-            $this->alertError('Opponent creation failed!');
+            $this->alerts->alertError('Opponent creation failed!');
         }
 
-        return redirect('admin/opponents')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/opponents');
     }
 
     public function edit($id)
     {
-        $data['opponent'] = $this->opponents->get($id);
-        $data['pageTitle'] = 'Editing an opponent';
+        $template = [
+            'opponent' => $this->opponents->get($id),
+            'pageTitle' => 'Editing an opponent'
+        ];
 
-        return view('admin.opponents.form', $data);
+        return view('admin.opponents.form', $template);
     }
 
     public function update($id, SaveOpponentRequest $request)
@@ -79,35 +84,41 @@ class OpponentsController extends AdminController {
             'description' => $request->input('description')
         ];
 
-        if ($this->opponents->update($id, $data)) {
+        $opponent = $this->opponents->update($id, $data);
+
+        if ($opponent) {
             if ($request->hasFile('image')) {
-                $this->opponents->insertFile($id, $request->file('image'));
+                $this->opponents->updateImage($id, $request->file('image'));
             }
-            $this->alertSuccess('Opponent succesfully edited!');
+            $this->alerts->alertSuccess('Opponent succesfully edited!');
         } else {
-            $this->alertError('Failed to edit an opponent!');
+            $this->alerts->alertError('Failed to edit an opponent!');
         }
 
-        return redirect('admin/opponents')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/opponents');
     }
 
     public function delete($id)
     {
-        try {
-            $this->opponents->delete($id);
-            $this->alertSuccess('Opponent deleted succesfully!');
-        } catch (\Exception $e) {
-            $this->alertError('Unable to delete an opponent due to an exception: ' . $e->getMessage());
+        if ($this->opponents->delete($id)) {
+            $this->alerts->alertSuccess('Opponent deleted succesfully!');
+        }
+        else {
+            $this->alerts->alertError('Unable to delete an opponent!');
         }
 
-        return redirect('admin/opponents')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/opponents');
     }
 
     public function deleteImage($id)
     {
-        $fileDeleted = $this->opponents->deleteFile($id);
+        $fileDeleted = $this->opponents->deleteImage($id);
 
-        $message = 'Error on file delete!';
+        $message = 'Error while deleting a file!';
         if($fileDeleted) {
             $message = 'File deleted successfully!';
         }

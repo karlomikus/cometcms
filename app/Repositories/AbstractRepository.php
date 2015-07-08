@@ -42,7 +42,16 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      */
     public function insert($data)
     {
-        return $this->model->create($data);
+        $model = null;
+
+        try {
+            $model = $this->model->create($data);
+        }
+        catch (\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+        }
+
+        return $model;
     }
 
     /**
@@ -52,7 +61,16 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      */
     public function update($id, $data)
     {
-        return $this->model->find($id)->update($data);
+        $model = null;
+
+        try {
+            $model = $this->model->find($id)->update($data);
+        }
+        catch (\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+        }
+
+        return $model;
     }
 
     /**
@@ -61,7 +79,16 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      */
     public function delete($id)
     {
-        return $this->model->find($id)->delete();
+        $deleted = false;
+
+        try {
+            $deleted = $this->model->find($id)->delete();
+        }
+        catch (\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+        }
+
+        return $deleted;
     }
 
 }

@@ -24,7 +24,7 @@
                                 {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
                                 @if(!empty($opponent->image))
                                     <div class="uploaded-file">
-                                        <a class="btn-image-delete" href="/admin/opponents/delete-image/{{ $opponent->id }}" data-ajax="get"><i class="fa fa-fw fa-remove"></i></a>
+                                        <a class="btn btn-xs btn-corner btn-overlay" href="/admin/opponents/delete-image/{{ $opponent->id }}" data-ajax="get"><i class="fa fa-fw fa-remove"></i></a>
                                         <img src="/uploads/opponents/{{ $opponent->image }}" alt="Image"/>
                                     </div>
                                 @endif
@@ -49,7 +49,7 @@
             $(".uploaded-file").remove();
         }
         else {
-            console.log(data.message);
+            alert(data.message);
         }
     }
 </script>
