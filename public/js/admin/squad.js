@@ -72,6 +72,13 @@ var SquadMemberViewModel = function (parent, memberData) {
     self.status = ko.observable(memberData.pivot.status);
     self.captain = ko.observable(memberData.pivot.captain);
 
+    var userImage = memberData.image;
+    if(userImage == null) {
+        userImage = 'noavatar.jpg';
+    }
+
+    self.image = ko.observable(userImage);
+
     self.addToMembers = function() {
         // Check if member is already added to team
         var exists = $.grep(parent.members(), function(e) { return e.user_id() === self.user_id(); });

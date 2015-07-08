@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="col-md-12" data-bind="foreach: members">
                                 <div class="squad-member">
-                                    <img src="http://placehold.it/180x180" alt="Avatar">
+                                    <img alt="Avatar" data-bind="attr: {src: '/uploads/users/' + image()}">
                                     <button class="btn btn-xs btn-corner btn-overlay" data-bind="click: removeFromMembers"><i class="fa fa-remove"></i></button>
                                     <div class="squad-member-info">
                                         <h4 data-bind="text: name"></h4>
