@@ -3,14 +3,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Session;
+use App\Services\AlertsService;
 
 class AdminController extends Controller {
 
-    private $alerts = [];
+    protected $alerts;
 
     public function __construct()
     {
-        //Session::flash('alerts', $this->alerts);
+        $this->alerts = new AlertsService();
     }
 
 } 

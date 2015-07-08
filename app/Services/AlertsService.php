@@ -27,11 +27,6 @@ class AlertsService {
         return $this->alert($message, 'info');
     }
 
-    public function setExceptionMessage($str)
-    {
-        $this->exceptionMessage = $str;
-    }
-
     public function alert($message, $alertType = 'info')
     {
         $this->alerts[] = [

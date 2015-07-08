@@ -607,6 +607,16 @@ $match-games-border-color: darken($color-light-bg, 6%);
     color: #ccc;
     margin-top: 0;
   }
+  ul {
+    margin: 5px 15px;
+    padding: 0;
+    li {
+      color: $brand-danger;
+      span {
+        color: $color-primary-dark;
+      }
+    }
+  }
 }
 
 .alert-danger {
@@ -624,6 +634,8 @@ $match-games-border-color: darken($color-light-bg, 6%);
     color: $brand-success;
   }
 }
+
+@import "datepicker";
 
 .dropdown-menu {
   border-radius: 0;

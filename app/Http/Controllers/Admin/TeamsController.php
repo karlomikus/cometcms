@@ -9,12 +9,10 @@ use App\Http\Requests\SaveTeamRequest;
 class TeamsController extends AdminController {
 
     protected $teams;
-    private $alerts;
 
     public function __construct(TeamsRepositoryInterface $teams)
     {
-        //parent::__construct();
-        $this->alerts = new \App\Services\AlertsService();
+        parent::__construct();
         $this->teams = $teams;
     }
 

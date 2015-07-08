@@ -12,8 +12,8 @@
                     <div class="col-md-10">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="name">Squad name</label>
-                                <input type="text" id="name" name="name" class="form-control" data-bind="value: name">
+                                <label for="name" class="control-label">Squad name</label>
+                                <input type="text" id="name" name="name" class="form-control" minlength="3" data-bind="value: name" required>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">

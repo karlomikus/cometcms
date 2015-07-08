@@ -7,7 +7,6 @@
 
     <title>CometCMS App</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300|Montserrat' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('/css/app-admin.css') }}">
@@ -86,39 +85,37 @@
     </div>
 </section>
 
-@if(Session::has('alerts'))
+@if(Session::has('alerts') || $errors->any())
     <!-- Custom alerts -->
     <div class="container">
-    @foreach(Session::get('alerts') as $alert)
-        <div class="alert alert-{{ $alert['type'] }} alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-            @if($alert['type'] == 'success')
-                <h3>Success!</h3>
-            @else
-                <h3>An error occured!</h3>
-            @endif
-            {{ $alert['message'] }}
-            @if($alert['exception'])
-                <hr>
-                <strong class="text-danger">Related exception message <i class="fa fa-caret-down"></i></strong><br>
-                {{ $alert['exception'] }}
-            @endif
-        </div>
-    @endforeach
-    </div>
-@endif
-
-@if($errors->any())
-    <!-- Framework errors -->
-    <div class="container">
-
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-            <h3>An error occured!</h3>
-            @foreach($errors->all() as $error)
-                {{ $error }}<br/>
+        @if($errors->any())
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                <h3>Validation error!</h3>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li><span>{{ $error }}</span></li>
+                    @endforeach
+                </ul>
+            </div>
+        @else
+            @foreach(Session::get('alerts') as $alert)
+                <div class="alert alert-{{ $alert['type'] }} alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    @if($alert['type'] == 'success')
+                        <h3>Success!</h3>
+                    @else
+                        <h3>An error occured!</h3>
+                    @endif
+                    {{ $alert['message'] }}
+                    @if($alert['exception'])
+                        <hr>
+                        <strong class="text-danger">Related exception message <i class="fa fa-caret-down"></i></strong><br>
+                        {{ $alert['exception'] }}
+                    @endif
+                </div>
             @endforeach
-        </div>
+        @endif
     </div>
 @endif
 
@@ -127,6 +124,7 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.validation/1.13.1/jquery.validate.min.js"></script>
 @yield('page-scripts-before')
 <script src="{{ asset('/js/dependencies.js') }}"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
