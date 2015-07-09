@@ -84,7 +84,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
-        $sortColumn !== null ?: $sortColumn = 'created_at'; // Default order by column
+        $sortColumn !== null ?: $sortColumn = 'date'; // Default order by column
         $order !== null ?: $order = 'asc'; // Default sorting
 
         $model = $this->model

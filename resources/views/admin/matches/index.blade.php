@@ -30,7 +30,7 @@
                 <table class="table table-admin table-grid">
                     <thead>
                         <tr>
-                            <th>{!! Form::gridHeader('Played on', 'created_at', 'Admin\MatchesController@index', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('Played on', 'date', 'Admin\MatchesController@index', $headerAttr) !!}</th>
                             <th>{!! Form::gridHeader('Team', 'teams.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
                             <th>{!! Form::gridHeader('Opponent', 'opponents.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
                             <th>{!! Form::gridHeader('Game', 'games.name', 'Admin\MatchesController@index', $headerAttr) !!}</th>
@@ -46,7 +46,7 @@
                         @endif
                         @foreach($data as $match)
                             <tr>
-                                <td><a href="{{ url('admin/matches/edit', [$match->id]) }}">{{ $match->created_at->format('d.m.Y') }}</a></td>
+                                <td><a href="{{ url('admin/matches/edit', [$match->id]) }}">{{ $match->date->format('d.m.Y - H:i') }}</a></td>
                                 <td>{{ $match->team->name }}</td>
                                 <td>{{ $match->opponent->name }}</td>
                                 <td>{{ $match->game->name }}</td>

@@ -16,6 +16,7 @@ class MatchesController extends AdminController {
 
     public function __construct(MatchesRepositoryInterface $matches)
     {
+        parent::__construct();
         $this->matches = $matches;
     }
     /**
@@ -34,7 +35,7 @@ class MatchesController extends AdminController {
         $grid = new GridView($this->matches);
         $grid->setOrder($order, 'desc');
         $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'created_at');
+        $grid->setSortColumn($sortColumn, 'date');
         $grid->setPath($request->getPathInfo());
 
         $data = $grid->gridPage($page, 15);
@@ -77,19 +78,17 @@ class MatchesController extends AdminController {
     {
         $data = $request->all();
 
-        if($this->matches->insert($data))
-            $this->alertSuccess('Match saved successfully.');
-        else
-        {
-            $this->alertError('Unable to save a match.');
+        if($this->matches->insert($data)) {
+            $this->alerts->alertSuccess('Match saved successfully.');
         }
-
-        \Session::flash('alerts', $this->getAlerts());
+        else {
+            $this->alerts->alertError('Unable to save a match.');
+        }
 
         // Browsers are dumb and can't follow 302 redirect from ajax call
         // return redirect('admin/matches')->with('alerts', $this->getAlerts());
         // So we return JSON response containing location which we redirect to with js
-        return response()->json(['location' => '/admin/matches', 'alerts' => $this->getAlerts()]);
+        return response()->json(['location' => '/admin/matches', 'alerts' => $this->alerts->getAlerts()]);
     }
 
     public function edit($id, TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)

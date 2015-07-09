@@ -26,6 +26,7 @@ class Match extends Model {
 
     protected $guarded = ['id'];
     protected $appends = ['participants'];
+    protected $dates = ['date'];
 
     public function opponent()
     {
