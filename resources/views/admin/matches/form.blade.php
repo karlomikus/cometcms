@@ -14,7 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="game">Choose game</label>
-                                    <select class="form-control games-dropdown" id="game" name="game" style="width: 100%" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'id', optionsAfterRender: setGameIcons">
+                                    <select class="form-control games-dropdown" id="game" name="game" style="width: 100%" data-bind="value: game_id, options: games, optionsText: 'name', optionsValue: 'id', optionsAfterRender: setGameIcons" required>
                                     </select>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="match-date">Match date</label>
-                                    <input type="text" id="match-date" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" placeholder="Played on date..." data-bind="value: match_date" />
+                                    <input type="text" id="match-date" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" placeholder="Played on date..." data-rule-dateISO="true" data-bind="value: match_date" required />
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="team">Choose team</label>
-                                <select class="form-control" id="team" name="team" data-bind="value: team_id, event: {change: fetchTeamMembers}, disable: searchingTeamMembers()">
+                                <select class="form-control" id="team" name="team" data-bind="value: team_id, event: {change: fetchTeamMembers}, disable: searchingTeamMembers()" required>
                                     @foreach($teams as $team)
                                         <option value="{{ $team->id }}">{{ $team->name }}</option>
                                     @endforeach
@@ -64,7 +64,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="opponent">Choose opponent</label>
-                                <select class="form-control" id="opponent" name="opponent" data-bind="value: opponent_id">
+                                <select class="form-control" id="opponent" name="opponent" data-bind="value: opponent_id" required>
                                     @foreach($opponents as $opponent)
                                         <option value="{{ $opponent->id }}">{{ $opponent->name }}</option>
                                     @endforeach
@@ -138,13 +138,13 @@
                                             <div class="form-group">
                                                 <label>TEAM SCORE</label>
                                                 <input type="number" class="form-control form-control-dark" placeholder="Team score"
-                                                       data-bind="value: home"/>
+                                                       data-bind="value: home, attr: {name: 'scoreTeam['+$parentContext.$index()+']['+$index()+']'}" data-rule-digits="true" required />
                                             </div>
                                             <div class="form-group">
                                                 <label>OPPONENT SCORE</label>
                                                 <input type="number" class="form-control form-control-dark"
                                                        placeholder="Opponent score"
-                                                       data-bind="value: guest"/>
+                                                       data-bind="value: guest, attr: {name: 'scoreOpponent['+$parentContext.$index()+']['+$index()+']'}" data-rule-digits="true" required />
                                             </div>
                                         </div>
                                         <button class="btn-remove-score" data-bind="click: $parent.removeScore">Remove score</button>
