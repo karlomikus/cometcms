@@ -104,7 +104,6 @@ var SquadMemberViewModel = function (parent, memberData) {
 };
 
 $(document).ready(function () {
-    $("#squad-form").validate();
     /**
      * Data binding
      */

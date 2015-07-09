@@ -81,5 +81,7 @@ $(document).ready(function () {
             }
         }
     });
+
+    $('form').validate();
 });
 //# sourceMappingURL=main.js.map

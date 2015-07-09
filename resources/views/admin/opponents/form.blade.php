@@ -12,7 +12,7 @@
                         <div class="col-md-10">
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                 {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
-                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required', 'minlength' => '3']) !!}
                                 {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                             </div>
                             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
