@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Matches</div>
                     <div class="panel-body">
-                        Won: 1, lose, 2, draw,3
+                        Something
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -20,6 +20,11 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ date('Y') }} Match statistics</div>
+                    <div class="panel-strip row">
+                        <div class="col-md-4">WON: 1</div>
+                        <div class="col-md-4">LOSE: 5</div>
+                        <div class="col-md-4">DRAW: 4</div>
+                    </div>
                     <div class="panel-body">
                         <canvas id="matches-graph" style="width: 100%; height: 200px;"></canvas>
                     </div>
@@ -35,7 +40,8 @@
 @section('page-scripts')
     <script>
         var options = {
-            responsive: true
+            //responsive: true,
+            barShowStroke: false
         };
 
         var data = {
@@ -43,8 +49,7 @@
             datasets: [
                 {
                     label: "Lost",
-                    fillColor: "rgba(255,0,0,0.2)",
-                    strokeColor: "rgba(255,0,0,1)",
+                    fillColor: "#ed6a5a",
                     pointColor: "rgba(255,0,0,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
@@ -53,8 +58,7 @@
                 },
                 {
                     label: "Won",
-                    fillColor: "rgba(0,255,0,0.2)",
-                    strokeColor: "rgba(0,255,0,1)",
+                    fillColor: "#5ca4a9",
                     pointColor: "rgba(0,255,0,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
@@ -63,8 +67,7 @@
                 },
                 {
                     label: "Draw",
-                    fillColor: "rgba(255,255,0,0.2)",
-                    strokeColor: "rgba(255,255,0,1)",
+                    fillColor: "#f4f1bb",
                     pointColor: "rgba(255,255,0,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
@@ -75,6 +78,6 @@
         };
 
         var ctx = $("#matches-graph").get(0).getContext("2d");
-        var matchesChart = new Chart(ctx).Bar(data);
+        var matchesChart = new Chart(ctx).Bar(data, options);
     </script>
 @endsection
