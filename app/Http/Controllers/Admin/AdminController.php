@@ -8,10 +8,12 @@ use App\Services\AlertsService;
 class AdminController extends Controller {
 
     protected $alerts;
+    protected $currentUser;
 
     public function __construct()
     {
         $this->alerts = new AlertsService();
+        $this->currentUser = \Auth::user();
     }
 
 } 
