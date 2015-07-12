@@ -55,8 +55,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users management <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/admin/users') }}">Users</a></li>
-                        <li><a href="{{ url('/admin/roles') }}">Roles</a></li>
-                        <li><a href="{{ url('/admin/permissions') }}">Permissions</a></li>
+                        <li><a href="{{ url('/admin/roles') }}">User roles</a></li>
                     </ul>
                 </li>
             </ul>

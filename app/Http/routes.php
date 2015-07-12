@@ -91,4 +91,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/matches/api/edit/{id}', 'Admin\MatchesController@getMatchJson');
     Route::get('/matches/api/meta', 'Admin\MatchesController@getMetaJson');
     Entrust::routeNeedsPermission('admin/matches/new', 'create-match', Redirect::to('/admin'));
+
+    /**
+     * User roles
+     */
+    Route::get('/roles', 'Admin\RolesController@index');
+    Route::get('/roles/new', 'Admin\RolesController@create');
+    Route::post('/roles/new', 'Admin\RolesController@save');
+    Route::get('/roles/edit/{id}', 'Admin\RolesController@edit');
+    Route::post('/roles/edit/{id}', 'Admin\RolesController@update');
+    Route::get('/roles/delete/{id}', 'Admin\RolesController@delete');
 });
