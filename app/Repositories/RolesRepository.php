@@ -15,11 +15,22 @@ class RolesRepository extends AbstractRepository implements RolesRepositoryInter
         $this->permission = $permission;
     }
 
+    /**
+     * Get all existing permissions
+     * 
+     * @return mixed
+     */
     public function getAllPermissions()
     {
         return $this->permission->get();
     }
 
+    /**
+     * Get permissions for a specified role ID
+     * 
+     * @param  int $roleID Role ID
+     * @return mixed
+     */
     public function getRolePermissions($roleID)
     {
         return $this->get($roleID)->perms;

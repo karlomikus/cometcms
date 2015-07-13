@@ -37,7 +37,7 @@
                         @endif
                         @foreach($data as $role)
                             <tr>
-                                <td><a href="{{ url('admin/roles/edit', [$role->id]) }}">{{ $role->name }}</a></td>
+                                <td><a href="{{ url('admin/roles/edit', [$role->id]) }}">{{ $role->display_name }}</a></td>
                                 <td>{{ $role->description }}</td>
                                 <td>
                                     <a href="{{ url('admin/roles/delete', [$role->id]) }}" class="text-delete" data-confirm="Are you sure that you want to delete this role?">Delete</a>

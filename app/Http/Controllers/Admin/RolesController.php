@@ -3,6 +3,7 @@
 use App\Libraries\GridView\GridView;
 use App\Repositories\Contracts\RolesRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RolesController extends AdminController {
 
@@ -10,6 +11,7 @@ class RolesController extends AdminController {
 
     public function __construct(RolesRepositoryInterface $roles)
     {
+        parent::__construct();
         $this->roles = $roles;
     }
 
@@ -38,73 +40,73 @@ class RolesController extends AdminController {
         $template = [
             'pageTitle' => 'Create new role',
             'perms' => $this->roles->getAllPermissions(),
-            'model' => null
+            'model' => null,
+            'selectedPerms' => []
         ];
 
         return view('admin.roles.form', $template);
     }
 
-    // public function save(SaveGameRequest $request, MapsRepositoryInterface $maps)
-    // {
-    //     $game = $this->games->insert([
-    //         'name'  => $request->input('name'),
-    //         'code'  => $request->input('code'),
-    //         'image' => null
-    //     ]);
+    public function save(Request $request)
+    {
+        $displayName = $request->input('display_name');
+        $name = Str::slug($displayName);
 
-    //     if ($game) {
-    //         if ($request->hasFile('image')) {
-    //             $this->games->insertImage($game->id, $request->file('image'));
-    //         }
-    //         // Insert maps
-    //         if ($request->has('mapname')) {
-    //             $mapNames = $request->input('mapname');
-    //             $totalMaps = count($mapNames);
-    //             for ($i = 0; $i < $totalMaps; $i ++) {
-    //                 if (!empty($mapNames[$i]))
-    //                     $maps->insertMap($mapNames[$i], $game->id, $request->file('mapimage')[$i]);
-    //             }
-    //         }
+        $role = $this->roles->insert([
+            'name'  => $name,
+            'display_name'  => $displayName,
+            'description' => $request->input('description')
+        ]);
 
-    //         $this->alertSuccess('New game created successfully!');
-    //     } else {
-    //         $this->alertError('Game creation failed!');
-    //     }
+        $perms = $request->input('perms');
 
-    //     return redirect('admin/games')->with('alerts', $this->getAlerts());
-    // }
+        if ($role) {
+            $role->attachPermissions($perms);
+            $this->alerts->alertSuccess('New role created successfully!');
+        }
+        else {
+            $this->alerts->alertError('Role creation failed!');
+        }
 
-    // public function edit($id, MapsRepositoryInterface $maps)
-    // {
-    //     $data['pageTitle'] = 'Editing a game';
-    //     $data['maps'] = $maps->getByGame($id)->toJson();
-    //     $data['model'] = $this->games->get($id);
+        $this->alerts->getAlerts();
 
-    //     return view('admin.games.form', $data);
-    // }
+        return redirect('admin/roles');
+    }
 
-    // public function update($id, SaveGameRequest $request, MapsRepositoryInterface $maps)
-    // {
-    //     $game = $this->games->update($id, [
-    //         'name' => $request->input('name'),
-    //         'code' => $request->input('code')
-    //     ]);
+    public function edit($id)
+    {
+        $roleData = $this->roles->get($id);
+        $template = [
+            'pageTitle' => 'Editing a role',
+            'model' => $roleData,
+            'perms' => $this->roles->getAllPermissions(),
+            'selectedPerms' => $roleData->perms->lists('id')->toArray()
+        ];
 
-    //     if ($game) {
-    //         if ($request->hasFile('image')) {
-    //             $this->games->updateImage($id, $request->file('image'));
-    //         }
+        return view('admin.roles.form', $template);
+    }
 
-    //         if ($request->has('mapname')) {
-    //             $maps->updateMaps($request->input('mapname'), $request->input('mapid'), $id, $request->file('mapimage'));
-    //         }
+    public function update($id, Request $request)
+    {
+        $displayName = $request->input('display_name');
+        $name = Str::slug($displayName);
 
-    //         $this->alertSuccess('Game edited successfully!');
-    //     } else {
-    //         $this->alertError('Game edit failed!');
-    //     }
+        $role = $this->roles->update($id, [
+            'display_name' => $displayName,
+            'name' => $name,
+            'description' => $request->input('description')
+        ]);
 
-    //     return redirect('admin/games')->with('alerts', $this->getAlerts());
-    // }
+        if ($role) {
+            $this->alerts->alertSuccess('Role edited successfully!');
+        }
+        else {
+            $this->alerts->alertError('Role edit failed!');
+        }
+
+        $this->alerts->getAlerts();
+
+        return redirect('admin/roles');
+    }
 
 }

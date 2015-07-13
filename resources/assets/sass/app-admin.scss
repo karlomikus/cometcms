@@ -84,7 +84,8 @@ body {
 
 a.text-delete {
   color: $brand-danger;
-  border-bottom: 1px dashed $brand-danger;
+  border: 1px solid $brand-danger;
+  background: #fff;
   text-decoration: none;
   padding: 0 5px;
   &:hover, &:focus, &:active {
@@ -532,6 +533,11 @@ $match-games-border-color: darken($color-light-bg, 6%);
   }
 }
 
+// Roles
+.role-info {
+  margin-bottom: 10px;
+}
+
 // Admin forms
 .admin-form {
   hr {
@@ -558,6 +564,10 @@ $match-games-border-color: darken($color-light-bg, 6%);
   border-width: 2px;
 }
 
+.btn-default {
+  background-color: #f3f3f3;
+}
+
 .btn-dark {
   padding: 5px 10px;
   border-color: lighten($color-primary-dark, 5%);
@@ -571,6 +581,22 @@ $match-games-border-color: darken($color-light-bg, 6%);
   &:hover, &:active, &:focus {
     color: #fff;
     border-color: $input-border-focus;
+  }
+}
+
+.btn-border {
+  background: #fff;
+  &.btn-success {
+    color: $color-primary-dark;
+    border: 1px solid $input-border;
+    &:hover {
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      border-width: 2px;
+      background: $brand-success;
+      color: #fff;
+    }
   }
 }
 
@@ -645,6 +671,22 @@ $match-games-border-color: darken($color-light-bg, 6%);
   color: $color-primary-dark;
   h3 {
     color: $brand-success;
+  }
+}
+
+.alert-info {
+  border-left-color: $brand-info;
+  color: $color-primary-dark;
+  h3 {
+    color: $brand-info;
+  }
+}
+
+.alert-warning {
+  border-left-color: $brand-warning;
+  color: $color-primary-dark;
+  h3 {
+    color: $brand-warning;
   }
 }
 

@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {!! Form::model($model, ['id' => 'opponent-form']) !!}
+                {!! Form::model($model, ['id' => 'role-form']) !!}
                     <div class="row">
                         <div class="col-md-2">
                             <h4 class="form-subtitle">Information</h4>
@@ -29,12 +29,23 @@
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
-                                {!! Form::label('perms', 'Choose', ['class' => 'control-label']) !!}
-                                <select class="form-control" name="perms" id="perms" multiple>
-                                    @foreach($perms as $perm)
-                                        <option value="{{ $perm->id }}">{{ $perm->display_name }}</option>
-                                    @endforeach
-                                </select>
+                                @if(isset($model) && $model->id == 1)
+                                    <div class="alert alert-warning">
+                                        <h3>Notice!</h3>
+                                        You are editing a base role, choosing permissions is disabled!
+                                    </div>
+                                @endif
+                                <button class="btn btn-sm btn-default" type="button">Check all</button>
+                                <button class="btn btn-sm btn-default" type="button">Uncheck all</button>
+                                <br>
+                                @foreach($perms as $perm)
+                                    <div class="role-info checkbox">
+                                        <label>
+                                            <input type="checkbox" value="{{ $perm->id }}" name="perms[]" {{ in_array($perm->id, $selectedPerms) == true ? 'checked' : '' }} {{ (isset($model) && $model->id == 1) ? 'disabled' : '' }}> {{ $perm->display_name }}
+                                        </label>
+                                        <p class="help-block">{{ $perm->description }}</p>
+                                    </div>
+                                @endforeach
                             </div>
                             <hr>
                         </div>
@@ -46,17 +57,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('page-scripts')
-    <script>
-    function ajaxCallbackSuccess(data) {
-        if(data.success == true) {
-            $(".uploaded-file").remove();
-        }
-        else {
-            alert(data.message);
-        }
-    }
-</script>
 @endsection

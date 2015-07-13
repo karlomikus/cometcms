@@ -5807,7 +5807,8 @@ body {
 
 a.text-delete {
   color: #fe5f55;
-  border-bottom: 1px dashed #fe5f55;
+  border: 1px solid #fe5f55;
+  background: #fff;
   text-decoration: none;
   padding: 0 5px; }
   a.text-delete:hover, a.text-delete:focus, a.text-delete:active {
@@ -6138,6 +6139,9 @@ label {
     .map-list .map .map-form input[type="file"] {
       color: #fff; }
 
+.role-info {
+  margin-bottom: 10px; }
+
 .admin-form hr {
   margin: 40px 0; }
 
@@ -6158,6 +6162,9 @@ label {
   border-left: 0;
   border-width: 2px; }
 
+.btn-default {
+  background-color: #f3f3f3; }
+
 .btn-dark {
   padding: 5px 10px;
   border-color: #373c51;
@@ -6171,6 +6178,19 @@ label {
   .btn-dark:hover, .btn-dark:active, .btn-dark:focus {
     color: #fff;
     border-color: #66afe9; }
+
+.btn-border {
+  background: #fff; }
+  .btn-border.btn-success {
+    color: #2d3142;
+    border: 1px solid #c8cbd9; }
+    .btn-border.btn-success:hover {
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      border-width: 2px;
+      background: #2ec4b6;
+      color: #fff; }
 
 .modal-content {
   border-radius: 0; }
@@ -6228,6 +6248,18 @@ label {
   color: #2d3142; }
   .alert-success h3 {
     color: #2ec4b6; }
+
+.alert-info {
+  border-left-color: #5bc0de;
+  color: #2d3142; }
+  .alert-info h3 {
+    color: #5bc0de; }
+
+.alert-warning {
+  border-left-color: #ff9f1c;
+  color: #2d3142; }
+  .alert-warning h3 {
+    color: #ff9f1c; }
 
 .panel {
   border-radius: 0;
