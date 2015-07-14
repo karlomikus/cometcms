@@ -30,8 +30,6 @@ Route::get('/match/{id}', 'MatchesController@show');
 /**
  * Admin routes
  */
-Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
 {
     Route::get('/', 'Admin\DashboardController@index');
@@ -82,15 +80,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     /**
      * Matches
      */
-    Route::get('/matches', 'Admin\MatchesController@index');
-    Route::get('/matches/new', 'Admin\MatchesController@create');
-    Route::post('/matches/new', 'Admin\MatchesController@save');
-    Route::get('/matches/edit/{id}', 'Admin\MatchesController@edit');
-    Route::post('/matches/edit/{id}', 'Admin\MatchesController@update');
-    Route::get('/matches/delete/{id}', 'Admin\MatchesController@delete');
-    Route::get('/matches/api/edit/{id}', 'Admin\MatchesController@getMatchJson');
-    Route::get('/matches/api/meta', 'Admin\MatchesController@getMetaJson');
-    Entrust::routeNeedsPermission('admin/matches/new', 'create-match', Redirect::to('/admin'));
+    Route::group(['prefix' => 'matches'], function()
+    {
+        Route::get('/', 'Admin\MatchesController@index');
+        Route::get('/new', 'Admin\MatchesController@create');
+        Route::post('/new', 'Admin\MatchesController@save');
+        Route::get('/edit/{id}', 'Admin\MatchesController@edit');
+        Route::post('/edit/{id}', 'Admin\MatchesController@update');
+        Route::get('/delete/{id}', 'Admin\MatchesController@delete');
+        Route::get('/api/edit/{id}', 'Admin\MatchesController@getMatchJson');
+        Route::get('/api/meta', 'Admin\MatchesController@getMetaJson');
+    });
 
     /**
      * User roles
@@ -102,3 +102,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/roles/edit/{id}', 'Admin\RolesController@update');
     Route::get('/roles/delete/{id}', 'Admin\RolesController@delete');
 });
+
+Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
+
+Entrust::routeNeedsPermission('admin/matches/new', 'create-match');
+Entrust::routeNeedsPermission('admin/matches/edit', 'edit-match');
+Entrust::routeNeedsPermission('admin/matches/delete', 'delete-match');
