@@ -34,14 +34,14 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="image">Image</label>
                                     <input id="file-image" type="file" name="image" id="image">
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <hr/>
                     </div>
                 </div>
@@ -84,6 +84,21 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><h4 class="form-subtitle">Member history</h4></div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-group">
+                                    @foreach($history as $member)
+                                        <li class="list-group-item">{{ $member->name }} ({{ $member->position }}) removed on {{ $member->replaced }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                         <hr>

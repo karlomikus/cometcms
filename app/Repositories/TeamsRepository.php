@@ -5,8 +5,11 @@ use App\Libraries\GridView\GridViewInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Team;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Libraries\ImageUploadTrait as ImageUpload;
 
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface {
+
+    use ImageUpload;
 
     private $uploadPath;
 
@@ -74,12 +77,11 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     {
         try {
             \DB::beginTransaction();
-            //dd($data);
             $teamModel = parent::update($id, $data);
 
             if ($teamModel) {
-                $this->deleteAllMembers($id);
-                $this->insertMembers($data['members'], $id);
+                //$this->deleteAllMembers($id);
+                $this->updateMembers($data['members']);
             }
         } catch (\Exception $e) {
             \DB::rollback();
@@ -91,29 +93,6 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         \DB::commit();
 
         return true;
-    }
-
-    /**
-     * Uploads the image and updates database reference
-     *
-     * @param  UploadedFile $file File
-     * @param  int $teamID ID of the team
-     * @return bool               Was file uploaded or not
-     */
-    public function updateImage(UploadedFile $file, $teamID)
-    {
-        $imageName = $teamID . '.' . $file->getClientOriginalExtension();
-
-        try {
-            $file->move($this->uploadPath, $imageName);
-            $this->update($teamID, ['image' => $imageName]);
-
-            return true;
-        } catch (\Exception $e) {
-            \Session::flash('exception', $e->getMessage());
-
-            return false;
-        }
     }
 
     /**
@@ -144,6 +123,30 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         \DB::commit();
 
         return true;
+    }
+
+    public function updateMembers($roster)
+    {
+        $table = \DB::table('team_roster');
+        $orgMembers = $table->where('id', $member['member_id'])->get(['user_id']);
+        foreach ($roster as $member) {
+            $table
+            ->where('id', $member['member_id'])
+            ->update([
+                'position' => isset($member['position']) ? $member['position'] : null,
+                'status'   => isset($member['status']) ? $member['status'] : null,
+                'captain'  => isset($member['captain']) ? $member['captain'] : 0
+            ]);
+        }
+    }
+
+    public function getMembersHistory($teamID)
+    {
+        return \DB::table('team_roster')
+                ->where('team_roster.team_id', $teamID)
+                ->whereNotNull('team_roster.deleted_at')
+                ->join('users', 'team_roster.user_id', '=', 'users.id')
+                ->get(['team_roster.position', 'team_roster.deleted_at as replaced', 'users.*']);
     }
 
     /**

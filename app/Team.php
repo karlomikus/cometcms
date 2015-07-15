@@ -29,7 +29,9 @@ class Team extends Model {
 
     public function roster()
     {
-        return $this->belongsToMany('App\User', 'team_roster')->withPivot('position', 'captain', 'status', 'id');
+        return $this->belongsToMany('App\User', 'team_roster')
+                ->whereNull('team_roster.deleted_at')
+                ->withPivot('position', 'captain', 'status', 'id');
     }
 
 }

@@ -23,15 +23,6 @@ interface TeamsRepositoryInterface {
     public function insertMembers($data, $teamID);
 
     /**
-     * Uploads the image and updates database reference
-     *
-     * @param  UploadedFile $file File
-     * @param  int $teamID ID of the team
-     * @return bool               Was file uploaded or not
-     */
-    public function updateImage(UploadedFile $file, $teamID);
-
-    /**
      * Delete all members from specific team
      *
      * @param  int $teamID Team ID

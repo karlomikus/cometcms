@@ -31,9 +31,9 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      * @param $columns
      * @return mixed
      */
-    public function get($id, $columns = ['*'])
+    public function get($id, $with = [], $columns = ['*'])
     {
-        return $this->model->find($id, $columns);
+        return $this->model->with($with)->find($id, $columns);
     }
 
     /**

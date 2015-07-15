@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Libraries\GridView\GridView;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Repositories\Contracts\GamesRepositoryInterface;
 use Illuminate\Http\Request;
@@ -45,7 +44,8 @@ class TeamsController extends AdminController {
 
         if ($team) {
             $this->alerts->alertSuccess('Squad saved successfully.');
-        } else {
+        }
+        else {
             $this->alerts->alertError('Unable to save a squad.');
         }
 
@@ -59,6 +59,7 @@ class TeamsController extends AdminController {
             'pageTitle' => 'Editing an squad',
             'modelData' => $this->teams->getTeamData($id),
             'games' => $games->all(),
+            'history' => $this->teams->getMembersHistory($id)
         ];
 
         return view('admin.teams.form', $template);
@@ -71,7 +72,8 @@ class TeamsController extends AdminController {
 
         if ($team) {
             $this->alerts->alertSuccess('Squad edited successfully.');
-        } else {
+        }
+        else {
             $this->alerts->alertError('Unable to edit a squad.');
         }
         
@@ -80,10 +82,12 @@ class TeamsController extends AdminController {
 
     public function delete($id)
     {
-        if ($this->teams->delete($id))
+        if ($this->teams->delete($id)) {
             $this->alerts->alertSuccess('Squad deleted succesfully!');
-        else
+        }
+        else {
             $this->alerts->alertError('Unable to delete squad!');
+        }
 
         $this->alerts->getAlerts();
         

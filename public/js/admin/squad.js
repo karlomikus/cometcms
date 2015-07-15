@@ -64,7 +64,7 @@ var SquadViewModel = function (squadData) {
 var SquadMemberViewModel = function (parent, memberData) {
     var self = this;
 
-    self.member_id = ko.observable(memberData.id);
+    self.member_id = ko.observable(memberData.pivot.id);
     self.user_id = ko.observable(memberData.pivot.user_id);
     self.name = ko.observable(memberData.name);
     self.team_id = ko.observable(parent.team_id);
