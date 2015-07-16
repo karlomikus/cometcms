@@ -6,6 +6,7 @@ use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Team;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Libraries\ImageUploadTrait as ImageUpload;
+use Carbon\Carbon;
 
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface {
 
@@ -81,7 +82,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
 
             if ($teamModel) {
                 //$this->deleteAllMembers($id);
-                $this->updateMembers($data['members']);
+                $this->updateMembers($data['members'], $id);
             }
         } catch (\Exception $e) {
             \DB::rollback();
@@ -103,7 +104,10 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
      */
     public function deleteAllMembers($teamID)
     {
-        return \DB::table('team_roster')->where('team_id', '=', $teamID)->delete();
+        return \DB::table('team_roster')
+            ->where('team_id', '=', $teamID)
+            ->whereNull('deleted_at')
+            ->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
     }
 
     public function delete($teamID)
@@ -125,28 +129,44 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         return true;
     }
 
-    public function updateMembers($roster)
+    public function updateMembers($roster, $teamID)
     {
         $table = \DB::table('team_roster');
-        $orgMembers = $table->where('id', $member['member_id'])->get(['user_id']);
-        foreach ($roster as $member) {
-            $table
-            ->where('id', $member['member_id'])
-            ->update([
-                'position' => isset($member['position']) ? $member['position'] : null,
-                'status'   => isset($member['status']) ? $member['status'] : null,
-                'captain'  => isset($member['captain']) ? $member['captain'] : 0
-            ]);
+
+        // Get original team members user IDs and compare it to the ones we get from the form
+        $orgMembers = array_pluck($table->where('team_id', $teamID)->whereNull('deleted_at')->get(['user_id']), 'user_id');
+        $formMembers = array_pluck($roster, 'user_id');
+        
+        // If they are the same then we can just update the meta data
+        if ($orgMembers == $formMembers) {
+            foreach ($roster as $member) {
+                \DB::table('team_roster')->where('id', $member['member_id'])->update([
+                    'position' => isset($member['position']) ? $member['position'] : null,
+                    'status'   => isset($member['status']) ? $member['status'] : null,
+                    'captain'  => isset($member['captain']) ? $member['captain'] : 0
+                ]);
+            }
+        }
+        else { // Else we need to soft delete old roster and create new one
+            $this->deleteAllMembers($teamID);
+            $this->insertMembers($roster, $teamID);
         }
     }
 
     public function getMembersHistory($teamID)
     {
-        return \DB::table('team_roster')
+        $query = \DB::table('team_roster')
                 ->where('team_roster.team_id', $teamID)
                 ->whereNotNull('team_roster.deleted_at')
                 ->join('users', 'team_roster.user_id', '=', 'users.id')
                 ->get(['team_roster.position', 'team_roster.deleted_at as replaced', 'users.*']);
+
+        $group = array();
+        foreach ($query as $val) {
+            $group[Carbon::parse($val->replaced)->format('Y-m-d H:i')][] = $val;
+        }
+
+        return $group;
     }
 
     /**

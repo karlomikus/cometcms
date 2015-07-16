@@ -89,21 +89,26 @@
                         <hr>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2"><h4 class="form-subtitle">Member history</h4></div>
-                    <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="list-group">
-                                    @foreach($history as $member)
-                                        <li class="list-group-item">{{ $member->name }} ({{ $member->position }}) removed on {{ $member->replaced }}</li>
+                @if($history)
+                    <div class="row">
+                        <div class="col-md-2"><h4 class="form-subtitle">Roster history</h4></div>
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @foreach($history as $historyDate => $members)
+                                        <h3>{{ $historyDate }}</h3>
+                                        <ul class="list-group">
+                                            @foreach($members as $member)
+                                                <li class="list-group-item">{{ $member->name }} ({{ $member->position }})</li>
+                                            @endforeach
+                                        </ul>
                                     @endforeach
-                                </ul>
+                                </div>
                             </div>
+                            <hr>
                         </div>
-                        <hr>
                     </div>
-                </div>
+                @endif
                 <div class="text-right">
                     @if($team)
                     <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>

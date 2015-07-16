@@ -31,7 +31,8 @@ class TeamsController extends AdminController {
             'team' => null,
             'modelData' => 'null',
             'games' => $games->all(),
-            'pageTitle' => 'Create new squad'
+            'pageTitle' => 'Create new squad',
+            'history' => null
         ];
 
         return view('admin.teams.form', $template);
