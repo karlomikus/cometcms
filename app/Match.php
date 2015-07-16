@@ -45,13 +45,11 @@ class Match extends Model {
 
     public function getParticipantsAttribute()
     {
-        $teamParticipants = \DB::table('matches')
-            ->select('team_roster.*', 'users.name')
-            ->join('match_participants', 'match_participants.match_id', '=', 'matches.id')
+        $teamParticipants = $this->join('match_participants', 'match_participants.match_id', '=', 'matches.id')
             ->join('team_roster', 'team_roster.id', '=', 'match_participants.roster_id')
             ->join('users', 'users.id', '=', 'team_roster.user_id')
             ->where('matches.id', '=', $this->id)
-            ->get();
+            ->get(['team_roster.*', 'users.name']);
 
         $opponentParticipants = preg_split("/[\t]/", $this->opponent_participants);
 
@@ -63,28 +61,40 @@ class Match extends Model {
         return $this->belongsTo('App\Game');
     }
 
-    public function getScoreAttribute()
-    {
-        // TODO: Optimize number of queries for matches scores, maybe use eloquent join...
-        $result = \DB::table('round_scores')
-            ->join('match_rounds', 'round_scores.round_id', '=', 'match_rounds.id')
-            ->select(\DB::raw('sum(home) as home, sum(guest) as guest'))
-            ->where('match_id', '=', $this->id)
-            ->first();
+    // public function getScoreAttribute()
+    // {
+    //     // $result = $this->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
+    //     // ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
+    //     // ->select(\DB::raw('sum(round_scores.home) as home, sum(round_scores.guest) as guest'))
+    //     // ->where('matches.id', $this->id)
+    //     // ->first();
+    //     //dd($result);
+    //     // TODO: Optimize number of queries for matches scores, maybe use eloquent join...
+    //     // $result = \DB::table('round_scores')
+    //     //     ->join('match_rounds', 'round_scores.round_id', '=', 'match_rounds.id')
+    //     //     ->select(\DB::raw('sum(home) as home, sum(guest) as guest'))
+    //     //     ->where('match_id', '=', $this->id)
+    //     //     ->first();
 
-        return $result;
-    }
+    //     $result = $this->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
+    //     ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
+    //     ->select(\DB::raw('sum(round_scores.home) as home, sum(round_scores.guest) as guest'))
+    //     ->where('matches.id', $this->id)
+    //     ->first();
 
-    public function getOutcomeAttribute()
-    {
-        $score = $this->getScoreAttribute();
+    //     return $result;
+    // }
 
-        if ($score->home > $score->guest)
-            return 'win';
-        elseif ($score->home < $score->guest)
-            return 'lose';
+    // public function getOutcomeAttribute()
+    // {
+    //     $score = $this->getScoreAttribute();
 
-        return 'draw';
-    }
+    //     if ($score->home > $score->guest)
+    //         return 'win';
+    //     elseif ($score->home < $score->guest)
+    //         return 'lose';
+
+    //     return 'draw';
+    // }
 
 }
