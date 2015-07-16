@@ -17,7 +17,7 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         $this->uploadPath = base_path() . '/public/uploads/maps/';
     }
 
-    public function insertMap($mapName, $gameID, $file)
+    public function insertMap($mapName, $gameID, $file = null)
     {
         try {
             $map = $this->model->create([
@@ -40,18 +40,29 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         }
     }
 
+    public function insertMaps($mapNames, $gameID, $mapImages = [])
+    {
+        $totalMaps = count($mapNames);
+        for ($i = 0; $i < $totalMaps; $i ++) {
+            if (!empty($mapNames[$i]))
+                $this->insertMap($mapNames[$i], $gameID, $mapImages[$i]);
+        }
+    }
+
     public function updateMaps($maps, $formMapIDs, $gameID, $files)
     {
-        $formMapIDs = array_map('intval', $formMapIDs); // Convert string values to integer
-        $currentMaps = array_values(array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray())); // Get current map values
+        // Convert string values to integer
+        $formMapIDs = array_map('intval', $formMapIDs);
+        // Get current database map values
+        $currentMaps = array_values(array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray()));
         $totalMaps = count($formMapIDs);
 
         // Update maps and insert new ones if any
         for ($i=0; $i < $totalMaps; $i++) {
-            if (empty($formMapIDs[$i])) {
+            if (empty($formMapIDs[$i])) { // Map doesn't exist
                 $this->insertMap($maps[$i], $gameID, $files[$i]);
             }
-            else {
+            else { // Update existing map
                 $mapImage = $this->get($formMapIDs[$i])->image;
                 if ($files[$i]) {
                     if ($mapImage) {

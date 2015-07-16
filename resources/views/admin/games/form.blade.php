@@ -41,7 +41,8 @@
                     <div class="col-md-10">
                         <div class="row">
                             <div class="col-md-12">
-                            <button class="btn btn-sm btn-success" type="button" data-bind="click: addMap"><i class="fa fa-plus"></i> Add map</button>
+                                <button class="btn btn-sm btn-success" type="button" data-bind="click: addMap"><i class="fa fa-plus"></i> Add map</button>
+                                <hr>
                                 <div class="map-list clearfix" data-bind="foreach: maps">
                                     <div class="map">
                                         <div class="map-image">

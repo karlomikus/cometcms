@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <a href="{{ url('admin/games/new') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add game</a>
             </div>
-            <form class="col-md-6" method="get" action="{{ url('admin/opponents') }}">
+            <form class="col-md-6" method="get" action="{{ url('admin/games') }}">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Enter search term..." value="{{ !empty($searchTerm) ? $searchTerm : "" }}" tabindex="1">
                     <span class="input-group-btn">

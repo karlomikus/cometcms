@@ -5,6 +5,7 @@ use App\Repositories\Contracts\GamesRepositoryInterface;
 use App\Repositories\Contracts\MapsRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveGameRequest;
+use Illuminate\Support\Str;
 
 class GamesController extends AdminController {
 
@@ -12,6 +13,7 @@ class GamesController extends AdminController {
 
     public function __construct(GamesRepositoryInterface $games)
     {
+        parent::__construct();
         $this->games = $games;
     }
 
@@ -37,20 +39,25 @@ class GamesController extends AdminController {
 
     public function create()
     {
-        $data['pageTitle'] = 'Create new game';
-        $data['maps'] = 'null';
-        $data['model'] = null;
+        $template = [
+            'pageTitle' => 'Create new game',
+            'maps' => 'null',
+            'model' => null
+        ];
 
-        return view('admin.games.form', $data);
+        return view('admin.games.form', $template);
     }
 
     public function save(SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
+        $code = Str::slug($request->input('code'));
+
         $game = $this->games->insert([
             'name'  => $request->input('name'),
-            'code'  => $request->input('code'),
+            'code'  => $code,
             'image' => null
         ]);
+        $formMaps = $request->input('mapname');
 
         if ($game) {
             if ($request->hasFile('image')) {
@@ -58,36 +65,39 @@ class GamesController extends AdminController {
             }
             // Insert maps
             if ($request->has('mapname')) {
-                $mapNames = $request->input('mapname');
-                $totalMaps = count($mapNames);
-                for ($i = 0; $i < $totalMaps; $i ++) {
-                    if (!empty($mapNames[$i]))
-                        $maps->insertMap($mapNames[$i], $game->id, $request->file('mapimage')[$i]);
-                }
+                $maps->insertMaps($formMaps, $game->id, $request->file('mapimage'));
+            }
+            else { // Insert default map
+                $maps->insertMap('Default map', $game->id);
             }
 
-            $this->alertSuccess('New game created successfully!');
-        } else {
-            $this->alertError('Game creation failed!');
+            $this->alerts->alertSuccess('New game created successfully!');
+        }
+        else {
+            $this->alerts->alertError('Game creation failed!');
         }
 
-        return redirect('admin/games')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/games');
     }
 
     public function edit($id, MapsRepositoryInterface $maps)
     {
-        $data['pageTitle'] = 'Editing a game';
-        $data['maps'] = $maps->getByGame($id)->toJson();
-        $data['model'] = $this->games->get($id);
+        $template['pageTitle'] = 'Editing a game';
+        $template['maps'] = $maps->getByGame($id)->toJson();
+        $template['model'] = $this->games->get($id);
 
-        return view('admin.games.form', $data);
+        return view('admin.games.form', $template);
     }
 
     public function update($id, SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
+        $code = Str::slug($request->input('code'));
+
         $game = $this->games->update($id, [
             'name' => $request->input('name'),
-            'code' => $request->input('code')
+            'code' => $code
         ]);
 
         if ($game) {
@@ -99,12 +109,29 @@ class GamesController extends AdminController {
                 $maps->updateMaps($request->input('mapname'), $request->input('mapid'), $id, $request->file('mapimage'));
             }
 
-            $this->alertSuccess('Game edited successfully!');
-        } else {
-            $this->alertError('Game edit failed!');
+            $this->alerts->alertSuccess('Game edited successfully!');
+        }
+        else {
+            $this->alerts->alertError('Game edit failed!');
         }
 
-        return redirect('admin/games')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/games');
+    }
+
+    public function delete($gameID)
+    {
+        if ($this->games->delete($gameID)) {
+            $this->alerts->alertSuccess('Game deleted succesfully!');
+        }
+        else {
+            $this->alerts->alertError('Unable to delete a game!');
+        }
+
+        $this->alerts->getAlerts();
+
+        return redirect('admin/games');
     }
 
 }
