@@ -106,6 +106,22 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     }
 
     /**
+     * Returns all matches with match ID, date and final scores for home and guest teams
+     * 
+     * @return mixed
+     */
+    public function getMatchesScores()
+    {
+        $model = $this->model
+            ->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
+            ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
+            ->select('matches.id', \DB::raw('sum(round_scores.home) as home, sum(round_scores.guest) as guest'), 'matches.date')
+            ->groupBy('matches.id');
+
+        return $model->get();
+    }
+
+    /**
      * Gets data from JSON request and inserts match, round and scores into database
      * 
      * @param  array $data Array of data

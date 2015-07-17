@@ -161,7 +161,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
                 ->join('users', 'team_roster.user_id', '=', 'users.id')
                 ->get(['team_roster.position', 'team_roster.deleted_at as replaced', 'users.*']);
 
-        $group = array();
+        $group = [];
         foreach ($query as $val) {
             $group[Carbon::parse($val->replaced)->format('Y-m-d H:i')][] = $val;
         }

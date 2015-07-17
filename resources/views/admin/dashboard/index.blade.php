@@ -21,12 +21,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ date('Y') }} Match statistics</div>
                     <div class="panel-strip row">
-                        <div class="col-md-4">WON: 1</div>
-                        <div class="col-md-4">LOSE: 5</div>
-                        <div class="col-md-4">DRAW: 4</div>
+                        <div class="col-md-4">WON: {{ $matchStats['won'] }}</div>
+                        <div class="col-md-4">LOST: {{ $matchStats['lost'] }}</div>
+                        <div class="col-md-4">DRAW: {{ $matchStats['draw'] }}</div>
                     </div>
                     <div class="panel-body">
                         <canvas id="matches-graph" style="width: 100%; height: 200px;"></canvas>
+                    </div>
+                    <div class="panel-footer">
+                        {{ var_dump($byMonth) }}
                     </div>
                 </div>
             </div>
