@@ -5869,7 +5869,8 @@ a {
         color: #ef233c; }
   .table-admin td {
     border-bottom: 1px solid #F0F0F0;
-    padding: 12px 20px !important; }
+    padding: 12px 20px !important;
+    vertical-align: middle !important; }
   .table-admin tfoot tr {
     background: #F9F9F9; }
   .table-admin tfoot .table-info-footer {
