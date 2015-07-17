@@ -46,6 +46,7 @@ class GridView {
         $result['searchTerm'] = $this->searchTerm;
         $result['data'] = $paginatedData;
         $result['totalItems'] = $data['count'];
+        $result['rowsLimit'] = $paginatedData->count();
 
         $result['headerAttr'] = [
             'page' => $page,
