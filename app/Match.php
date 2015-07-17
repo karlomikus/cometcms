@@ -85,16 +85,16 @@ class Match extends Model {
     //     return $result;
     // }
 
-    // public function getOutcomeAttribute()
-    // {
-    //     $score = $this->getScoreAttribute();
+    public function getOutcomeAttribute()
+    {
+        // home_score and guest_score come from separate query
+        // TODO: Add check for missing scores
+        if ($this->home_score > $this->guest_score)
+            return 'win';
+        elseif ($this->home_score < $this->guest_score)
+            return 'lose';
 
-    //     if ($score->home > $score->guest)
-    //         return 'win';
-    //     elseif ($score->home < $score->guest)
-    //         return 'lose';
-
-    //     return 'draw';
-    // }
+        return 'draw';
+    }
 
 }

@@ -87,9 +87,9 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         $result['count'] = $this->model->count();
         
         $model = $this->model
-            // ->join('teams', 'teams.id', '=', 'matches.team_id')
-            // ->join('opponents', 'opponents.id', '=', 'matches.opponent_id')
-            // ->join('games', 'games.id', '=', 'matches.game_id')
+            ->join('teams', 'teams.id', '=', 'matches.team_id')
+            ->join('opponents', 'opponents.id', '=', 'matches.opponent_id')
+            ->join('games', 'games.id', '=', 'matches.game_id')
             ->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
             ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
             ->select('matches.*', \DB::raw('sum(round_scores.home) as home_score, sum(round_scores.guest) as guest_score'))
