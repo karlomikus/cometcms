@@ -1,0 +1,58 @@
+label {
+  font-family: $font-family-accent;
+  font-weight: 300;
+  color: lighten($color-navbar-bg, 20%);
+}
+
+.form-control {
+  box-shadow: none;
+  font-size: 16px;
+  box-sizing: border-box;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form-control-dark {
+  padding: 5px 10px;
+  border-color: lighten($color-primary-dark, 5%);
+  background: $color-primary-dark;
+  height: 30px;
+  font-size: 14px;
+  color: lighten($color-primary-dark, 40%);
+  &:focus {
+    color: #fff;
+  }
+}
+
+.has-error .form-control, .has-error .form-control:focus {
+  box-shadow: none;
+}
+
+.uploaded-file {
+  border: 1px solid $input-border;
+  padding: 5px;
+  display: block;
+  width: 200px;
+  position: relative;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.admin-form {
+  hr {
+    margin: 40px 0;
+  }
+}
+
+.form-subtitle {
+  font-weight: 200;
+  margin-top: 0;
+}

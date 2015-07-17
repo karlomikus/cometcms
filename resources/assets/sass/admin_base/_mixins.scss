@@ -1,0 +1,14 @@
+@mixin block($color) {
+  background: $color;
+  border: 1px solid darken($color, 4%);
+  padding: 20px;
+  color: darken($color, 70%);
+  h3 {
+    margin: 0 0 20px 0;
+    small {
+      color: darken($color, 30%);
+      display: block;
+      margin-top: 5px;
+    }
+  }
+}

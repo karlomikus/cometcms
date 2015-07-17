@@ -1,0 +1,70 @@
+/**
+ * Button base
+ */
+.btn {
+  font-family: $font-family-accent;
+  font-weight: 300;
+  box-shadow: 0 2px 0 rgba(0,0,0,.1);
+  text-shadow: 0 1px 2px rgba(0,0,0,.15);
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-width: 2px;
+}
+
+/**
+ * Overlay button used primary for images
+ */
+.btn-overlay {
+  background: rgba(0,0,0,.5);
+  border: 0;
+  color: #fff;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  &:hover, &:focus, &:active {
+    background: $brand-danger;
+    color: #fff;
+  }
+}
+
+.btn-default {
+  background-color: #f3f3f3;
+}
+
+/**
+ * Buttons used on dark backgrounds
+ */
+.btn-dark {
+  padding: 5px 10px;
+  border-color: lighten($color-primary-dark, 5%);
+  background: $color-primary-dark;
+  height: 30px;
+  font-size: 14px;
+  color: lighten($color-primary-dark, 30%);
+  box-shadow: none;
+  text-shadow: none;
+  font-family: $font-family-sans-serif;
+  &:hover, &:active, &:focus {
+    color: #fff;
+    border-color: $input-border-focus;
+  }
+}
+
+/**
+ * Buttons without backgrounds
+ */
+.btn-border {
+  background: #fff;
+  &.btn-success {
+    color: $color-primary-dark;
+    border: 1px solid $input-border;
+    &:hover {
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      border-width: 2px;
+      background: $brand-success;
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+// Default colors
+$color-accent: #ef233c;
+$color-primary-dark: #2d3142;
+
+$brand-success: #2ec4b6;
+$brand-danger: #fe5f55;
+$brand-warning: #ff9f1c;
+$brand-primary: lighten($color-primary-dark, 15%);
+$link-hover-color: $color-accent;
+$color-light-bg: #f8f9fe;
+$color-navbar-bg: $color-primary-dark;
+
+$state-danger-text: $brand-danger;
+
+// Fonts
+$font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+$font-family-accent: "Montserrat", sans-serif;
+
+// Tables
+$table-bg-accent: $color-light-bg;
+$table-border-color: #F0F0F0;
+$table-bg-hover: #FFF7E4;
+$table-bg-accent: #F9F9F9;
+
+// Inputs
+$input-height-base: 40px;
+$input-border-radius: 2px;
+$input-border: lighten($color-primary-dark, 60%);
+$padding-base-vertical: 9px;
+$padding-base-horizontal: 14px;
+
+// Dropdowns
+$dropdown-link-hover-color: #fff;
+$dropdown-link-hover-bg: darken($color-accent, 5%);
+$dropdown-border: $color-primary-dark;
+
+/*
+* User variables
+*/
+$page-bar-height: 70px;
+
+$match-lose-color: #f25f5c;
+$match-win-color: #70c1b3;
+$match-draw-color: #ffe066;
+
+$nav-pills-border-radius: 0;
+$nav-link-hover-bg: darken($color-light-bg, 6%);
+$nav-pills-active-link-hover-bg: $color-primary-dark;
+
+$modal-backdrop-bg: $color-primary-dark;
+$modal-backdrop-opacity: .8;

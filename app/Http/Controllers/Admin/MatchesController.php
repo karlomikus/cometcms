@@ -56,10 +56,6 @@ class MatchesController extends AdminController {
      */
     public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
     {
-        // if (!$this->currentUser->can(['create-match']) && !$this->currentUser->hasRole('admin')) {
-        //     return view('admin.noaccess');
-        // }
-
         $data['teams'] = $teams->all();
         $data['opponents'] = $opponents->all();
         $data['games'] = $games->all();

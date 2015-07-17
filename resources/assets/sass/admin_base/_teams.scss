@@ -1,0 +1,31 @@
+.squad-member {
+  background: $color-primary-dark;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 180px;
+  height: 385px;
+  position: relative;
+  .btn-corner {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  .btn-captain-active {
+    color: #fff;
+    background: $input-border-focus;
+    border-color: $input-border-focus;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .squad-member-info {
+    padding: 10px;
+    h4 {
+      text-align: center;
+      margin-top: 0;
+      color: #fff;
+    }
+  }
+}

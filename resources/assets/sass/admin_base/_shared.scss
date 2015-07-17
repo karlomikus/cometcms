@@ -1,0 +1,69 @@
+.pagebar {
+  background: lighten($color-navbar-bg, 10%);
+  margin-bottom: 20px;
+  height: $page-bar-height;
+  line-height: $page-bar-height;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 1020;
+  .page-title {
+    margin: 0;
+    padding: 0;
+    line-height: inherit;
+    font-weight: 200;
+    display: inline-block;
+    color: #eae8ff;
+  }
+}
+
+// NAVBAR
+.navbar-admin {
+  background: $color-navbar-bg;
+  border-color: $color-navbar-bg;
+  margin-bottom: 0;
+
+  .navbar-brand {
+    color: #eae8ff;
+    &:hover,
+    &:focus {
+      color: #eae8ff;
+    }
+  }
+
+  .navbar-nav {
+    > li > a {
+      color: #eae8ff;
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: $color-accent;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: $color-accent;
+      }
+    }
+  }
+
+  .navbar-nav {
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: $color-accent;
+        color: #fff;
+      }
+    }
+  }
+
+  .badge {
+    background-color: $color-accent;
+  }
+}

@@ -58,15 +58,21 @@
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="table-info-footer">Showing 15 of total <strong>{{ $totalItems }}</strong> results.</td>
+                            <td colspan="3">{!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                {!! $data->appends(['sort' => $sortColumn, 'order' => $order, 'search' => $searchTerm])->render() !!}
+                
             </div>
             <div class="col-md-6 text-right">
-                Found total <strong>{{ $totalItems }}</strong> results.
+                
             </div>
         </div>
     </div>
