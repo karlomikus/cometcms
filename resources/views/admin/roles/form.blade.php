@@ -50,8 +50,9 @@
                             <hr>
                         </div>
                     </div>
-                     <div class="text-right">
-                        <button class="btn btn-success" type="submit">Save</button>
+                    <div class="text-right">
+                        <a href="/admin/roles" class="btn btn-default">Cancel</a>
+                        <button class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>
                     </div>
                 {!! Form::close() !!}
             </div>

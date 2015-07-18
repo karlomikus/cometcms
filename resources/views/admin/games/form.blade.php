@@ -66,7 +66,8 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button class="btn btn-success" type="submit">Save</button>
+                    <a href="/admin/games" class="btn btn-default">Cancel</a>
+                    <button class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>
                 </div>
                 {!! Form::close() !!}
             </div>

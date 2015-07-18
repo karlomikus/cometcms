@@ -113,7 +113,8 @@
                     @if($team)
                     <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
                     @endif
-                    <button id="save-squad" class="btn btn-success" type="submit">Save</button>
+                    <a href="/admin/teams" class="btn btn-default">Cancel</a>
+                    <button id="save-squad" class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>
                 </div>
                 {!! Form::close() !!}
             </div>

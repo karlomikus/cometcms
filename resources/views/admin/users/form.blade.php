@@ -49,8 +49,11 @@
                             {!! $errors->first('pwd', '<span class="help-block">:message</span>') !!}
                         </div>
                         <hr>
-                        <button class="btn btn-success" type="submit">Save</button>
                     </div>
+                </div>
+                <div class="text-right">
+                    <a href="/admin/users" class="btn btn-default">Cancel</a>
+                    <button class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>
                 </div>
                 {!! Form::close() !!}
             </div>

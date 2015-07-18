@@ -5,8 +5,9 @@
     border-color: $table-border-color !important;
     background: $table-bg-accent;
     padding: 12px 20px !important;
+    color: #878787;
     a {
-      color: $brand-primary;
+      color: lighten($brand-primary, 5%);
       i {
         color: $color-accent;
       }

@@ -174,7 +174,8 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button class="btn btn-success" type="submit" id="match-submit">Save</button>
+                    <a href="/admin/matches" class="btn btn-default">Cancel</a>
+                    <button class="btn btn-success" type="submit" id="match-submit">Save <i class="fa fa-chevron-right"></i></button>
                 </div>
                 {!! Form::close() !!}
             </div>
