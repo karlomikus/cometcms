@@ -81,7 +81,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="page-title">{{ $pageTitle or 'Page title' }}</h3>
+                <a href="#" class="btn btn-dark"><i class="fa fa-caret-left"></i></a> <h3 class="page-title">{{ $pageTitle or 'Page title' }}</h3>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="#" class="btn btn-dark"><i class="fa fa-fw fa-trash"></i> Trash (21)</a>
             </div>
         </div>
     </div>

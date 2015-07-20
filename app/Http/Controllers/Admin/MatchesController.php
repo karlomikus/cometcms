@@ -110,29 +110,28 @@ class MatchesController extends AdminController {
         $data = $request->all();
 
         if($this->matches->update($id, $data))
-            $this->alertSuccess('Match updated successfully.');
+            $this->alerts->alertSuccess('Match updated successfully.');
         else
-            $this->alertError('Unable to update a match.');
-
-        \Session::flash('alerts', $this->getAlerts());
+            $this->alerts->alertError('Unable to update a match.');
 
         // Browsers are dumb and can't follow 302 redirect from ajax call
         // return redirect('admin/matches')->with('alerts', $this->getAlerts());
         // So we return JSON response containing location which we redirect to with js
-        return response()->json(['location' => '/admin/matches', 'alerts' => $this->getAlerts()]);
+        return response()->json(['location' => '/admin/matches', 'alerts' => $this->alerts->getAlerts()]);
     }
 
     public function delete($id)
     {
-        try {
-            $this->matches->delete($id);
-            $this->alertSuccess('Match deleted succesfully!');
+        if ($this->matches->delete($id)) {
+            $this->alerts->alertSuccess('Match deleted succesfully!');
         }
-        catch (Exception $e) {
-            $this->alertError('Unable to delete a match due to an exception: ' . $e->getMessage());
+        else {
+            $this->alerts->alertError('Unable to delete a match!');
         }
 
-        return redirect('admin/matches')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/matches');
     }
 
     public function getMatchJson($matchID)
