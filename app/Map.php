@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Map
@@ -17,6 +18,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Map whereUpdatedAt($value)
  */
 class Map extends Model {
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
 	protected $hidden = ['created_at', 'updated_at'];
 

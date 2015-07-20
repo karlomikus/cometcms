@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Match
@@ -24,9 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Match extends Model {
 
+    use SoftDeletes;
+
     protected $guarded = ['id'];
     protected $appends = ['participants'];
-    protected $dates = ['date'];
+    protected $dates = ['date', 'deleted_at'];
 
     public function opponent()
     {

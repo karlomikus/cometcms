@@ -26,6 +26,7 @@ class CreateMatchesTable extends Migration {
             $table->text('standins')->nullable();
             $table->datetime('date')->default(date("Y-m-d H:i:s"));
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

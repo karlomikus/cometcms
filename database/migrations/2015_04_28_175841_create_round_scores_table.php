@@ -20,6 +20,7 @@ class CreateRoundScoresTable extends Migration {
 			$table->integer('home');
 			$table->integer('guest');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

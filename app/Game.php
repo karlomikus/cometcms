@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Game
@@ -18,11 +19,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Game extends Model {
 
+    use SoftDeletes;
+
     public $timestamps = false;
 
     protected $hidden = ['created_at', 'updated_at'];
 
     protected $fillable = ['name', 'code', 'image'];
+
+    protected $dates = ['deleted_at'];
 
     public function maps()
     {
