@@ -4,9 +4,11 @@ namespace App\Repositories;
 use App\Libraries\GridView\GridViewInterface;
 use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\User;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Libraries\ImageUploadTrait as ImageUpload;
 
 class UsersRepository extends AbstractRepository implements UsersRepositoryInterface, GridViewInterface {
+
+    use ImageUpload;
 
     private $uploadPath;
 
@@ -14,7 +16,13 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
     {
         parent::__construct($user);
 
-        $this->uploadPath = base_path() . '/public/uploads/users/';
+        $this->setUploadPath(base_path() . '/public/uploads/users/');
+    }
+
+    public function delete($userID)
+    {
+        $this->deleteImage($userID);
+        return parent::delete($userID);
     }
 
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
@@ -35,20 +43,6 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
         $model = $this->model->orderBy('name');
 
         return $model->where('name', 'LIKE', '%'. $string .'%')->get();
-    }
-
-    public function insertImage($id, UploadedFile $file)
-    {
-        $imageName = $id . '.' . $file->getClientOriginalExtension();
-
-        try {
-            $file->move($this->uploadPath, $imageName);
-            $this->update($id, ['image' => $imageName]);
-
-            return true;
-        } catch (\Exception $e) {
-            return false;
-        }
     }
 
 }

@@ -7,17 +7,17 @@
                 {!! Form::model($user, ['files' => true]) !!}
                 <div class="row">
                     <div class="col-md-2">
-                        <h4 class="form-subtitle">Personal</h4>
+                        <h4 class="form-subtitle">Information</h4>
                     </div>
                     <div class="col-md-10">
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
-                            {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
                             {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                         </div>
                         <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                             {!! Form::label('email', 'E-mail', ['class' => 'control-label']) !!}
-                            {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('email', null, ['class' => 'form-control', 'required' => 'required']) !!}
                             {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                         </div>
                         <div class="form-group">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('pwd') ? 'has-error' : '' }}">
                             <label for="pwd" class="control-label">Password <small>Leave empty for default</small></label>
-                            {!! Form::password('pwd', ['class' => 'form-control', 'id' => 'pwd']) !!}
+                            <input type="password" class="form-control" id="pwd" name="pwd" {{ !$user ? 'required' : '' }}>
                             {!! $errors->first('pwd', '<span class="help-block">:message</span>') !!}
                         </div>
                         <hr>

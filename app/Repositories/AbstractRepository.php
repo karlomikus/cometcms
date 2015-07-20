@@ -64,7 +64,8 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         $model = null;
 
         try {
-            $model = $this->model->find($id)->update($data);
+            $model = $this->model->find($id);
+            $model->update($data);
         }
         catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
