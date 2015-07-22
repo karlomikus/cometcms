@@ -13,6 +13,7 @@ class OpponentsController extends AdminController {
     {
         parent::__construct();
         $this->opponents = $opponents;
+        $this->setTrashLink('opponents');
     }
 
     public function index(Request $request)
