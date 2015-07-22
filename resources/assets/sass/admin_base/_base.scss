@@ -17,6 +17,19 @@ a.text-delete {
   }
 }
 
+a.text-restore {
+  color: $brand-info;
+  border: 1px solid $brand-info;
+  background: #fff;
+  text-decoration: none;
+  padding: 0 5px;
+  &:hover, &:focus, &:active {
+    color: #fff;
+    background: $brand-info;
+    border-bottom: 1px solid $brand-info;
+  }
+}
+
 a {
   color: #3680C3;
 }

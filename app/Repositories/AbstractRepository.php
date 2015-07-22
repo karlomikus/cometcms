@@ -92,4 +92,9 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         return $deleted;
     }
 
+    public function getTrash()
+    {
+        return $this->model->onlyTrashed()->get();
+    }
+
 }

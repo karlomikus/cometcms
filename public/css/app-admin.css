@@ -5813,6 +5813,17 @@ a.text-delete {
     background: #fe5f55;
     border-bottom: 1px solid #fe5f55; }
 
+a.text-restore {
+  color: #5bc0de;
+  border: 1px solid #5bc0de;
+  background: #fff;
+  text-decoration: none;
+  padding: 0 5px; }
+  a.text-restore:hover, a.text-restore:focus, a.text-restore:active {
+    color: #fff;
+    background: #5bc0de;
+    border-bottom: 1px solid #5bc0de; }
+
 a {
   color: #3680C3; }
 

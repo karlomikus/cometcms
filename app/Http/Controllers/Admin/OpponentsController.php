@@ -4,8 +4,11 @@ use App\Libraries\GridView\GridView;
 use App\Repositories\Contracts\OpponentsRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveOpponentRequest;
+use App\Http\Controllers\Admin\TraitTrashable as Trash;
 
 class OpponentsController extends AdminController {
+
+    use Trash;
 
     private $opponents;
 
@@ -13,7 +16,11 @@ class OpponentsController extends AdminController {
     {
         parent::__construct();
         $this->opponents = $opponents;
-        $this->setTrashLink('opponents');
+
+        view()->share('totalTrash', count($this->opponents->getTrash()));
+
+        $this->setTrashView('admin.trash.index');
+        $this->setData($this->opponents);
     }
 
     public function index(Request $request)
