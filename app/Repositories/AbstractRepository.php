@@ -33,7 +33,7 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      */
     public function get($id, $with = [], $columns = ['*'])
     {
-        return $this->model->with($with)->find($id, $columns);
+        return $this->model->withTrashed()->with($with)->find($id, $columns);
     }
 
     /**

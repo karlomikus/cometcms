@@ -33,17 +33,17 @@ class Match extends Model {
 
     public function opponent()
     {
-        return $this->belongsTo('App\Opponent');
+        return $this->belongsTo('App\Opponent')->withTrashed();
     }
 
     public function team()
     {
-        return $this->belongsTo('App\Team');
+        return $this->belongsTo('App\Team')->withTrashed();
     }
 
     public function rounds()
     {
-        return $this->hasMany('App\MatchRounds');
+        return $this->hasMany('App\MatchRounds')->withTrashed();
     }
 
     public function getParticipantsAttribute()
