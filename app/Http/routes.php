@@ -65,7 +65,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/opponents/edit/{id}', 'Admin\OpponentsController@update');
     Route::get('/opponents/delete/{id}', 'Admin\OpponentsController@delete');
     Route::get('/opponents/delete-image/{id}', 'Admin\OpponentsController@deleteImage');
+
     Route::get('/opponents/trash', 'Admin\OpponentsController@trash');
+    Route::get('/opponents/restore/{id}', 'Admin\OpponentsController@restore');
+    Route::get('/opponents/remove/{id}', 'Admin\OpponentsController@remove');
 
     /**
      * Teams

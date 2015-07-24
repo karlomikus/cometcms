@@ -97,4 +97,24 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         return $this->model->onlyTrashed()->get();
     }
 
+    public function restoreFromTrash($id)
+    {
+        return $this->get($id)->restore();
+    }
+
+    public function deleteFromTrash($id)
+    {
+        $removed = false;
+
+        try {
+            $this->model->withTrashed()->find($id)->forceDelete();
+            $removed = true;
+        }
+        catch (\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+        }
+
+        return $removed;
+    }
+
 }

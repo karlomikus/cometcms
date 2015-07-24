@@ -1,26 +1,31 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Libraries\GridView\GridView;
-use App\Repositories\Contracts\OpponentsRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Libraries\GridView\GridView;
 use App\Http\Requests\SaveOpponentRequest;
 use App\Http\Controllers\Admin\TraitTrashable as Trash;
+use App\Repositories\Contracts\OpponentsRepositoryInterface;
 
+/**
+ * Opponents backend module. Uses trashable trait.
+ * 
+ * @category Admin controllers
+ */
 class OpponentsController extends AdminController {
 
     use Trash;
 
+    /**
+     * Local repository instance
+     */
     private $opponents;
 
     public function __construct(OpponentsRepositoryInterface $opponents)
     {
         parent::__construct();
+
         $this->opponents = $opponents;
-
-        view()->share('totalTrash', count($this->opponents->getTrash()));
-
-        $this->setTrashView('admin.trash.index');
-        $this->setData($this->opponents);
+        $this->trashInit($this->opponents, 'admin.opponents.trash');
     }
 
     public function index(Request $request)
