@@ -84,7 +84,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
-        $result['count'] = $this->model->count();
+        
         
         $model = $this->model
             ->join('teams', 'teams.id', '=', 'matches.team_id')
@@ -100,7 +100,9 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
                 ->orWhere('teams.name', 'LIKE', '%' . $searchTerm . '%')
                 ->orWhere('games.name', 'LIKE', '%' . $searchTerm . '%');
 
-        $result['items'] = $model->orderBy($sortColumn, $order)->with('team', 'opponent', 'game')->skip($limit * ($page - 1))->take($limit)->get();
+        $model->orderBy($sortColumn, $order)->with('team', 'opponent', 'game');
+        $result['count'] = $this->model->count();
+        $result['items'] = $model->skip($limit * ($page - 1))->take($limit)->get();
 
         return $result;
     }
