@@ -11,6 +11,7 @@ class GridView {
     private $sortColumn;
     private $order;
     private $path;
+    private $trash;
 
     /**
      * Set up data repository. Data repository must implement
@@ -18,13 +19,14 @@ class GridView {
      *
      * @param $dataSource mixed Data repository
      */
-    public function __construct(GridViewInterface $dataSource)
+    public function __construct(GridViewInterface $dataSource, $getOnlyTrashed = false)
     {
         $this->dataSource = $dataSource;
         $this->sortColumn = 'id';
         $this->order = 'asc';
         $this->searchTerm = null;
         $this->path = null;
+        $this->trash = $getOnlyTrashed;
     }
 
     /**
@@ -36,7 +38,7 @@ class GridView {
      */
     public function gridPage($page, $limit)
     {
-        $data = $this->dataSource->getByPageGrid($page, $limit, $this->sortColumn, $this->order, $this->searchTerm);
+        $data = $this->dataSource->getByPageGrid($page, $limit, $this->sortColumn, $this->order, $this->searchTerm, $this->trash);
 
         $paginatedData = new LengthAwarePaginator($data['items'], $data['count'], $limit, $page, ['path' => $this->path]);
 

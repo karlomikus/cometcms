@@ -10,6 +10,7 @@ interface GridViewInterface {
      * @param $limit int Page results limit
      * @param $sortColumn string Column name
      * @param $searchTerm string Search term
+     * @param $trash bool Get only trashed items
      * @return array
      */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null);

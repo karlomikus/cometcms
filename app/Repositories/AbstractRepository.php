@@ -33,7 +33,7 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
      */
     public function get($id, $with = [], $columns = ['*'])
     {
-        return $this->model->with($with)->find($id, $columns);
+        return $this->model->withTrashed()->with($with)->find($id, $columns);
     }
 
     /**
@@ -64,7 +64,8 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         $model = null;
 
         try {
-            $model = $this->model->find($id)->update($data);
+            $model = $this->model->find($id);
+            $model->update($data);
         }
         catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
@@ -89,6 +90,31 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         }
 
         return $deleted;
+    }
+
+    public function getTrash()
+    {
+        return $this->model->onlyTrashed()->get();
+    }
+
+    public function restoreFromTrash($id)
+    {
+        return $this->get($id)->restore();
+    }
+
+    public function deleteFromTrash($id)
+    {
+        $removed = false;
+
+        try {
+            $this->model->withTrashed()->find($id)->forceDelete();
+            $removed = true;
+        }
+        catch (\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+        }
+
+        return $removed;
     }
 
 }

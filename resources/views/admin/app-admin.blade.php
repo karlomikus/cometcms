@@ -81,45 +81,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
+                {{-- <a href="#" class="btn btn-dark"><i class="fa fa-caret-left"></i></a> --}}
                 <h3 class="page-title">{{ $pageTitle or 'Page title' }}</h3>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="/admin/opponents/trash/" class="btn btn-dark"><i class="fa fa-fw fa-trash"></i> Trash ({{ $totalTrash or '0' }})</a>
             </div>
         </div>
     </div>
 </section>
 
-@if(Session::has('alerts') || $errors->any())
-    <!-- Custom alerts -->
-    <div class="container">
-        @if($errors->any())
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                <h3>Validation error!</h3>
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li><span>{{ $error }}</span></li>
-                    @endforeach
-                </ul>
-            </div>
-        @else
-            @foreach(Session::get('alerts') as $alert)
-                <div class="alert alert-{{ $alert['type'] }} alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                    @if($alert['type'] == 'success')
-                        <h3>Success!</h3>
-                    @else
-                        <h3>An error occured!</h3>
-                    @endif
-                    {{ $alert['message'] }}
-                    @if($alert['exception'])
-                        <hr>
-                        <strong class="text-danger">Related exception message <i class="fa fa-caret-down"></i></strong><br>
-                        {{ $alert['exception'] }}
-                    @endif
-                </div>
-            @endforeach
-        @endif
-    </div>
-@endif
+@include('admin.partials.alerts')
 
 @yield('content')
 

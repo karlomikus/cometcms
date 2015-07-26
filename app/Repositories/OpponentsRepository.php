@@ -41,9 +41,12 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
      * @param $searchTerm string Search term
      * @return array
      */
-    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
         $model = $this->model->orderBy($sortColumn, $order);
+
+        if($trash)
+            $model->onlyTrashed();
 
         if ($searchTerm)
             $model->where('name', 'LIKE', '%' . $searchTerm . '%');

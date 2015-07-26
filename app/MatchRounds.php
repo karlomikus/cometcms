@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\MatchRounds
@@ -20,7 +21,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MatchRounds extends Model {
 
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
     protected $hidden = ['created_at', 'updated_at'];
+    
     protected $guarded = ['id'];
 
     public function scores()

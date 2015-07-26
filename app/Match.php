@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Match
@@ -24,23 +25,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Match extends Model {
 
+    use SoftDeletes;
+
     protected $guarded = ['id'];
     protected $appends = ['participants'];
-    protected $dates = ['date'];
+    protected $dates = ['date', 'deleted_at'];
 
     public function opponent()
     {
-        return $this->belongsTo('App\Opponent');
+        return $this->belongsTo('App\Opponent')->withTrashed();
     }
 
     public function team()
     {
-        return $this->belongsTo('App\Team');
+        return $this->belongsTo('App\Team')->withTrashed();
     }
 
     public function rounds()
     {
-        return $this->hasMany('App\MatchRounds');
+        return $this->hasMany('App\MatchRounds')->withTrashed();
     }
 
     public function getParticipantsAttribute()

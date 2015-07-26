@@ -20,6 +20,7 @@ class CreateMapsTable extends Migration {
 			$table->integer('game_id')->unsigned();
 			$table->foreign('game_id')->references('id')->on('games');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

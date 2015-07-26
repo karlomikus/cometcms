@@ -41,12 +41,12 @@ class UsersController extends AdminController {
 
     public function create()
     {
-        $data['roles'] = $this->roles->all();
-        $data['user'] = null;
+        $template['roles'] = $this->roles->all();
+        $template['user'] = null;
 
-        $data['pageTitle'] = 'Create new user';
+        $template['pageTitle'] = 'Create new user';
 
-        return view('admin.users.form', $data);
+        return view('admin.users.form', $template);
     }
 
     public function save(SaveUserRequest $request)
@@ -59,18 +59,20 @@ class UsersController extends AdminController {
             'name' => $request->input('name')
         ]);
 
-        $user->attachRoles($roles);
-
         if ($user) {
+            $user->attachRoles($roles);
             if ($request->hasFile('image')) {
                 $this->users->insertImage($user->id, $request->file('image'));
             }
-            $this->alertSuccess('New user created successfully!');
-        } else {
-            $this->alertError('User creation failed!');
+            $this->alerts->alertSuccess('New user created successfully!');
+        }
+        else {
+            $this->alerts->alertError('User creation failed!');
         }
 
-        return redirect('admin/users')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/users');
     }
 
     public function edit($id)
@@ -85,7 +87,6 @@ class UsersController extends AdminController {
 
     public function update($id, SaveUserRequest $request)
     {
-        // TODO: Roles editing
         $roles = $request->input('roles');
         $data = [
             'email' => $request->input('email'),
@@ -93,27 +94,38 @@ class UsersController extends AdminController {
             'name' => $request->input('name')
         ];
 
-        $user = $this->users->get($id);
-        $usersRoles = $user->roles;
+        $user = $this->users->update($id, $data);
 
-        if ($this->users->update($id, $data)) {
-            $this->alertSuccess('User edited!');
+        if ($user) {
+            $user->detachRoles($user->roles);
+            $user->attachRoles($roles);
+            if ($request->hasFile('image')) {
+                $this->users->updateImage($id, $request->file('image'));
+            }
+
+            $this->alerts->alertSuccess('User edited successfully!');
         }
         else {
-            $this->alertError('Error while updating the user!');
+            $this->alerts->alertError('Error while updating the user!');
         }
 
-        return redirect('admin/users')->with('alerts', $this->getAlerts());
+        $this->alerts->getAlerts();
+
+        return redirect('admin/users');
     }
 
     public function delete($id)
     {
-        $message = 'User deleting failed!';
         if ($this->users->delete($id)) {
-            $message = 'User deleted succesfully!';
+            $this->alerts->alertSuccess('User deleted succesfully!');
+        }
+        else {
+            $this->alerts->alertError('Error deleting a user!');
         }
 
-        return redirect('admin/users')->with('message', $message);
+        $this->alerts->getAlerts();
+
+        return redirect('admin/users');
     }
 
     public function searchUsers(Request $request)
