@@ -4,12 +4,12 @@
     <div class="container">
         <div class="alert alert-warning">
             <h3>Warning!</h3>
-            Permanently deleting opponents will also permanently delete all records where they are referenced. This includes: matches.
+            Permanently deleting opponents will also permanently delete all records where they are referenced. This will affect: matches.
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a href="{{ url('admin/opponents/trash/empty') }}" class="btn btn-danger"><i class="fa fa-times-circle"></i> Empty trash</a>
-                <a href="{{ url('admin/opponents/trash/restore') }}" class="btn btn-info"><i class="fa fa-reply-all"></i> Restore all</a>
+                <a href="{{ url('admin/opponents/trash?empty=all') }}" class="btn btn-danger"><i class="fa fa-times-circle"></i> Empty trash</a>
+                <a href="{{ url('admin/opponents/trash?restore=all') }}" class="btn btn-info"><i class="fa fa-reply-all"></i> Restore all</a>
             </div>
             <form class="col-md-6" method="get" action="{{ url('admin/opponents/trash') }}">
                 <div class="input-group">

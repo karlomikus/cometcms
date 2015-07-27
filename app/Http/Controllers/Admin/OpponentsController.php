@@ -25,7 +25,7 @@ class OpponentsController extends AdminController {
         parent::__construct();
 
         $this->opponents = $opponents;
-        $this->trashInit($this->opponents, 'admin.opponents.trash');
+        $this->trashInit($this->opponents, 'admin/opponents/trash', 'admin.opponents.trash');
     }
 
     public function index(Request $request)

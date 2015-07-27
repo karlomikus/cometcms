@@ -7,17 +7,32 @@ trait TraitTrashable {
 
     protected $view;
     protected $data;
+    protected $redirectUrl;
 
-    private function trashInit($data, $view)
+    /**
+     * Setup repository reference and default trash view.
+     * 
+     * @param  mixed $data Repository reference
+     * @param  string $view Trash view
+     * @return void
+     */
+    private function trashInit($data, $redirectUrl, $view)
     {
-        // Set repository instance
         $this->data = $data;
-        // Set main trash view file
         $this->view = $view;
+        $this->redirectUrl = $redirectUrl;
+
         // Insert total trash items to view
         view()->share('totalTrash', count($this->data->getTrash()));
     }
 
+    /**
+     * Default trash action. Generates grid made of only trashed items.
+     * Also checks for query string for emptying and restoring trashed items.
+     * 
+     * @param  Request $request Http request
+     * @return mixed
+     */
     public function trash(Request $request)
     {
         // Usual grid view stuff
@@ -25,6 +40,15 @@ trait TraitTrashable {
         $page = $request->query('page');
         $sortColumn = $request->query('sort');
         $order = $request->query('order');
+
+        // Restore all items from trash
+        if ($request->has('restore')) {
+            $this->restoreAll();
+        }
+
+        if ($request->has('empty')) {
+            $this->emptyTrash();
+        }
 
         // Initiate grid view but only with trashed items
         $grid = new GridView($this->data, true);
@@ -40,6 +64,12 @@ trait TraitTrashable {
         return view($this->view, $template);
     }
 
+    /**
+     * Restore specific item
+     * 
+     * @param  int $id
+     * @return mixed
+     */
     public function restore($id)
     {
         if ($this->data->restoreFromTrash($id)) {
@@ -51,9 +81,15 @@ trait TraitTrashable {
 
         $this->alerts->getAlerts();
 
-        return redirect('admin/opponents/trash');
+        return redirect($this->redirectUrl);
     }
 
+    /**
+     * Remove specific item
+     * 
+     * @param  int $id
+     * @return mixed
+     */
     public function remove($id)
     {
         if ($this->data->deleteFromTrash($id)) {
@@ -65,7 +101,45 @@ trait TraitTrashable {
 
         $this->alerts->getAlerts();
 
-        return redirect('admin/opponents/trash');
+        return redirect($this->redirectUrl);
+    }
+
+    /**
+     * Restore all items
+     * 
+     * @return mixed
+     */
+    private function restoreAll()
+    {
+        if ($this->data->restoreAll()) {
+            $this->alerts->alertSuccess('Successfully restored all items from trash!');
+        }
+        else {
+            $this->alerts->alertError('Unable to restore all items from trash!');
+        }
+
+        $this->alerts->getAlerts();
+
+        redirect($this->redirectUrl);
+    }
+
+    /**
+     * Remove all items
+     * 
+     * @return mixed
+     */
+    private function emptyTrash()
+    {
+        if ($this->data->emptyAll()) {
+            $this->alerts->alertSuccess('Successfully deleted all items from trash!');
+        }
+        else {
+            $this->alerts->alertError('Unable to empty the trash!');
+        }
+
+        $this->alerts->getAlerts();
+
+        redirect($this->redirectUrl);
     }
 
 }
