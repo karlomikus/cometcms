@@ -52,3 +52,8 @@ th {
       border-color: darken($table-bg-hover, 20%);
     }
 }
+
+.no-results {
+  text-align: center !important;
+  font-weight: 400;
+}

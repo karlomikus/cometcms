@@ -3,6 +3,9 @@
 use App\Libraries\GridView\GridView;
 use Illuminate\Http\Request;
 
+/**
+ * Implements general methods for trash actions used by most of the controllers.
+ */
 trait TraitTrashable {
 
     protected $view;
@@ -24,6 +27,7 @@ trait TraitTrashable {
 
         // Insert total trash items to view
         view()->share('totalTrash', count($this->data->getTrash()));
+        view()->share('trashLink', $this->redirectUrl);
     }
 
     /**

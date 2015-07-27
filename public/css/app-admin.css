@@ -5905,6 +5905,10 @@ th {
   .table-hover > tbody > tr:hover > td {
     border-color: #ffd97e; }
 
+.no-results {
+  text-align: center !important;
+  font-weight: 400; }
+
 label {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;

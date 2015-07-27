@@ -1,5 +1,9 @@
 @extends('admin.app-admin')
 
+@section('breadcrumbs')
+    <a href="{{ url('admin/opponents') }}" class="btn btn-dark"><i class="fa fa-caret-left"></i></a>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="alert alert-warning">
@@ -46,7 +50,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center">No results found.</td>
+                                <td colspan="3" class="no-results">No results found.</td>
                             </tr>
                         @endforelse
                     </tbody>
