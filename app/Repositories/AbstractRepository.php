@@ -65,7 +65,7 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
         $model = null;
 
         try {
-            $model = $this->model->find($id);
+            $model = $this->model->withTrashed()->find($id);
             $model->update($data);
         }
         catch (\Exception $e) {
@@ -138,7 +138,10 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
         $emptied = false;
 
         try {
-            $this->model->onlyTrashed()->forceDelete();
+            $models = $this->model->onlyTrashed()->get();
+            foreach ($models as $model) {
+                $this->deleteFromTrash($model->id);
+            }
             $emptied = true;
         }
         catch(\Exception $e) {
