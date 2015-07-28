@@ -22,9 +22,12 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
 
     public function deleteFromTrash($id)
     {
-        $this->deleteImage($id);
+        if (parent::deleteFromTrash($id)) {
+            $this->deleteImage($id);
+            return true;
+        }
 
-        return parent::deleteFromTrash($id);
+        return false;
     }
 
     /**
