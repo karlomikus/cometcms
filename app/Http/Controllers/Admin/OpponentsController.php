@@ -116,10 +116,10 @@ class OpponentsController extends AdminController {
     public function delete($id)
     {
         if ($this->opponents->delete($id)) {
-            $this->alerts->alertSuccess('Opponent deleted succesfully!');
+            $this->alerts->alertSuccess('Opponent moved to trash succesfully!');
         }
         else {
-            $this->alerts->alertError('Unable to delete an opponent!');
+            $this->alerts->alertError('Unable to trash an opponent!');
         }
 
         $this->alerts->getAlerts();

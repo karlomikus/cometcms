@@ -128,10 +128,10 @@ class GamesController extends AdminController {
     public function delete($gameID)
     {
         if ($this->games->delete($gameID)) {
-            $this->alerts->alertSuccess('Game deleted succesfully!');
+            $this->alerts->alertSuccess('Game moved to trash succesfully!');
         }
         else {
-            $this->alerts->alertError('Unable to delete a game!');
+            $this->alerts->alertError('Unable to trash a game!');
         }
 
         $this->alerts->getAlerts();
