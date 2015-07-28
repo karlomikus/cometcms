@@ -31,9 +31,12 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
         return parent::delete($gameID);
     }
 
-    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
         $model = $this->model->orderBy($sortColumn, $order);
+
+        if($trash)
+            $model->onlyTrashed();
 
         if($searchTerm)
             $model->where('name', 'LIKE', '%'. $searchTerm .'%')->orWhere('code', 'LIKE', '%'. $searchTerm .'%');

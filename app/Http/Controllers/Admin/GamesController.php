@@ -6,15 +6,20 @@ use App\Repositories\Contracts\MapsRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveGameRequest;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Admin\TraitTrashable as Trash;
 
 class GamesController extends AdminController {
+
+    use Trash;
 
     protected $games;
 
     public function __construct(GamesRepositoryInterface $games)
     {
         parent::__construct();
+
         $this->games = $games;
+        $this->trashInit($this->games, 'admin/games/trash', 'admin.games.trash');
     }
 
     public function index(Request $request)

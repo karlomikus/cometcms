@@ -44,6 +44,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/games/edit/{id}', 'Admin\GamesController@update');
     Route::get('/games/delete/{id}', 'Admin\GamesController@delete');
 
+    Route::get('/games/trash', 'Admin\GamesController@trash');
+    Route::get('/games/restore/{id}', 'Admin\GamesController@restore');
+    Route::get('/games/remove/{id}', 'Admin\GamesController@remove');
+
     /**
      * Users
      */
