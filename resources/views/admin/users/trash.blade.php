@@ -1,18 +1,27 @@
 @extends('admin.app-admin')
 
+@section('breadcrumbs')
+    <a href="{{ url('admin/users') }}" class="btn btn-dark"><i class="fa fa-caret-left"></i></a>
+@endsection
+
 @section('content')
     <div class="container">
+        <div class="alert alert-warning">
+            <h3>Warning!</h3>
+            Permanently deleting users will also permanently delete all records where they are referenced. This will affect: groups.
+        </div>
         <div class="row">
             <div class="col-md-6">
-                <a href="{{ url('admin/users/new') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> New user</a>
+                <a href="{{ url('admin/users/trash?empty=all') }}" class="btn btn-danger"><i class="fa fa-times-circle"></i> Empty trash</a>
+                <a href="{{ url('admin/users/trash?restore=all') }}" class="btn btn-info"><i class="fa fa-reply-all"></i> Restore all</a>
             </div>
-            <form class="col-md-6" method="get" action="{{ url('admin/users') }}">
+            <form class="col-md-6" method="get" action="{{ url('admin/users/trash') }}">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Enter search term..." value="{{ !empty($searchTerm) ? $searchTerm : "" }}" tabindex="1">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         @if(!empty($searchTerm))
-                            <a class="btn btn-primary" href="{{ url('admin/users') }}"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a class="btn btn-primary" href="{{ url('admin/users/trash') }}"><i class="glyphicon glyphicon-remove"></i></a>
                         @endif
                     </span>
                 </div>
@@ -24,21 +33,15 @@
                 <table class="table table-hover table-grid table-admin">
                     <thead>
                         <tr>
-                            <th>{!! Form::gridHeader('Name', 'name', 'Admin\UsersController@index', $headerAttr) !!}</th>
-                            <th>{!! Form::gridHeader('E-mail', 'email', 'Admin\UsersController@index', $headerAttr) !!}</th>
-                            <th>{!! Form::gridHeader('Registered on', 'created_at', 'Admin\UsersController@index', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('Name', 'name', 'Admin\UsersController@trash', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('E-mail', 'email', 'Admin\UsersController@trash', $headerAttr) !!}</th>
+                            <th>{!! Form::gridHeader('Registered on', 'created_at', 'Admin\UsersController@trash', $headerAttr) !!}</th>
                             <th>Roles</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$totalItems > 0)
-                            <tr>
-                                <td colspan="5" class="text-center">No results found.</td>
-                                <td></td>
-                            </tr>
-                        @endif
-                        @foreach($data as $user)
+                        @forelse ($data as $user)
                             <tr>
                                 <td><a href="{{ url('admin/users/edit', [$user->id]) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
@@ -49,10 +52,15 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{ url('admin/users/delete', [$user->id]) }}" class="text-delete">Trash</a>
+                                    <a href="{{ url('admin/users/restore', [$user->id]) }}" class="text-restore">Restore</a>
+                                    <a href="{{ url('admin/users/remove', [$user->id]) }}" class="text-delete" data-confirm="Are you sure that you want to permanently delete this user?">Delete</a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="no-results">No results found.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
@@ -64,4 +72,5 @@
             </div>
         </div>
     </div>
+
 @endsection

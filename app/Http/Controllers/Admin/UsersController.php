@@ -6,8 +6,11 @@ use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\Repositories\Contracts\RolesRepositoryInterface;
 use App\Role;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\TraitTrashable as Trash;
 
 class UsersController extends AdminController {
+
+    use Trash;
 
     protected $users;
 
@@ -17,6 +20,8 @@ class UsersController extends AdminController {
 
         $this->users = $users;
         $this->roles = $roles;
+
+        $this->trashInit($this->users, 'admin/users/trash', 'admin.users.trash');
     }
 
 	public function index(Request $request)

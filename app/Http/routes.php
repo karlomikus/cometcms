@@ -59,6 +59,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/users/delete/{id}', 'Admin\UsersController@delete');
     Route::get('/users/api/user', 'Admin\UsersController@searchUsers');
 
+    Route::get('/users/trash', 'Admin\UsersController@trash');
+    Route::get('/users/restore/{id}', 'Admin\UsersController@restore');
+    Route::get('/users/remove/{id}', 'Admin\UsersController@remove');
+
     /**
      * Opponents
      */
