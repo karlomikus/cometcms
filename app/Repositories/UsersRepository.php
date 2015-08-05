@@ -25,11 +25,14 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
         return parent::delete($userID);
     }
 
-    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if($searchTerm)
+        if ($trash)
+            $model->onlyTrashed();
+
+        if ($searchTerm)
             $model->where('name', 'LIKE', '%'. $searchTerm .'%')->orWhere('email', 'LIKE', '%'. $searchTerm .'%');
 
         $result['count'] = $model->count();

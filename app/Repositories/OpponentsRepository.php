@@ -20,16 +20,11 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
         $this->setUploadPath(base_path() . '/public/uploads/opponents/');
     }
 
-    /**
-     * Delete a single opponent and it's image
-     * 
-     * @param $id
-     */
-    public function delete($opponentID)
+    public function deleteFromTrash($id)
     {
-        $this->deleteImage($opponentID);
+        $this->deleteImage($id);
 
-        return parent::delete($opponentID);
+        return parent::deleteFromTrash($id);
     }
 
     /**

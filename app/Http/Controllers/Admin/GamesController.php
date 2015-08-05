@@ -6,15 +6,20 @@ use App\Repositories\Contracts\MapsRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveGameRequest;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Admin\TraitTrashable as Trash;
 
 class GamesController extends AdminController {
+
+    use Trash;
 
     protected $games;
 
     public function __construct(GamesRepositoryInterface $games)
     {
         parent::__construct();
+
         $this->games = $games;
+        $this->trashInit($this->games, 'admin/games/trash', 'admin.games.trash');
     }
 
     public function index(Request $request)
@@ -123,10 +128,10 @@ class GamesController extends AdminController {
     public function delete($gameID)
     {
         if ($this->games->delete($gameID)) {
-            $this->alerts->alertSuccess('Game deleted succesfully!');
+            $this->alerts->alertSuccess('Game moved to trash succesfully!');
         }
         else {
-            $this->alerts->alertError('Unable to delete a game!');
+            $this->alerts->alertError('Unable to trash a game!');
         }
 
         $this->alerts->getAlerts();

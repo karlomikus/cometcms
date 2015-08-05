@@ -25,7 +25,7 @@ class OpponentsController extends AdminController {
         parent::__construct();
 
         $this->opponents = $opponents;
-        $this->trashInit($this->opponents, 'admin.opponents.trash');
+        $this->trashInit($this->opponents, 'admin/opponents/trash', 'admin.opponents.trash');
     }
 
     public function index(Request $request)
@@ -116,10 +116,10 @@ class OpponentsController extends AdminController {
     public function delete($id)
     {
         if ($this->opponents->delete($id)) {
-            $this->alerts->alertSuccess('Opponent deleted succesfully!');
+            $this->alerts->alertSuccess('Opponent moved to trash succesfully!');
         }
         else {
-            $this->alerts->alertError('Unable to delete an opponent!');
+            $this->alerts->alertError('Unable to trash an opponent!');
         }
 
         $this->alerts->getAlerts();

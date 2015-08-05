@@ -77,19 +77,7 @@
     </div>
 </nav>
 
-<section class="pagebar">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                {{-- <a href="#" class="btn btn-dark"><i class="fa fa-caret-left"></i></a> --}}
-                <h3 class="page-title">{{ $pageTitle or 'Page title' }}</h3>
-            </div>
-            <div class="col-md-6 text-right">
-                <a href="/admin/opponents/trash/" class="btn btn-dark"><i class="fa fa-fw fa-trash"></i> Trash ({{ $totalTrash or '0' }})</a>
-            </div>
-        </div>
-    </div>
-</section>
+@include('admin.partials.pagebar')
 
 @include('admin.partials.alerts')
 

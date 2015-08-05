@@ -23,19 +23,32 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
         return $this->model->with('maps')->get();
     }
 
-    public function delete($gameID)
+    // public function delete($gameID)
+    // {
+    //     // TODO: Delete maps images
+    //     // $this->deleteImage($gameID);
+    //     $this->model->find($gameID)->maps()->delete();
+    //     return parent::delete($gameID);
+    // }
+    
+    public function deleteFromTrash($id)
     {
-        // TODO: Delete maps images
-        $this->deleteImage($gameID);
-        $this->model->find($gameID)->maps()->delete();
-        return parent::delete($gameID);
-    }
+        if (parent::deleteFromTrash($id)) {
+            $this->deleteImage($id);
+            return true;
+        }
 
-    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+        return false;
+    } 
+
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if($searchTerm)
+        if ($trash)
+            $model->onlyTrashed();
+
+        if ($searchTerm)
             $model->where('name', 'LIKE', '%'. $searchTerm .'%')->orWhere('code', 'LIKE', '%'. $searchTerm .'%');
 
         $result['count'] = $model->count();

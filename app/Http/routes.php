@@ -44,6 +44,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/games/edit/{id}', 'Admin\GamesController@update');
     Route::get('/games/delete/{id}', 'Admin\GamesController@delete');
 
+    Route::get('/games/trash', 'Admin\GamesController@trash');
+    Route::get('/games/restore/{id}', 'Admin\GamesController@restore');
+    Route::get('/games/remove/{id}', 'Admin\GamesController@remove');
+
     /**
      * Users
      */
@@ -54,6 +58,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/users/edit/{id}', 'Admin\UsersController@update');
     Route::get('/users/delete/{id}', 'Admin\UsersController@delete');
     Route::get('/users/api/user', 'Admin\UsersController@searchUsers');
+
+    Route::get('/users/trash', 'Admin\UsersController@trash');
+    Route::get('/users/restore/{id}', 'Admin\UsersController@restore');
+    Route::get('/users/remove/{id}', 'Admin\UsersController@remove');
 
     /**
      * Opponents

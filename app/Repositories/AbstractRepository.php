@@ -1,9 +1,10 @@
 <?php
 namespace App\Repositories;
 
-use App\Repositories\Contracts\AbstractRepositoryInterface;
+use App\Repositories\Contracts\AbstractRepositoryInterface as BaseRepositoryActions;
+use App\Repositories\Contracts\TrashableInterface as TrashActions;
 
-abstract class AbstractRepository implements AbstractRepositoryInterface {
+abstract class AbstractRepository implements BaseRepositoryActions, TrashActions {
 
     protected $model;
 
@@ -64,7 +65,7 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         $model = null;
 
         try {
-            $model = $this->model->find($id);
+            $model = $this->model->withTrashed()->find($id);
             $model->update($data);
         }
         catch (\Exception $e) {
@@ -115,6 +116,39 @@ abstract class AbstractRepository implements AbstractRepositoryInterface {
         }
 
         return $removed;
+    }
+
+    public function restoreAll()
+    {
+        $restored = false;
+
+        try {
+            $this->model->onlyTrashed()->restore();
+            $restored = true;
+        }
+        catch(\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+        }
+
+        return $restored;
+    }
+
+    public function emptyAll()
+    {
+        $emptied = false;
+
+        try {
+            $models = $this->model->onlyTrashed()->get();
+            foreach ($models as $model) {
+                $this->deleteFromTrash($model->id);
+            }
+            $emptied = true;
+        }
+        catch(\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+        }
+
+        return $emptied;
     }
 
 }

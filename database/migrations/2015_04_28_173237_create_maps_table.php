@@ -18,7 +18,7 @@ class CreateMapsTable extends Migration {
 			$table->string('name');
 			$table->string('image')->nullable();
 			$table->integer('game_id')->unsigned();
-			$table->foreign('game_id')->references('id')->on('games');
+			$table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
 			$table->timestamps();
 			$table->softDeletes();
 		});
