@@ -8,14 +8,24 @@ use Illuminate\Http\Request;
  */
 trait TraitTrashable {
 
+    /**
+     * @var
+     */
     protected $view;
+    /**
+     * @var
+     */
     protected $data;
+    /**
+     * @var
+     */
     protected $redirectUrl;
 
     /**
      * Setup repository reference and default trash view.
-     * 
+     *
      * @param  mixed $data Repository reference
+     * @param  string $redirectUrl
      * @param  string $view Trash view
      * @return void
      */
@@ -33,7 +43,7 @@ trait TraitTrashable {
     /**
      * Default trash action. Generates grid made of only trashed items.
      * Also checks for query string for emptying and restoring trashed items.
-     * 
+     *
      * @param  Request $request Http request
      * @return mixed
      */
@@ -64,13 +74,13 @@ trait TraitTrashable {
         // Setup view data
         $template = $grid->gridPage($page, 15);
         $template['pageTitle'] = 'Trash';
-        
+
         return view($this->view, $template);
     }
 
     /**
      * Restore specific item
-     * 
+     *
      * @param  int $id
      * @return mixed
      */
@@ -90,7 +100,7 @@ trait TraitTrashable {
 
     /**
      * Remove specific item
-     * 
+     *
      * @param  int $id
      * @return mixed
      */
@@ -110,7 +120,7 @@ trait TraitTrashable {
 
     /**
      * Restore all items
-     * 
+     *
      * @return mixed
      */
     private function restoreAll()
@@ -129,7 +139,7 @@ trait TraitTrashable {
 
     /**
      * Remove all items
-     * 
+     *
      * @return mixed
      */
     private function emptyTrash()

@@ -8,16 +8,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property integer $id 
  * @property integer $round_id 
- * @property integer $score_home 
- * @property integer $score_guest 
+ * @property integer $home 
+ * @property integer $guest 
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
+ * @property \Carbon\Carbon $deleted_at 
  * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereRoundId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereScoreHome($value)
- * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereScoreGuest($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereHome($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereGuest($value)
  * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\RoundScores whereDeletedAt($value)
  */
 class RoundScores extends Model {
 

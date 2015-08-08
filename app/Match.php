@@ -6,22 +6,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * App\Match
  *
- * @property-read \App\Opponent $opponent
- * @property-read \App\Team $team
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\MatchRounds[] $rounds
- * @property-read \App\Game $game
  * @property integer $id 
  * @property integer $team_id 
  * @property integer $opponent_id 
  * @property integer $game_id 
+ * @property string $matchlink 
+ * @property string $opponent_participants 
+ * @property string $standins 
+ * @property \Carbon\Carbon $date 
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
+ * @property \Carbon\Carbon $deleted_at 
+ * @property-read \App\Opponent $opponent 
+ * @property-read \App\Team $team 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\MatchRounds[] $rounds 
+ * @property-read mixed $participants 
+ * @property-read \App\Game $game 
+ * @property-read mixed $outcome 
  * @method static \Illuminate\Database\Query\Builder|\App\Match whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Match whereTeamId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Match whereOpponentId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Match whereGameId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Match whereMatchlink($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Match whereOpponentParticipants($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Match whereStandins($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Match whereDate($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Match whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Match whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Match whereDeletedAt($value)
  */
 class Match extends Model {
 

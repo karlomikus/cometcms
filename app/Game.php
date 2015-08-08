@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $id 
  * @property string $name 
  * @property string $code 
- * @property string $image
+ * @property string $image 
+ * @property \Carbon\Carbon $deleted_at 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Map[] $maps 
  * @method static \Illuminate\Database\Query\Builder|\App\Game whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Game whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Game whereCode($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Game whereImage($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Game whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Game whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Game whereDeletedAt($value)
  */
 class Game extends Model {
 

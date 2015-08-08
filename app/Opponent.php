@@ -9,13 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer $id 
  * @property string $name 
  * @property string $description 
+ * @property string $image 
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
+ * @property \Carbon\Carbon $deleted_at 
  * @method static \Illuminate\Database\Query\Builder|\App\Opponent whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Opponent whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Opponent whereDescription($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Opponent whereImage($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Opponent whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Opponent whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Opponent whereDeletedAt($value)
  */
 class Opponent extends Model {
 
