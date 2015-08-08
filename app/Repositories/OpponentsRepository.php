@@ -11,8 +11,6 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
 
     use ImageUpload;
 
-    private $uploadPath;
-
     public function __construct(Opponent $opponent)
     {
         parent::__construct($opponent);
@@ -20,6 +18,12 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
         $this->setUploadPath(base_path() . '/public/uploads/opponents/');
     }
 
+    /**
+     * Remove reference image when permanently deleting an opponent
+     *
+     * @param int $id
+     * @return bool
+     */
     public function deleteFromTrash($id)
     {
         $this->deleteImage($id);
@@ -33,7 +37,9 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
      * @param $page int Current page
      * @param $limit int Page results limit
      * @param $sortColumn string Column name
+     * @param $order string Order type
      * @param $searchTerm string Search term
+     * @param $trash bool Get only trashed items
      * @return array
      */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)

@@ -8,7 +8,7 @@ use App\Repositories\Contracts\OpponentsRepositoryInterface;
 
 /**
  * Opponents backend module. Uses trashable trait.
- * 
+ *
  * @category Admin controllers
  */
 class OpponentsController extends AdminController {
@@ -51,7 +51,7 @@ class OpponentsController extends AdminController {
     public function create()
     {
         $template = [
-            'opponent' => null,
+            'opponent'  => null,
             'pageTitle' => 'Create new opponent'
         ];
 
@@ -71,7 +71,8 @@ class OpponentsController extends AdminController {
                 $this->opponents->insertImage($opponent->id, $request->file('image'));
             }
             $this->alerts->alertSuccess('New opponent created successfully!');
-        } else {
+        }
+        else {
             $this->alerts->alertError('Opponent creation failed!');
         }
 
@@ -83,7 +84,7 @@ class OpponentsController extends AdminController {
     public function edit($id)
     {
         $template = [
-            'opponent' => $this->opponents->get($id),
+            'opponent'  => $this->opponents->get($id),
             'pageTitle' => 'Editing an opponent'
         ];
 
@@ -104,7 +105,8 @@ class OpponentsController extends AdminController {
                 $this->opponents->updateImage($id, $request->file('image'));
             }
             $this->alerts->alertSuccess('Opponent succesfully edited!');
-        } else {
+        }
+        else {
             $this->alerts->alertError('Failed to edit an opponent!');
         }
 
@@ -132,9 +134,10 @@ class OpponentsController extends AdminController {
         $fileDeleted = $this->opponents->deleteImage($id);
 
         $message = 'Error while deleting a file!';
-        if($fileDeleted) {
+        if ($fileDeleted) {
             $message = 'File deleted successfully!';
         }
+
         return response()->json(['success' => $fileDeleted, 'message' => $message]);
     }
 
