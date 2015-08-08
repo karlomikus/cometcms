@@ -60,7 +60,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function profile()
     {
-        return $this->hasOne('App\Profile');
+        return $this->hasOne('App\UsersProfile');
     }
 
 }

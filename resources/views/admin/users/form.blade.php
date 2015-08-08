@@ -51,6 +51,24 @@
                         <hr>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <h4 class="form-subtitle">Profile</h4>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
+                            {!! Form::label('first_name', 'First name', ['class' => 'control-label']) !!}
+                            {!! Form::text('first_name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                            {!! $errors->first('first_name', '<span class="help-block">:message</span>') !!}
+                        </div>
+                        <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                            {!! Form::label('last_name', 'Last name', ['class' => 'control-label']) !!}
+                            {!! Form::text('last_name', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                            {!! $errors->first('last_name', '<span class="help-block">:message</span>') !!}
+                        </div>
+                        <hr>
+                    </div>
+                </div>
                 <div class="text-right">
                     <a href="/admin/users" class="btn btn-default">Cancel</a>
                     <button class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>

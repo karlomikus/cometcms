@@ -66,7 +66,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {{-- <li><a href="#"><i class="fa fa-fw fa-bell"></i> <span class="badge">42</span></a></li> --}}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->profile->first_name }} {{ Auth::user()->profile->last_name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/') }}">View site</a></li>
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
