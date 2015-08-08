@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User, App\Role, App\Permission;
+use App\User, App\UsersProfile, App\Role, App\Permission;
 
 class UsersTableSeeder extends Seeder {
 
@@ -103,18 +103,34 @@ class UsersTableSeeder extends Seeder {
         $roleModerators->attachPermissions([$createMatch, $editMatch, $deleteMatch]);
         $roleContent->attachPermissions([$createMatch, $editMatch, $createTeam, $editTeam]);
 
-        User::create([
+        $admin = User::create([
             'name' => 'Karlo',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123')
-        ])->attachRoles([$roleAdmins, $roleUsers]);
+        ]);
+        $admin->attachRoles([$roleAdmins, $roleUsers]);
+        UsersProfile::create([
+            'user_id' => $admin->id,
+            'bio' => 'First and most important user, the admin of this glorious web app',
+            'image' => null,
+            'first_name' => 'Karlo',
+            'last_name' => 'Mikuš'
+        ]);
 
         for ($i=0; $i < 54; $i++) {
-            User::create([
+            $user = User::create([
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => Hash::make('demo123')
-            ])->attachRole($roleUsers);
+            ]);
+            $user->attachRole($roleUsers);
+            UsersProfile::create([
+                'user_id' => $user->id,
+                'bio' => $faker->paragraph(),
+                'image' => null,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName
+            ]);
         }
     }
 

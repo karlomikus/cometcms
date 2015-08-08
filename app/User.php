@@ -53,4 +53,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $dates = ['deleted_at'];
 
+    /**
+     * User profile
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
+
 }
