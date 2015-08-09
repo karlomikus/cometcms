@@ -1,7 +1,7 @@
 "use strict";
 
 var matchViewModel = null;
-var defaultModelData = {game_id: 1, rounds: [{scores: [], notes: null}], participants: {team: []}};
+var defaultModelData = {game_id: metaData[0].id, rounds: [{scores: [], notes: null}], participants: {team: []}};
 
 function formatMap (map) {
     if (!map.id || !map.element.dataset.icon) { return map.text; }
