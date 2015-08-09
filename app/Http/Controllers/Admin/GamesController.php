@@ -8,12 +8,23 @@ use App\Http\Requests\SaveGameRequest;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Admin\TraitTrashable as Trash;
 
+/**
+ * Games controller
+ *
+ * @package App\Http\Controllers\Admin
+ */
 class GamesController extends AdminController {
 
     use Trash;
 
+    /**
+     * @var GamesRepositoryInterface
+     */
     protected $games;
 
+    /**
+     * @param GamesRepositoryInterface $games
+     */
     public function __construct(GamesRepositoryInterface $games)
     {
         parent::__construct();
@@ -22,6 +33,10 @@ class GamesController extends AdminController {
         $this->trashInit($this->games, 'admin/games/trash', 'admin.games.trash');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $searchTerm = $request->query('search');
@@ -42,6 +57,9 @@ class GamesController extends AdminController {
         return view('admin.games.index', $data);
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $template = [
@@ -53,6 +71,11 @@ class GamesController extends AdminController {
         return view('admin.games.form', $template);
     }
 
+    /**
+     * @param SaveGameRequest $request
+     * @param MapsRepositoryInterface $maps
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function save(SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
         $code = Str::slug($request->input('code'));
@@ -87,6 +110,11 @@ class GamesController extends AdminController {
         return redirect('admin/games');
     }
 
+    /**
+     * @param $id
+     * @param MapsRepositoryInterface $maps
+     * @return \Illuminate\View\View
+     */
     public function edit($id, MapsRepositoryInterface $maps)
     {
         $template['pageTitle'] = 'Editing a game';
@@ -96,6 +124,12 @@ class GamesController extends AdminController {
         return view('admin.games.form', $template);
     }
 
+    /**
+     * @param $id
+     * @param SaveGameRequest $request
+     * @param MapsRepositoryInterface $maps
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update($id, SaveGameRequest $request, MapsRepositoryInterface $maps)
     {
         $code = Str::slug($request->input('code'));
@@ -125,6 +159,10 @@ class GamesController extends AdminController {
         return redirect('admin/games');
     }
 
+    /**
+     * @param $gameID
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete($gameID)
     {
         if ($this->games->delete($gameID)) {

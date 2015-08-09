@@ -4,19 +4,40 @@ namespace App\Repositories;
 use App\Libraries\GridView\GridViewInterface;
 use App\Repositories\Contracts\MapsRepositoryInterface;
 use App\Map;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Libraries\ImageUploadTrait as ImageUpload;
+use League\Flysystem\Exception;
 
+/**
+ * Maps repository
+ *
+ * Implements grid view and uses image uploading
+ *
+ * @package App\Repositories
+ */
 class MapsRepository extends AbstractRepository implements MapsRepositoryInterface, GridViewInterface {
 
-    private $uploadPath;
+    use ImageUpload;
 
+    /**
+     * Set model instance and upload path
+     *
+     * @param Map $map
+     */
     public function __construct(Map $map)
     {
         parent::__construct($map);
 
-        $this->uploadPath = base_path() . '/public/uploads/maps/';
+        $this->setUploadPath(base_path() . '/public/uploads/maps/');
     }
 
+    /**
+     * Add map and it's image
+     *
+     * @param $mapName string Map name
+     * @param $gameID int Game ID
+     * @param null $file Map image file
+     * @return bool
+     */
     public function insertMap($mapName, $gameID, $file = null)
     {
         try {
@@ -27,21 +48,32 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
             ]);
 
             if ($file !== null) {
-                $imageName = $map->id . '_' . $gameID . '.' . $file->getClientOriginalExtension();
-                $file->move($this->uploadPath, $imageName);
-
-                $map->image = $imageName;
-                $map->save();
+                $this->insertImage($map->id, $file);
             }
 
             return true;
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
+            \Session::flash('exception', $e->getMessage());
+
             return false;
         }
     }
 
+    /**
+     * Add multiple maps
+     *
+     * @param $mapNames array Map names
+     * @param $gameID
+     * @param array $mapImages
+     * @throws Exception
+     */
     public function insertMaps($mapNames, $gameID, $mapImages = [])
     {
+        if (!is_array($mapNames)) {
+            throw new Exception('Map names is not an array!');
+        }
+
         $totalMaps = count($mapNames);
         for ($i = 0; $i < $totalMaps; $i ++) {
             if (!empty($mapNames[$i]))
@@ -49,29 +81,39 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         }
     }
 
+    /**
+     * Update maps
+     *
+     * Compares changes on data coming from form and data coming from database.
+     * Inserts new maps, updates existing maps and deletes removed maps.
+     *
+     * @param $maps array Maps array
+     * @param $formMapIDs array Map IDs coming from the form
+     * @param $gameID int Game ID
+     * @param $files
+     * @throws Exception
+     */
     public function updateMaps($maps, $formMapIDs, $gameID, $files)
     {
+        if (!is_array($maps) || !is_array($formMapIDs)) {
+            throw new Exception('Maps are not an array!');
+        }
+
         // Convert string values to integer
         $formMapIDs = array_map('intval', $formMapIDs);
         // Get current database map values
         $currentMaps = array_values(array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray()));
+        // Count maps coming from form
         $totalMaps = count($formMapIDs);
 
         // Update maps and insert new ones if any
-        for ($i=0; $i < $totalMaps; $i++) {
+        for ($i = 0; $i < $totalMaps; $i ++) {
             if (empty($formMapIDs[$i])) { // Map doesn't exist
                 $this->insertMap($maps[$i], $gameID, $files[$i]);
             }
             else { // Update existing map
-                $mapImage = $this->get($formMapIDs[$i])->image;
                 if ($files[$i]) {
-                    if ($mapImage) {
-                        unlink($this->uploadPath . $mapImage);
-                    }
-                    $imageName = $formMapIDs[$i] . '_' . $gameID . '.' . $files[$i]->getClientOriginalExtension();
-                    $files[$i]->move($this->uploadPath, $imageName);
-
-                    $this->update($formMapIDs[$i], ['image' => $imageName]);
+                    $this->updateImage($formMapIDs[$i], $files[$i]);
                 }
                 $this->update($formMapIDs[$i], ['name' => $maps[$i]]);
             }
@@ -82,19 +124,40 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         $this->deleteMaps($mapsToDelete);
     }
 
+    /**
+     * @param array $mapIDs
+     */
     public function deleteMaps(array $mapIDs)
     {
         $maps = $this->model->whereIn('id', $mapIDs)->get();
 
         foreach ($maps as $map) {
-            $filename = $this->uploadPath . $map->image;
+            //$this->deleteImage($map->id);
             parent::delete($map->id);
-            if (file_exists($filename) && is_file($filename)) {
-                unlink($filename);
-            }
         }
     }
 
+    /**
+     * @param array $mapIDs
+     */
+    public function destroyMaps(array $mapIDs)
+    {
+        $maps = $this->model->whereIn('id', $mapIDs)->get();
+
+        foreach ($maps as $map) {
+            $this->deleteImage($map->id);
+            $this->deleteFromTrash($map->id);
+        }
+    }
+
+    /**
+     * @param int $page
+     * @param int $limit
+     * @param string $sortColumn
+     * @param $order
+     * @param null $searchTerm
+     * @return mixed
+     */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
     {
         $model = $this->model->orderBy($sortColumn, $order);
@@ -108,6 +171,12 @@ class MapsRepository extends AbstractRepository implements MapsRepositoryInterfa
         return $result;
     }
 
+    /**
+     * Get all maps from a specific game
+     *
+     * @param $gameID int Game ID
+     * @return mixed
+     */
     public function getByGame($gameID)
     {
         return $this->model->where('game_id', '=', $gameID)->get();

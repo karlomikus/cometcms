@@ -18,7 +18,7 @@ class CreateMatchRoundsTable extends Migration {
 			$table->integer('match_id')->unsigned();
 			$table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
 			$table->integer('map_id')->unsigned()->nullable();
-			$table->foreign('map_id')->references('id')->on('maps');
+			$table->foreign('map_id')->references('id')->on('maps')->onDelete('cascade');
             $table->text('notes')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
