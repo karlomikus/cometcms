@@ -20,6 +20,9 @@ class OpponentsController extends AdminController {
      */
     private $opponents;
 
+    /**
+     * @param OpponentsRepositoryInterface $opponents
+     */
     public function __construct(OpponentsRepositoryInterface $opponents)
     {
         parent::__construct();
@@ -28,6 +31,10 @@ class OpponentsController extends AdminController {
         $this->trashInit($this->opponents, 'admin/opponents/trash', 'admin.opponents.trash');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $searchTerm = $request->query('search');
@@ -48,6 +55,9 @@ class OpponentsController extends AdminController {
         return view('admin.opponents.index', $data);
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         $template = [
@@ -58,6 +68,10 @@ class OpponentsController extends AdminController {
         return view('admin.opponents.form', $template);
     }
 
+    /**
+     * @param SaveOpponentRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function save(SaveOpponentRequest $request)
     {
         $opponent = $this->opponents->insert([
@@ -81,6 +95,10 @@ class OpponentsController extends AdminController {
         return redirect('admin/opponents');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\View\View
+     */
     public function edit($id)
     {
         $template = [
@@ -91,6 +109,11 @@ class OpponentsController extends AdminController {
         return view('admin.opponents.form', $template);
     }
 
+    /**
+     * @param $id
+     * @param SaveOpponentRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update($id, SaveOpponentRequest $request)
     {
         $data = [
@@ -115,6 +138,10 @@ class OpponentsController extends AdminController {
         return redirect('admin/opponents');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete($id)
     {
         if ($this->opponents->delete($id)) {
@@ -129,6 +156,10 @@ class OpponentsController extends AdminController {
         return redirect('admin/opponents');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function deleteImage($id)
     {
         $fileDeleted = $this->opponents->deleteImage($id);
