@@ -5,10 +5,24 @@ use App\Repositories\Contracts\RolesRepositoryInterface;
 use App\Libraries\GridView\GridViewInterface;
 use App\Role, App\Permission;
 
+/**
+ * Roles repository
+ *
+ * @package App\Repositories
+ */
 class RolesRepository extends AbstractRepository implements RolesRepositoryInterface, GridViewInterface {
 
+    /**
+     * Permission model instance
+     *
+     * @var Permission
+     */
     protected $permission;
 
+    /**
+     * @param Role $role
+     * @param Permission $permission
+     */
     public function __construct(Role $role, Permission $permission)
     {
         parent::__construct($role);
@@ -17,7 +31,7 @@ class RolesRepository extends AbstractRepository implements RolesRepositoryInter
 
     /**
      * Get all existing permissions
-     * 
+     *
      * @return mixed
      */
     public function getAllPermissions()
@@ -27,7 +41,7 @@ class RolesRepository extends AbstractRepository implements RolesRepositoryInter
 
     /**
      * Get permissions for a specified role ID
-     * 
+     *
      * @param  int $roleID Role ID
      * @return mixed
      */
@@ -37,22 +51,27 @@ class RolesRepository extends AbstractRepository implements RolesRepositoryInter
     }
 
     /**
-     * Returns paged results for a specific page
+     * Prepare paged data for the grid view
      *
-     * @param $page int Current page
-     * @param $limit int Page results limit
-     * @param $sortColumn string Column name
-     * @param $searchTerm string Search term
-     * @return array
+     * @param int $page
+     * @param int $limit
+     * @param string $sortColumn
+     * @param $order
+     * @param null $searchTerm
+     * @param bool $trash
+     * @return mixed
      */
-    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
         $model = $this->model->orderBy($sortColumn, $order);
 
+        if ($trash)
+            $model->onlyTrashed();
+
         if ($searchTerm)
             $model->where('name', 'LIKE', '%' . $searchTerm . '%')
-                ->orWhere('display_name', 'LIKE', '%'. $searchTerm .'%')
-                ->orWhere('description', 'LIKE', '%'. $searchTerm .'%');
+                ->orWhere('display_name', 'LIKE', '%' . $searchTerm . '%')
+                ->orWhere('description', 'LIKE', '%' . $searchTerm . '%');
 
         $result['count'] = $model->count();
         $result['items'] = $model->skip($limit * ($page - 1))->take($limit)->get();

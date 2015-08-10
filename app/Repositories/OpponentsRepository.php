@@ -7,10 +7,18 @@ use App\Libraries\GridView\GridViewInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Libraries\ImageUploadTrait as ImageUpload;
 
+/**
+ * Opponents Repository
+ *
+ * @package App\Repositories
+ */
 class OpponentsRepository extends AbstractRepository implements OpponentsRepositoryInterface, GridViewInterface {
 
     use ImageUpload;
 
+    /**
+     * @param Opponent $opponent
+     */
     public function __construct(Opponent $opponent)
     {
         parent::__construct($opponent);
@@ -32,7 +40,7 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
     }
 
     /**
-     * Returns paged results for a specific page
+     * Prepare paged data for the grid view
      *
      * @param $page int Current page
      * @param $limit int Page results limit
@@ -46,7 +54,7 @@ class OpponentsRepository extends AbstractRepository implements OpponentsReposit
     {
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if($trash)
+        if ($trash)
             $model->onlyTrashed();
 
         if ($searchTerm)

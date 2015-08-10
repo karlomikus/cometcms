@@ -1,18 +1,19 @@
 <?php
 namespace App\Repositories;
 
-use App\Libraries\GridView\GridViewInterface;
 use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Team;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Libraries\ImageUploadTrait as ImageUpload;
 use Carbon\Carbon;
 
+/**
+ * Teams repository
+ *
+ * @package App\Repositories
+ */
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface {
 
     use ImageUpload;
-
-    private $uploadPath;
 
     /**
      * Initiate the repository with team model
@@ -23,7 +24,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     {
         parent::__construct($team);
 
-        $this->uploadPath = base_path() . '/public/uploads/squads/';
+        $this->setUploadPath(base_path() . '/public/uploads/squads/');
     }
 
     /**
@@ -62,7 +63,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             if ($teamModel) {
                 $this->insertMembers($data['members'], $teamModel->id);
             }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             \DB::rollback();
 
             \Session::flash('exception', $e->getMessage());
@@ -74,6 +76,11 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         return true;
     }
 
+    /**
+     * @param $id
+     * @param $data
+     * @return bool
+     */
     public function update($id, $data)
     {
         try {
@@ -84,7 +91,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
                 //$this->deleteAllMembers($id);
                 $this->updateMembers($data['members'], $id);
             }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             \DB::rollback();
 
             \Session::flash('exception', $e->getMessage());
@@ -110,13 +118,18 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             ->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
     }
 
+    /**
+     * @param $teamID
+     * @return bool
+     */
     public function delete($teamID)
     {
         try {
             \DB::beginTransaction();
             $this->deleteAllMembers($teamID);
             parent::delete($teamID);
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             \DB::rollback();
 
             \Session::flash('exception', $e->getMessage());
@@ -129,6 +142,10 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         return true;
     }
 
+    /**
+     * @param $roster
+     * @param $teamID
+     */
     public function updateMembers($roster, $teamID)
     {
         $table = \DB::table('team_roster');
@@ -136,7 +153,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         // Get original team members user IDs and compare it to the ones we get from the form
         $orgMembers = array_pluck($table->where('team_id', $teamID)->whereNull('deleted_at')->get(['user_id']), 'user_id');
         $formMembers = array_pluck($roster, 'user_id');
-        
+
         // If they are the same then we can just update the meta data
         if ($orgMembers == $formMembers) {
             foreach ($roster as $member) {
@@ -153,14 +170,21 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         }
     }
 
+    /**
+     * Get all roster changes since team creation
+     *
+     * @param $teamID
+     * @return array
+     */
     public function getMembersHistory($teamID)
     {
         $query = \DB::table('team_roster')
-                ->where('team_roster.team_id', $teamID)
-                ->whereNotNull('team_roster.deleted_at')
-                ->join('users', 'team_roster.user_id', '=', 'users.id')
-                ->get(['team_roster.position', 'team_roster.deleted_at as replaced', 'users.*']);
+            ->where('team_roster.team_id', $teamID)
+            ->whereNotNull('team_roster.deleted_at')
+            ->join('users', 'team_roster.user_id', '=', 'users.id')
+            ->get(['team_roster.position', 'team_roster.deleted_at as replaced', 'users.*']);
 
+        // Group changes by date
         $group = [];
         foreach ($query as $val) {
             $group[Carbon::parse($val->replaced)->format('Y-m-d H:i')][] = $val;

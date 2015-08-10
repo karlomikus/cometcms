@@ -4,12 +4,23 @@ namespace App\Repositories;
 use App\Repositories\Contracts\AbstractRepositoryInterface as BaseRepositoryActions;
 use App\Repositories\Contracts\TrashableInterface as TrashActions;
 
+/**
+ * Base repository class
+ *
+ * @package App\Repositories
+ */
 abstract class AbstractRepository implements BaseRepositoryActions, TrashActions {
 
+    /**
+     * Specific model instance
+     *
+     * @var
+     */
     protected $model;
 
     /**
      * Inject the model dependecy
+     *
      * @param $model
      */
     public function __construct($model)
@@ -19,6 +30,7 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
 
     /**
      * Get all items
+     *
      * @return mixed
      */
     public function all()
@@ -28,6 +40,7 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
 
     /**
      * Get single item
+     *
      * @param $id
      * @param $columns
      * @return mixed
@@ -39,7 +52,9 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
 
     /**
      * Create new item
+     *
      * @param $data
+     * @return mixed Returns new model instance
      */
     public function insert($data)
     {
@@ -57,8 +72,10 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
 
     /**
      * Update a single item
+     *
      * @param $id
      * @param $data
+     * @return mixed Returns new model instance
      */
     public function update($id, $data)
     {
@@ -77,7 +94,9 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
 
     /**
      * Delete a single item
+     *
      * @param $id
+     * @returns bool Is the file deleted
      */
     public function delete($id)
     {
@@ -93,16 +112,33 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
         return $deleted;
     }
 
+    /**
+     * Get only trashed (soft deleted) items
+     *
+     * @return mixed
+     */
     public function getTrash()
     {
         return $this->model->onlyTrashed()->get();
     }
 
+    /**
+     * Restore one item from trash
+     *
+     * @param int $id
+     * @return mixed
+     */
     public function restoreFromTrash($id)
     {
         return $this->get($id)->restore();
     }
 
+    /**
+     * Permanently delete one item from trash
+     *
+     * @param int $id
+     * @return bool
+     */
     public function deleteFromTrash($id)
     {
         $removed = false;
@@ -118,6 +154,11 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
         return $removed;
     }
 
+    /**
+     * Restore all items
+     *
+     * @return bool
+     */
     public function restoreAll()
     {
         $restored = false;
@@ -126,13 +167,18 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
             $this->model->onlyTrashed()->restore();
             $restored = true;
         }
-        catch(\Exception $e) {
+        catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 
         return $restored;
     }
 
+    /**
+     * Permanently delete all items
+     *
+     * @return bool
+     */
     public function emptyAll()
     {
         $emptied = false;
@@ -144,7 +190,7 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
             }
             $emptied = true;
         }
-        catch(\Exception $e) {
+        catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 

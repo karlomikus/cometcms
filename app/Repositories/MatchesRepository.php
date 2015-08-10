@@ -6,15 +6,30 @@ use App\MatchRounds;
 use App\RoundScores;
 use Carbon\Carbon;
 
+/**
+ * Class MatchesRepository
+ * @package App\Repositories
+ */
 class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface, GridViewInterface {
 
+    /**
+     * Rounds (games) model instance
+     *
+     * @var MatchRounds
+     */
     protected $rounds;
+
+    /**
+     * Scores model instance
+     *
+     * @var RoundScores
+     */
     protected $scores;
 
     /**
      * Initiate the repository with given models. We also need rounds and scores models
      * since the match is dependent on them, but they don't need a sepearete repository.
-     * 
+     *
      * @param $match Match Match model
      * @param $rounds MatchRounds Rounds model
      * @param $scores RoundScores Scores model
@@ -28,30 +43,8 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     }
 
     /**
-     * Custom query for all matches
-     * 
-     * @return mixed
-     */
-    public function all()
-    {
-        // TODO: Fix rounds counting!
-        $query = \DB::table('matches')
-            ->join('teams', 'teams.id', '=', 'matches.team_id')
-            ->join('opponents', 'opponents.id', '=', 'matches.opponent_id')
-            ->join('games', 'games.id', '=', 'matches.game_id')
-            ->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
-            ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
-            ->select(\DB::raw("matches.id, teams.name as team, opponents.name as opponent,
-                 games.name as game, count(match_rounds.match_id) as 'rounds',
-                 sum(round_scores.home) as 'score_home', sum(round_scores.guest) as 'score_guest', matches.created_at"))
-            ->groupBy('matches.id');
-
-        return $query->get();
-    }
-
-    /**
      * Gets rounds model from specified match ID
-     * 
+     *
      * @param $matchID int ID of the match
      * @return mixed Rounds model
      */
@@ -62,7 +55,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
     /**
      * Render JSON for use in knockout
-     * 
+     *
      * @param  int $matchID Match ID
      * @return mixed
      */
@@ -74,15 +67,17 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
     }
 
     /**
-    * Returns paged results for a specific page
-    *
-    * @param $page int Current page
-    * @param $limit int Page results limit
-    * @param $sortColumn string Column name
-    * @param $searchTerm string Search term
-    * @return array
-    */
-    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null)
+     * Prepare paged data for the grid view
+     *
+     * @param $page int Current page
+     * @param $limit int Page results limit
+     * @param $sortColumn string Column name
+     * @param $order string Order type
+     * @param $searchTerm string Search term
+     * @param $trash bool Get only trashed items
+     * @return array
+     */
+    public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
         $model = $this->model
             ->join('teams', 'teams.id', '=', 'matches.team_id')
@@ -92,6 +87,9 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
             ->select('matches.*', \DB::raw('sum(round_scores.home) as home_score, sum(round_scores.guest) as guest_score'))
             ->groupBy('matches.id');
+
+        if ($trash)
+            $model->onlyTrashed();
 
         if ($searchTerm)
             $model->where('opponents.name', 'LIKE', '%' . $searchTerm . '%')
@@ -107,7 +105,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
     /**
      * Returns all matches with match ID, date and final scores for home and guest teams
-     * 
+     *
      * @return mixed
      */
     public function getMatchesScores()
@@ -123,7 +121,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
     /**
      * Gets data from JSON request and inserts match, round and scores into database
-     * 
+     *
      * @param  array $data Array of data
      * @return bool       Insert successful
      */
@@ -134,7 +132,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
             // Insert tab delimited opponent team participants
             $opponentParticipants = null;
-            if(isset($data['guest_team'])) {
+            if (isset($data['guest_team'])) {
                 $opponentParticipants = implode("\t", $data['guest_team']);
             }
 
@@ -144,28 +142,28 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
             // Create a new match
             $matchModel = $this->model->create([
-                'team_id' => $data['team_id'],
-                'opponent_id' => $data['opponent_id'],
-                'game_id' => $data['game_id'],
-                'matchlink' => isset($data['matchlink']) ? $data['matchlink'] : null,
+                'team_id'               => $data['team_id'],
+                'opponent_id'           => $data['opponent_id'],
+                'game_id'               => $data['game_id'],
+                'matchlink'             => isset($data['matchlink']) ? $data['matchlink'] : null,
                 'opponent_participants' => $opponentParticipants,
-                'date' => $matchDate
+                'date'                  => $matchDate
             ]);
 
             // Create match rounds
             foreach ($data['rounds'] as $round) {
                 $roundModel = $this->rounds->create([
                     'match_id' => $matchModel['id'],
-                    'map_id' => $round['map_id'],
-                    'notes' => isset($round['notes']) ? $round['notes'] : null,
+                    'map_id'   => $round['map_id'],
+                    'notes'    => isset($round['notes']) ? $round['notes'] : null,
                 ]);
 
                 // Create round scores
                 foreach ($round['scores'] as $score) {
                     $this->scores->create([
                         'round_id' => $roundModel['id'],
-                        'home' => $score['home'],
-                        'guest' => $score['guest']
+                        'home'     => $score['home'],
+                        'guest'    => $score['guest']
                     ]);
                 }
             }
@@ -175,7 +173,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             foreach ($teamParticipants as $participant) {
                 if ($participant['active'] == 1) {
                     \DB::table('match_participants')->insert([
-                        'match_id' => $matchModel['id'],
+                        'match_id'  => $matchModel['id'],
                         'roster_id' => $participant['roster_id']
                     ]);
                 }
@@ -195,7 +193,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
     /**
      * Deletes all rounds and it's scores for a given match ID
-     * 
+     *
      * @param  int $matchID Match ID
      * @return void
      */
@@ -212,9 +210,9 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
     /**
      * Update match on edit. Deletes old scores and rounds before inserting new ones
-     * 
-     * @param  int   $id    Match ID
-     * @param  array $data  Data to insert
+     *
+     * @param  int $id Match ID
+     * @param  array $data Data to insert
      * @return mixed
      */
     public function update($id, $data)
@@ -226,7 +224,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
             // Insert tab delimited opponent team participants
             $opponentParticipants = null;
-            if(isset($data['guest_team'])) {
+            if (isset($data['guest_team'])) {
                 $opponentParticipants = implode("\t", $data['guest_team']);
             }
 
@@ -250,16 +248,16 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             foreach ($data['rounds'] as $round) {
                 $roundModel = $this->rounds->create([
                     'match_id' => $match->id,
-                    'map_id' => $round['map_id'],
-                    'notes' => isset($round['notes']) ? $round['notes'] : null,
+                    'map_id'   => $round['map_id'],
+                    'notes'    => isset($round['notes']) ? $round['notes'] : null,
                 ]);
 
                 // Create round scores
                 foreach ($round['scores'] as $score) {
                     $this->scores->create([
                         'round_id' => $roundModel['id'],
-                        'home' => $score['home'],
-                        'guest' => $score['guest']
+                        'home'     => $score['home'],
+                        'guest'    => $score['guest']
                     ]);
                 }
             }
@@ -270,7 +268,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             foreach ($teamParticipants as $participant) {
                 if ($participant['active'] == 1) {
                     \DB::table('match_participants')->insert([
-                        'match_id' => $match->id,
+                        'match_id'  => $match->id,
                         'roster_id' => $participant['roster_id']
                     ]);
                 }
@@ -281,7 +279,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
 
             return false;
         }
-        
+
         \DB::commit();
 
         return true;

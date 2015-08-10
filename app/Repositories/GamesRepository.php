@@ -53,13 +53,15 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
     }
 
     /**
-     * @param int $page
-     * @param int $limit
-     * @param string $sortColumn
-     * @param $order
-     * @param null $searchTerm
-     * @param bool $trash
-     * @return mixed
+     * Prepare paged data for the grid view
+     *
+     * @param $page int Current page
+     * @param $limit int Page results limit
+     * @param $sortColumn string Column name
+     * @param $order string Order type
+     * @param $searchTerm string Search term
+     * @param $trash bool Get only trashed items
+     * @return array
      */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
