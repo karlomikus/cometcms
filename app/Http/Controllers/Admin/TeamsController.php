@@ -1,15 +1,14 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Repositories\Contracts\TeamsRepositoryInterface;
-use App\Repositories\Contracts\GamesRepositoryInterface;
-use Illuminate\Http\Request;
+use App\Repositories\Contracts\TeamsRepositoryInterface as Teams;
+use App\Repositories\Contracts\GamesRepositoryInterface as Games;
 use App\Http\Requests\SaveTeamRequest;
 
 class TeamsController extends AdminController {
 
     protected $teams;
 
-    public function __construct(TeamsRepositoryInterface $teams)
+    public function __construct(Teams $teams)
     {
         parent::__construct();
         $this->teams = $teams;
@@ -18,21 +17,21 @@ class TeamsController extends AdminController {
     public function index()
     {
         $template = [
-            'data' => $this->teams->all(),
+            'data'      => $this->teams->all(),
             'pageTitle' => 'Squads'
         ];
 
         return view('admin.teams.index', $template);
     }
 
-    public function create(GamesRepositoryInterface $games)
+    public function create(Games $games)
     {
         $template = [
-            'team' => null,
+            'team'      => null,
             'modelData' => 'null',
-            'games' => $games->all(),
+            'games'     => $games->all(),
             'pageTitle' => 'Create new squad',
-            'history' => null
+            'history'   => null
         ];
 
         return view('admin.teams.form', $template);
@@ -53,14 +52,14 @@ class TeamsController extends AdminController {
         return response()->json(['location' => '/admin/teams', 'alerts' => $this->alerts->getAlerts()]);
     }
 
-    public function edit($id, GamesRepositoryInterface $games)
+    public function edit($id, Games $games)
     {
         $template = [
-            'team' => $this->teams->get($id),
+            'team'      => $this->teams->get($id),
             'pageTitle' => 'Editing an squad',
             'modelData' => $this->teams->getTeamData($id),
-            'games' => $games->all(),
-            'history' => $this->teams->getMembersHistory($id)
+            'games'     => $games->all(),
+            'history'   => $this->teams->getMembersHistory($id)
         ];
 
         return view('admin.teams.form', $template);
@@ -77,21 +76,21 @@ class TeamsController extends AdminController {
         else {
             $this->alerts->alertError('Unable to edit a squad.');
         }
-        
+
         return response()->json(['location' => '/admin/teams', 'alerts' => $this->alerts->getAlerts()]);
     }
 
     public function delete($id)
     {
         if ($this->teams->delete($id)) {
-            $this->alerts->alertSuccess('Squad deleted succesfully!');
+            $this->alerts->alertSuccess('Squad deleted successfully!');
         }
         else {
             $this->alerts->alertError('Unable to delete squad!');
         }
 
         $this->alerts->getAlerts();
-        
+
         return redirect('admin/teams');
     }
 

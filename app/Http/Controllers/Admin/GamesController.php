@@ -1,8 +1,8 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Libraries\GridView\GridView;
-use App\Repositories\Contracts\GamesRepositoryInterface;
-use App\Repositories\Contracts\MapsRepositoryInterface;
+use App\Repositories\Contracts\GamesRepositoryInterface as Games;
+use App\Repositories\Contracts\MapsRepositoryInterface as Maps;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveGameRequest;
 use Illuminate\Support\Str;
@@ -18,14 +18,14 @@ class GamesController extends AdminController {
     use Trash;
 
     /**
-     * @var GamesRepositoryInterface
+     * @var Games
      */
     protected $games;
 
     /**
-     * @param GamesRepositoryInterface $games
+     * @param Games $games
      */
-    public function __construct(GamesRepositoryInterface $games)
+    public function __construct(Games $games)
     {
         parent::__construct();
 
@@ -64,8 +64,8 @@ class GamesController extends AdminController {
     {
         $template = [
             'pageTitle' => 'Create new game',
-            'maps' => 'null',
-            'model' => null
+            'maps'      => 'null',
+            'model'     => null
         ];
 
         return view('admin.games.form', $template);
@@ -73,10 +73,10 @@ class GamesController extends AdminController {
 
     /**
      * @param SaveGameRequest $request
-     * @param MapsRepositoryInterface $maps
+     * @param Maps $maps
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function save(SaveGameRequest $request, MapsRepositoryInterface $maps)
+    public function save(SaveGameRequest $request, Maps $maps)
     {
         $code = Str::slug($request->input('code'));
 
@@ -112,10 +112,10 @@ class GamesController extends AdminController {
 
     /**
      * @param $id
-     * @param MapsRepositoryInterface $maps
+     * @param Maps $maps
      * @return \Illuminate\View\View
      */
-    public function edit($id, MapsRepositoryInterface $maps)
+    public function edit($id, Maps $maps)
     {
         $template['pageTitle'] = 'Editing a game';
         $template['maps'] = $maps->getByGame($id)->toJson();
@@ -127,10 +127,10 @@ class GamesController extends AdminController {
     /**
      * @param $id
      * @param SaveGameRequest $request
-     * @param MapsRepositoryInterface $maps
+     * @param Maps $maps
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id, SaveGameRequest $request, MapsRepositoryInterface $maps)
+    public function update($id, SaveGameRequest $request, Maps $maps)
     {
         $code = Str::slug($request->input('code'));
 
@@ -166,7 +166,7 @@ class GamesController extends AdminController {
     public function delete($gameID)
     {
         if ($this->games->delete($gameID)) {
-            $this->alerts->alertSuccess('Game moved to trash succesfully!');
+            $this->alerts->alertSuccess('Game moved to trash successfully!');
         }
         else {
             $this->alerts->alertError('Unable to trash a game!');

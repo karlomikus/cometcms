@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Repositories\Contracts\GamesRepositoryInterface;
-use App\Repositories\Contracts\MapsRepositoryInterface;
-use App\Repositories\Contracts\MatchesRepositoryInterface;
-use App\Repositories\Contracts\TeamsRepositoryInterface;
-use App\Repositories\Contracts\OpponentsRepositoryInterface;
+use App\Repositories\Contracts\GamesRepositoryInterface as Games;
+use App\Repositories\Contracts\MapsRepositoryInterface as Maps;
+use App\Repositories\Contracts\MatchesRepositoryInterface as Matches;
+use App\Repositories\Contracts\TeamsRepositoryInterface as Teams;
+use App\Repositories\Contracts\OpponentsRepositoryInterface as Opponents;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveMatchRequest;
 use App\Libraries\GridView\GridView;
@@ -14,23 +14,24 @@ class MatchesController extends AdminController {
 
     protected $matches;
 
-    public function __construct(MatchesRepositoryInterface $matches)
+    public function __construct(Matches $matches)
     {
         parent::__construct();
         $this->matches = $matches;
     }
+
     /**
      * Show matches list
-     * 
+     *
      * @param $request Request
      * @return mixed
      */
     public function index(Request $request)
     {
         $searchTerm = $request->query('search');
-        $page       = $request->query('page');
+        $page = $request->query('page');
         $sortColumn = $request->query('sort');
-        $order      = $request->query('order');
+        $order = $request->query('order');
 
         $grid = new GridView($this->matches);
         $grid->setOrder($order, 'desc');
@@ -47,14 +48,14 @@ class MatchesController extends AdminController {
 
     /**
      * Show match create form
-     * 
-     * @param $teams TeamsRepositoryInterface
-     * @param $opponents OpponentsRepositoryInterface
-     * @param $games GamesRepositoryInterface
-     * @param $maps MapsRepositoryInterface
+     *
+     * @param $teams Teams
+     * @param $opponents Opponents
+     * @param $games Games
+     * @param $maps Maps
      * @return mixed
      */
-    public function create(TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
+    public function create(Teams $teams, Opponents $opponents, Games $games, Maps $maps)
     {
         $data['teams'] = $teams->all();
         $data['opponents'] = $opponents->all();
@@ -70,7 +71,7 @@ class MatchesController extends AdminController {
 
     /**
      * Read json request and save match to database
-     * 
+     *
      * @param $request SaveMatchRequest
      * @return string JSON response containing redirect location and alert messages
      */
@@ -78,7 +79,7 @@ class MatchesController extends AdminController {
     {
         $data = $request->all();
 
-        if($this->matches->insert($data)) {
+        if ($this->matches->insert($data)) {
             $this->alerts->alertSuccess('Match saved successfully.');
         }
         else {
@@ -91,7 +92,7 @@ class MatchesController extends AdminController {
         return response()->json(['location' => '/admin/matches', 'alerts' => $this->alerts->getAlerts()]);
     }
 
-    public function edit($id, TeamsRepositoryInterface $teams, OpponentsRepositoryInterface $opponents, GamesRepositoryInterface $games, MapsRepositoryInterface $maps)
+    public function edit($id, Teams $teams, Opponents $opponents, Games $games, Maps $maps)
     {
         $data['teams'] = $teams->all();
         $data['opponents'] = $opponents->all();
@@ -109,7 +110,7 @@ class MatchesController extends AdminController {
     {
         $data = $request->all();
 
-        if($this->matches->update($id, $data))
+        if ($this->matches->update($id, $data))
             $this->alerts->alertSuccess('Match updated successfully.');
         else
             $this->alerts->alertError('Unable to update a match.');
@@ -141,7 +142,7 @@ class MatchesController extends AdminController {
         return response()->json($match);
     }
 
-    public function getMetaJson(GamesRepositoryInterface $games)
+    public function getMetaJson(Games $games)
     {
         $data = $games->allWithMaps();
 

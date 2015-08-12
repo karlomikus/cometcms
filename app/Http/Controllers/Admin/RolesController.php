@@ -1,16 +1,22 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Libraries\GridView\GridView;
-use App\Repositories\Contracts\RolesRepositoryInterface;
+use App\Repositories\Contracts\RolesRepositoryInterface as Roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\SaveRoleRequest;
 
 class RolesController extends AdminController {
 
+    /**
+     * @var Roles
+     */
     protected $roles;
 
-    public function __construct(RolesRepositoryInterface $roles)
+    /**
+     * @param Roles $roles
+     */
+    public function __construct(Roles $roles)
     {
         parent::__construct();
         $this->roles = $roles;
@@ -39,9 +45,9 @@ class RolesController extends AdminController {
     public function create()
     {
         $template = [
-            'pageTitle' => 'Create new role',
-            'perms' => $this->roles->getAllPermissions(),
-            'model' => null,
+            'pageTitle'     => 'Create new role',
+            'perms'         => $this->roles->getAllPermissions(),
+            'model'         => null,
             'selectedPerms' => []
         ];
 
@@ -54,9 +60,9 @@ class RolesController extends AdminController {
         $name = Str::slug($displayName);
 
         $role = $this->roles->insert([
-            'name'  => $name,
-            'display_name'  => $displayName,
-            'description' => $request->input('description')
+            'name'         => $name,
+            'display_name' => $displayName,
+            'description'  => $request->input('description')
         ]);
 
         $perms = $request->input('perms');
@@ -80,9 +86,9 @@ class RolesController extends AdminController {
     {
         $roleData = $this->roles->get($id);
         $template = [
-            'pageTitle' => 'Editing a role',
-            'model' => $roleData,
-            'perms' => $this->roles->getAllPermissions(),
+            'pageTitle'     => 'Editing a role',
+            'model'         => $roleData,
+            'perms'         => $this->roles->getAllPermissions(),
             'selectedPerms' => $roleData->perms->lists('id')->toArray()
         ];
 
@@ -96,8 +102,8 @@ class RolesController extends AdminController {
 
         $role = $this->roles->update($id, [
             'display_name' => $displayName,
-            'name' => $name,
-            'description' => $request->input('description')
+            'name'         => $name,
+            'description'  => $request->input('description')
         ]);
 
         $perms = $request->input('perms');
