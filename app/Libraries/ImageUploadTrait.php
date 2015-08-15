@@ -60,6 +60,11 @@ trait ImageUploadTrait {
         
         if (file_exists($filename) && is_file($filename)) {
             parent::update($id, ['image' => null]);
+
+            // Don't delete images during development process
+            if (\App::environment('local'))
+                return true;
+
             return unlink($filename);
         }
 
