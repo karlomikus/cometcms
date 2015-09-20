@@ -44,14 +44,27 @@
 @endsection
 
 @section('page-scripts')
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script>
-    function ajaxCallbackSuccess(data) {
-        if(data.success == true) {
-            $(".uploaded-file").remove();
+        function ajaxCallbackSuccess(data) {
+            if(data.success == true) {
+                $(".uploaded-file").remove();
+            }
+            else {
+                alert(data.message);
+            }
         }
-        else {
-            alert(data.message);
-        }
-    }
-</script>
+
+        var simplemde = new SimpleMDE({
+            autofocus: true,
+            autosave: {
+                enabled: true,
+                unique_id: "cometCmsEditor",
+                delay: 1000
+            },
+            element: document.getElementById("description"),
+            spellChecker: false
+        });
+    </script>
 @endsection

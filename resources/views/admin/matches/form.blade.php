@@ -194,5 +194,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('/js/admin/matches.js') }}"></script>
+    <script src="{{ asset('/js/admin/modules/matches.js') }}"></script>
 @endsection

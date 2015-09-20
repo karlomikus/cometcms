@@ -83,5 +83,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('/js/admin/games.js') }}"></script>
+    <script src="{{ asset('/js/admin/modules/games.js') }}"></script>
 @endsection
