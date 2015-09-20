@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Libraries\GridView\GridView;
 use App\Http\Requests\SaveOpponentRequest;
 use App\Http\Controllers\Admin\TraitTrashable as Trash;
-use App\Repositories\Contracts\OpponentsRepositoryInterface;
+use App\Repositories\Contracts\OpponentsRepositoryInterface as Opponents;
 
 /**
  * Opponents backend module. Uses trashable trait.
@@ -21,9 +21,9 @@ class OpponentsController extends AdminController {
     private $opponents;
 
     /**
-     * @param OpponentsRepositoryInterface $opponents
+     * @param Opponents $opponents
      */
-    public function __construct(OpponentsRepositoryInterface $opponents)
+    public function __construct(Opponents $opponents)
     {
         parent::__construct();
 

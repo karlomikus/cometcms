@@ -24,12 +24,12 @@ class UsersController extends AdminController {
         $this->trashInit($this->users, 'admin/users/trash', 'admin.users.trash');
     }
 
-	public function index(Request $request)
+    public function index(Request $request)
     {
         $searchTerm = $request->query('search');
-        $page       = $request->query('page');
+        $page = $request->query('page');
         $sortColumn = $request->query('sort');
-        $order      = $request->query('order');
+        $order = $request->query('order');
 
         $grid = new GridView($this->users);
         $grid->setOrder($order, 'asc');
@@ -59,9 +59,9 @@ class UsersController extends AdminController {
         $roles = $request->input('roles');
 
         $user = $this->users->insert([
-            'email' => $request->input('email'),
+            'email'    => $request->input('email'),
             'password' => \Hash::make($request->input('pwd')),
-            'name' => $request->input('name')
+            'name'     => $request->input('name')
         ]);
 
         if ($user) {
@@ -94,9 +94,9 @@ class UsersController extends AdminController {
     {
         $roles = $request->input('roles');
         $data = [
-            'email' => $request->input('email'),
+            'email'    => $request->input('email'),
             'password' => \Hash::make($request->input('pwd')),
-            'name' => $request->input('name')
+            'name'     => $request->input('name')
         ];
 
         $user = $this->users->update($id, $data);
@@ -137,9 +137,10 @@ class UsersController extends AdminController {
     {
         $searchString = $request->input('q');
         $result = [];
-        if(strlen($searchString) >= 2) {
+        if (strlen($searchString) >= 2) {
             $result = $this->users->searchUsersByName($searchString);
         }
+
         return response()->json($result);
     }
 
