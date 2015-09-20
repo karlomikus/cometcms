@@ -30,8 +30,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     /**
      * Add members to specific team
      *
-     * @param  array $data Array with member data
-     * @param  int $teamID ID of the team we are adding members to
+     * @param  array $data    Array with member data
+     * @param  int   $teamID  ID of the team we are adding members to
      * @return void           Void since we use transaction in insert() method
      */
     public function insertMembers($data, $teamID)
@@ -49,7 +49,8 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     }
 
     /**
-     * Add new team and team members. Uses transactions, if transaction commits returns true.
+     * Add new team and team members.
+     * Uses transactions, if transaction commits returns true.
      *
      * @param  array $data Array of data
      * @return bool        Was transaction commited

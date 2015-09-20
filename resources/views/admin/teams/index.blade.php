@@ -9,7 +9,7 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="list-group">
                     @forelse($data as $team)
                         <a href="{{ url('admin/teams/edit', [$team->id]) }}" class="list-group-item clearfix">

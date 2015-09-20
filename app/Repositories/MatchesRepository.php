@@ -7,7 +7,8 @@ use App\RoundScores;
 use Carbon\Carbon;
 
 /**
- * Class MatchesRepository
+ * Matches repository
+ *
  * @package App\Repositories
  */
 class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface, GridViewInterface {

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Admin\TraitTrashable as Trash;
 
 /**
- * Games controller
+ * Games Controller
  *
  * @package App\Http\Controllers\Admin
  */

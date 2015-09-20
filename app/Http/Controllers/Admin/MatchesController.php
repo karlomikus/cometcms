@@ -12,12 +12,15 @@ use App\Libraries\GridView\GridView;
 
 class MatchesController extends AdminController {
 
+    use TraitTrashable;
+
     protected $matches;
 
     public function __construct(MatchesRepositoryInterface $matches)
     {
         parent::__construct();
         $this->matches = $matches;
+        $this->trashInit($this->matches, 'admin/matches/trash', 'admin.matches.trash');
     }
     /**
      * Show matches list
