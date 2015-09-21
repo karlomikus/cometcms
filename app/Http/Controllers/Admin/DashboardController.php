@@ -9,6 +9,8 @@ class DashboardController extends AdminController {
 
     public function __construct(StatisticsService $stats)
     {
+        parent::__construct();
+
         $this->stats = $stats;
     }
 
@@ -17,7 +19,7 @@ class DashboardController extends AdminController {
         $template['pageTitle'] = 'Dashboard';
         $template['matchStats'] = $this->stats->getMatchesOutcomeStatistics();
         $template['byMonth'] = $this->stats->getMatchesOutcomeByMonth();
-        
+
         return view('admin.dashboard.index', $template);
     }
 

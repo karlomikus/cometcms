@@ -7,7 +7,7 @@
 
 	<title>CometCMS App</title>
 
-    <link rel="stylesheet" href="{{ asset('/css/dependencies.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
