@@ -79,6 +79,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::get('/opponents/remove/{id}', 'Admin\OpponentsController@remove');
 
     /**
+     * Posts
+     */
+    Route::get('/posts', 'Admin\PostsController@index');
+    Route::get('/posts/new', 'Admin\PostsController@create');
+    Route::post('/posts/new', 'Admin\PostsController@save');
+    Route::get('/posts/edit/{id}', 'Admin\PostsController@edit');
+    Route::post('/posts/edit/{id}', 'Admin\PostsController@update');
+    Route::get('/posts/delete/{id}', 'Admin\PostsController@delete');
+
+    /**
      * Teams
      */
     Route::get('/teams', 'Admin\TeamsController@index');
