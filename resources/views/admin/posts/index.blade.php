@@ -23,7 +23,7 @@
                     @endif
                     @foreach($data as $post)
                         <tr>
-                            <td><a href="{{ url('admin/posts/edit', [$post->id]) }}">{{ $post->title }}</a></td>
+                            <td>@if($post->status == 'draft')<span class="label label-default">draft</span>@endif <a href="{{ url('admin/posts/edit', [$post->id]) }}">{{ $post->title }}</a></td>
                             <td>{{ str_limit($post->summary, 50, '...') }}</td>
                             <td>
                                 <a href="{{ url('admin/posts/delete', [$post->id]) }}" class="text-delete">Trash</a>

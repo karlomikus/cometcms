@@ -40,7 +40,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="disabled"><a href="{{ url('/admin/pages') }}">Pages</a></li>
-                        <li class="disabled"><a href="{{ url('/admin/posts') }}">Posts</a></li>
+                        <li><a href="{{ url('/admin/posts') }}">Posts</a></li>
                         <li><a href="{{ url('/admin/games') }}">Games</a></li>
                         <li><a href="{{ url('/admin/opponents') }}">Opponents</a></li>
                         <li><a href="{{ url('/admin/matches') }}">Matches</a></li>

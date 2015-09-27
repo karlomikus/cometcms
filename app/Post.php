@@ -5,16 +5,27 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
-{
-	use SoftDeletes;
+class Post extends Model {
 
-	protected $fillable = ['user_id', 'title', 'summary', 'content', 'slug', 'category', 'status'];
+    use SoftDeletes;
 
-	protected $dates = ['deleted_at'];
+    protected $fillable = [
+        'user_id',
+        'title',
+        'summary',
+        'content',
+        'slug',
+        'category',
+        'status',
+        'comments',
+        'publish_date_start',
+        'publish_date_end'
+    ];
 
-	public function author()
-	{
-		return $this->belongsTo('App\User', 'user_id');
-	}
+    protected $dates = ['deleted_at'];
+
+    public function author()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

@@ -17,5 +17,6 @@ elixir(function(mix) {
             'admin.js'
         ], 'public/js/admin/main.js')
         .scripts(['modules/dashboard.js'], 'public/js/admin/modules/dashboard.js')
+        .scripts(['modules/posts.js'], 'public/js/admin/modules/posts.js')
         .version(['css/admin/main.css', 'js/admin/main.js']);
 });
