@@ -12,6 +12,8 @@
                     <tr>
                         <th>{!! Form::gridHeader('Title', 'title', 'Admin\PostsController@index', $headerAttr) !!}</th>
                         <th>{!! Form::gridHeader('Created on', 'created_at', 'Admin\PostsController@index', $headerAttr) !!}</th>
+                        <th>{!! Form::gridHeader('Author', 'user_id', 'Admin\PostsController@index', $headerAttr) !!}</th>
+                        <th>{!! Form::gridHeader('Category', 'category', 'Admin\PostsController@index', $headerAttr) !!}</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -25,6 +27,8 @@
                         <tr>
                             <td>@if($post->status == 'draft')<span class="label label-default">draft</span>@endif <a href="{{ url('admin/posts/edit', [$post->id]) }}">{{ $post->title }}</a></td>
                             <td>{{ $post->created_at->format('d.m.Y H:i') }}</td>
+                            <td>{{ $post->author->name }}</td>
+                            <td>{{ $post->category->name or 'n/a' }}</td>
                             <td>
                                 <a href="{{ url('admin/posts/delete', [$post->id]) }}" class="text-delete">Trash</a>
                                 <a href="{{ url('post', [$post->slug]) }}" target="_blank" class="text-restore">View</a>

@@ -21,6 +21,8 @@ trait TraitTrashable {
      */
     protected $redirectUrl;
 
+    private $defaultSortColumn = 'name';
+
     /**
      * Setup repository reference and default trash view.
      *
@@ -67,7 +69,7 @@ trait TraitTrashable {
         // Initiate grid view but only with trashed items
         $grid = new GridView($this->data, true);
         $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'name'); // TODO: Sortcolumn name
+        $grid->setSortColumn($sortColumn, $this->defaultSortColumn);
         $grid->setPath($request->getPathInfo());
         $grid->setOrder($order, 'asc');
 
@@ -154,6 +156,14 @@ trait TraitTrashable {
         $this->alerts->getAlerts();
 
         redirect($this->redirectUrl);
+    }
+
+    /**
+     * @param string $defaultSortColumn
+     */
+    protected function setDefaultSortColumn($defaultSortColumn)
+    {
+        $this->defaultSortColumn = $defaultSortColumn;
     }
 
 }

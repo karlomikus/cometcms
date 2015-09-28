@@ -88,6 +88,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
     Route::post('/posts/edit/{id}', 'Admin\PostsController@update');
     Route::get('/posts/delete/{id}', 'Admin\PostsController@delete');
 
+    Route::get('/posts/trash', 'Admin\PostsController@trash');
+    Route::get('/posts/restore/{id}', 'Admin\PostsController@restore');
+    Route::get('/posts/remove/{id}', 'Admin\PostsController@remove');
+
     /**
      * Teams
      */

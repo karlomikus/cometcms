@@ -15,7 +15,7 @@ class Post extends Model {
         'summary',
         'content',
         'slug',
-        'category',
+        'post_category_id',
         'status',
         'comments',
         'publish_date_start',
@@ -27,5 +27,10 @@ class Post extends Model {
     public function author()
     {
         return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\PostCategory', 'post_category_id', 'id');
     }
 }

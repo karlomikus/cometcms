@@ -31,6 +31,7 @@ class PostsController extends AdminController {
         $this->posts = $posts;
         $this->categories = $categories;
         $this->trashInit($this->posts, 'admin/posts/trash', 'admin.posts.trash');
+        $this->setDefaultSortColumn('title');
     }
 
     /**

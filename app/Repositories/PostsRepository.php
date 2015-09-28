@@ -44,7 +44,7 @@ class PostsRepository extends AbstractRepository implements PostsRepositoryInter
 			$model->where('title', 'LIKE', '%' . $searchTerm . '%')->orWhere('slug', 'LIKE', '%' . $searchTerm . '%');
 
 		$result['count'] = $model->count();
-		$result['items'] = $model->skip($limit * ($page - 1))->take($limit)->get();
+		$result['items'] = $model->with('author', 'category')->skip($limit * ($page - 1))->take($limit)->get();
 
 		return $result;
 	}
