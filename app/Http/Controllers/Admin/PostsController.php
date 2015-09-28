@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\PostCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Libraries\GridView\GridView;
@@ -61,7 +60,7 @@ class PostsController extends AdminController {
     public function create()
     {
         $template = [
-            'post'      => null,
+            'post'      => $this->posts->getModel(),
             'pageTitle' => 'Create new post',
             'categories' => $this->categories->all()->lists('name', 'id')
         ];

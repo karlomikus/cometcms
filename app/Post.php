@@ -22,7 +22,7 @@ class Post extends Model {
         'publish_date_end'
     ];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'publish_date_start', 'publish_date_end'];
 
     public function author()
     {

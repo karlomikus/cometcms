@@ -197,4 +197,9 @@ abstract class AbstractRepository implements BaseRepositoryActions, TrashActions
         return $emptied;
     }
 
+    public function getModel()
+    {
+        return $this->model;
+    }
+
 }

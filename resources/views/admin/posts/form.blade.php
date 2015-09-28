@@ -37,34 +37,34 @@
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('publish_date_start') ? 'has-error' : '' }}">
                                     {!! Form::label('publish_date_start', 'Publish on date', ['class' => 'control-label']) !!}
-                                    <input type="text" name="publish_date_start" id="publish_date_start" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-rule-dateISO="true" required />
+                                    <input type="text" name="publish_date_start" value="{{ $post->publish_date_start }}" id="publish_date_start" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-rule-dateISO="true" required />
                                     {!! $errors->first('publish_date_start', '<span class="help-block">:message</span>') !!}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('publish_date_end') ? 'has-error' : '' }}">
                                     {!! Form::label('publish_date_end', 'Publish to date', ['class' => 'control-label']) !!}
-                                    <input type="text" name="publish_date_end" id="publish_date_end" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-rule-dateISO="true" required />
+                                    <input type="text" name="publish_date_end" value="{{ $post->publish_date_end }}" id="publish_date_end" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-rule-dateISO="true" required />
                                     {!! $errors->first('publish_date_end', '<span class="help-block">:message</span>') !!}
                                 </div>
                             </div>
                         </div>
                         <div class="form-group {{ $errors->has('post_category_id') ? 'has-error' : '' }}">
                             {!! Form::label('post_category_id', 'Category', ['class' => 'control-label']) !!}
-                            {!! Form::select('post_category_id', $categories, null, ['class' => 'form-control']) !!}
+                            {!! Form::select('post_category_id', $categories, $post->post_category_id, ['class' => 'form-control']) !!}
                             {!! $errors->first('post_category_id', '<span class="help-block">:message</span>') !!}
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="comments" id="comments-enable" value="1" checked>
+                                        {!! Form::radio('comments', 1) !!}
                                         Allow comments on post
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="comments" id="comments-disable" value="0">
+                                        {!! Form::radio('comments', 0) !!}
                                         Disable comments on post
                                     </label>
                                 </div>
@@ -72,13 +72,13 @@
                             <div class="col-md-6">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="status-draft" value="draft" checked>
+                                        {!! Form::radio('status', 'draft') !!}
                                         Save as draft
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="status-published" value="published">
+                                        {!! Form::radio('status', 'published') !!}
                                         Prepare to publish
                                     </label>
                                 </div>
