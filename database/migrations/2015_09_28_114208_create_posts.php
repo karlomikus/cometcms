@@ -19,7 +19,7 @@ class CreatePosts extends Migration
             $table->string('summary', 250)->nullable();
             $table->text('content');
             $table->string('slug', 100);
-            $table->integer('category')->unsigned()->nullable();
+            $table->integer('post_category_id')->unsigned()->nullable();
             $table->dateTime('publish_date_start')->nullable();
             $table->dateTime('publish_date_end')->nullable();
             $table->enum('status', ['published', 'draft'])->default('draft');
@@ -28,6 +28,7 @@ class CreatePosts extends Migration
 
             $table->unique('slug');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('post_category_id')->references('id')->on('post_categories');
             $table->softDeletes();
         });
     }
