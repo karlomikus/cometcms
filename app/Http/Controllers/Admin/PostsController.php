@@ -1,10 +1,12 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\PostCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Libraries\GridView\GridView;
 use App\Http\Controllers\Admin\TraitTrashable as Trash;
 use App\Repositories\Contracts\PostsRepositoryInterface as Posts;
+use App\Repositories\Contracts\PostCategoriesRepositoryInterface as Categories;
 use Illuminate\Support\Str;
 
 /**
@@ -20,13 +22,14 @@ class PostsController extends AdminController {
      * Local repository instance
      */
     private $posts;
+    private $categories;
 
-
-    public function __construct(Posts $posts)
+    public function __construct(Posts $posts, Categories $categories)
     {
         parent::__construct();
 
         $this->posts = $posts;
+        $this->categories = $categories;
         $this->trashInit($this->posts, 'admin/posts/trash', 'admin.posts.trash');
     }
 
@@ -43,9 +46,9 @@ class PostsController extends AdminController {
 
         $grid = new GridView($this->posts);
         $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'title');
+        $grid->setSortColumn($sortColumn, 'created_at');
         $grid->setPath($request->getPathInfo());
-        $grid->setOrder($order, 'asc');
+        $grid->setOrder($order, 'desc');
 
         $data = $grid->gridPage($page, 15);
 
@@ -58,7 +61,8 @@ class PostsController extends AdminController {
     {
         $template = [
             'post'      => null,
-            'pageTitle' => 'Create new post'
+            'pageTitle' => 'Create new post',
+            'categories' => $this->categories->all()->lists('name', 'id')
         ];
 
         return view('admin.posts.form', $template);
@@ -75,7 +79,8 @@ class PostsController extends AdminController {
             'publish_date_end'   => Carbon::parse($request->input('publish_date_end'))->toDateTimeString(),
             'user_id'            => $this->currentUser->id,
             'status'             => $request->input('status'),
-            'comments'           => $request->input('comments')
+            'comments'           => $request->input('comments'),
+            'post_category_id'   => $request->input('post_category_id')
         ]);
 
         if ($post) {
@@ -94,7 +99,8 @@ class PostsController extends AdminController {
     {
         $template = [
             'post'      => $this->posts->get($id),
-            'pageTitle' => 'Editing a post'
+            'pageTitle' => 'Editing a post',
+            'categories' => $this->categories->all()->lists('name', 'id')
         ];
 
         return view('admin.posts.form', $template);
@@ -113,7 +119,7 @@ class PostsController extends AdminController {
         $post = $this->posts->update($id, $data);
 
         if ($post) {
-            $this->alerts->alertSuccess('Post succesfully edited!');
+            $this->alerts->alertSuccess('Post successfully edited!');
         }
         else {
             $this->alerts->alertError('Failed to edit a post!');

@@ -11,7 +11,7 @@
                     <thead>
                     <tr>
                         <th>{!! Form::gridHeader('Title', 'title', 'Admin\PostsController@index', $headerAttr) !!}</th>
-                        <th>Summary</th>
+                        <th>{!! Form::gridHeader('Created on', 'created_at', 'Admin\PostsController@index', $headerAttr) !!}</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -24,7 +24,7 @@
                     @foreach($data as $post)
                         <tr>
                             <td>@if($post->status == 'draft')<span class="label label-default">draft</span>@endif <a href="{{ url('admin/posts/edit', [$post->id]) }}">{{ $post->title }}</a></td>
-                            <td>{{ str_limit($post->summary, 50, '...') }}</td>
+                            <td>{{ $post->created_at->format('d.m.Y H:i') }}</td>
                             <td>
                                 <a href="{{ url('admin/posts/delete', [$post->id]) }}" class="text-delete">Trash</a>
                                 <a href="{{ url('post', [$post->slug]) }}" target="_blank" class="text-restore">View</a>

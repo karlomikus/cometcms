@@ -49,10 +49,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
-                            {!! Form::label('category', 'Category', ['class' => 'control-label']) !!}
-                            {!! Form::text('category', null, ['class' => 'form-control']) !!}
-                            {!! $errors->first('category', '<span class="help-block">:message</span>') !!}
+                        <div class="form-group {{ $errors->has('post_category_id') ? 'has-error' : '' }}">
+                            {!! Form::label('post_category_id', 'Category', ['class' => 'control-label']) !!}
+                            {!! Form::select('post_category_id', $categories, null, ['class' => 'form-control']) !!}
+                            {!! $errors->first('post_category_id', '<span class="help-block">:message</span>') !!}
                         </div>
                         <div class="row">
                             <div class="col-md-6">

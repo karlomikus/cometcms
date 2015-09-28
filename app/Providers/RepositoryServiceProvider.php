@@ -20,5 +20,6 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind('App\Repositories\Contracts\RolesRepositoryInterface', 'App\Repositories\RolesRepository');
         $this->app->bind('App\Repositories\Contracts\MapsRepositoryInterface', 'App\Repositories\MapsRepository');
         $this->app->bind('App\Repositories\Contracts\PostsRepositoryInterface', 'App\Repositories\PostsRepository');
+        $this->app->bind('App\Repositories\Contracts\PostCategoriesRepositoryInterface', 'App\Repositories\PostCategoriesRepository');
     }
 }
