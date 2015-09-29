@@ -1,5 +1,5 @@
 .pagebar {
-  background: lighten($color-navbar-bg, 10%);
+  background: darken($color-navbar-bg, 10%);
   margin-bottom: 20px;
   height: $page-bar-height;
   line-height: $page-bar-height;
@@ -14,7 +14,7 @@
     line-height: inherit;
     font-weight: 200;
     display: inline-block;
-    color: #eae8ff;
+    color: $color-primary-dark;
   }
 }
 
@@ -35,7 +35,7 @@
 
   .navbar-nav {
     > li > a {
-      color: #eae8ff;
+      color: $color-primary-dark;
 
       &:hover,
       &:focus {
