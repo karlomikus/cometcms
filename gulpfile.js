@@ -10,13 +10,15 @@ elixir(function(mix) {
             'jquery/dist/jquery.js',
             'moment/moment.js',
             'jquery-validation/dist/jquery.validate.js',
-            'knockout/build/output/knockout-latest.debug.js',
+            //'knockout/build/output/knockout-latest.debug.js',
             'bootstrap-sass/assets/javascripts/bootstrap.js'
         ], 'public/js/admin/dependencies.js', 'node_modules')
         .scripts([
             'admin.js'
         ], 'public/js/admin/main.js')
+        .browserify('matches.js', 'public/js/admin/modules/matches.js', 'resources/assets/js/modules')
+        .browserify('games.js', 'public/js/admin/modules/games.js', 'resources/assets/js/modules')
+        .browserify('teams.js', 'public/js/admin/modules/teams.js', 'resources/assets/js/modules')
         .scripts(['modules/dashboard.js'], 'public/js/admin/modules/dashboard.js')
-        .scripts(['modules/posts.js'], 'public/js/admin/modules/posts.js')
-        .version(['css/admin/main.css', 'js/admin/main.js']);
+        .scripts(['modules/posts.js'], 'public/js/admin/modules/posts.js');
 });

@@ -1,3 +1,5 @@
+var ko = require('knockout');
+
 "use strict";
 
 var squadViewModel = null;

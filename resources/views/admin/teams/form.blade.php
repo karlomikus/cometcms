@@ -131,5 +131,5 @@
 @endsection
 
 @section('page-scripts')
-    <script src="{{ asset('/js/admin/modules/squad.js') }}"></script>
+    <script src="{{ asset('/js/admin/modules/teams.js') }}"></script>
 @endsection

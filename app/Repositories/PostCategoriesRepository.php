@@ -18,4 +18,9 @@ class PostCategoriesRepository extends AbstractRepository implements PostCategor
 	{
 		parent::__construct($postCategory);
 	}
+
+	public function getOrInsert($data)
+	{
+		return $this->model->firstOrCreate($data);
+	}
 }

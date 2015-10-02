@@ -70,6 +70,10 @@ class PostsController extends AdminController {
 
     public function save(Request $request)
     {
+        $category = $this->categories->getOrInsert([
+            'name' => $request->input('post_category_name')
+        ]);
+
         $post = $this->posts->insert([
             'title'              => $request->input('title'),
             'summary'            => $request->input('summary'),
@@ -80,7 +84,7 @@ class PostsController extends AdminController {
             'user_id'            => $this->currentUser->id,
             'status'             => $request->input('status'),
             'comments'           => $request->input('comments'),
-            'post_category_id'   => $request->input('post_category_id')
+            'post_category_id'   => $category->id
         ]);
 
         if ($post) {
