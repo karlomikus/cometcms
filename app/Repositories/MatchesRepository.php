@@ -138,8 +138,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             }
 
             // Parse date
-            $formDate = $data['match_date'] . ' ' . $data['match_time'];
-            $matchDate = Carbon::parse($formDate)->toDateTimeString();
+            $matchDate = Carbon::parse($data['match_date'])->toDateTimeString();
 
             // Create a new match
             $matchModel = $this->model->create([
@@ -230,8 +229,7 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
             }
 
             // Parse date
-            $formDate = $data['match_date'] . ' ' . $data['match_time'];
-            $matchDate = Carbon::parse($formDate)->toDateTimeString();
+            $matchDate = Carbon::parse($data['match_date'])->toDateTimeString();
 
             $match->team_id = $data['team_id'];
             $match->opponent_id = $data['opponent_id'];

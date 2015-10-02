@@ -36,7 +36,7 @@ var MatchViewModel = function (matchData, addonData) {
     self.games = ko.observableArray(addonData);
 
     var matchDate = moment(matchData.date);
-    self.match_date = ko.observable(matchDate.format("YYYY-MM-DD"));
+    self.match_date = ko.observable(matchDate.format("YYYY-MM-DD hh:mm"));
     self.match_time = ko.observable(matchDate.format("hh:mm"));
 
     self.matchlink = ko.observable(matchData.matchlink);

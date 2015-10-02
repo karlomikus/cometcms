@@ -37,14 +37,14 @@
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('publish_date_start') ? 'has-error' : '' }}">
                                     {!! Form::label('publish_date_start', 'Publish on date', ['class' => 'control-label']) !!}
-                                    <input type="text" name="publish_date_start" value="{{ $post->publish_date_start }}" id="publish_date_start" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-rule-dateISO="true" required />
+                                    <input type="text" name="publish_date_start" value="{{ $post->publish_date_start }}" id="publish_date_start" class="form-control" required />
                                     {!! $errors->first('publish_date_start', '<span class="help-block">:message</span>') !!}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('publish_date_end') ? 'has-error' : '' }}">
                                     {!! Form::label('publish_date_end', 'Publish to date', ['class' => 'control-label']) !!}
-                                    <input type="text" name="publish_date_end" value="{{ $post->publish_date_end }}" id="publish_date_end" class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-rule-dateISO="true" required />
+                                    <input type="text" name="publish_date_end" value="{{ $post->publish_date_end }}" id="publish_date_end" class="form-control" required />
                                     {!! $errors->first('publish_date_end', '<span class="help-block">:message</span>') !!}
                                 </div>
                             </div>
@@ -98,10 +98,6 @@
 @endsection
 
 @section('page-scripts')
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        var simplemde = new SimpleMDE({ element: $("#post-content")[0] });
-    </script>
+    <script src="{{ asset('/js/admin/modules/posts.js') }}"></script>
 @endsection

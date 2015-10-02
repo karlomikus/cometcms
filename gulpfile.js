@@ -23,5 +23,6 @@ elixir(function (mix) {
         .browserify('matches.js', 'public/js/admin/modules/matches.js', 'resources/assets/js/modules')
         .browserify('games.js', 'public/js/admin/modules/games.js', 'resources/assets/js/modules')
         .browserify('teams.js', 'public/js/admin/modules/teams.js', 'resources/assets/js/modules')
-        .browserify('dashboard.js', 'public/js/admin/modules/dashboard.js', 'resources/assets/js/modules');
+        .browserify('dashboard.js', 'public/js/admin/modules/dashboard.js', 'resources/assets/js/modules')
+        .browserify('posts.js', 'public/js/admin/modules/posts.js', 'resources/assets/js/modules');
 });

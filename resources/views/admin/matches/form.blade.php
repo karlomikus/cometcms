@@ -34,13 +34,7 @@
                                     <input type="text" id="match-date" class="form-control" placeholder="Played on date..." data-bind="value: match_date" required />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="match-time">Match time</label>
-                                    <input type="text" id="match-time" class="form-control" placeholder="h:m" data-bind="value: match_time" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <div class="form-group">
                                     <label for="matchlink">Match link</label>
                                     <input type="url" id="matchlink" class="form-control" placeholder="http://" data-bind="value: matchlink" />
@@ -185,7 +179,6 @@
 
 @section('page-scripts-before')
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>--}}
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
         const matchData = {!! $matchJSON !!};
