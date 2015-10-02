@@ -1,4 +1,5 @@
 var ko = require('knockout');
+var datetimepicker = require('jquery-datetimepicker');
 
 "use strict";
 
@@ -265,9 +266,9 @@ $(document).ready(function () {
         templateResult: formatGame
     });
 
-    // $('#match-date').datepicker({
-    //     format: "yyyy/mm/dd"
-    // });
+     $('#match-date').datetimepicker({
+         format: 'Y-m-d H:i'
+     });
 
     // ---------------------------- Form submit ---------------------------- //
     form.submit(function (ev) {
