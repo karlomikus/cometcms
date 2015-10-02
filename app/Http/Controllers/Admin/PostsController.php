@@ -1,11 +1,12 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Http\Requests\SavePostRequest;
 use App\Libraries\GridView\GridView;
 use App\Http\Controllers\Admin\TraitTrashable as Trash;
 use App\Repositories\Contracts\PostsRepositoryInterface as Posts;
 use App\Repositories\Contracts\PostCategoriesRepositoryInterface as Categories;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 /**
@@ -68,7 +69,7 @@ class PostsController extends AdminController {
         return view('admin.posts.form', $template);
     }
 
-    public function save(Request $request)
+    public function save(SavePostRequest $request)
     {
         $post = $this->posts->insert([
             'title'              => $request->input('title'),
@@ -106,7 +107,7 @@ class PostsController extends AdminController {
         return view('admin.posts.form', $template);
     }
 
-    public function update($id, Request $request)
+    public function update($id, SavePostRequest $request)
     {
         $data = [
             'title'              => $request->input('title'),

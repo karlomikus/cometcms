@@ -15,13 +15,13 @@
                             {!! Form::text('title', null, ['class' => 'form-control', 'required' => 'required', 'minlength' => '5']) !!}
                             {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
                         </div>
-                        <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
+                        <div class="form-group {{ $errors->has('summary') ? 'has-error' : '' }}">
                             {!! Form::label('summary', 'Summary', ['class' => 'control-label']) !!}
                             {!! Form::textarea('summary', null, ['class' => 'form-control', 'rows' => '2']) !!}
                             {!! $errors->first('summary', '<span class="help-block">:message</span>') !!}
                         </div>
                         <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
-                            {!! Form::label('content', 'Post body', ['class' => 'control-label']) !!}
+                            {!! Form::label('content', 'Post content', ['class' => 'control-label']) !!}
                             {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => '6', 'id' => 'post-content', 'required' => 'required']) !!}
                             {!! $errors->first('content', '<span class="help-block">:message</span>') !!}
                         </div>
