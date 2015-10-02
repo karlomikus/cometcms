@@ -37,14 +37,14 @@
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('publish_date_start') ? 'has-error' : '' }}">
                                     {!! Form::label('publish_date_start', 'Publish on date', ['class' => 'control-label']) !!}
-                                    <input type="text" name="publish_date_start" value="{{ $post->publish_date_start }}" id="publish_date_start" class="form-control" required />
+                                    {!! Form::text('publish_date_start', null, ['class' => 'form-control']) !!}
                                     {!! $errors->first('publish_date_start', '<span class="help-block">:message</span>') !!}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('publish_date_end') ? 'has-error' : '' }}">
                                     {!! Form::label('publish_date_end', 'Publish to date', ['class' => 'control-label']) !!}
-                                    <input type="text" name="publish_date_end" value="{{ $post->publish_date_end }}" id="publish_date_end" class="form-control" required />
+                                    {!! Form::text('publish_date_end', null, ['class' => 'form-control']) !!}
                                     {!! $errors->first('publish_date_end', '<span class="help-block">:message</span>') !!}
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                             <div class="col-md-6">
                                 <div class="radio">
                                     <label>
-                                        {!! Form::radio('comments', 1) !!}
+                                        {!! Form::radio('comments', 1, true) !!}
                                         Allow comments on post
                                     </label>
                                 </div>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        {!! Form::radio('status', 'published') !!}
+                                        {!! Form::radio('status', 'published', true) !!}
                                         Prepare to publish
                                     </label>
                                 </div>
