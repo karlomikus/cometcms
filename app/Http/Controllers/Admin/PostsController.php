@@ -49,8 +49,8 @@ class PostsController extends AdminController {
     public function create()
     {
         $template = [
-            'post'      => $this->posts->getModel(),
-            'pageTitle' => 'Create new post',
+            'post'       => $this->posts->getModel(),
+            'pageTitle'  => 'Create new post',
             'categories' => $this->categories->all()->lists('name', 'id')
         ];
 
@@ -87,8 +87,8 @@ class PostsController extends AdminController {
     public function edit($id)
     {
         $template = [
-            'post'      => $this->posts->get($id),
-            'pageTitle' => 'Editing a post',
+            'post'       => $this->posts->get($id),
+            'pageTitle'  => 'Editing a post',
             'categories' => $this->categories->all()->lists('name', 'id')
         ];
 
@@ -112,6 +112,20 @@ class PostsController extends AdminController {
         }
         else {
             $this->alerts->alertError('Failed to edit a post!');
+        }
+
+        $this->alerts->getAlerts();
+
+        return redirect('admin/posts');
+    }
+
+    public function delete($id)
+    {
+        if ($this->posts->delete($id)) {
+            $this->alerts->alertSuccess('Post moved to trash successfully!');
+        }
+        else {
+            $this->alerts->alertError('Unable to trash this post!');
         }
 
         $this->alerts->getAlerts();

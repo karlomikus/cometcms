@@ -44,8 +44,8 @@
                             <td>{{ $post->author->name }}</td>
                             <td>{{ $post->category->name or 'n/a' }}</td>
                             <td>
-                                <a href="{{ url('admin/opponents/restore', [$post->id]) }}" class="text-restore">Restore</a>
-                                <a href="{{ url('admin/opponents/remove', [$post->id]) }}" class="text-delete" data-confirm="Are you sure that you want to permanently delete this opponent?">Delete</a>
+                                <a href="{{ url('admin/posts/restore', [$post->id]) }}" class="text-restore">Restore</a>
+                                <a href="{{ url('admin/posts/remove', [$post->id]) }}" class="text-delete" data-confirm="Are you sure that you want to permanently delete this post?">Delete</a>
                             </td>
                         </tr>
                     @empty

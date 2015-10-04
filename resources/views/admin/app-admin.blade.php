@@ -25,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            {{-- <a class="navbar-brand" href="{{ url('/admin') }}">Dashboard</a> --}}
+            <a class="navbar-brand" href="{{ url('/admin') }}"><i class="fa fa-circle-o-notch"></i></a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-nav">
