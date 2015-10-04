@@ -31,27 +31,15 @@ class PostsController extends AdminController {
         $this->posts = $posts;
         $this->categories = $categories;
         $this->trashInit($this->posts, 'admin/posts/trash', 'admin.posts.trash');
-        $this->setDefaultSortColumn('title');
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $searchTerm = $request->query('search');
-        $page = $request->query('page');
-        $sortColumn = $request->query('sort');
-        $order = $request->query('order');
-
         $grid = new GridView($this->posts);
-        $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'created_at');
-        $grid->setPath($request->getPathInfo());
-        $grid->setOrder($order, 'desc');
-
-        $data = $grid->gridPage($page, 15);
+        $data = $grid->gridPage(15);
 
         $data['pageTitle'] = 'Posts';
 

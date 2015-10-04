@@ -34,23 +34,12 @@ class GamesController extends AdminController {
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $searchTerm = $request->query('search');
-        $page = $request->query('page');
-        $sortColumn = $request->query('sort');
-        $order = $request->query('order');
-
         $grid = new GridView($this->games);
-        $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'name');
-        $grid->setPath($request->getPathInfo());
-        $grid->setOrder($order, 'asc');
-
-        $data = $grid->gridPage($page, 15);
+        $data = $grid->gridPage(15);
 
         $data['pageTitle'] = 'Games';
 

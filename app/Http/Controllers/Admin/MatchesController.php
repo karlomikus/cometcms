@@ -29,20 +29,10 @@ class MatchesController extends AdminController {
      * @param $request Request
      * @return mixed
      */
-    public function index(Request $request)
+    public function index()
     {
-        $searchTerm = $request->query('search');
-        $page = $request->query('page');
-        $sortColumn = $request->query('sort');
-        $order = $request->query('order');
-
         $grid = new GridView($this->matches);
-        $grid->setOrder($order, 'desc');
-        $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'date');
-        $grid->setPath($request->getPathInfo());
-
-        $data = $grid->gridPage($page, 15);
+        $data = $grid->gridPage(15);
 
         $data['pageTitle'] = 'Matches';
 

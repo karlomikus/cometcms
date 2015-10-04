@@ -24,20 +24,10 @@ class UsersController extends AdminController {
         $this->trashInit($this->users, 'admin/users/trash', 'admin.users.trash');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $searchTerm = $request->query('search');
-        $page = $request->query('page');
-        $sortColumn = $request->query('sort');
-        $order = $request->query('order');
-
         $grid = new GridView($this->users);
-        $grid->setOrder($order, 'asc');
-        $grid->setSortColumn($sortColumn, 'name');
-        $grid->setSearchTerm($searchTerm);
-        $grid->setPath($request->getPathInfo());
-
-        $data = $grid->gridPage($page, 15);
+        $data = $grid->gridPage(15);
 
         $data['pageTitle'] = 'Users';
 

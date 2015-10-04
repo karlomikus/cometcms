@@ -22,20 +22,10 @@ class RolesController extends AdminController {
         $this->roles = $roles;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $searchTerm = $request->query('search');
-        $page = $request->query('page');
-        $sortColumn = $request->query('sort');
-        $order = $request->query('order');
-
         $grid = new GridView($this->roles);
-        $grid->setSearchTerm($searchTerm);
-        $grid->setSortColumn($sortColumn, 'display_name');
-        $grid->setPath($request->getPathInfo());
-        $grid->setOrder($order, 'asc');
-
-        $template = $grid->gridPage($page, 15);
+        $template = $grid->gridPage(15);
 
         $template['pageTitle'] = 'User roles';
 

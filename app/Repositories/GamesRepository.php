@@ -65,6 +65,9 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
      */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
+        $sortColumn = (!$sortColumn) ? 'name' : $sortColumn;
+        $order = (!$order) ? 'asc' : $order;
+
         $model = $this->model->orderBy($sortColumn, $order);
 
         if ($trash)

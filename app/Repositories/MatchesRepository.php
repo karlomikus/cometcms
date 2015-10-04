@@ -80,6 +80,9 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
      */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
+        $sortColumn = (!$sortColumn) ? 'date' : $sortColumn;
+        $order = (!$order) ? 'asc' : $order;
+
         $model = $this->model
             ->join('teams', 'teams.id', '=', 'matches.team_id')
             ->join('opponents', 'opponents.id', '=', 'matches.opponent_id')
