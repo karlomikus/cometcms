@@ -16,6 +16,9 @@
                         Event, date, time, info
                     </div>
                 </div>
+                <a href="{{ url('admin/posts/new') }}" class="btn btn-lg btn-block btn-info">Create post</a>
+                <br>
+                <a href="{{ url('admin/matches/new') }}" class="btn btn-lg btn-block btn-info">Create match</a>
             </div>
             <div class="col-md-8">
                 <div class="panel panel-default">

@@ -98,6 +98,6 @@
 @endsection
 
 @section('page-scripts')
-    <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="{{ asset('/js/admin/lib/simplemde.min.js') }}"></script>
     <script src="{{ asset('/js/admin/modules/posts.js') }}"></script>
 @endsection

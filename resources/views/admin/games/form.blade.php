@@ -75,13 +75,10 @@
     </div>
 @endsection
 
-@section('page-scripts-before')
+@section('page-scripts')
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
         const modelData = {!! $maps !!};
     </script>
-@endsection
-
-@section('page-scripts')
     <script src="{{ asset('/js/admin/modules/games.js') }}"></script>
 @endsection

@@ -4,6 +4,10 @@ elixir(function (mix) {
     mix
         .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/fonts/bootstrap')
         .copy('node_modules/bootstrap-sass/assets/stylesheets', 'resources/assets/sass/admin/bootstrap')
+        .copy('node_modules/simplemde/dist/simplemde.min.js', 'public/js/admin/lib')
+        .copy('node_modules/Select2/dist/js/select2.full.min.js', 'public/js/admin/lib')
+
+        // Compile SASS
         .sass(['admin/app-admin.scss'], 'public/css/admin/main.css')
 
         // Global admin dependencies

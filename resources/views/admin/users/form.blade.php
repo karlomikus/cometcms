@@ -79,11 +79,8 @@
     </div>
 @endsection
 
-@section('page-scripts-before')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-@endsection
-
 @section('page-scripts')
+    <script src="{{ asset('/js/admin/lib/select2.full.min.js') }}"></script>
     <script>
         $("#roles").select2();
     </script>

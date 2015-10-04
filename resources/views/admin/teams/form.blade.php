@@ -122,14 +122,11 @@
     </div>
 @endsection
 
-@section('page-scripts-before')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+@section('page-scripts')
     <script>
         // TODO: rly, this is bad, but knockout doesn't play nice with passing ajax data to viewmodel
         const modelData = {!! $modelData !!};
     </script>
-@endsection
-
-@section('page-scripts')
+    <script src="{{ asset('/js/admin/lib/select2.full.min.js') }}"></script>
     <script src="{{ asset('/js/admin/modules/teams.js') }}"></script>
 @endsection
