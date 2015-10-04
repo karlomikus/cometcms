@@ -34,9 +34,16 @@ class RolesController extends AdminController {
 
     public function create()
     {
+        $permissionGroups = ['match', 'post', 'user', 'team', 'opponent'];
+
+        $perms = [];
+        foreach ($permissionGroups as $group) {
+            $perms[$group] = $this->roles->groupPermissionsBy($group);
+        }
+
         $template = [
             'pageTitle'     => 'Create new role',
-            'perms'         => $this->roles->getAllPermissions(),
+            'perms'         => $perms,
             'model'         => null,
             'selectedPerms' => []
         ];
@@ -74,11 +81,18 @@ class RolesController extends AdminController {
 
     public function edit($id)
     {
+        $permissionGroups = ['match', 'post', 'user', 'team', 'opponent'];
+
+        $perms = [];
+        foreach ($permissionGroups as $group) {
+            $perms[$group] = $this->roles->groupPermissionsBy($group);
+        }
+
         $roleData = $this->roles->get($id);
         $template = [
             'pageTitle'     => 'Editing a role',
             'model'         => $roleData,
-            'perms'         => $this->roles->getAllPermissions(),
+            'perms'         => $perms,
             'selectedPerms' => $roleData->perms->lists('id')->toArray()
         ];
 

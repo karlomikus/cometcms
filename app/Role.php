@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Zizaco\Entrust\EntrustRole;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Role
@@ -21,6 +22,8 @@ use Zizaco\Entrust\EntrustRole;
  * @method static \Illuminate\Database\Query\Builder|\App\Role whereUpdatedAt($value)
  */
 class Role extends EntrustRole {
+
+    use SoftDeletes;
 
     protected $guarded = ['id'];
 

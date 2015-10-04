@@ -1,3 +1,13 @@
-.role-info {
+.perm-container {
   margin-bottom: 10px;
+  border: 1px solid #000;
+  padding: 10px;
+  .perm-name {
+    float: left;
+    font-weight: 500;
+    width: 200px;
+  }
+  .perm-perms {
+    float: left;
+  }
 }

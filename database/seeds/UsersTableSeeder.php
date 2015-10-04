@@ -50,6 +50,7 @@ class UsersTableSeeder extends Seeder {
         $deleteMatch->description  = 'Role can delete matches';
         $deleteMatch->save();
 
+        // Teams permissions
         $createTeam = new Permission();
         $createTeam->name = 'create-team';
         $createTeam->display_name = 'Create Teams';
@@ -66,6 +67,7 @@ class UsersTableSeeder extends Seeder {
         $deleteTeam->description  = 'Role can delete teams';
         $deleteTeam->save();
 
+        // Opponent permissions
         $createOpponent = new Permission();
         $createOpponent->name = 'create-opponent';
         $createOpponent->display_name = 'Create Opponents';
@@ -82,6 +84,7 @@ class UsersTableSeeder extends Seeder {
         $deleteOpponent->description  = 'Role can delete opponents';
         $deleteOpponent->save();
 
+        // Users permissions
         $createUser = new Permission();
         $createUser->name = 'create-user';
         $createUser->display_name = 'Create Users';
@@ -98,10 +101,39 @@ class UsersTableSeeder extends Seeder {
         $deleteUser->description  = 'Role can delete users';
         $deleteUser->save();
 
-        $roleAdmins->attachPermissions([$createMatch, $editMatch, $deleteMatch, $createTeam, $editTeam, $deleteTeam, $createOpponent, $editOpponent, $deleteOpponent,
-            $createUser, $editUser, $deleteUser]);
-        $roleModerators->attachPermissions([$createMatch, $editMatch, $deleteMatch]);
-        $roleContent->attachPermissions([$createMatch, $editMatch, $createTeam, $editTeam]);
+        // Posts permissions
+        $createPost = new Permission();
+        $createPost->name = 'create-post';
+        $createPost->display_name = 'Create post';
+        $createPost->description  = 'Role can create posts';
+        $createPost->save();
+        $editPost = new Permission();
+        $editPost->name = 'edit-post';
+        $editPost->display_name = 'Edit posts';
+        $editPost->description  = 'Role can edit post';
+        $editPost->save();
+        $deletePost = new Permission();
+        $deletePost->name = 'delete-post';
+        $deletePost->display_name = 'Delete posts';
+        $deletePost->description  = 'Role can delete posts';
+        $deletePost->save();
+
+        $roleAdmins->attachPermissions([
+            $createMatch, $editMatch, $deleteMatch,
+            $createTeam, $editTeam, $deleteTeam,
+            $createOpponent, $editOpponent, $deleteOpponent,
+            $createUser, $editUser, $deleteUser,
+            $createPost, $editPost, $deletePost
+        ]);
+        $roleModerators->attachPermissions([
+            $createMatch, $editMatch, $deleteMatch,
+            $createPost, $editPost, $deletePost
+        ]);
+        $roleContent->attachPermissions([
+            $createMatch, $editMatch,
+            $createTeam, $editTeam,
+            $createPost, $editPost
+        ]);
 
         $admin = User::create([
             'name' => 'Karlo',

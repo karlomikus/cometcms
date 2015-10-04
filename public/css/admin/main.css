@@ -6223,8 +6223,16 @@ label {
     .map-list .map .map-form input[type="file"] {
       color: #fff; }
 
-.role-info {
-  margin-bottom: 10px; }
+.perm-container {
+  margin-bottom: 10px;
+  border: 1px solid #000;
+  padding: 10px; }
+  .perm-container .perm-name {
+    float: left;
+    font-weight: 500;
+    width: 200px; }
+  .perm-container .perm-perms {
+    float: left; }
 
 /*
 | ----------------------------------------

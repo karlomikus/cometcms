@@ -38,12 +38,17 @@
                                 <button class="btn btn-sm btn-default" type="button">Check all</button>
                                 <button class="btn btn-sm btn-default" type="button">Uncheck all</button>
                                 <br>
-                                @foreach($perms as $perm)
-                                    <div class="role-info checkbox">
-                                        <label>
-                                            <input type="checkbox" value="{{ $perm->id }}" name="perms[]" {{ in_array($perm->id, $selectedPerms) == true ? 'checked' : '' }} {{ (isset($model) && $model->id == 1) ? 'disabled' : '' }}> {{ $perm->display_name }}
-                                        </label>
-                                        <p class="help-block">{{ $perm->description }}</p>
+                                @foreach($perms as $group => $perm)
+                                    <div class="perm-container clearfix">
+                                        <div class="perm-name">{{ $group }}</div>
+                                        <div class="perm-perms">
+                                            @foreach($perm as $p)
+                                                <label>
+                                                    <input type="checkbox" value="{{ $p->id }}" name="perms[]" {{ in_array($p->id, $selectedPerms) == true ? 'checked' : '' }} {{ (isset($model) && $model->id == 1) ? 'disabled' : '' }}>
+                                                    {{ $p->display_name }}
+                                                </label>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 @endforeach
                             </div>

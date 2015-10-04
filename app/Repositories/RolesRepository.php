@@ -50,6 +50,11 @@ class RolesRepository extends AbstractRepository implements RolesRepositoryInter
         return $this->get($roleID)->perms;
     }
 
+    public function groupPermissionsBy($keyword)
+    {
+        return $this->permission->where('name', 'LIKE', '%' . $keyword . '%')->get();
+    }
+
     /**
      * Prepare paged data for the grid view
      *
