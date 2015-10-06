@@ -6,6 +6,9 @@ use Carbon\Carbon;
 
 class StatisticsService {
 
+    /**
+     * @var MatchesRepositoryInterface
+     */
     protected $matches;
 
     public function __construct(MatchesRepositoryInterface $matches)
@@ -53,6 +56,18 @@ class StatisticsService {
         }
 
         return $group;
+    }
+
+    public function getLatestMatch()
+    {
+        $data = [];
+
+//        $match = $this->matches->getUpcomingMatches()->first();
+//        $data['match_id'] = $match->id;
+//        $data['opponent'] = $match->opponent->name;
+//        $data['date'] = $match->date;
+
+        return $data;
     }
 
 } 

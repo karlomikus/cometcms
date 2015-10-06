@@ -287,4 +287,28 @@ class MatchesRepository extends AbstractRepository implements MatchesRepositoryI
         return true;
     }
 
+    public function getUpcomingMatches()
+    {
+        $date = Carbon::now()->toDateTimeString();
+        return $this->model->where('date', '>', $date)->orderBy('date')->get();
+    }
+
+    public function getMatchesByYearMonth($year, $month)
+    {
+        return $this->model
+            ->where('YEAR(date)', $year)
+            ->where('MONTH(date)', $month)
+            ->orderBy('date')
+            ->get();
+    }
+
+    public function yearlyReport($year)
+    {
+        return $this->model
+            ->whereRaw('YEAR(date) = ?', [$year])
+            ->select(\DB::raw('COUNT(*) as matches, MONTH(date) as month'))
+            ->groupBy('month')
+            ->get();
+    }
+
 }

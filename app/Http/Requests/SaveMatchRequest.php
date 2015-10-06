@@ -25,7 +25,7 @@ class SaveMatchRequest extends Request {
             'game_id'     => 'required|integer',
             'opponent_id' => 'required|integer',
             'matchlink'   => 'URL',
-            'match_date'  => 'date_format:Y-m-d',
+            'match_date'  => 'date_format:Y-m-d H:i',
             'match_time'  => 'date_format:H:i'
         ];
 

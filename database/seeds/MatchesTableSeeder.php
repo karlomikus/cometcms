@@ -13,7 +13,8 @@ class MatchesTableSeeder extends Seeder {
             Match::create([
                 'team_id' => $faker->numberBetween(1, 5),
                 'game_id' => $faker->numberBetween(1, 3),
-                'opponent_id' => $faker->numberBetween(1, 10)
+                'opponent_id' => $faker->numberBetween(1, 10),
+                'date' => $faker->dateTimeThisYear
             ]);
 
             for ($j=1; $j <= 2; $j++) {
