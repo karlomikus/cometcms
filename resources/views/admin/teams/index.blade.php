@@ -9,17 +9,29 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-8">
-                <div class="list-group">
+            <div class="col-md-12">
+                <div class="team-group">
                     @forelse($data as $team)
-                        <a href="{{ url('admin/teams/edit', [$team->id]) }}" class="list-group-item clearfix">
-                            @if($team->image)
-                                <img class="pic-50 pic-left" src="/uploads/teams/{{ $team->image }}" alt="Image"/>
-                            @else
-                                <img class="pic-50 pic-left" src="/uploads/nopic.jpg" alt="No picture"/>
-                            @endif
-                            <h4 class="list-group-item-heading">{{ $team->name }}</h4>
-                            <p class="list-group-item-text">{{ $team->description }}</p>
+                        <a href="{{ url('admin/teams/edit', [$team->id]) }}" class="team-group-item clearfix">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    @if($team->image)
+                                        <img class="pic-50 pic-left" src="/uploads/teams/{{ $team->image }}" alt="Image"/>
+                                    @else
+                                        <img class="pic-50 pic-left" src="/uploads/nopic.jpg" alt="No picture"/>
+                                    @endif
+                                    <h4 class="team-group-item-heading">{{ $team->name }}</h4>
+                                    <p class="team-group-item-text">{{ str_limit($team->description, 90) }}</p>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <h4 class="team-group-item-heading">{{ $team->roster->count() }}</h4>
+                                    <p class="team-group-item-text">Members</p>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <h4 class="team-group-item-heading">{{ $team->matches->count() }}</h4>
+                                    <p class="team-group-item-text">Matches</p>
+                                </div>
+                            </div>
                         </a>
                     @empty
                         <div class="alert alert-info">

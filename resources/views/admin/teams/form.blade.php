@@ -1,5 +1,12 @@
 @extends('admin.app-admin')
 
+@section('pagebar-buttons')
+    <div class="col-md-6 text-right">
+        <a href="#" class="btn btn-dark"><i class="fa fa-fw fa-shield"></i> Match history</a>
+        <a href="#" class="btn btn-dark"><i class="fa fa-fw fa-line-chart"></i> Statistics</a>
+    </div>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">

@@ -10,6 +10,7 @@
                     <a href="{{ url($trashLink) }}" class="btn btn-dark"><i class="fa fa-fw fa-trash"></i> Trash ({{ $totalTrash or '0' }})</a>
                 </div>
             @endif
+            @yield('pagebar-buttons')
         </div>
     </div>
 </section>
