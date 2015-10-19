@@ -165,4 +165,13 @@ class ThemeInfo {
     {
         $this->parent = $parent;
     }
+
+    /**
+     * @return string
+     */
+    function __toString()
+    {
+        return "Theme: $this->name";
+    }
+
 }

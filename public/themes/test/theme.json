@@ -1,0 +1,8 @@
+{
+  "name": "Test theme",
+  "author": "Karlo Mikuš",
+  "version": "0.0.1",
+  "namespace": "test",
+  "description": "Just another default test theme",
+  "parent": null
+}

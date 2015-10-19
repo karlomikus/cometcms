@@ -70,8 +70,7 @@ class Theme {
             throw new ThemeNotFoundException($theme);
         }
 
-        $this->activeTheme = $theme;
-        $this->loadTheme();
+        $this->loadTheme($theme);
     }
 
     /**
@@ -91,27 +90,30 @@ class Theme {
      */
     public function get()
     {
-        return $this->activeTheme;
+        return $this->themes[$this->activeTheme];
     }
 
     /**
      * Load a theme
      *
+     * @param string $theme
      * @throws \Exception
      */
-    private function loadTheme()
+    private function loadTheme($theme)
     {
-        if (isset($this->activeTheme)) {
-            $theme = $this->findThemeByNamespace($this->activeTheme);
+        if (isset($theme)) {
+            $th = $this->findThemeByNamespace($theme);
 
             $viewFinder = $this->view->getFinder();
 
-            if (is_null($theme->getParent())) {
-                $viewFinder->prependPath($theme->getPath());
+            if (is_null($th->getParent())) {
+                $viewFinder->prependPath($th->getPath());
             }
             else {
-                $this->loadTheme($theme->getParent());
+                $this->loadTheme($th->getParent());
             }
+
+            $this->activeTheme = $theme;
         }
         else {
             throw new \Exception('Unable to load a theme!');
@@ -142,14 +144,7 @@ class Theme {
      */
     private function themeExists($theme)
     {
-        $themes = [];
-        foreach ($this->themes as $themeInfo) {
-            if (!array_key_exists($themeInfo->getNamespace(), $themes)) {
-                $themes[$themeInfo->getNamespace()] = $themeInfo;
-            }
-        }
-
-        return array_key_exists($theme, $themes);
+        return array_key_exists($theme, $this->themes);
     }
 
     /**
@@ -166,7 +161,8 @@ class Theme {
             $json = $themePath . '/theme.json';
 
             if (File::exists($json)) {
-                $themeInfo[] = $this->parseThemeInfo(json_decode(File::get($json), true));
+                $th = $this->parseThemeInfo(json_decode(File::get($json), true));
+                $themeInfo[$th->getNamespace()] = $th;
             }
         }
 
