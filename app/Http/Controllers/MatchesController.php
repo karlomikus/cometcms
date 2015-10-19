@@ -1,15 +1,17 @@
 <?php namespace App\Http\Controllers;
 
-use App\Game;
 use App\Http\Requests;
 use App\Repositories\Contracts\MatchesRepositoryInterface;
+use App\Http\Controllers\Local\LocalController;
 
-class MatchesController extends Controller {
+class MatchesController extends LocalController {
 
     protected $matches;
 
     public function __construct(MatchesRepositoryInterface $matches)
     {
+        parent::__construct();
+
         $this->matches = $matches;
     }
 

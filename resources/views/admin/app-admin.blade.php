@@ -39,8 +39,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="disabled"><a href="{{ url('/admin/pages') }}">Pages</a></li>
                         <li><a href="{{ url('/admin/posts') }}">Posts</a></li>
+                        <li class="disabled"><a href="{{ url('/admin/pages') }}">Pages</a></li>
+                        <li class="disabled"><a href="{{ url('/admin/media') }}">Media library</a></li>
                         <li><a href="{{ url('/admin/games') }}">Games</a></li>
                         <li><a href="{{ url('/admin/opponents') }}">Opponents</a></li>
                         <li><a href="{{ url('/admin/matches') }}">Matches</a></li>
@@ -68,6 +69,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->profile->first_name }} {{ Auth::user()->profile->last_name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="{{ url('/') }}">Edit profile</a></li>
                         <li><a href="{{ url('/') }}">View site</a></li>
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
                     </ul>
@@ -82,6 +84,21 @@
 @include('admin.partials.alerts')
 
 @yield('content')
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="site-footer-content">
+            <div class="row">
+                <div class="col-md-6">
+                    Copyright &copy; {{ date('Y') }} - Clan Comet CMS
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="http://karlomikus.com">Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <!-- Scripts -->
 <script src="{{ asset('js/admin/dependencies.js') }}"></script>

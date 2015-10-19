@@ -9,22 +9,26 @@ class GamesTableSeeder extends Seeder {
     {
         Game::create([
             'name' => 'DotA 2',
-            'code' => 'dota'
+            'code' => 'dota',
+            'image' => '1.gif'
         ]);
-        
+
         Game::create([
             'name' => 'Counter Strike: Global Offensive',
-            'code' => 'csgo'
+            'code' => 'csgo',
+            'image' => '2.gif'
         ]);
-        
+
         Game::create([
             'name' => 'Call of Duty 4: Modern Warfare',
-            'code' => 'cod4'
+            'code' => 'cod4',
+            'image' => '3.gif'
         ]);
-        
+
         Game::create([
             'name' => 'League of Legends',
-            'code' => 'lol'
+            'code' => 'lol',
+            'image' => '4.gif'
         ]);
     }
 

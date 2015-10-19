@@ -67,3 +67,12 @@
     background-color: $color-accent;
   }
 }
+
+// Footer
+.site-footer {
+  background-color: #f5f5f5;
+  margin-top: 30px;
+  .site-footer-content {
+    padding: 30px 0;
+  }
+}

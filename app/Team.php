@@ -36,9 +36,14 @@ class Team extends Model {
 
     public function roster()
     {
-        return $this->belongsToMany('App\User', 'team_roster')
+        return $this->belongsToMany(User::class, 'team_roster')
                 ->whereNull('team_roster.deleted_at')
                 ->withPivot('position', 'captain', 'status', 'id');
+    }
+
+    public function matches()
+    {
+        return $this->hasMany(Match::class);
     }
 
 }

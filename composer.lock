@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "227ca328d6e3e9ab5f6acf73cd06cfea",
+    "hash": "e7cd65ba9f7f3d9c5236d2764a5c5dc0",
     "content-hash": "b053c8cea50a87a23e14db78fb53dd67",
     "packages": [
         {
@@ -671,12 +671,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/fractal.git",
-                "reference": "219022e3031c13a150b393d4adb3a1c7455e2de2"
+                "reference": "953f18ef045c9a7644b4aea8d9e53e80b9e0e6aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/219022e3031c13a150b393d4adb3a1c7455e2de2",
-                "reference": "219022e3031c13a150b393d4adb3a1c7455e2de2",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/953f18ef045c9a7644b4aea8d9e53e80b9e0e6aa",
+                "reference": "953f18ef045c9a7644b4aea8d9e53e80b9e0e6aa",
                 "shasum": ""
             },
             "require": {
@@ -726,7 +726,7 @@
                 "league",
                 "rest"
             ],
-            "time": "2015-10-17 15:37:34"
+            "time": "2015-10-16 20:38:43"
         },
         {
             "name": "monolog/monolog",
@@ -2025,12 +2025,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "76f09aaa65121b800c04394bd32dca78c3810b5c"
+                "reference": "38a97cf07cb049e74e80561764458877773ec56a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/76f09aaa65121b800c04394bd32dca78c3810b5c",
-                "reference": "76f09aaa65121b800c04394bd32dca78c3810b5c",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/38a97cf07cb049e74e80561764458877773ec56a",
+                "reference": "38a97cf07cb049e74e80561764458877773ec56a",
                 "shasum": ""
             },
             "require": {
@@ -2080,7 +2080,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2015-10-19 07:32:38"
+            "time": "2015-08-18 08:57:06"
         },
         {
             "name": "doctrine/annotations",
@@ -2544,12 +2544,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "f6b2ebd8c462494083bfea6c087f79da36503930"
+                "reference": "9198c2f7668b9ee494959f8ff7f5f6e6f65379ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f6b2ebd8c462494083bfea6c087f79da36503930",
-                "reference": "f6b2ebd8c462494083bfea6c087f79da36503930",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9198c2f7668b9ee494959f8ff7f5f6e6f65379ca",
+                "reference": "9198c2f7668b9ee494959f8ff7f5f6e6f65379ca",
                 "shasum": ""
             },
             "require": {
@@ -2586,7 +2586,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-10-19 10:11:20"
+            "time": "2015-10-12 15:48:46"
         },
         {
             "name": "hamcrest/hamcrest-php",

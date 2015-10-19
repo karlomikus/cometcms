@@ -54,9 +54,10 @@ class TeamsController extends AdminController {
 
     public function edit($id, Games $games)
     {
+        $team = $this->teams->get($id);
         $template = [
-            'team'      => $this->teams->get($id),
-            'pageTitle' => 'Editing an squad',
+            'team'      => $team,
+            'pageTitle' => 'Editing: ' . $team->name,
             'modelData' => $this->teams->getTeamData($id),
             'games'     => $games->all(),
             'history'   => $this->teams->getMembersHistory($id)
@@ -77,7 +78,7 @@ class TeamsController extends AdminController {
             $this->alerts->alertError('Unable to edit a squad.');
         }
 
-        return response()->json(['location' => '/admin/teams', 'alerts' => $this->alerts->getAlerts()]);
+        return response()->json(['location' => '/admin/teams/edit/' . $id, 'alerts' => $this->alerts->getAlerts()]);
     }
 
     public function delete($id)
