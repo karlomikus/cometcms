@@ -85,7 +85,19 @@ class Theme {
     }
 
     /**
+     * Return currently active theme
+     *
+     * @return null|string
+     */
+    public function get()
+    {
+        return $this->activeTheme;
+    }
+
+    /**
      * Load a theme
+     *
+     * @throws \Exception
      */
     private function loadTheme()
     {
@@ -93,7 +105,16 @@ class Theme {
             $theme = $this->findThemeByNamespace($this->activeTheme);
 
             $viewFinder = $this->view->getFinder();
-            $viewFinder->prependPath($theme->getPath());
+
+            if (is_null($theme->getParent())) {
+                $viewFinder->prependPath($theme->getPath());
+            }
+            else {
+                $this->loadTheme($theme->getParent());
+            }
+        }
+        else {
+            throw new \Exception('Unable to load a theme!');
         }
     }
 
@@ -190,6 +211,8 @@ class Theme {
             $themeInfo->setDescription($info['description']);
         if (isset($info['version']))
             $themeInfo->setVersion($info['version']);
+        if (isset($info['parent']))
+            $themeInfo->setParent($info['parent']);
 
         $themeInfo->setPath($this->findPath($info['namespace']));
 

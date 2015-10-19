@@ -149,4 +149,20 @@ class ThemeInfo {
 
         $this->description = $description;
     }
+
+    /**
+     * @return ThemeInfo|null
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param ThemeInfo|null $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
 }
