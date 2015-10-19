@@ -47,7 +47,7 @@ class Theme {
     public function __construct(Container $app)
     {
         // Default themes path
-        $this->basePath = realpath(public_path('themes'));
+        $this->basePath = config('theme.path');
 
         // Config view finder
         $paths = $app['config']['view.paths'];

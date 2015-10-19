@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Local;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\Theme\Theme;
 
 /**
  * Base public controller
@@ -16,11 +17,22 @@ class LocalController extends Controller {
     protected $currentUser;
 
     /**
-     * Initialize alerts and setup current user
+     * @var \App\Libraries\Theme\Theme Theme instance
      */
-    public function __construct()
+    protected $theme;
+
+    /**
+     * Initialize alerts and setup current user
+     * @param Theme $theme
+     */
+    public function __construct(Theme $theme)
     {
+        $this->middleware('auth');
+
         $this->currentUser = \Auth::user();
+        $this->theme = $theme;
+
+        $this->theme->setTheme('default');
     }
 
 }
