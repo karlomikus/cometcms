@@ -150,7 +150,7 @@ return [
         'Zizaco\Entrust\EntrustServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'App\Libraries\GridView\GridViewServiceProvider',
-
+        'App\Libraries\Theme\ThemeServiceProvider',
 	],
 
 	/*
@@ -202,7 +202,6 @@ return [
         // Aplication specific facades
         'Entrust'   => 'Zizaco\Entrust\EntrustFacade',
         'Form'      => 'Illuminate\Html\FormFacade',
-        'HTML'      => 'Illuminate\Html\HtmlFacade',
 	],
 
 ];
