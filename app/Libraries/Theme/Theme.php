@@ -105,6 +105,17 @@ class Theme {
     }
 
     /**
+     * Set base themes folder path
+     *
+     * @param $path
+     */
+    public function setDefaultThemePath($path)
+    {
+        $this->basePath = $path;
+        $this->scanThemes();
+    }
+
+    /**
      * Load a theme
      *
      * @param string $theme
