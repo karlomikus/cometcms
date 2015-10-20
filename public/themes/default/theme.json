@@ -3,6 +3,5 @@
   "author": "Karlo Mikuš",
   "version": "0.0.1",
   "namespace": "default",
-  "description": "Just a default test theme",
-  "parent": "test"
+  "description": "Just a default test theme"
 }

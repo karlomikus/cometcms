@@ -17,7 +17,7 @@ class Theme {
 
     /**
      * Scanned themes
-     * @var ThemeInfo[]
+     * @var array|ThemeInfo[]
      */
     private $themes;
 
@@ -37,7 +37,7 @@ class Theme {
      * Current active theme
      * @var string|null
      */
-    private $activeTheme;
+    private $activeTheme = null;
 
     /**
      * Setup default view finder and view paths.
@@ -76,7 +76,7 @@ class Theme {
     /**
      * Get all found themes
      *
-     * @return mixed
+     * @return array|ThemeInfo[]
      */
     public function getThemes()
     {
@@ -86,11 +86,22 @@ class Theme {
     /**
      * Return currently active theme
      *
-     * @return null|string
+     * @return null|ThemeInfo
      */
     public function get()
     {
         return $this->themes[$this->activeTheme];
+    }
+
+    /**
+     * Check if theme exists
+     *
+     * @param $theme
+     * @return bool
+     */
+    public function themeExists($theme)
+    {
+        return array_key_exists($theme, $this->themes);
     }
 
     /**
@@ -101,22 +112,19 @@ class Theme {
      */
     private function loadTheme($theme)
     {
-        if (isset($theme)) {
-            $th = $this->findThemeByNamespace($theme);
+        if (!isset($theme))
+            return;
 
+        $th = $this->findThemeByNamespace($theme);
+
+        if (isset($th)) {
             $viewFinder = $this->view->getFinder();
 
-            if (is_null($th->getParent())) {
-                $viewFinder->prependPath($th->getPath());
-            }
-            else {
+            $viewFinder->prependPath($th->getPath());
+            if (!is_null($th->getParent()))
                 $this->loadTheme($th->getParent());
-            }
 
             $this->activeTheme = $theme;
-        }
-        else {
-            throw new \Exception('Unable to load a theme!');
         }
     }
 
@@ -128,27 +136,14 @@ class Theme {
      */
     private function findThemeByNamespace($namespace)
     {
-        foreach ($this->themes as $theme) {
-            if ($namespace === $theme->getNamespace())
-                return $theme;
-        }
+        if (isset($this->themes[$namespace]))
+            return $this->themes[$namespace];
 
         return null;
     }
 
     /**
-     * Check if theme exists
-     *
-     * @param $theme
-     * @return bool
-     */
-    private function themeExists($theme)
-    {
-        return array_key_exists($theme, $this->themes);
-    }
-
-    /**
-     * Check all available themes
+     * Scan for all available themes
      *
      * @throws ThemeInfoAttributeException
      */
@@ -156,30 +151,33 @@ class Theme {
     {
         $themeDirectories = glob($this->basePath . '/*', GLOB_ONLYDIR);
 
-        $themeInfo = [];
+        $themes = [];
         foreach ($themeDirectories as $themePath) {
             $json = $themePath . '/theme.json';
 
             if (File::exists($json)) {
                 $th = $this->parseThemeInfo(json_decode(File::get($json), true));
-                $themeInfo[$th->getNamespace()] = $th;
+                $themes[$th->getNamespace()] = $th;
             }
         }
 
-        $this->themes = $themeInfo;
+        $this->themes = $themes;
     }
 
     /**
      * Find theme views path
      *
-     * @param $theme
+     * @param $namespace
      * @return string
      */
-    private function findPath($theme)
+    private function findPath($namespace)
     {
-        $themePath = $this->basePath . '/' . $theme . '/views';
+        $path = [];
+        $path[] = $this->basePath;
+        $path[] = $namespace;
+        $path[] = 'views';
 
-        return $themePath;
+        return implode(DIRECTORY_SEPARATOR, $path);
     }
 
     /**

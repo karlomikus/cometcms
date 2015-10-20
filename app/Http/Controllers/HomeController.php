@@ -12,6 +12,7 @@ class HomeController extends LocalController {
 	public function index()
 	{
 		echo $this->theme->get();
+		//dd($this->theme->getThemes());
 		return view('home');
 	}
 

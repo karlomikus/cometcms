@@ -1,0 +1,6 @@
+{
+  "name": "Foundation theme",
+  "author": "Karlo Mikus",
+  "namespace": "foundation",
+  "parent": "bootstrap"
+}

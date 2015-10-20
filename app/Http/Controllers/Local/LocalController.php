@@ -32,7 +32,9 @@ class LocalController extends Controller {
         $this->currentUser = \Auth::user();
         $this->theme = $theme;
 
-        $this->theme->setTheme('default');
+        start_measure('theme_setup','Time for theme setup');
+        $this->theme->setTheme('foundation');
+        stop_measure('theme_setup');
     }
 
 }
