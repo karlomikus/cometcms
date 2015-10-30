@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Local;
 
 use App\Http\Controllers\Controller;
-use App\Libraries\Theme\Theme;
+use Karlomikus\Theme\Theme;
 
 /**
  * Base public controller
@@ -17,7 +17,7 @@ class LocalController extends Controller {
     protected $currentUser;
 
     /**
-     * @var \App\Libraries\Theme\Theme Theme instance
+     * @var \Karlomikus\Theme\Theme Theme instance
      */
     protected $theme;
 
@@ -33,7 +33,7 @@ class LocalController extends Controller {
         $this->theme = $theme;
 
         start_measure('theme_setup','Time for theme setup');
-        $this->theme->setTheme('foundation');
+        $this->theme->set('foundation');
         stop_measure('theme_setup');
     }
 

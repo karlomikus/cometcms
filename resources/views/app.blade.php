@@ -50,6 +50,9 @@
 		</div>
 	</nav>
 
+	<div>
+		TEST: {{ asset('asset') }}
+	</div>
 	@yield('content')
 
 	<!-- Scripts -->
