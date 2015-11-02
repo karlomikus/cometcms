@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cf40bcc477b7bc717f216678bf7b1cac",
-    "content-hash": "24c1a57223dfec0aee209b9bec5c3749",
+    "hash": "aac21051a71edf304783779bec37a1dc",
+    "content-hash": "ed19188a742e6f23b5568b635093949b",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -449,16 +449,16 @@
         },
         {
             "name": "karlomikus/theme",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/karlomikus/theme.git",
-                "reference": "e1ed868d51616a7470bb41142f76da1fdbc9a777"
+                "reference": "9b31824e696add987d2cc55a14fa5cc501573e3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/karlomikus/theme/zipball/e1ed868d51616a7470bb41142f76da1fdbc9a777",
-                "reference": "e1ed868d51616a7470bb41142f76da1fdbc9a777",
+                "url": "https://api.github.com/repos/karlomikus/theme/zipball/9b31824e696add987d2cc55a14fa5cc501573e3a",
+                "reference": "9b31824e696add987d2cc55a14fa5cc501573e3a",
                 "shasum": ""
             },
             "require": {
@@ -473,7 +473,10 @@
             "autoload": {
                 "psr-4": {
                     "Karlomikus\\Theme\\": "src/Theme"
-                }
+                },
+                "files": [
+                    "src/Theme/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -492,7 +495,7 @@
                 "theme",
                 "views"
             ],
-            "time": "2015-10-21 16:21:55"
+            "time": "2015-10-31 18:24:21"
         },
         {
             "name": "laravel/framework",
@@ -981,6 +984,190 @@
                 "php"
             ],
             "time": "2015-09-19 14:15:08"
+        },
+        {
+            "name": "orchestra/contracts",
+            "version": "v3.1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/contracts.git",
+                "reference": "579e2fc88e84e856af683df03000065f3fdf3942"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/contracts/zipball/579e2fc88e84e856af683df03000065f3fdf3942",
+                "reference": "579e2fc88e84e856af683df03000065f3fdf3942",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~5.1.0",
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Contracts\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                }
+            ],
+            "description": "Contracts for Orchestra Platform",
+            "keywords": [
+                "contracts",
+                "orchestra-platform",
+                "orchestral"
+            ],
+            "time": "2015-09-11 18:09:07"
+        },
+        {
+            "name": "orchestra/html",
+            "version": "v3.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/html.git",
+                "reference": "b820d25e806004760768ac5529359720dbd7bfad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/html/zipball/b820d25e806004760768ac5529359720dbd7bfad",
+                "reference": "b820d25e806004760768ac5529359720dbd7bfad",
+                "shasum": ""
+            },
+            "require": {
+                "orchestra/support": "~3.1.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "illuminate/database": "~5.1.0",
+                "illuminate/pagination": "~5.1.0",
+                "illuminate/routing": "~5.1.0",
+                "illuminate/translation": "~5.1.0",
+                "mockery/mockery": "^0.9.1"
+            },
+            "suggest": {
+                "laravel/framework": "Allow using orchestra/html component outside of Orchestra Platform (~5.1).",
+                "orchestra/foundation": "Allow using orchestra/html with Orchestra Platform (~3.1)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Html\\": "src/"
+                },
+                "files": [
+                    "src/Support/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                }
+            ],
+            "description": "HTML Component for Orchestra Platform",
+            "homepage": "http://orchestraplatform.com/docs/latest/components/html/",
+            "keywords": [
+                "form",
+                "html",
+                "laravel",
+                "orchestra-platform",
+                "orchestral",
+                "table"
+            ],
+            "time": "2015-10-29 22:56:57"
+        },
+        {
+            "name": "orchestra/support",
+            "version": "v3.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/support.git",
+                "reference": "dff78128d4d101b854d738d28ba5b51bf806553c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/support/zipball/dff78128d4d101b854d738d28ba5b51bf806553c",
+                "reference": "dff78128d4d101b854d738d28ba5b51bf806553c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1.0",
+                "orchestra/contracts": "~3.1.0",
+                "php": ">=5.5.0"
+            },
+            "replace": {
+                "orchestra/support-core": "self.version",
+                "orchestra/support-facades": "self.version",
+                "orchestra/support-providers": "self.version"
+            },
+            "require-dev": {
+                "illuminate/database": "~5.1.0",
+                "illuminate/routing": "~5.1.0",
+                "illuminate/session": "~5.1.0",
+                "mockery/mockery": "0.9.*"
+            },
+            "suggest": {
+                "laravel/framework": "Allow using orchestra/support component outside of Orchestra Platform (~5.1).",
+                "orchestra/foundation": "Allow using orchestra/support with Orchestra Platform (~3.1).",
+                "orchestra/messages": "Allow using Messages component (~3.1)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Support\\Facades\\": "src/Facades/",
+                    "Orchestra\\Support\\Providers\\": "src/Providers/",
+                    "Orchestra\\Support\\": "src/Support/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                }
+            ],
+            "description": "Support Component for Orchestra Platform",
+            "homepage": "http://orchestraplatform.com/docs/latest/components/support/",
+            "keywords": [
+                "laravel",
+                "orchestra-platform",
+                "orchestral",
+                "utilities",
+                "validator"
+            ],
+            "time": "2015-09-18 03:06:25"
         },
         {
             "name": "psr/log",
@@ -2517,12 +2704,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "4dd192e778f283bd1f86b89e7dd79c7ee41809d6"
+                "reference": "e0d369d63f3e04ac3cc18e8ccebfc92d9f0d8822"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/4dd192e778f283bd1f86b89e7dd79c7ee41809d6",
-                "reference": "4dd192e778f283bd1f86b89e7dd79c7ee41809d6",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/e0d369d63f3e04ac3cc18e8ccebfc92d9f0d8822",
+                "reference": "e0d369d63f3e04ac3cc18e8ccebfc92d9f0d8822",
                 "shasum": ""
             },
             "require": {
@@ -2559,7 +2746,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-10-30 09:41:12"
+            "time": "2015-10-30 22:32:56"
         },
         {
             "name": "hamcrest/hamcrest-php",
