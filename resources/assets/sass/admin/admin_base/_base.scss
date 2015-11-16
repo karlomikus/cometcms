@@ -1,37 +1,14 @@
 body {
   font-weight: 300;
   //padding-top: 140px;
-  //background: #F8F7FD;
-}
-
-a.text-delete {
-  color: $brand-danger;
-  border: 1px solid $brand-danger;
-  background: #fff;
-  text-decoration: none;
-  padding: 0 5px;
-  &:hover, &:focus, &:active {
-    color: #fff;
-    background: $brand-danger;
-    border-bottom: 1px solid $brand-danger;
-  }
-}
-
-a.text-restore {
-  color: $brand-info;
-  border: 1px solid $brand-info;
-  background: #fff;
-  text-decoration: none;
-  padding: 0 5px;
-  &:hover, &:focus, &:active {
-    color: #fff;
-    background: $brand-info;
-    border-bottom: 1px solid $brand-info;
-  }
+  background: #f4f4f5;
 }
 
 a {
-  color: #3680C3;
+  color: $color-accent-dark;
+  &:hover, &:active, &:focus {
+    color: $color-accent;
+  }
 }
 
 // SHARED

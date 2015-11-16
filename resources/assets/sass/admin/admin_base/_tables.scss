@@ -1,22 +1,26 @@
 .table-admin {
-  border: 1px solid $table-border-color;
+  border: 0;
   th {
     // border: 0 !important;
-    border-color: $table-border-color !important;
+    border: 0 !important;
     background: $table-bg-accent;
-    padding: 12px 20px !important;
-    color: #878787;
+    padding: 6px 20px !important;
+    color: $color-primary-dark;
+    box-shadow: inset 0 1px #fff;
     a {
-      color: lighten($brand-primary, 5%);
+      color: $color-primary-dark;
       i {
         color: $color-accent;
       }
     }
   }
   td {
-    border-bottom: 1px solid $table-border-color;
+    border-bottom: 1px solid #EBEDF6;
     padding: 12px 20px !important;
     vertical-align: middle !important;
+    small {
+      color: #6F6F6F;
+    }
   }
   tfoot {
     tr {
@@ -49,8 +53,12 @@ th {
 .table-hover > tbody > tr:hover {
     background-color: $table-bg-hover;
     > td {
-      border-color: darken($table-bg-hover, 20%);
+      border-color: darken($table-bg-hover, 10%);
     }
+}
+
+.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+  border-top: 0;
 }
 
 .no-results {

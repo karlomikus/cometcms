@@ -8,7 +8,7 @@
     <title>CometCMS App</title>
     
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,300|Montserrat' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,300|Montserrat|Raleway:300,500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -25,11 +25,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/admin') }}"><i class="fa fa-circle-o-notch"></i></a>
+            {{--<a class="navbar-brand" href="{{ url('/admin') }}">COMET</a>--}}
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-nav">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-left">
                 <li>
                     <a href="{{ url('/admin') }}">Dashboard</a>
                 </li>
@@ -49,17 +49,17 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="disabled"><a href="{{ url('/admin/settings') }}">Settings</a></li>
-                        <li class="disabled"><a href="{{ url('/admin/navigation') }}">Navigation</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users management <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/admin/users') }}">Users</a></li>
                         <li><a href="{{ url('/admin/roles') }}">User roles</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="disabled"><a href="{{ url('/admin/settings') }}">Site settings</a></li>
+                        <li class="disabled"><a href="{{ url('/admin/navigation') }}">Navigation</a></li>
                     </ul>
                 </li>
             </ul>
@@ -67,8 +67,9 @@
             <ul class="nav navbar-nav navbar-right">
                 {{-- <li><a href="#"><i class="fa fa-fw fa-bell"></i> <span class="badge">42</span></a></li> --}}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->profile->first_name }} {{ Auth::user()->profile->last_name }} <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li class="dropdown-header">{{ Auth::user()->profile->first_name }} {{ Auth::user()->profile->last_name }}</li>
                         <li><a href="{{ url('/') }}">Edit profile</a></li>
                         <li><a href="{{ url('/') }}">View site</a></li>
                         <li><a href="{{ url('/auth/logout') }}">Logout</a></li>

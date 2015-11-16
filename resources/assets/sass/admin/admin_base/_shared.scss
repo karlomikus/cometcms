@@ -1,27 +1,59 @@
 .pagebar {
-  background: lighten($color-navbar-bg, 10%);
+  background: $color-pagebar-bg;
   margin-bottom: 20px;
   height: $page-bar-height;
-  line-height: $page-bar-height;
-  .page-title {
-    margin: 0;
-    padding: 0;
-    line-height: inherit;
-    font-weight: 200;
-    display: inline-block;
-    color: #eae8ff;
+  //line-height: $page-bar-height;
+  .pagebar-header {
+    padding-top: 15px;
+    .page-title {
+      margin: 0;
+      padding: 0;
+      line-height: inherit;
+      font-weight: 200;
+      display: inline-block;
+      color: $color-primary-dark;
+    }
+    .breadcrumbs {
+      display: block;
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      padding: 0;
+      & > * {
+        float: left;
+        margin: 0;
+        color: $color-accent;
+        text-transform: uppercase;
+        font-family: $font-family-accent;
+        font-size: 10px;
+        &::after {
+          content: '\25B8';
+          color: #ccc;
+          margin: 0 5px;
+        }
+        &.current {
+          color: #ccc;
+          &::after {
+            content: '';
+          }
+        }
+      }
+    }
+  }
+  .pagebar-right {
+    text-align: right;
+    line-height: $page-bar-height;
   }
 }
 
 // NAVBAR
 .navbar-admin {
   background: $color-navbar-bg;
-  box-shadow: inset 0 -3px darken($color-navbar-bg, 2%);
-  border-color: darken($color-navbar-bg, 2%);
   margin-bottom: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
+  border: 0;
 
   .navbar-brand {
     color: #eae8ff;
@@ -31,6 +63,10 @@
     }
   }
 
+  .navbar-left {
+    margin-left: -15px;
+  }
+
   .navbar-nav {
     > li > a {
       color: #eae8ff;
@@ -38,8 +74,8 @@
       &:hover,
       &:focus {
         color: #fff;
-        background-color: $color-accent;
-        box-shadow: inset 0 -3px darken($color-accent, 10%);
+        background-color: $color-accent-dark;
+        box-shadow: inset 0 -3px 0 $color-accent;
       }
     }
     > .active > a {
@@ -47,7 +83,8 @@
       &:hover,
       &:focus {
         color: #fff;
-        background-color: $color-accent;
+        background-color: $color-accent-dark;
+        box-shadow: inset 0 -3px 0 $color-accent;
       }
     }
   }
@@ -57,7 +94,8 @@
       &,
       &:hover,
       &:focus {
-        background-color: $color-accent;
+        background-color: $color-accent-dark;
+        box-shadow: inset 0 -3px 0 $color-accent;
         color: #fff;
       }
     }
@@ -68,11 +106,56 @@
   }
 }
 
+// Grid view
+.index-action {
+  background: #fff;
+  padding: 10px 15px;
+  input {
+    border: none;
+    border-radius: 0;
+  }
+  .input-group-addon {
+    border: 0;
+    border-radius: 0;
+    background: none;
+    padding: 9px 0 9px 10px;
+    color: #6F6F6F;
+  }
+}
+
 // Footer
 .site-footer {
-  background-color: #f5f5f5;
+  background-color: #fff;
   margin-top: 30px;
   .site-footer-content {
     padding: 30px 0;
   }
+}
+
+// Section
+.section {
+  background: #fff;
+  box-shadow: 0 2px 3px #e6e6e6;
+  margin-bottom: 20px;
+  .section-body {
+    padding: 15px;
+  }
+  &.section-aside {
+    background: #FFFBF2;
+    box-shadow: 0 2px 3px darken(#FFFBF2, 50);
+  }
+}
+
+.section-title {
+  color: $color-primary-dark;
+  font-size: 18px;
+}
+
+// HACKS :^)
+.col-no-padding-left {
+  padding-left: 0 !important;
+}
+
+.col-no-padding-right {
+  padding-right: 0 !important;
 }

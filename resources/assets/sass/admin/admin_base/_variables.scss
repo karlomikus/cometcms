@@ -1,14 +1,18 @@
 // Default colors
-$color-accent: #ef233c;
-$color-primary-dark: #2d3142;
+$color-accent: #4fb77a;
+$color-accent-dark: #448464;
+$color-primary-dark: #333742;
 
 $brand-success: #2ec4b6;
 $brand-danger: #fe5f55;
 $brand-warning: #ff9f1c;
-$brand-primary: lighten($color-primary-dark, 15%);
+$brand-info: #4d8ac0;
+$brand-primary: lighten($color-primary-dark, 10%);
 $link-hover-color: $color-accent;
 $color-light-bg: #f8f9fe;
-$color-navbar-bg: #2d3142;
+$color-navbar-bg: $color-primary-dark;
+$color-pagebar-bg: #fff;
+$color-main-bordering: #dddee4;
 
 $state-danger-text: #2d3142;
 
@@ -17,10 +21,10 @@ $font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 $font-family-accent: "Montserrat", sans-serif;
 
 // Tables
-$table-bg-accent: $color-light-bg;
-$table-border-color: #F0F0F0;
-$table-bg-hover: #FFF7E4;
-$table-bg-accent: #F9F9F9;
+$table-border-color: $color-main-bordering;
+$table-bg-hover: #FFFBF2;
+$table-bg-accent: #f4f4f5;
+$table-bg: #ffffff;
 
 // Inputs
 $input-height-base: 40px;
@@ -37,7 +41,7 @@ $dropdown-border: $color-primary-dark;
 /*
 * User variables
 */
-$page-bar-height: 70px;
+$page-bar-height: 80px;
 
 $match-lose-color: #f25f5c;
 $match-win-color: #70c1b3;
