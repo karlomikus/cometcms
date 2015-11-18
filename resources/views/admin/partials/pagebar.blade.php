@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6">
                 <header class="pagebar-header">
-                    {!! $breadcrumbs !!}
+                    {!! $breadcrumbs or '<ul class="breadcrumbs"><li class="active"><a href="/admin">Dashboard</a></li></ul>' !!}
                     <h3 class="page-title">{{ $pageTitle or 'Page title' }}</h3>
                 </header>
             </div>

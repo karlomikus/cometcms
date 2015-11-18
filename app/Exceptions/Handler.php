@@ -1,6 +1,7 @@
 <?php namespace App\Exceptions;
 
 use Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler {
@@ -39,4 +40,17 @@ class Handler extends ExceptionHandler {
 		return parent::render($request, $e);
 	}
 
+	protected function renderHttpException(HttpException $e)
+	{
+		$status = $e->getStatusCode();
+
+		$template = [];
+        if (view()->exists("errors.{$status}")) {
+        	$template['exception'] = $e;
+        	$template['pageTitle'] = 'An error occured';
+            return response()->view("errors.{$status}", $template, $status);
+        } else {
+            return $this->convertExceptionToResponse($e);
+        }
+	}
 }
