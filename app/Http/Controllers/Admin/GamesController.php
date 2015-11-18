@@ -31,6 +31,7 @@ class GamesController extends AdminController {
 
         $this->games = $games;
         $this->trashInit($this->games, 'admin/games/trash', 'admin.games.trash');
+        $this->breadcrumbs->addCrumb('Games', 'games');
     }
 
     /**
@@ -51,6 +52,7 @@ class GamesController extends AdminController {
      */
     public function create()
     {
+        $this->breadcrumbs->addCrumb('New', 'new');
         $template = [
             'pageTitle' => 'Create new game',
             'maps'      => 'null',
@@ -106,6 +108,7 @@ class GamesController extends AdminController {
      */
     public function edit($id, Maps $maps)
     {
+        $this->breadcrumbs->addCrumb('Edit', 'edit');
         $template['pageTitle'] = 'Editing a game';
         $template['maps'] = $maps->getByGame($id)->toJson();
         $template['model'] = $this->games->get($id);

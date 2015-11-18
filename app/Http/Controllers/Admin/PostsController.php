@@ -31,6 +31,7 @@ class PostsController extends AdminController {
         $this->posts = $posts;
         $this->categories = $categories;
         $this->trashInit($this->posts, 'admin/posts/trash', 'admin.posts.trash');
+        $this->breadcrumbs->addCrumb('Posts', 'posts');
     }
 
     /**
@@ -48,6 +49,7 @@ class PostsController extends AdminController {
 
     public function create()
     {
+        $this->breadcrumbs->addCrumb('New', 'new');
         $template = [
             'post'       => $this->posts->getModel(),
             'pageTitle'  => 'Create new post',
@@ -86,6 +88,7 @@ class PostsController extends AdminController {
 
     public function edit($id)
     {
+        $this->breadcrumbs->addCrumb('Edit', 'edit');
         $template = [
             'post'       => $this->posts->get($id),
             'pageTitle'  => 'Editing a post',

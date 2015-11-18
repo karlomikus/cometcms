@@ -22,6 +22,7 @@ class UsersController extends AdminController {
         $this->roles = $roles;
 
         $this->trashInit($this->users, 'admin/users/trash', 'admin.users.trash');
+        $this->breadcrumbs->addCrumb('Users', 'users');
     }
 
     public function index()
@@ -36,6 +37,7 @@ class UsersController extends AdminController {
 
     public function create()
     {
+        $this->breadcrumbs->addCrumb('New', 'new');
         $template['roles'] = $this->roles->all();
         $template['user'] = null;
 
@@ -72,6 +74,7 @@ class UsersController extends AdminController {
 
     public function edit($id)
     {
+        $this->breadcrumbs->addCrumb('Edit', 'edit');
         $data['roles'] = Role::all();
         $data['user'] = $this->users->get($id);
 

@@ -20,6 +20,8 @@ class AdminController extends Controller {
      */
     protected $currentUser;
 
+    protected $breadcrumbs;
+
     /**
      * Initialize alerts and setup current user
      */
@@ -27,6 +29,10 @@ class AdminController extends Controller {
     {
         $this->alerts = new Alerts();
         $this->currentUser = \Auth::user();
+        $this->breadcrumbs = new \Creitive\Breadcrumbs\Breadcrumbs;
+        $this->breadcrumbs->addCrumb('Dashboard', '/admin');
+        $this->breadcrumbs->setDivider('');
+        view()->share('breadcrumbs', $this->breadcrumbs);
     }
 
 } 

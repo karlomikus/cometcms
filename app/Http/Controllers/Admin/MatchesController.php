@@ -21,6 +21,7 @@ class MatchesController extends AdminController {
         parent::__construct();
         $this->matches = $matches;
         $this->trashInit($this->matches, 'admin/matches/trash', 'admin.matches.trash');
+        $this->breadcrumbs->addCrumb('Matches', 'matches');
     }
 
     /**
@@ -50,6 +51,7 @@ class MatchesController extends AdminController {
      */
     public function create(Teams $teams, Opponents $opponents, Games $games, Maps $maps)
     {
+        $this->breadcrumbs->addCrumb('New', 'new');
         $data['teams'] = $teams->all();
         $data['opponents'] = $opponents->all();
         $data['games'] = $games->all();
@@ -87,6 +89,7 @@ class MatchesController extends AdminController {
 
     public function edit($id, Teams $teams, Opponents $opponents, Games $games, Maps $maps)
     {
+        $this->breadcrumbs->addCrumb('Edit', 'edit');
         $data['teams'] = $teams->all();
         $data['opponents'] = $opponents->all();
         $data['games'] = $games->all();

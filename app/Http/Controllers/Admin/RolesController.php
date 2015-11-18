@@ -20,6 +20,7 @@ class RolesController extends AdminController {
     {
         parent::__construct();
         $this->roles = $roles;
+        $this->breadcrumbs->addCrumb('Roles', 'roles');
     }
 
     public function index()
@@ -34,6 +35,7 @@ class RolesController extends AdminController {
 
     public function create()
     {
+        $this->breadcrumbs->addCrumb('New', 'new');
         $permissionGroups = ['match', 'post', 'user', 'team', 'opponent'];
 
         $perms = [];
@@ -81,6 +83,7 @@ class RolesController extends AdminController {
 
     public function edit($id)
     {
+        $this->breadcrumbs->addCrumb('Edit', 'edit');
         $permissionGroups = ['match', 'post', 'user', 'team', 'opponent'];
 
         $perms = [];

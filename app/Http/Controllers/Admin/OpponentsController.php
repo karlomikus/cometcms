@@ -29,6 +29,7 @@ class OpponentsController extends AdminController {
 
         $this->opponents = $opponents;
         $this->trashInit($this->opponents, 'admin/opponents/trash', 'admin.opponents.trash');
+        $this->breadcrumbs->addCrumb('Opponents', 'opponents');
     }
 
     /**
@@ -49,6 +50,7 @@ class OpponentsController extends AdminController {
      */
     public function create()
     {
+        $this->breadcrumbs->addCrumb('New', 'new');
         $template = [
             'opponent'  => null,
             'pageTitle' => 'Create new opponent'
@@ -90,6 +92,7 @@ class OpponentsController extends AdminController {
      */
     public function edit($id)
     {
+        $this->breadcrumbs->addCrumb('Edit', 'edit');
         $template = [
             'opponent'  => $this->opponents->get($id),
             'pageTitle' => 'Editing an opponent'

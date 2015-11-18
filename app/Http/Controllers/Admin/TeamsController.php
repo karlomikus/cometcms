@@ -12,6 +12,7 @@ class TeamsController extends AdminController {
     {
         parent::__construct();
         $this->teams = $teams;
+        $this->breadcrumbs->addCrumb('Squads', 'teams');
     }
 
     public function index()
@@ -26,6 +27,7 @@ class TeamsController extends AdminController {
 
     public function create(Games $games)
     {
+        $this->breadcrumbs->addCrumb('New', 'new');
         $template = [
             'team'      => null,
             'modelData' => 'null',
@@ -54,10 +56,11 @@ class TeamsController extends AdminController {
 
     public function edit($id, Games $games)
     {
+        $this->breadcrumbs->addCrumb('Edit squad', 'edit');
         $team = $this->teams->get($id);
         $template = [
             'team'      => $team,
-            'pageTitle' => 'Editing: ' . $team->name,
+            'pageTitle' => $team->name,
             'modelData' => $this->teams->getTeamData($id),
             'games'     => $games->all(),
             'history'   => $this->teams->getMembersHistory($id)

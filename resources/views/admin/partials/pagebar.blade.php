@@ -3,12 +3,7 @@
         <div class="row">
             <div class="col-md-6">
                 <header class="pagebar-header">
-                    @yield('breadcrumbs')
-                    <ul class="breadcrumbs">
-                        <li>{!! link_to('/', 'Home') !!}</li>
-                        <li>{!! link_to('admin', 'Dashboard') !!}</li>
-                        <li class="current">Posts</li>
-                    </ul>
+                    {!! $breadcrumbs !!}
                     <h3 class="page-title">{{ $pageTitle or 'Page title' }}</h3>
                 </header>
             </div>
