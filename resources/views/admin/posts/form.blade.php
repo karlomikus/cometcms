@@ -68,9 +68,15 @@
                                 Disable comments on post
                             </label>
                         </div>
-                        <button class="btn btn-block btn-action" type="submit">Save and publish</button>
-                        <button class="btn btn-block btn-primary" type="submit">Save as draft</button>
-                        <a href="/admin/posts" class="btn btn-block btn-primary">Cancel</a>
+                        @if ($post->status === 'draft')
+                            <button class="btn btn-block btn-action" name="save-type" value="publish" type="submit">Publish now</button>
+                            <button class="btn btn-block btn-primary" name="save-type" value="draft" type="submit">Save</button>
+                            <a href="/admin/posts" class="btn btn-block btn-primary">Cancel</a>
+                        @else
+                            <button class="btn btn-block btn-action" name="save-type" value="publish" type="submit">Save and publish</button>
+                            <button class="btn btn-block btn-primary" name="save-type" value="draft" type="submit">Save as draft</button>
+                            <a href="/admin/posts" class="btn btn-block btn-primary">Cancel</a>
+                        @endif
                     </div>
                 </aside>
             </div>

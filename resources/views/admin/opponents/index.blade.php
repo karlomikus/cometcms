@@ -2,12 +2,11 @@
 
 @section('content')
     <div class="container">
-
-        @include('admin.partials.index-action', ['module' => 'opponents'])
-
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-hover table-grid table-admin">
+                <div class="section section-main">
+                    @include('admin.partials.index-action', ['module' => 'opponents'])
+                    <table class="table table-hover table-grid table-admin">
                     <thead>
                         <tr>
                             <th>{!! Form::gridHeader('Name', 'name', 'Admin\OpponentsController@index', $headerAttr) !!}</th>
@@ -38,6 +37,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                </div>
             </div>
         </div>
     </div>

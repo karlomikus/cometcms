@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         {!! Form::model($model, ['files' => true, 'id' => 'game-form', 'class' => 'row']) !!}
-        <div class="col-xs-12">
+        <div class="col-xs-8">
             <div class="section section-main">
                 <div class="row">
                     <div class="col-md-6">

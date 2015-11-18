@@ -61,6 +61,11 @@ class PostsController extends AdminController {
 
     public function save(SavePostRequest $request)
     {
+        $status = 'draft';
+        if ($request->input('save-type') === 'publish') {
+            $status = 'published';
+        }
+
         $post = $this->posts->insert([
             'title'              => $request->input('title'),
             'summary'            => $request->input('summary'),
@@ -69,7 +74,7 @@ class PostsController extends AdminController {
             'publish_date_start' => Carbon::parse($request->input('publish_date_start'))->toDateTimeString(),
             'publish_date_end'   => Carbon::parse($request->input('publish_date_end'))->toDateTimeString(),
             'user_id'            => $this->currentUser->id,
-            'status'             => $request->input('status'),
+            'status'             => $status,
             'comments'           => $request->input('comments'),
             'post_category_id'   => $request->input('post_category_id')
         ]);

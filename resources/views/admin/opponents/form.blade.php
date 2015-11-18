@@ -2,25 +2,19 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                {!! Form::model($opponent, ['files' => true, 'id' => 'opponent-form']) !!}
+        {!! Form::model($opponent, ['files' => true, 'id' => 'opponent-form', 'class' => 'row']) !!}
+            <div class="col-md-9">
+                <div class="section section-main">
                     <div class="row">
-                        <div class="col-md-2">
-                            <h4 class="form-subtitle">Information</h4>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+                        <div class="col-xs-6">
+                            <div class="form-group form-group-inline {{ $errors->has('name') ? 'has-error' : '' }}">
                                 {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
                                 {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required', 'minlength' => '3']) !!}
                                 {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                             </div>
-                            <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                                {!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
-                                {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => '3']) !!}
-                                {!! $errors->first('description', '<span class="help-block">:message</span>') !!}
-                            </div>
-                            <div class="form-group">
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group form-group-inline">
                                 {!! Form::label('image', 'Image', ['class' => 'control-label']) !!}
                                 @if(!empty($opponent->image))
                                     <div class="uploaded-file">
@@ -28,18 +22,34 @@
                                         <img src="/uploads/opponents/{{ $opponent->image }}" alt="Image"/>
                                     </div>
                                 @endif
-                                {!! Form::file('image') !!}
+                                {!! Form::file('image', ['class' => 'form-control']) !!}
                             </div>
-                            <hr>
                         </div>
                     </div>
-                     <div class="text-right">
-                         <a href="/admin/opponents" class="btn btn-default">Cancel</a>
-                         <button class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group form-group-inline {{ $errors->has('description') ? 'has-error' : '' }}">
+                                {!! Form::label('description', 'Description', ['class' => 'control-label']) !!}
+                                {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => '3']) !!}
+                                {!! $errors->first('description', '<span class="help-block">:message</span>') !!}
+                            </div>
+                        </div>
                     </div>
-                {!! Form::close() !!}
+                </div>
             </div>
-        </div>
+            <div class="col-xs-3">
+                <div class="section section-main">
+                    <div class="section-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="btn btn-block btn-action" type="submit">Save opponent</button>
+                                <a href="/admin/opponents" class="btn btn-block btn-primary">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {!! Form::close() !!}
     </div>
 @endsection
 

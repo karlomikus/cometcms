@@ -49,6 +49,7 @@ trait TraitTrashable {
      */
     public function trash(Request $request)
     {
+        $this->breadcrumbs->addCrumb('Trash', 'trash');
         // Restore all items from trash
         if ($request->has('restore')) {
             $this->restoreAll();
@@ -84,7 +85,7 @@ trait TraitTrashable {
 
         $this->alerts->getAlerts();
 
-        return redirect($this->redirectUrl);
+         return redirect($this->redirectUrl);
     }
 
     /**
