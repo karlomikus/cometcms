@@ -6021,9 +6021,9 @@ label {
           content: '\25B8';
           color: #ccc;
           margin: 0 5px; }
-        .pagebar .pagebar-header .breadcrumbs > *.current {
+        .pagebar .pagebar-header .breadcrumbs > *.active {
           color: #ccc; }
-          .pagebar .pagebar-header .breadcrumbs > *.current::after {
+          .pagebar .pagebar-header .breadcrumbs > *.active::after {
             content: ''; }
   .pagebar .pagebar-right {
     text-align: right;
