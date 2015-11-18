@@ -30,13 +30,13 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse-nav">
             <ul class="nav navbar-nav navbar-left">
-                <li>
+                <li class="{{ set_active('admin') }}">
                     <a href="{{ url('/admin') }}">Dashboard</a>
                 </li>
-                <li>
+                <li class="{{ set_active('admin/teams*') }}">
                     <a href="{{ url('/admin/teams') }}">Squad management</a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown {{ set_active(['admin/posts*', 'admin/games*', 'admin/opponents*', 'admin/matches*']) }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/admin/posts') }}">Posts</a></li>
@@ -48,14 +48,14 @@
                         <li class="disabled"><a href="{{ url('/admin/events') }}">Events</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown {{ set_active(['admin/users*', 'admin/roles*']) }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users management <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/admin/users') }}">Users</a></li>
                         <li><a href="{{ url('/admin/roles') }}">User roles</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown {{ set_active(['admin/settings*', 'admin/navigation*']) }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="disabled"><a href="{{ url('/admin/settings') }}">Site settings</a></li>
