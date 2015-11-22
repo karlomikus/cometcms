@@ -2,54 +2,49 @@
 
 @section('pagebar-buttons')
     <div class="col-md-6 text-right">
-        <a href="#" class="btn btn-dark"><i class="fa fa-fw fa-shield"></i> Match history</a>
-        <a href="#" class="btn btn-dark"><i class="fa fa-fw fa-line-chart"></i> Statistics</a>
+        <a href="#" class="btn btn-default"><i class="fa fa-fw fa-shield"></i> Match history</a>
+        <a href="#" class="btn btn-default"><i class="fa fa-fw fa-line-chart"></i> Statistics</a>
     </div>
 @endsection
 
 @section('content')
     <div class="container">
-        <div class="row">
+        {!! Form::open(['id' => 'squad-form', 'class' => 'row', 'files' => true]) !!}
             <div class="col-md-12">
-                {!! Form::open(['id' => 'squad-form', 'files' => true]) !!}
-                <div class="row">
-                    <div class="col-md-2">
-                        <h4 class="form-subtitle">Squad information</h4>
-                    </div>
-                    <div class="col-md-10">
-                        <div class="row">
-                            <div class="form-group col-md-6">
+                <div class="section section-main">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group form-group-inline">
                                 <label for="name" class="control-label">Squad name</label>
                                 <input type="text" id="name" name="name" class="form-control" minlength="3" data-bind="value: name" required>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="game" class="control-label">Primary game</label>
-                                    <select class="form-control games-dropdown" id="game" name="game" data-bind="value: game_id">
-                                        @foreach($games as $game)
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-inline">
+                                <label for="game" class="control-label">Primary game</label>
+                                <select class="form-control games-dropdown" id="game" name="game" data-bind="value: game_id">
+                                    @foreach($games as $game)
                                         <option value="{{ $game->id }}" data-icon="{{ $game->image }}">{{ $game->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="description" class="control-label">Description</label>
-                                    <textarea name="description" id="description" rows="4" class="form-control" data-bind="value: description"></textarea>
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-inline">
+                                <label for="description" class="control-label">Description</label>
+                                <textarea name="description" id="description" rows="4" class="form-control" data-bind="value: description"></textarea>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="image">Image</label>
-                                    <input id="file-image" type="file" name="image" id="image">
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-inline">
+                                <label for="image" class="control-label">Image</label>
+                                <input class="form-control" type="file" name="image" id="image">
                             </div>
                         </div>
-                        <hr/>
                     </div>
                 </div>
                 <div class="row">
@@ -123,9 +118,8 @@
                     <a href="/admin/teams" class="btn btn-default">Cancel</a>
                     <button id="save-squad" class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>
                 </div>
-                {!! Form::close() !!}
             </div>
-        </div>
+        {!! Form::close() !!}
     </div>
 @endsection
 

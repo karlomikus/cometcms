@@ -720,16 +720,16 @@
         },
         {
             "name": "laravie/html",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravie/html.git",
-                "reference": "7b2c477f7431f28c0eac5bb0316e029096fc1d12"
+                "reference": "f708c72290efb402793b61f58e679323b00e427d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravie/html/zipball/7b2c477f7431f28c0eac5bb0316e029096fc1d12",
-                "reference": "7b2c477f7431f28c0eac5bb0316e029096fc1d12",
+                "url": "https://api.github.com/repos/laravie/html/zipball/f708c72290efb402793b61f58e679323b00e427d",
+                "reference": "f708c72290efb402793b61f58e679323b00e427d",
                 "shasum": ""
             },
             "require": {
@@ -779,7 +779,7 @@
                 }
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
-            "time": "2015-11-06 00:41:18"
+            "time": "2015-11-18 23:35:26"
         },
         {
             "name": "league/flysystem",
@@ -1255,16 +1255,16 @@
         },
         {
             "name": "orchestra/support",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/support.git",
-                "reference": "dff78128d4d101b854d738d28ba5b51bf806553c"
+                "reference": "800172583fd438d85143ef30e35bdc8d38e284a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/support/zipball/dff78128d4d101b854d738d28ba5b51bf806553c",
-                "reference": "dff78128d4d101b854d738d28ba5b51bf806553c",
+                "url": "https://api.github.com/repos/orchestral/support/zipball/800172583fd438d85143ef30e35bdc8d38e284a1",
+                "reference": "800172583fd438d85143ef30e35bdc8d38e284a1",
                 "shasum": ""
             },
             "require": {
@@ -1321,7 +1321,7 @@
                 "utilities",
                 "validator"
             ],
-            "time": "2015-09-18 03:06:25"
+            "time": "2015-11-20 12:54:22"
         },
         {
             "name": "psr/log",

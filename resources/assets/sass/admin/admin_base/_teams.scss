@@ -1,3 +1,8 @@
+/************************************
+ * @group squad-members
+ *
+ * Members list
+ */
 .squad-member {
   background: $color-primary-dark;
   float: left;
@@ -30,15 +35,18 @@
   }
 }
 
+/************************************
+ * @group squad-index
+ *
+ * Squad listing
+ */
 .team-group {
   margin-bottom: 20px;
   .team-group-item {
     position: relative;
     display: block;
     padding: 10px 15px;
-    margin-bottom: -1px;
-    background-color: #FFF;
-    border: 1px solid #DDD;
+    border-bottom: 1px solid #EBEDF6;
     img {
       border: 1px solid #DDD;
     }

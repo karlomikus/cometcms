@@ -5896,7 +5896,12 @@ th {
   text-align: center !important;
   font-weight: 400; }
 
-label {
+/************************************
+ * @group form-controls
+ *
+ * Bootstrap form overrides
+ */
+.control-label {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   color: #5f677c; }
@@ -5909,6 +5914,14 @@ label {
     box-shadow: none;
     border-color: #4fb77a; }
 
+.has-error .form-control, .has-error .form-control:focus {
+  box-shadow: none; }
+
+/************************************
+ * @group form-variations
+ *
+ * Form style variations
+ */
 .form-control-dark {
   padding: 5px 10px;
   border-color: #3e4350;
@@ -5918,9 +5931,6 @@ label {
   color: #949bad; }
   .form-control-dark:focus {
     color: #fff; }
-
-.has-error .form-control, .has-error .form-control:focus {
-  box-shadow: none; }
 
 .uploaded-file {
   border: 1px solid #ced1d9;
@@ -5936,13 +5946,18 @@ label {
     top: 10px;
     right: 10px; }
 
-.admin-form hr {
-  margin: 40px 0; }
+.form-group-accent .form-control {
+  font-size: 24px; }
 
-.form-subtitle {
-  font-weight: 200;
-  margin-top: 0; }
+.required:after {
+  color: #fe5f55;
+  content: '*'; }
 
+/************************************
+ * @group form-group
+ *
+ * Inline labels form group stlyes
+ */
 .form-group-inline {
   border-bottom: 1px solid #f4f4f4;
   margin-bottom: 0;
@@ -5972,7 +5987,8 @@ label {
     font-size: 12px;
     position: absolute;
     top: 0;
-    left: 0; }
+    left: 0;
+    z-index: 10; }
   .form-group-inline .form-control {
     border-radius: 0;
     margin: 0;
@@ -5986,14 +6002,82 @@ label {
       border-color: #4fb77a; }
   .form-group-inline .editor-toolbar {
     padding-top: 30px; }
+  .form-group-inline .select2-container {
+    margin-top: 23px; }
+  .form-group-inline .select2-container--default .select2-selection--single {
+    border: 0; }
 
-.form-group-accent .form-control {
-  font-size: 24px; }
+/************************************
+ * @group shared-wrapper
+ *
+ * Site wrapper
+ */
+.page-wrapper {
+  min-height: 100%;
+  margin-bottom: -80px; }
+  .page-wrapper:after {
+    content: "";
+    display: block; }
 
-.required:after {
-  color: #fe5f55;
-  content: '*'; }
+/************************************
+ * @group shared-footer
+ *
+ * Site footer
+ */
+.site-footer {
+  background-color: #fff;
+  margin-top: 30px;
+  height: 80px; }
+  .site-footer .site-footer-content {
+    padding: 30px 0; }
 
+.site-footer, .page-wrapper:after {
+  height: 80px; }
+
+/************************************
+ * @group shared-navbar
+ *
+ * Default admin navigation bar
+ */
+.navbar-admin {
+  background: #333742;
+  margin-bottom: 0;
+  border-radius: 0;
+  border: 0; }
+  .navbar-admin .navbar-brand {
+    color: #eae8ff; }
+    .navbar-admin .navbar-brand:hover,
+    .navbar-admin .navbar-brand:focus {
+      color: #eae8ff; }
+  .navbar-admin .navbar-left {
+    margin-left: -15px; }
+  .navbar-admin .navbar-nav > li > a {
+    color: #eae8ff; }
+    .navbar-admin .navbar-nav > li > a:hover,
+    .navbar-admin .navbar-nav > li > a:focus {
+      color: #fff;
+      background-color: #448464;
+      box-shadow: inset 0 -3px 0 #4fb77a; }
+  .navbar-admin .navbar-nav > .active > a,
+  .navbar-admin .navbar-nav > .active > a:hover,
+  .navbar-admin .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #448464;
+    box-shadow: inset 0 -3px 0 #4fb77a; }
+  .navbar-admin .navbar-nav > .open > a,
+  .navbar-admin .navbar-nav > .open > a:hover,
+  .navbar-admin .navbar-nav > .open > a:focus {
+    background-color: #448464;
+    box-shadow: inset 0 -3px 0 #4fb77a;
+    color: #fff; }
+  .navbar-admin .badge {
+    background-color: #4fb77a; }
+
+/************************************
+ * @group shared-pagebar
+ *
+ * Pagebar containg page title and addon buttons
+ */
 .pagebar {
   background: #fff;
   margin-bottom: 20px;
@@ -6032,40 +6116,11 @@ label {
     text-align: right;
     line-height: 80px; }
 
-.navbar-admin {
-  background: #333742;
-  margin-bottom: 0;
-  border-radius: 0;
-  border: 0; }
-  .navbar-admin .navbar-brand {
-    color: #eae8ff; }
-    .navbar-admin .navbar-brand:hover,
-    .navbar-admin .navbar-brand:focus {
-      color: #eae8ff; }
-  .navbar-admin .navbar-left {
-    margin-left: -15px; }
-  .navbar-admin .navbar-nav > li > a {
-    color: #eae8ff; }
-    .navbar-admin .navbar-nav > li > a:hover,
-    .navbar-admin .navbar-nav > li > a:focus {
-      color: #fff;
-      background-color: #448464;
-      box-shadow: inset 0 -3px 0 #4fb77a; }
-  .navbar-admin .navbar-nav > .active > a,
-  .navbar-admin .navbar-nav > .active > a:hover,
-  .navbar-admin .navbar-nav > .active > a:focus {
-    color: #fff;
-    background-color: #448464;
-    box-shadow: inset 0 -3px 0 #4fb77a; }
-  .navbar-admin .navbar-nav > .open > a,
-  .navbar-admin .navbar-nav > .open > a:hover,
-  .navbar-admin .navbar-nav > .open > a:focus {
-    background-color: #448464;
-    box-shadow: inset 0 -3px 0 #4fb77a;
-    color: #fff; }
-  .navbar-admin .badge {
-    background-color: #4fb77a; }
-
+/************************************
+ * @group shared-index-action
+ *
+ * Default grid view index action
+ */
 .index-action {
   background: #fff;
   padding: 10px 15px; }
@@ -6079,37 +6134,11 @@ label {
     padding: 9px 0 9px 10px;
     color: #6F6F6F; }
 
-.site-footer {
-  background-color: #fff;
-  margin-top: 30px;
-  height: 80px; }
-  .site-footer .site-footer-content {
-    padding: 30px 0; }
-
-.page-wrapper {
-  min-height: 100%;
-  margin-bottom: -80px; }
-  .page-wrapper:after {
-    content: "";
-    display: block; }
-
-.site-footer, .page-wrapper:after {
-  height: 80px; }
-
-.section {
-  background: #fff;
-  box-shadow: 0 2px 3px #e6e6e6;
-  margin-bottom: 20px; }
-  .section .section-body {
-    padding: 15px; }
-  .section.section-aside {
-    background: #FFFBF2;
-    box-shadow: 0 2px 3px #f2a800; }
-
-.section-title {
-  color: #333742;
-  font-size: 18px; }
-
+/************************************
+ * @group shared-misc
+ *
+ * Misc. styles
+ */
 .col-no-padding-left {
   padding-left: 0 !important; }
 
@@ -6256,6 +6285,28 @@ a.text-restore {
     background: #4d8ac0;
     border-bottom: 1px solid #4d8ac0; }
 
+/************************************
+ * @group section-base
+ *
+ * Base page section styles
+ */
+.section-title {
+  color: #333742;
+  font-size: 18px; }
+
+.section {
+  background: #fff;
+  box-shadow: 0 2px 3px #e6e6e6;
+  margin-bottom: 20px; }
+  .section .section-body {
+    padding: 15px; }
+  .section.section-aside {
+    background: #FFFBF2;
+    box-shadow: 0 2px 3px #f2a800; }
+  .section .section-action {
+    border-bottom: 1px solid #EBEDF6;
+    padding: 10px; }
+
 /*
 | ----------------------------------------
 | PAGE
@@ -6374,6 +6425,11 @@ a.text-restore {
       color: #2ec4b6;
       border: 1px solid #2ec4b6; }
 
+/************************************
+ * @group squad-members
+ *
+ * Members list
+ */
 .squad-member {
   background: #333742;
   float: left;
@@ -6400,15 +6456,18 @@ a.text-restore {
       margin-top: 0;
       color: #fff; }
 
+/************************************
+ * @group squad-index
+ *
+ * Squad listing
+ */
 .team-group {
   margin-bottom: 20px; }
   .team-group .team-group-item {
     position: relative;
     display: block;
     padding: 10px 15px;
-    margin-bottom: -1px;
-    background-color: #FFF;
-    border: 1px solid #DDD; }
+    border-bottom: 1px solid #EBEDF6; }
     .team-group .team-group-item img {
       border: 1px solid #DDD; }
     .team-group .team-group-item .team-group-item-heading {
@@ -6424,22 +6483,22 @@ a.text-restore {
 
 .map-list .map {
   background: #333742;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  width: 200px;
-  float: left; }
+  border-bottom: 2px solid #282b34;
+  border-top: 1px solid #3e4350;
+  overflow: hidden;
+  position: relative; }
   .map-list .map .map-image {
-    margin-right: 10px;
-    position: relative; }
+    float: left; }
     .map-list .map .map-image .btn {
       position: absolute;
       top: 10px;
       left: 10px; }
     .map-list .map .map-image img {
-      width: 200px;
-      height: 150px; }
+      width: 120px;
+      height: auto; }
   .map-list .map .map-form {
-    padding: 10px; }
+    padding: 10px;
+    float: left; }
     .map-list .map .map-form input[type="file"] {
       color: #fff; }
 

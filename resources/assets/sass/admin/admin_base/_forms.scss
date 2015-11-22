@@ -1,4 +1,9 @@
-label {
+/************************************
+ * @group form-controls
+ *
+ * Bootstrap form overrides
+ */
+.control-label {
   font-family: $font-family-accent;
   font-weight: 300;
   color: lighten($color-primary-dark, 20%);
@@ -14,6 +19,15 @@ label {
   }
 }
 
+.has-error .form-control, .has-error .form-control:focus {
+  box-shadow: none;
+}
+
+/************************************
+ * @group form-variations
+ *
+ * Form style variations
+ */
 .form-control-dark {
   padding: 5px 10px;
   border-color: lighten($color-primary-dark, 5%);
@@ -24,10 +38,6 @@ label {
   &:focus {
     color: #fff;
   }
-}
-
-.has-error .form-control, .has-error .form-control:focus {
-  box-shadow: none;
 }
 
 .uploaded-file {
@@ -47,17 +57,22 @@ label {
   }
 }
 
-.admin-form {
-  hr {
-    margin: 40px 0;
+.form-group-accent {
+  .form-control {
+    font-size: 24px;
   }
 }
 
-.form-subtitle {
-  font-weight: 200;
-  margin-top: 0;
+.required:after {
+  color: $brand-danger;
+  content: '*';
 }
 
+/************************************
+ * @group form-group
+ *
+ * Inline labels form group stlyes
+ */
 .form-group-inline {
   border-bottom: 1px solid #f4f4f4;
   margin-bottom: 0;
@@ -95,6 +110,7 @@ label {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 10;
   }
   .form-control {
     border-radius: 0;
@@ -112,15 +128,10 @@ label {
   .editor-toolbar {
     padding-top: 30px;
   }
-}
-
-.form-group-accent {
-  .form-control {
-    font-size: 24px;
+  .select2-container {
+    margin-top: 23px;
   }
-}
-
-.required:after {
-  color: $brand-danger;
-  content: '*';
+  .select2-container--default .select2-selection--single {
+    border: 0;
+  }
 }

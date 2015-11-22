@@ -1,8 +1,103 @@
+/************************************
+ * @group shared-wrapper
+ *
+ * Site wrapper
+ */
+.page-wrapper {
+  min-height: 100%;
+  margin-bottom: -$footer-height;
+  &:after {
+    content: "";
+    display: block;
+  }
+}
+
+/************************************
+ * @group shared-footer
+ *
+ * Site footer
+ */
+.site-footer {
+  background-color: #fff;
+  margin-top: 30px;
+  height: $footer-height;
+  .site-footer-content {
+    padding: 30px 0;
+  }
+}
+
+// Sticky footer
+.site-footer, .page-wrapper:after {
+  height: $footer-height;
+}
+
+/************************************
+ * @group shared-navbar
+ *
+ * Default admin navigation bar
+ */
+.navbar-admin {
+  background: $color-navbar-bg;
+  margin-bottom: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 0;
+  .navbar-brand {
+    color: #eae8ff;
+    &:hover,
+    &:focus {
+      color: #eae8ff;
+    }
+  }
+  .navbar-left {
+    margin-left: -15px;
+  }
+  .navbar-nav {
+    > li > a {
+      color: #eae8ff;
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: $color-accent-dark;
+        box-shadow: inset 0 -3px 0 $color-accent;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: #fff;
+        background-color: $color-accent-dark;
+        box-shadow: inset 0 -3px 0 $color-accent;
+      }
+    }
+  }
+  .navbar-nav {
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: $color-accent-dark;
+        box-shadow: inset 0 -3px 0 $color-accent;
+        color: #fff;
+      }
+    }
+  }
+  .badge {
+    background-color: $color-accent;
+  }
+}
+
+/************************************
+ * @group shared-pagebar
+ *
+ * Pagebar containg page title and addon buttons
+ */
 .pagebar {
   background: $color-pagebar-bg;
   margin-bottom: 20px;
   height: $page-bar-height;
-  //line-height: $page-bar-height;
   .pagebar-header {
     padding-top: 15px;
     .page-title {
@@ -46,67 +141,11 @@
   }
 }
 
-// NAVBAR
-.navbar-admin {
-  background: $color-navbar-bg;
-  margin-bottom: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  border: 0;
-
-  .navbar-brand {
-    color: #eae8ff;
-    &:hover,
-    &:focus {
-      color: #eae8ff;
-    }
-  }
-
-  .navbar-left {
-    margin-left: -15px;
-  }
-
-  .navbar-nav {
-    > li > a {
-      color: #eae8ff;
-
-      &:hover,
-      &:focus {
-        color: #fff;
-        background-color: $color-accent-dark;
-        box-shadow: inset 0 -3px 0 $color-accent;
-      }
-    }
-    > .active > a {
-      &,
-      &:hover,
-      &:focus {
-        color: #fff;
-        background-color: $color-accent-dark;
-        box-shadow: inset 0 -3px 0 $color-accent;
-      }
-    }
-  }
-
-  .navbar-nav {
-    > .open > a {
-      &,
-      &:hover,
-      &:focus {
-        background-color: $color-accent-dark;
-        box-shadow: inset 0 -3px 0 $color-accent;
-        color: #fff;
-      }
-    }
-  }
-
-  .badge {
-    background-color: $color-accent;
-  }
-}
-
-// Grid view
+/************************************
+ * @group shared-index-action
+ *
+ * Default grid view index action
+ */
 .index-action {
   background: #fff;
   padding: 10px 15px;
@@ -123,50 +162,11 @@
   }
 }
 
-// Footer
-$footer-height: 80px;
-.site-footer {
-  background-color: #fff;
-  margin-top: 30px;
-  height: $footer-height;
-  .site-footer-content {
-    padding: 30px 0;
-  }
-}
-
-.page-wrapper {
-  min-height: 100%;
-  margin-bottom: -$footer-height;
-  &:after {
-    content: "";
-    display: block;
-  }
-}
-
-.site-footer, .page-wrapper:after {
-  height: $footer-height; 
-}
-
-// Section
-.section {
-  background: #fff;
-  box-shadow: 0 2px 3px #e6e6e6;
-  margin-bottom: 20px;
-  .section-body {
-    padding: 15px;
-  }
-  &.section-aside {
-    background: #FFFBF2;
-    box-shadow: 0 2px 3px darken(#FFFBF2, 50);
-  }
-}
-
-.section-title {
-  color: $color-primary-dark;
-  font-size: 18px;
-}
-
-// HACKS :^)
+/************************************
+ * @group shared-misc
+ *
+ * Misc. styles
+ */
 .col-no-padding-left {
   padding-left: 0 !important;
 }

@@ -1,0 +1,26 @@
+/************************************
+ * @group section-base
+ *
+ * Base page section styles
+ */
+.section-title {
+  color: $color-primary-dark;
+  font-size: 18px;
+}
+
+.section {
+  background: #fff;
+  box-shadow: 0 2px 3px #e6e6e6;
+  margin-bottom: 20px;
+  .section-body {
+    padding: 15px;
+  }
+  &.section-aside {
+    background: #FFFBF2;
+    box-shadow: 0 2px 3px darken(#FFFBF2, 50);
+  }
+  .section-action {
+    border-bottom: 1px solid #EBEDF6;
+    padding: 10px;
+  }
+}

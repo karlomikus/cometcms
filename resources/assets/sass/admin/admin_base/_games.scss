@@ -1,25 +1,25 @@
 .map-list {
   .map {
     background: $color-primary-dark;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    width: 200px;
-    float: left;
+    border-bottom: 2px solid darken($color-primary-dark, 5);
+    border-top: 1px solid lighten($color-primary-dark, 5);
+    overflow: hidden;
+    position: relative;
     .map-image {
-      margin-right: 10px;
-      position: relative;
+      float: left;
       .btn {
         position: absolute;
         top: 10px;
         left: 10px;
       }
       img {
-        width: 200px;
-        height: 150px;
+        width: 120px;
+        height: auto;
       }
     }
     .map-form {
       padding: 10px;
+      float: left;
       input[type="file"] {
         color: #fff;
       }
