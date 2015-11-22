@@ -77,7 +77,7 @@
   border-bottom: 1px solid #f4f4f4;
   margin-bottom: 0;
   position: relative;
-  &:not(:first-child) {
+  &.fg-connector {
     border-left: 1px solid #f4f4f4;
   }
   &.has-error {
@@ -130,8 +130,16 @@
   }
   .select2-container {
     margin-top: 23px;
+    padding-left: 7px;
   }
   .select2-container--default .select2-selection--single {
     border: 0;
   }
+}
+
+.select2-dropdown {
+  border-color: #f4f4f4;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $color-accent;
 }

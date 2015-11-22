@@ -13,14 +13,14 @@
             <div class="col-md-12">
                 <div class="section section-main">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-no-padding-right">
                             <div class="form-group form-group-inline">
                                 <label for="name" class="control-label">Squad name</label>
                                 <input type="text" id="name" name="name" class="form-control" minlength="3" data-bind="value: name" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-inline">
+                        <div class="col-md-6 col-no-padding-left">
+                            <div class="form-group fg-connector form-group-inline">
                                 <label for="game" class="control-label">Primary game</label>
                                 <select class="form-control games-dropdown" id="game" name="game" data-bind="value: game_id">
                                     @foreach($games as $game)
@@ -47,48 +47,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2"><h4 class="form-subtitle">Members</h4></div>
-                    <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="Search users..." data-bind="value: search_string">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-info" type="button" data-bind="click: findUsers, attr: {disabled: searching()}">Find! <i class="fa fa-spinner fa-pulse" data-bind="css: {hide: !searching()}"></i></button>
-                                        </span>
-                                    </div>
-                                    <hr>
-                                    <ul class="list-group" data-bind="foreach: found_users">
-                                        <li class="list-group-item"><button class="btn btn-success btn-xs" data-bind="click: addToMembers"><i class="fa fa-plus-circle"></i></button> <!--ko text: name--><!--/ko--></li>
-                                    </ul>
+                <div class="section section-main">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                    <input class="form-control" type="text" placeholder="Start typing to find and add members..." data-bind="value: search_string">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info" type="button" data-bind="click: findUsers, attr: {disabled: searching()}">Find! <i class="fa fa-spinner fa-pulse" data-bind="css: {hide: !searching()}"></i></button>
+                                    </span>
                                 </div>
+                                <ul class="list-group" data-bind="foreach: found_users">
+                                    <li class="list-group-item"><button class="btn btn-success btn-xs" data-bind="click: addToMembers"><i class="fa fa-plus-circle"></i></button> <!--ko text: name--><!--/ko--></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12" data-bind="foreach: members">
-                                <div class="squad-member">
-                                    <img alt="Avatar" data-bind="attr: {src: '/uploads/users/' + image()}">
-                                    <button class="btn btn-xs btn-corner btn-overlay" data-bind="click: removeFromMembers"><i class="fa fa-remove"></i></button>
-                                    <div class="squad-member-info">
-                                        <h4 data-bind="text: name"></h4>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-dark" placeholder="Player position..." data-bind="value: position">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-dark" placeholder="Player status..." data-bind="value: status">
-                                        </div>
-                                        <div class="form-group">
-                                            <button class="btn btn-dark btn-block" data-bind="css: {'btn-captain-active': captain}, click: toggleCaptain">
-                                                <i class="fa fa-star"></i> Captain
-                                            </button>
-                                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" data-bind="foreach: members">
+                            <div class="squad-member">
+                                <img alt="Avatar" data-bind="attr: {src: '/uploads/users/' + image()}">
+                                <button class="btn btn-xs btn-corner btn-overlay" data-bind="click: removeFromMembers"><i class="fa fa-remove"></i></button>
+                                <div class="squad-member-info">
+                                    <h4 data-bind="text: name"></h4>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-dark" placeholder="Player position..." data-bind="value: position">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-dark" placeholder="Player status..." data-bind="value: status">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-dark btn-block" data-bind="css: {'btn-captain-active': captain}, click: toggleCaptain">
+                                            <i class="fa fa-star"></i> Captain
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     </div>
                 </div>
                 @if($history)
