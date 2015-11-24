@@ -22,12 +22,6 @@ Route::controllers([
 ]);
 
 /**
- * Basic routes
- */
-Route::get('/matches', 'MatchesController@index');
-Route::get('/match/{id}', 'MatchesController@show');
-
-/**
  * Admin routes
  */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
