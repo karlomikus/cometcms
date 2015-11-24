@@ -102,7 +102,7 @@ class TeamsController extends AdminController {
     {
         $data = $this->teams->getTeamData($teamID);
 
-        return response()->json(['data' => $data]);
+        return response()->json($data);
     }
 
 }

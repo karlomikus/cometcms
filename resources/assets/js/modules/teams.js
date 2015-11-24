@@ -1,9 +1,37 @@
-var ko = require('knockout');
+//var ko = require('knockout');
+var Vue = require('Vue');
+Vue.use(require('vue-resource'));
 
 "use strict";
 
-var squadViewModel = null;
-var defaultModelData = {roster:[{pivot: {}}]};
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
+Vue.config.debug = true;
+
+new Vue({
+    el: '#squad-form',
+
+    data: {
+        squad: {
+            roster: []
+        }
+    },
+
+    ready: function() {
+        // Get team information and pass it to the form
+        this.$http.get('/admin/teams/api/team/2', function(data) {
+            this.squad = data;
+        });
+    },
+
+    methods: {
+        removeFromMembers: function (index) {
+            this.squad.roster.splice(index, 1);
+        }
+    }
+});
+
+// var squadViewModel = null;
+// var defaultModelData = {roster:[{pivot: {}}]};
 
 var SquadViewModel = function (squadData) {
     var self = this;
