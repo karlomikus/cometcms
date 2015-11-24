@@ -5528,17 +5528,6 @@ var SquadViewModel = function SquadViewModel(squadData) {
             }
         });
     };
-
-    // self.prepareImage = function () {
-    //     var input = $("#file-image")[0];
-    //     if(input.files && input.files[0]) {
-    //         var fileReader = new FileReader();
-    //         fileReader.onload = function (e) {
-    //             console.log(e.target.result);
-    //         }
-    //         fileReader.readAsDataURL(input.files[0]);
-    //     }
-    // };
 };
 
 var SquadMemberViewModel = function SquadMemberViewModel(parent, memberData) {
@@ -5585,17 +5574,6 @@ var SquadMemberViewModel = function SquadMemberViewModel(parent, memberData) {
 };
 
 $(document).ready(function () {
-    /**
-     * Data binding
-     */
-    console.log('Loading viewmodel...');
-    if (modelData) {
-        squadViewModel = new SquadViewModel(modelData);
-    } else {
-        squadViewModel = new SquadViewModel(defaultModelData);
-    }
-    console.log('Viewmodel loaded!');
-
     $("#game").select2({
         templateResult: formatGame
     });
@@ -5635,7 +5613,7 @@ $(document).ready(function () {
         });
     });
 
-    ko.applyBindings(squadViewModel, document.getElementById('squad-form'));
+    //ko.applyBindings(squadViewModel, document.getElementById('squad-form'));
 });
 
 },{"knockout":1}]},{},[2]);

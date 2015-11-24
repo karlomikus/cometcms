@@ -4,7 +4,11 @@ function formatGame(game) {
     if (!game.id) {
         return game.text;
     }
-    return $('<span><img src="/uploads/games/' + game.element.dataset.icon + '" class="img-game" /> ' + game.text + '</span>');
+    var gameIcon = 'noicon.png';
+    if (game.element.dataset.icon) {
+        gameIcon = game.element.dataset.icon;
+    }
+    return $('<span><img src="/uploads/games/' + gameIcon + '" class="img-game" /> ' + game.text + '</span>');
 }
 
 $(document).ready(function () {
