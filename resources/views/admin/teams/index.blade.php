@@ -5,9 +5,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section section-main">
-                    <div class="section-action">
-                        <a href="{{ url('admin/teams/new') }}" class="btn btn-action"><i class="fa fa-fw fa-plus-square"></i> Create new squad</a>
-                    </div>
                     <div class="team-group">
                         @forelse($data as $team)
                             <a href="{{ url('admin/teams/edit', [$team->id]) }}" class="team-group-item clearfix">
@@ -37,6 +34,9 @@
                                 You have not created any squads yet!
                             </div>
                         @endforelse
+                    </div>
+                    <div class="squads-action">
+                        <a href="{{ url('admin/teams/new') }}"><i class="fa fa-fw fa-plus-square"></i> Create new squad</a>
                     </div>
                 </div>
             </div>

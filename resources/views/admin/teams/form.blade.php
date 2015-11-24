@@ -10,7 +10,7 @@
 @section('content')
     <div class="container">
         {!! Form::open(['id' => 'squad-form', 'class' => 'row', 'files' => true]) !!}
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="section section-main">
                     <div class="row">
                         <div class="col-md-6 col-no-padding-right">
@@ -54,6 +54,11 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                                     <input class="form-control" type="text" placeholder="Start typing to find and add members..." data-bind="value: search_string">
+                                    <ul class="dropdown-menu" v-show="searching">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +67,7 @@
                         <div class="col-md-12">
                             <div class="squad-member" v-for="member in squad.roster">
                                 {{-- <img alt="Avatar" v-bind="src: '/uploads/users/' + member.image"> --}}
-                                <button class="btn btn-xs btn-corner btn-overlay" v-on:click="removeFromMembers($index)" type="button"><i class="fa fa-remove"></i></button>
+                                <button class="btn btn-xs btn-corner btn-overlay" @click="removeFromMembers($index)" type="button"><i class="fa fa-remove"></i></button>
                                 <div class="squad-member-info">
                                     <h4>@{{ member.name }}</h4>
                                     <div class="form-group">
@@ -76,34 +81,34 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        <div class="col-md-3">
+            <div class="section section-main">
+                <div class="section-body">
+                    <button id="save-squad" class="btn btn-block btn-action" type="submit">Save squad</button>
+                    <a href="/admin/teams" class="btn btn-block btn-default">Cancel</a>
+                    @if($team)
+                        <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
+                    @endif
+                </div>
+            </div>
+            <div class="section section-main">
                 @if($history)
                     <div class="row">
-                        <div class="col-md-2"><h4 class="form-subtitle">Roster history</h4></div>
-                        <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @foreach($history as $historyDate => $members)
-                                        <h3>{{ $historyDate }}</h3>
-                                        <ul class="list-group">
-                                            @foreach($members as $member)
-                                                <li class="list-group-item">{{ $member->name }} ({{ $member->position }})</li>
-                                            @endforeach
-                                        </ul>
+                        <div class="col-md-12">
+                            @foreach($history as $historyDate => $members)
+                                <h3>{{ $historyDate }}</h3>
+                                <ul class="list-group">
+                                    @foreach($members as $member)
+                                        <li class="list-group-item">{{ $member->name }} ({{ $member->position }})</li>
                                     @endforeach
-                                </div>
-                            </div>
-                            <hr>
+                                </ul>
+                            @endforeach
                         </div>
                     </div>
                 @endif
-                <div class="text-right">
-                    @if($team)
-                    <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
-                    @endif
-                    <a href="/admin/teams" class="btn btn-default">Cancel</a>
-                    <button id="save-squad" class="btn btn-success" type="submit">Save <i class="fa fa-chevron-right"></i></button>
-                </div>
             </div>
+        </div>
         {!! Form::close() !!}
     </div>
 @endsection

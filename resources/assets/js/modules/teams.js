@@ -11,6 +11,10 @@ new Vue({
     el: '#squad-form',
 
     data: {
+        name: '',
+        description: '',
+        game_id: null,
+        searching: true,
         squad: {
             roster: []
         }

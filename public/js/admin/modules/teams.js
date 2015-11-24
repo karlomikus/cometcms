@@ -10286,12 +10286,17 @@ new Vue({
     el: '#squad-form',
 
     data: {
+        name: '',
+        description: '',
+        game_id: null,
+        searching: true,
         squad: {
             roster: []
         }
     },
 
     ready: function ready() {
+        // Get team information and pass it to the form
         this.$http.get('/admin/teams/api/team/2', function (data) {
             this.squad = data;
         });
