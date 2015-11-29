@@ -4,13 +4,12 @@
  * Members list
  */
 .squad-member {
-  background: $color-primary-dark;
   float: left;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 20px;
   width: 180px;
-  height: 385px;
+  height: 150px;
   position: relative;
+  box-shadow: 0 2px 4px #e0e0e0;
   .btn-corner {
     position: absolute;
     top: 5px;
@@ -22,15 +21,17 @@
     border-color: $input-border-focus;
   }
   img {
-    width: 100%;
-    height: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    display: block;
+    margin: auto;
   }
   .squad-member-info {
     padding: 10px;
     h4 {
       text-align: center;
       margin-top: 0;
-      color: #fff;
     }
   }
 }
@@ -80,5 +81,16 @@
       color: $color-primary-dark;
       text-decoration: none;
     }
+  }
+}
+
+/************************************
+ * @group squad-search
+ *
+ * Squad search component
+ */
+.member-search-group {
+  .dropdown-menu {
+    width: 100%;
   }
 }

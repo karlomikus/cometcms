@@ -1,6 +1,6 @@
 <section class="index-action">
     <div class="row">
-        <form class="col-md-4" method="get" action="{{ url('admin/'. $module) }}">
+        <form class="col-sm-4" method="get" action="{{ url('admin/'. $module) }}">
             <div class="input-group">
                 <span class="input-group-addon">
                     <i class="glyphicon glyphicon-search"></i>
@@ -13,7 +13,7 @@
                 </span>
             </div>
         </form>
-        <div class="col-md-8 text-right">
+        <div class="col-sm-8 text-right">
             <a href="{{ url('admin/'. $module .'/new') }}" class="btn btn-action"><i class="fa fa-fw fa-plus-square"></i> Create</a>
         </div>
     </div>

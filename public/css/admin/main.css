@@ -6438,13 +6438,12 @@ a.text-restore {
  * Members list
  */
 .squad-member {
-  background: #333742;
   float: left;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 20px;
   width: 180px;
-  height: 385px;
-  position: relative; }
+  height: 150px;
+  position: relative;
+  box-shadow: 0 2px 4px #e0e0e0; }
   .squad-member .btn-corner {
     position: absolute;
     top: 5px;
@@ -6454,14 +6453,16 @@ a.text-restore {
     background: #66afe9;
     border-color: #66afe9; }
   .squad-member img {
-    width: 100%;
-    height: auto; }
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    display: block;
+    margin: auto; }
   .squad-member .squad-member-info {
     padding: 10px; }
     .squad-member .squad-member-info h4 {
       text-align: center;
-      margin-top: 0;
-      color: #fff; }
+      margin-top: 0; }
 
 /************************************
  * @group squad-index
@@ -6500,6 +6501,14 @@ a.text-restore {
       background-color: #f7f7f7;
       color: #333742;
       text-decoration: none; }
+
+/************************************
+ * @group squad-search
+ *
+ * Squad search component
+ */
+.member-search-group .dropdown-menu {
+  width: 100%; }
 
 .map-list .map {
   background: #333742;

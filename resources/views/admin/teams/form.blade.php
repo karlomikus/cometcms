@@ -50,14 +50,17 @@
                 <div class="section section-main">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group member-search-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                    <input class="form-control" type="text" placeholder="Start typing to find and add members..." data-bind="value: search_string">
-                                    <ul class="dropdown-menu" v-show="searching">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
+                                    <input data-toggle="dropdown" id="search-users" class="form-control" type="text" placeholder="Start typing to find and add members..." v-model="search_term" @keyup="getUsers() | debounce 500">
+                                    <ul class="dropdown-menu" id="found-users-list">
+                                        <li v-for="user in foundUsers">
+                                            <a href="#" @click.prevent="addMember(user)">
+                                                @{{ user.name }} @{{ user.last_name }}<br>
+                                                <small>@{{ user.email }}</small>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -66,16 +69,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="squad-member" v-for="member in squad.roster">
-                                {{-- <img alt="Avatar" v-bind="src: '/uploads/users/' + member.image"> --}}
-                                <button class="btn btn-xs btn-corner btn-overlay" @click="removeFromMembers($index)" type="button"><i class="fa fa-remove"></i></button>
+                                <img alt="Avatar" v-bind:src="'/uploads/users/' + member.image">
+                                {{--<button class="btn btn-xs btn-corner btn-overlay" @click="removeMember($index)" type="button"><i class="fa fa-remove"></i></button>--}}
                                 <div class="squad-member-info">
                                     <h4>@{{ member.name }}</h4>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-dark" placeholder="Player position..." v-model="member.pivot.position">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-dark" placeholder="Player status..." v-model="member.pivot.status">
-                                    </div>
+                                    {{--<div class="form-group">--}}
+                                        {{--<input type="text" class="form-control form-control-dark" placeholder="Player position..." v-model="member.pivot.position">--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<input type="text" class="form-control form-control-dark" placeholder="Player status..." v-model="member.pivot.status">--}}
+                                    {{--</div>--}}
                                 </div>
                             </div>
                         </div>
@@ -85,6 +88,7 @@
         <div class="col-md-3">
             <div class="section section-main">
                 <div class="section-body">
+                    <input id="team-id" type="hidden" value="{{ $team->id or null }}">
                     <button id="save-squad" class="btn btn-block btn-action" type="submit">Save squad</button>
                     <a href="/admin/teams" class="btn btn-block btn-default">Cancel</a>
                     @if($team)
