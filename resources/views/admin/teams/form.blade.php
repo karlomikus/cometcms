@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="container">
-        {!! Form::open(['id' => 'squad-form', 'class' => 'row', 'files' => true]) !!}
+        {!! Form::open(['id' => 'squad-form', 'class' => 'row', 'files' => true, 'v-on:submit.prevent' => 'onSubmit']) !!}
             <div class="col-md-9">
                 <div class="section section-main">
                     <div class="row">
@@ -22,7 +22,7 @@
                         <div class="col-md-6 col-no-padding-left">
                             <div class="form-group fg-connector form-group-inline">
                                 <label for="game" class="control-label">Primary game</label>
-                                <select class="form-control games-dropdown" id="game" name="game" v-model="squad.game_id">
+                                <select class="form-control games-dropdown" id="game" name="game" v-model="squad.gameID">
                                     @foreach($games as $game)
                                         <option value="{{ $game->id }}" data-icon="{{ $game->image }}">{{ $game->name }}</option>
                                     @endforeach
@@ -53,7 +53,7 @@
                             <div class="form-group member-search-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                    <input data-toggle="dropdown" id="search-users" class="form-control" type="text" placeholder="Start typing to find and add members..." v-model="search_term" @keyup="getUsers() | debounce 500">
+                                    <input data-toggle="dropdown" id="search-users" class="form-control" type="text" placeholder="Start typing to find and add members..." v-model="searchTerm" @keyup="getUsers() | debounce 500">
                                     <ul class="dropdown-menu" id="found-users-list">
                                         <li v-for="user in foundUsers">
                                             <a href="#" @click.prevent="addMember(user)">

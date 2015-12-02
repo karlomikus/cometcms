@@ -24,13 +24,13 @@ class SaveTeamRequest extends Request {
             'name'     => 'required|min:3',
             'game_id'     => 'required|integer',
             'image' => 'image',
-            'members' => 'required|array'
+            'roster' => 'required|array'
         ];
 
-        foreach ($this->request->get('members') as $key => $member) {
-            $rules['members.' . $key . '.user_id'] = 'required|integer';
-            $rules['members.' . $key . '.team_id'] = 'integer';
-            $rules['members.' . $key . '.captain'] = 'boolean';
+        foreach ($this->request->get('roster') as $key => $member) {
+            $rules['roster.' . $key . '.id'] = 'required|integer';
+            $rules['roster.' . $key . '.pivot.team_id'] = 'integer';
+            $rules['roster.' . $key . '.pivot.captain'] = 'boolean';
         }
 
         return $rules;

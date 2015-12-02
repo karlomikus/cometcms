@@ -10,32 +10,45 @@ var vm = new Vue({
     el: '#squad-form',
 
     data: {
-        team_id: null,
+        // Team default data
+        teamID: null,
         name: null,
         description: null,
-        game_id: null,
+        gameID: null,
         squad: {
             roster: []
         },
+        // Template data
         foundUsers: [],
-        search_term: null
+        isSearching: false,
+        searchTerm: null
     },
 
     ready: function () {
-        this.team_id = $('#team-id').val();
-        // Get team information and pass it to the form
-        this.$http.get('/admin/teams/api/team/' + this.team_id, function (data) {
-            data.roster = data.roster.map(function (obj) {
-                if (obj.image == null) {
-                    obj.image = 'noavatar.jpg';
-                }
-                return obj;
-            });
-            this.squad = data;
-        });
+        this.onReady();
+        this.initFormData();
     },
 
     methods: {
+        onReady: function() {
+            $('#search-users').focus(function () {
+                $('#found-users-list').dropdown();
+            });
+        },
+
+        initFormData: function() {
+            this.teamID = $('#team-id').val();
+            this.$http.get('/admin/teams/api/team/' + this.teamID, function (data) {
+                data.roster = data.roster.map(function (obj) {
+                    if (obj.image == null) {
+                        obj.image = 'noavatar.jpg';
+                    }
+                    return obj;
+                });
+                this.squad = data;
+            });
+        },
+
         addMember: function (user) {
             user['pivot'] = {
                 user_id: user.id,
@@ -51,21 +64,30 @@ var vm = new Vue({
                 this.squad.roster.push(user);
             }
         },
+
         removeMember: function (index) {
             this.squad.roster.splice(index, 1);
         },
+
         getUsers: function () {
-            this.$http.get('/admin/users/api/user', {q: this.search_term}, function (data) {
+            if (this.searchTerm.length < 3) return;
+
+            this.isSearching = true;
+            this.$http.get('/admin/users/api/user', {q: this.searchTerm}, function (data) {
                 this.foundUsers = data.map(function (obj) {
                     if (obj.image == null) {
                         obj.image = 'noavatar.jpg';
                     }
                     return obj;
                 });
+                this.isSearching = false;
             });
         },
-        saveForm: function () {
 
+        onSubmit: function () {
+            this.$http.post('/admin/teams/edit/' + this.teamID, this.squad, function (response) {
+                console.log(response);
+            });
         }
     }
 });
@@ -74,49 +96,43 @@ var vm = new Vue({
  * Page events
  */
 $(document).ready(function () {
-    $("#game").select2({
+    $('#game').select2({
         templateResult: formatGame
     });
 
-    $("#search-users").focus(function () {
-        if ($(this).val()) {
-            $('#found-users-list').dropdown();
-        }
-    });
+    // $('#squad-form').submit(function (ev) {
+    //     ev.preventDefault();
 
-    $('#squad-form').submit(function (ev) {
-        ev.preventDefault();
+    //     // Disabled save button while processing form
+    //     var $button = $('#save-squad');
+    //     $button.attr('disabled', true);
 
-        // Disabled save button while processing form
-        var $button = $("#save-squad");
-        $button.attr('disabled', true);
+    //     // Setup ajax, added CSRF token
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('input[name="_token"]').val()
+    //         },
+    //         contentType: 'application/json; charset=utf-8',
+    //         dataType: 'json'
+    //     });
 
-        // Setup ajax, added CSRF token
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-            },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
-        });
+    //     var data = ko.toJSON(squadViewModel);
+    //     var posting = null;
 
-        var data = ko.toJSON(squadViewModel);
-        var posting = null;
+    //     if (modelData) {
+    //         posting = $.post('/admin/teams/edit/' + modelData.id, data, 'json');
+    //     }
+    //     else {
+    //         posting = $.post('/admin/teams/new', data, 'json');
+    //     }
 
-        if (modelData) {
-            posting = $.post("/admin/teams/edit/" + modelData.id, data, 'json');
-        }
-        else {
-            posting = $.post("/admin/teams/new", data, 'json');
-        }
+    //     posting.fail(function (response) {
+    //         $button.attr('disabled', false);
+    //         console.log(response.statusText);
+    //     });
 
-        posting.fail(function (response) {
-            $button.attr('disabled', false);
-            console.log(response.statusText);
-        });
-
-        posting.done(function (resp) {
-            window.location.href = resp.location;
-        });
-    });
+    //     posting.done(function (resp) {
+    //         window.location.href = resp.location;
+    //     });
+    // });
 });
