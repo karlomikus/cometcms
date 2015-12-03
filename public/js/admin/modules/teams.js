@@ -10278,25 +10278,17 @@ Vue.use(require('vue-resource'));
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
 
-/**
- * Vue Viewmodel
- */
 var vm = new Vue({
     el: '#squad-form',
 
     data: {
-        // Team default data
-        teamID: null,
-        name: null,
-        description: null,
-        gameID: null,
         squad: {
             roster: []
         },
-        // Template data
         foundUsers: [],
+        searchTerm: null,
         isSearching: false,
-        searchTerm: null
+        isSubmitting: false
     },
 
     ready: function ready() {
@@ -10306,6 +10298,9 @@ var vm = new Vue({
 
     methods: {
         onReady: function onReady() {
+            $('#game').select2({
+                templateResult: formatGame
+            });
             $('#search-users').focus(function () {
                 $('#found-users-list').dropdown();
             });
@@ -10320,6 +10315,7 @@ var vm = new Vue({
                     }
                     return obj;
                 });
+
                 this.squad = data;
             });
         },
@@ -10360,56 +10356,17 @@ var vm = new Vue({
         },
 
         onSubmit: function onSubmit() {
+            this.isSubmitting = true;
             this.$http.post('/admin/teams/edit/' + this.teamID, this.squad, function (response) {
-                console.log(response);
+                //if (response.location) window.location.href = response.location;
+                showAlert.success(response.message);
+                this.isSubmitting = false;
+            }).error(function (data, status, request) {
+                showAlert.error(data.message);
+                this.isSubmitting = false;
             });
         }
     }
-});
-
-/**
- * Page events
- */
-$(document).ready(function () {
-    $('#game').select2({
-        templateResult: formatGame
-    });
-
-    // $('#squad-form').submit(function (ev) {
-    //     ev.preventDefault();
-
-    //     // Disabled save button while processing form
-    //     var $button = $('#save-squad');
-    //     $button.attr('disabled', true);
-
-    //     // Setup ajax, added CSRF token
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('input[name="_token"]').val()
-    //         },
-    //         contentType: 'application/json; charset=utf-8',
-    //         dataType: 'json'
-    //     });
-
-    //     var data = ko.toJSON(squadViewModel);
-    //     var posting = null;
-
-    //     if (modelData) {
-    //         posting = $.post('/admin/teams/edit/' + modelData.id, data, 'json');
-    //     }
-    //     else {
-    //         posting = $.post('/admin/teams/new', data, 'json');
-    //     }
-
-    //     posting.fail(function (response) {
-    //         $button.attr('disabled', false);
-    //         console.log(response.statusText);
-    //     });
-
-    //     posting.done(function (resp) {
-    //         window.location.href = resp.location;
-    //     });
-    // });
 });
 
 },{"Vue":1,"vue-resource":4}]},{},[11]);

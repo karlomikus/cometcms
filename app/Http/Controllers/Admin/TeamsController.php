@@ -41,8 +41,7 @@ class TeamsController extends AdminController {
 
     public function save(SaveTeamRequest $request)
     {
-        $data = $request->all();
-        $team = $this->teams->insert($data);
+        $team = $this->teams->insert($request->all());
 
         if ($team) {
             $this->alerts->alertSuccess('Squad saved successfully.');
@@ -60,7 +59,7 @@ class TeamsController extends AdminController {
         $team = $this->teams->get($id);
         $template = [
             'team'      => $team,
-            'pageTitle' => $team->name,
+            'pageTitle' => 'Editing a squad',
             'modelData' => $this->teams->getTeamData($id),
             'games'     => $games->all(),
             'history'   => $this->teams->getMembersHistory($id)
@@ -71,17 +70,13 @@ class TeamsController extends AdminController {
 
     public function update($id, SaveTeamRequest $request)
     {
-        $data = $request->all();
-        $team = $this->teams->update($id, $data);
+        $team = $this->teams->update($id, $request->all());
 
         if ($team) {
-            $this->alerts->alertSuccess('Squad edited successfully.');
-        }
-        else {
-            $this->alerts->alertError('Unable to edit a squad.');
+            return $this->apiResponse(null, 'Squad edited successfully.', 200, '/admin/teams/edit/' . $id);
         }
 
-        return response()->json(['location' => '/admin/teams/edit/' . $id, 'alerts' => $this->alerts->getAlerts()]);
+        return $this->apiResponse(null, 'Error occured while updating a squad.', 500);
     }
 
     public function delete($id)

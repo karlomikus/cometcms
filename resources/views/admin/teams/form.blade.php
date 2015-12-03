@@ -1,7 +1,7 @@
 @extends('admin.app-admin')
 
 @section('pagebar-buttons')
-    <div class="col-md-6 text-right">
+    <div class="col-xs-6 text-right">
         <a href="#" class="btn btn-default"><i class="fa fa-fw fa-shield"></i> Match history</a>
         <a href="#" class="btn btn-default"><i class="fa fa-fw fa-line-chart"></i> Statistics</a>
     </div>
@@ -9,17 +9,18 @@
 
 @section('content')
     <div class="container">
+        <div id="alerts-container"></div>
         {!! Form::open(['id' => 'squad-form', 'class' => 'row', 'files' => true, 'v-on:submit.prevent' => 'onSubmit']) !!}
             <div class="col-md-9">
                 <div class="section section-main">
                     <div class="row">
-                        <div class="col-md-6 col-no-padding-right">
+                        <div class="col-md-6">
                             <div class="form-group form-group-inline">
                                 <label for="name" class="control-label">Squad name</label>
                                 <input type="text" id="name" name="name" class="form-control" minlength="3" v-model="squad.name" required>
                             </div>
                         </div>
-                        <div class="col-md-6 col-no-padding-left">
+                        <div class="col-md-6">
                             <div class="form-group fg-connector form-group-inline">
                                 <label for="game" class="control-label">Primary game</label>
                                 <select class="form-control games-dropdown" id="game" name="game" v-model="squad.gameID">
@@ -69,6 +70,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="squad-member" v-for="member in squad.roster">
+                                <div class="squad-member-header">
+                                    <a href="#" data-toggle="dropdown"><i class="fa fa-fw fa-bars"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Make captain</a></li>
+                                        <li><a href="#">Edit status</a></li>
+                                        <li><a href="#">Edit position</a></li>
+                                    </ul>
+                                </div>
                                 <img alt="Avatar" v-bind:src="'/uploads/users/' + member.image">
                                 {{--<button class="btn btn-xs btn-corner btn-overlay" @click="removeMember($index)" type="button"><i class="fa fa-remove"></i></button>--}}
                                 <div class="squad-member-info">
@@ -89,7 +98,7 @@
             <div class="section section-main">
                 <div class="section-body">
                     <input id="team-id" type="hidden" value="{{ $team->id or null }}">
-                    <button id="save-squad" class="btn btn-block btn-action" type="submit">Save squad</button>
+                    <button id="save-squad" class="btn btn-block btn-action" type="submit" :disabled="isSubmitting">Save squad</button>
                     <a href="/admin/teams" class="btn btn-block btn-default">Cancel</a>
                     @if($team)
                         <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>

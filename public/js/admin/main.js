@@ -1,6 +1,6 @@
 'use strict';
 
-function formatGame(game) {
+function formatGame (game) {
     if (!game.id) {
         return game.text;
     }
@@ -11,8 +11,23 @@ function formatGame(game) {
     return $('<span><img src="/uploads/games/' + gameIcon + '" class="img-game" /> ' + game.text + '</span>');
 }
 
-$(document).ready(function () {
+var showAlert = {
+    error: function (message) {
+        $('#alerts-container').html(this.template('danger', 'An error occured', message));
+    },
+    success: function (message) {
+        $('#alerts-container').html(this.template('success', 'Success!', message));
+    },
+    template: function (type, title, message) {
+        return '<div class="alert alert-' + type + ' alert-dismissible">' +
+            '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' +
+            '<h3>' + title + '</h3>' +
+            message +
+            '</div>';
+    }
+}
 
+$(document).ready(function () {
     $('a[data-popup="true"]').click(function (e) {
         $('#modal-loader').show();
 
@@ -88,5 +103,4 @@ $(document).ready(function () {
 
     $('form').validate();
 });
-//# sourceMappingURL=main.js.map
 //# sourceMappingURL=main.js.map

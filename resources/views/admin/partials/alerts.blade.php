@@ -1,6 +1,6 @@
 @if(Session::has('alerts') || $errors->any())
     <!-- Custom alerts -->
-    <div class="container">
+    <div class="container" id="alerts-container">
         @if($errors->any())
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>

@@ -39,11 +39,11 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         // We go through each element since we need to get rid of garbage properties from client JSON
         foreach ($data as $member) {
             \DB::table('team_roster')->insert([
-                'user_id'  => $member['user_id'],
+                'user_id'  => $member['id'],
                 'team_id'  => $teamID,
-                'position' => isset($member['position']) ? $member['position'] : null,
-                'status'   => isset($member['status']) ? $member['status'] : null,
-                'captain'  => isset($member['captain']) ? $member['captain'] : 0
+                'position' => isset($member['pivot']['position']) ? $member['pivot']['position'] : null,
+                'status'   => isset($member['pivot']['status']) ? $member['pivot']['status'] : null,
+                'captain'  => isset($member['pivot']['captain']) ? $member['pivot']['captain'] : 0
             ]);
         }
     }
@@ -60,14 +60,12 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
         try {
             \DB::beginTransaction();
             $teamModel = parent::insert($data);
-
             if ($teamModel) {
                 $this->insertMembers($data['members'], $teamModel->id);
             }
         }
         catch (\Exception $e) {
             \DB::rollback();
-
             \Session::flash('exception', $e->getMessage());
 
             return false;
@@ -90,13 +88,14 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
 
             if ($teamModel) {
                 //$this->deleteAllMembers($id);
-                $this->updateMembers($data['members'], $id);
+                $this->updateMembers($data['roster'], $id);
             }
         }
         catch (\Exception $e) {
             \DB::rollback();
-
             \Session::flash('exception', $e->getMessage());
+
+            dd($e);
 
             return false;
         }
@@ -153,15 +152,15 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
 
         // Get original team members user IDs and compare it to the ones we get from the form
         $orgMembers = array_pluck($table->where('team_id', $teamID)->whereNull('deleted_at')->get(['user_id']), 'user_id');
-        $formMembers = array_pluck($roster, 'user_id');
+        $formMembers = array_pluck($roster, 'id');
 
         // If they are the same then we can just update the meta data
-        if ($orgMembers == $formMembers) {
+        if ($orgMembers === $formMembers) {
             foreach ($roster as $member) {
-                \DB::table('team_roster')->where('id', $member['member_id'])->update([
-                    'position' => isset($member['position']) ? $member['position'] : null,
-                    'status'   => isset($member['status']) ? $member['status'] : null,
-                    'captain'  => isset($member['captain']) ? $member['captain'] : 0
+                \DB::table('team_roster')->where('id', $member['pivot']['id'])->update([
+                    'position' => isset($member['pivot']['position']) ? $member['pivot']['position'] : null,
+                    'status'   => isset($member['pivot']['status']) ? $member['pivot']['status'] : null,
+                    'captain'  => isset($member['pivot']['captain']) ? $member['pivot']['captain'] : 0
                 ]);
             }
         }
