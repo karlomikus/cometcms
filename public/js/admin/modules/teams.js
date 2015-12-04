@@ -10358,7 +10358,6 @@ var vm = new Vue({
         onSubmit: function onSubmit() {
             this.isSubmitting = true;
             this.$http.post('/admin/teams/edit/' + this.teamID, this.squad, function (response) {
-                //if (response.location) window.location.href = response.location;
                 showAlert.success(response.message);
                 this.isSubmitting = false;
             }).error(function (data, status, request) {

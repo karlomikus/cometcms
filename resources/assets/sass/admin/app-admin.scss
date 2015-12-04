@@ -44,6 +44,8 @@
 | ----------------------------------------
 | Plugin specific styles and the rest
 */
+// Loaders.css
+@import "plugins/loaders";
 // Datepicker plugin
 @import "plugins/datepicker";
 // Select2 plugin

@@ -96,7 +96,8 @@
             </div>
         <div class="col-md-3">
             <div class="section section-main">
-                <div class="section-body">
+                <div class="section-body" style="position: relative;">
+                    <div class="section-loader" v-if="isSubmitting"><div class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
                     <input id="team-id" type="hidden" value="{{ $team->id or null }}">
                     <button id="save-squad" class="btn btn-block btn-action" type="submit" :disabled="isSubmitting">Save squad</button>
                     <a href="/admin/teams" class="btn btn-block btn-default">Cancel</a>
