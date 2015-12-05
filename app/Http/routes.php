@@ -17,15 +17,14 @@ Route::get('/', 'HomeController@index');
  * TODO: Change this terrible route shorthand to something more readable
  */
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth'     => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
 /**
  * Admin routes
  */
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
-{
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'Admin\DashboardController@index');
 
     /**
@@ -90,18 +89,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function()
      * Teams
      */
     Route::get('/teams', 'Admin\TeamsController@index');
+    Route::post('/teams', 'Admin\TeamsController@save');
+    Route::put('/teams/{id}', 'Admin\TeamsController@update');
     Route::get('/teams/new', 'Admin\TeamsController@create');
-    Route::post('/teams/new', 'Admin\TeamsController@save');
     Route::get('/teams/edit/{id}', 'Admin\TeamsController@edit');
-    Route::post('/teams/edit/{id}', 'Admin\TeamsController@update');
     Route::get('/teams/delete/{id}', 'Admin\TeamsController@delete');
-    Route::get('/teams/api/team/{id}', 'Admin\TeamsController@getRoster');
+    Route::group(['prefix' => 'api'], function () {
+        Route::get('/teams/{id}', 'Admin\TeamsController@get');
+    });
 
     /**
      * Matches
      */
-    Route::group(['prefix' => 'matches'], function()
-    {
+    Route::group(['prefix' => 'matches'], function () {
         Route::get('/', 'Admin\MatchesController@index');
         Route::get('/new', 'Admin\MatchesController@create');
         Route::post('/new', 'Admin\MatchesController@save');

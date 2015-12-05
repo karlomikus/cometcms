@@ -54,7 +54,7 @@
                             <div class="form-group member-search-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                    <input data-toggle="dropdown" id="search-users" class="form-control" type="text" placeholder="Start typing to find and add members..." v-model="searchTerm" @keyup="getUsers() | debounce 500">
+                                    <input data-toggle="dropdown" autocomplete="off" id="search-users" class="form-control" type="text" placeholder="Start typing to find and add members..." v-model="searchTerm" @keyup="getUsers() | debounce 500">
                                     <ul class="dropdown-menu" id="found-users-list">
                                         <li v-for="user in foundUsers">
                                             <a href="#" @click.prevent="addMember(user)">
@@ -69,27 +69,22 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="squad-member" v-for="member in squad.roster">
-                                <div class="squad-member-header">
-                                    <a href="#" data-toggle="dropdown"><i class="fa fa-fw fa-bars"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Make captain</a></li>
-                                        <li><a href="#">Edit status</a></li>
-                                        <li><a href="#">Edit position</a></li>
-                                    </ul>
+                            <section class="squad-members">
+                                <div class="squad-member" v-for="member in squad.roster">
+                                    <div class="squad-member-header">
+                                        <a href="#" data-toggle="dropdown"><i class="fa fa-lg fa-fw fa-bars"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" @click.prevent="makeCaptain($index)">Make captain</a></li>
+                                            <li><a href="#" @click.prevent="removeMember($index)">Remove from roster</a></li>
+                                        </ul>
+                                        <i class="captain pull-right fa fa-fw fa-star" title="Current squad captain" v-if="member.captain"></i>
+                                    </div>
+                                    <img alt="Avatar" :src="'/uploads/users/' + member.image">
+                                    <div class="squad-member-info">
+                                        <h4>@{{ member.name }}</h4>
+                                    </div>
                                 </div>
-                                <img alt="Avatar" v-bind:src="'/uploads/users/' + member.image">
-                                {{--<button class="btn btn-xs btn-corner btn-overlay" @click="removeMember($index)" type="button"><i class="fa fa-remove"></i></button>--}}
-                                <div class="squad-member-info">
-                                    <h4>@{{ member.name }}</h4>
-                                    {{--<div class="form-group">--}}
-                                        {{--<input type="text" class="form-control form-control-dark" placeholder="Player position..." v-model="member.pivot.position">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<input type="text" class="form-control form-control-dark" placeholder="Player status..." v-model="member.pivot.status">--}}
-                                    {{--</div>--}}
-                                </div>
-                            </div>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -97,7 +92,15 @@
         <div class="col-md-3">
             <div class="section section-main">
                 <div class="section-body" style="position: relative;">
-                    <div class="section-loader" v-if="isSubmitting"><div class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+                    <div class="section-loader" v-if="isSubmitting">
+                        <div class="loader-inner line-scale-pulse-out">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
                     <input id="team-id" type="hidden" value="{{ $team->id or null }}">
                     <button id="save-squad" class="btn btn-block btn-action" type="submit" :disabled="isSubmitting">Save squad</button>
                     <a href="/admin/teams" class="btn btn-block btn-default">Cancel</a>
@@ -107,20 +110,18 @@
                 </div>
             </div>
             <div class="section section-main">
-                @if($history)
-                    <div class="row">
-                        <div class="col-md-12">
-                            @foreach($history as $historyDate => $members)
-                                <h3>{{ $historyDate }}</h3>
+                <div class="row" v-if="squad.history">
+                    <div class="col-md-12">
+                        <div class="squad-history-item" v-for="(date, roster) in squad.history">
+                            <h3 data-toggle="collapse" data-target="#history-id-@{{ $index }}">@{{ date | moment 'DD.MM.YYYY' }}</h3>
+                            <div class="collapse" id="history-id-@{{ $index }}">
                                 <ul class="list-group">
-                                    @foreach($members as $member)
-                                        <li class="list-group-item">{{ $member->name }} ({{ $member->position }})</li>
-                                    @endforeach
+                                    <li class="list-group-item" v-for="member in roster">@{{ member.name }} (@{{ member.position }})</li>
                                 </ul>
-                            @endforeach
+                            </div>
                         </div>
                     </div>
-                @endif
+                </div>
             </div>
         </div>
         {!! Form::close() !!}

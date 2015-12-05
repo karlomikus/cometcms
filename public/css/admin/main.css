@@ -6454,34 +6454,34 @@ a.text-restore {
  *
  * Members list
  */
+.squad-members {
+  padding: 0 0 0 20px; }
+
 .squad-member {
   float: left;
-  margin: 20px;
+  margin: 0 20px 20px 0;
   width: 180px;
-  height: 150px;
-  position: relative;
-  box-shadow: 0 2px 4px #e0e0e0; }
-  .squad-member .btn-corner {
-    position: absolute;
-    top: 5px;
-    right: 5px; }
-  .squad-member .btn-captain-active {
-    color: #fff;
-    background: #66afe9;
-    border-color: #66afe9; }
+  box-shadow: 0 2px 4px #e0e0e0;
+  border: 1px solid #ededed; }
+  .squad-member .squad-member-header {
+    position: relative;
+    padding: 10px 10px 5px 10px; }
+    .squad-member .squad-member-header > a {
+      color: #adadad; }
+    .squad-member .squad-member-header .captain {
+      color: #F3C66A; }
   .squad-member img {
     width: 80px;
     height: 80px;
     border-radius: 40px;
     display: block;
-    margin: auto; }
+    margin: 10px auto; }
   .squad-member .squad-member-info {
+    height: 80px;
     padding: 10px; }
     .squad-member .squad-member-info h4 {
       text-align: center;
       margin-top: 0; }
-  .squad-member .squad-member-header {
-    position: relative; }
 
 /************************************
  * @group squad-index
@@ -6526,8 +6526,32 @@ a.text-restore {
  *
  * Squad search component
  */
-.member-search-group .dropdown-menu {
-  width: 100%; }
+.member-search-group {
+  border-bottom: 1px solid #f4f4f4; }
+  .member-search-group .dropdown-menu {
+    width: 100%; }
+  .member-search-group input {
+    border: none;
+    border-radius: 0; }
+  .member-search-group .input-group-addon {
+    border: 0;
+    border-radius: 0;
+    background: none;
+    padding: 9px 0 9px 10px;
+    color: #6F6F6F; }
+
+/************************************
+ * @group squad-history
+ *
+ * Squad history component
+ */
+.squad-history-item h3 {
+  margin: 10px 15px;
+  cursor: pointer;
+  display: block; }
+
+.squad-history-item .list-group {
+  margin: 0; }
 
 .map-list .map {
   background: #333742;

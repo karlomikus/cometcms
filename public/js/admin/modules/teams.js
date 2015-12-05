@@ -10278,12 +10278,18 @@ Vue.use(require('vue-resource'));
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
 
+Vue.filter('moment', function (value, format) {
+    return moment(value).format(format);
+});
+
 var vm = new Vue({
     el: '#squad-form',
 
     data: {
+        teamID: null,
         squad: {
-            roster: []
+            roster: [],
+            history: null
         },
         foundUsers: [],
         searchTerm: null,
@@ -10308,15 +10314,16 @@ var vm = new Vue({
 
         initFormData: function initFormData() {
             this.teamID = $('#team-id').val();
-            this.$http.get('/admin/teams/api/team/' + this.teamID, function (data) {
-                data.roster = data.roster.map(function (obj) {
+            this.$http.get('/admin/api/teams/' + this.teamID, function (response) {
+                response.data.roster.data = response.data.roster.data.map(function (obj) {
                     if (obj.image == null) {
                         obj.image = 'noavatar.jpg';
                     }
                     return obj;
                 });
 
-                this.squad = data;
+                this.squad = response.data;
+                this.squad.roster = response.data.roster.data;
             });
         },
 
@@ -10324,7 +10331,8 @@ var vm = new Vue({
             user['pivot'] = {
                 user_id: user.id,
                 position: null,
-                status: null
+                status: null,
+                captain: 0
             };
 
             var exists = $.grep(this.squad.roster, function (e) {
@@ -10338,6 +10346,16 @@ var vm = new Vue({
 
         removeMember: function removeMember(index) {
             this.squad.roster.splice(index, 1);
+        },
+
+        makeCaptain: function makeCaptain(index) {
+            this.squad.roster.forEach(function (member, i) {
+                if (index == i) {
+                    member.captain = true;
+                } else {
+                    member.captain = false;
+                }
+            });
         },
 
         getUsers: function getUsers() {
@@ -10357,13 +10375,23 @@ var vm = new Vue({
 
         onSubmit: function onSubmit() {
             this.isSubmitting = true;
-            this.$http.post('/admin/teams/edit/' + this.teamID, this.squad, function (response) {
-                showAlert.success(response.message);
-                this.isSubmitting = false;
-            }).error(function (data, status, request) {
-                showAlert.error(data.message);
-                this.isSubmitting = false;
-            });
+            if (this.teamID) {
+                this.$http.put('/admin/teams/' + this.teamID, this.squad, function (response) {
+                    showAlert.success(response.message);
+                }).error(function (response) {
+                    showAlert.error(response.message);
+                }).always(function () {
+                    this.isSubmitting = false;
+                });
+            } else {
+                this.$http.post('/admin/teams/', this.squad, function (response) {
+                    showAlert.success(response.message);
+                }).error(function (response) {
+                    showAlert.error(response.message);
+                }).always(function () {
+                    this.isSubmitting = false;
+                });
+            }
         }
     }
 });

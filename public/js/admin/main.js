@@ -25,7 +25,7 @@ var showAlert = {
             message +
             '</div>';
     }
-}
+};
 
 $(document).ready(function () {
     $('a[data-popup="true"]').click(function (e) {

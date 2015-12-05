@@ -3,8 +3,12 @@
 use App\Repositories\Contracts\TeamsRepositoryInterface as Teams;
 use App\Repositories\Contracts\GamesRepositoryInterface as Games;
 use App\Http\Requests\SaveTeamRequest;
+use App\Transformers\TeamMembersTransformer;
+use App\Transformers\TeamTransformer;
 
-class TeamsController extends AdminController {
+class TeamsController extends AdminController
+{
+    use TraitApi;
 
     protected $teams;
 
@@ -44,13 +48,10 @@ class TeamsController extends AdminController {
         $team = $this->teams->insert($request->all());
 
         if ($team) {
-            $this->alerts->alertSuccess('Squad saved successfully.');
-        }
-        else {
-            $this->alerts->alertError('Unable to save a squad.');
+            return $this->apiResponse(null, 'Squad saved successfully.', 200, '/admin/teams/edit/' . $team->id);
         }
 
-        return response()->json(['location' => '/admin/teams', 'alerts' => $this->alerts->getAlerts()]);
+        return $this->apiResponse(null, 'Error occured while saving a squad.', 500);
     }
 
     public function edit($id, Games $games)
@@ -73,10 +74,11 @@ class TeamsController extends AdminController {
         $team = $this->teams->update($id, $request->all());
 
         if ($team) {
-            return $this->apiResponse(null, 'Squad edited successfully.', 200, '/admin/teams/edit/' . $id);
+            $this->setMessage('Saved successfgllyl!');
+            return $this->respondWithArray([]);
         }
 
-        return $this->apiResponse(null, 'Error occured while updating a squad.', 500);
+        return $this->respondWithError('Error occured while updating a squad.', 500);
     }
 
     public function delete($id)
@@ -93,11 +95,12 @@ class TeamsController extends AdminController {
         return redirect('admin/teams');
     }
 
-    public function getRoster($teamID)
+    public function get($teamID)
     {
         $data = $this->teams->getTeamData($teamID);
+        $data['history'] = $this->teams->getMembersHistory($teamID);
 
-        return response()->json($data);
+        return $this->respondWithItem($data, new TeamTransformer());
     }
 
 }

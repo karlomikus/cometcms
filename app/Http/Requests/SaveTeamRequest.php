@@ -22,15 +22,14 @@ class SaveTeamRequest extends Request {
     {
         $rules = [
             'name'     => 'required|min:3',
-            'game_id'     => 'required|integer',
+            'gameId'     => 'required|integer',
             'image' => 'image',
             'roster' => 'required|array'
         ];
 
         foreach ($this->request->get('roster') as $key => $member) {
-            $rules['roster.' . $key . '.id'] = 'required|integer';
-            $rules['roster.' . $key . '.pivot.team_id'] = 'integer';
-            $rules['roster.' . $key . '.pivot.captain'] = 'boolean';
+            $rules['roster.' . $key . '.userId'] = 'required|integer';
+            $rules['roster.' . $key . '.captain'] = 'boolean';
         }
 
         return $rules;

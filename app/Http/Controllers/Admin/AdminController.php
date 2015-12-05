@@ -39,24 +39,4 @@ class AdminController extends Controller {
         $this->breadcrumbs->setDivider('');
         view()->share('breadcrumbs', $this->breadcrumbs);
     }
-
-    /**
-     * Temporary response generator for API calls.
-     *
-     * @param  mixed  $data
-     * @param  string  $message
-     * @param  integer $statusCode
-     * @param  string  $redirectTo
-     * @return mixed
-     */
-    protected function apiResponse($data, $message = null, $statusCode = 200, $redirectTo = null) {
-        $json = [
-            'data' => $data,
-            'location' => $redirectTo,
-            'status' => $statusCode,
-            'message' => $message
-        ];
-
-        return response()->json($json, $statusCode);
-    }
 } 
