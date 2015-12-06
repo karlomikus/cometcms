@@ -182,15 +182,9 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             ->where('team_roster.team_id', $teamID)
             ->whereNotNull('team_roster.deleted_at')
             ->join('users', 'team_roster.user_id', '=', 'users.id')
-            ->get(['team_roster.position', 'team_roster.deleted_at as replaced', 'users.*']);
+            ->get(['team_roster.position', 'team_roster.captain', 'team_roster.deleted_at as replaced', 'users.*']);
 
-        // Group changes by date
-        $group = [];
-        foreach ($query as $val) {
-            $group[Carbon::parse($val->replaced)->format('Y-m-d H:i')][] = $val;
-        }
-
-        return $group;
+        return $query;
     }
 
     /**

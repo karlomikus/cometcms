@@ -96,6 +96,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/teams/delete/{id}', 'Admin\TeamsController@delete');
     Route::group(['prefix' => 'api'], function () {
         Route::get('/teams/{id}', 'Admin\TeamsController@get');
+        Route::get('/teams/history/{id}', 'Admin\TeamsController@getHistory');
     });
 
     /**

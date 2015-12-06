@@ -5,13 +5,14 @@ use League\Fractal\TransformerAbstract;
 
 class TeamHistoryTransformer extends TransformerAbstract
 {
-    public function transform($team)
+    public function transform($userHistory)
     {
         return [
-            'id'          => (int) $team->id,
-            'name'        => $team->name,
-            'description' => $team->description,
-            'gameId'      => (int) $team->game_id
+            'userId'     => (int) $userHistory->id,
+            'name'       => $userHistory->name,
+            'replacedOn' => $userHistory->replaced,
+            'position'   => $userHistory->position,
+            'captain'    => (bool) $userHistory->captain
         ];
     }
 }

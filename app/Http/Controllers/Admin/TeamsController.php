@@ -3,6 +3,7 @@
 use App\Repositories\Contracts\TeamsRepositoryInterface as Teams;
 use App\Repositories\Contracts\GamesRepositoryInterface as Games;
 use App\Http\Requests\SaveTeamRequest;
+use App\Transformers\TeamHistoryTransformer;
 use App\Transformers\TeamMembersTransformer;
 use App\Transformers\TeamTransformer;
 
@@ -103,4 +104,10 @@ class TeamsController extends AdminController
         return $this->respondWithItem($data, new TeamTransformer());
     }
 
+    public function getHistory($teamID)
+    {
+        $data = $this->teams->getMembersHistory($teamID);
+
+        return $this->respondWithCollection($data, new TeamHistoryTransformer());
+    }
 }
