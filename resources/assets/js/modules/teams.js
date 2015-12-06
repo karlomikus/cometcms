@@ -53,15 +53,13 @@ var vm = new Vue({
         },
 
         addMember: function (user) {
-            user['pivot'] = {
-                user_id: user.id,
-                position: null,
-                status: null,
-                captain: 0
-            };
+            user['position'] = null;
+            user['status'] = null;
+            user['captain'] = false;
+            user['userId'] = user.id;
 
             var exists = $.grep(this.squad.roster, function (e) {
-                return e.pivot.user_id === user.id;
+                return e.userId === user.id;
             });
 
             if (exists.length === 0) {
@@ -87,8 +85,9 @@ var vm = new Vue({
             if (this.searchTerm.length < 3) return;
 
             this.isSearching = true;
-            this.$http.get('/admin/users/api/user', {q: this.searchTerm}, function (data) {
-                this.foundUsers = data.map(function (obj) {
+            this.$http.get('/admin/api/users', {q: this.searchTerm}, function (response) {
+                console.log(response.message);
+                this.foundUsers = response.data.map(function (obj) {
                     if (obj.image == null) {
                         obj.image = 'noavatar.jpg';
                     }

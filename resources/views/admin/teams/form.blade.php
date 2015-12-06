@@ -110,18 +110,18 @@
                 </div>
             </div>
             <div class="section section-main">
-                <div class="row" v-if="squad.history">
-                    <div class="col-md-12">
-                        <div class="squad-history-item" v-for="(date, roster) in squad.history">
-                            <h3 data-toggle="collapse" data-target="#history-id-@{{ $index }}">@{{ date | moment 'DD.MM.YYYY' }}</h3>
-                            <div class="collapse" id="history-id-@{{ $index }}">
-                                <ul class="list-group">
-                                    <li class="list-group-item" v-for="member in roster">@{{ member.name }} (@{{ member.position }})</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{--<div class="row" v-if="squad.history">--}}
+                    {{--<div class="col-md-12">--}}
+                        {{--<div class="squad-history-item" v-for="(date, roster) in squad.history">--}}
+                            {{--<h3 data-toggle="collapse" data-target="#history-id-@{{ $index }}">@{{ date | moment 'DD.MM.YYYY' }}</h3>--}}
+                            {{--<div class="collapse" id="history-id-@{{ $index }}">--}}
+                                {{--<ul class="list-group">--}}
+                                    {{--<li class="list-group-item" v-for="member in roster">@{{ member.name }} (@{{ member.position }})</li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
         </div>
         {!! Form::close() !!}

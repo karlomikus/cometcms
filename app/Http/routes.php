@@ -50,7 +50,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/users/edit/{id}', 'Admin\UsersController@edit');
     Route::post('/users/edit/{id}', 'Admin\UsersController@update');
     Route::get('/users/delete/{id}', 'Admin\UsersController@delete');
-    Route::get('/users/api/user', 'Admin\UsersController@searchUsers');
+    Route::group(['prefix' => 'api'], function () {
+        Route::get('/users/', 'Admin\UsersController@searchUsers');
+    });
 
     Route::get('/users/trash', 'Admin\UsersController@trash');
     Route::get('/users/restore/{id}', 'Admin\UsersController@restore');

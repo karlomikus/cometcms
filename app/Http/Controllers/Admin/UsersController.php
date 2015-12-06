@@ -5,12 +5,14 @@ use App\Http\Requests\SaveUserRequest;
 use App\Repositories\Contracts\UsersRepositoryInterface;
 use App\Repositories\Contracts\RolesRepositoryInterface;
 use App\Role;
+use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\TraitTrashable as Trash;
 
-class UsersController extends AdminController {
+class UsersController extends AdminController
+{
 
-    use Trash;
+    use Trash, TraitApi;
 
     protected $users;
 
@@ -129,12 +131,18 @@ class UsersController extends AdminController {
     public function searchUsers(Request $request)
     {
         $searchString = $request->input('q');
+
         $result = [];
-        if (strlen($searchString) >= 2) {
+        if (strlen($searchString) >= 3) {
             $result = $this->users->searchUsersByName($searchString);
+            if (count($result) == 0) {
+                $this->setMessage('No users found!');
+            }
+        }
+        else {
+            $this->setMessage('Search string must contain at least 3 characters!');
         }
 
-        return response()->json($result);
+        return $this->respondWithCollection($result, new UserTransformer());
     }
-
 }
