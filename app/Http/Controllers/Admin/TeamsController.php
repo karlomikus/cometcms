@@ -16,6 +16,7 @@ class TeamsController extends AdminController
     public function __construct(Teams $teams)
     {
         parent::__construct();
+
         $this->teams = $teams;
         $this->breadcrumbs->addCrumb('Squads', 'teams');
     }
@@ -49,10 +50,11 @@ class TeamsController extends AdminController
         $team = $this->teams->insert($request->all());
 
         if ($team) {
-            return $this->apiResponse(null, 'Squad saved successfully.', 200, '/admin/teams/edit/' . $team->id);
+            $this->setMessage('Saved a squad successfully!');
+            return $this->respondWithArray([]);
         }
 
-        return $this->apiResponse(null, 'Error occured while saving a squad.', 500);
+        return $this->respondWithError('Error occured while saving a squad.', 500);
     }
 
     public function edit($id, Games $games)
@@ -75,7 +77,7 @@ class TeamsController extends AdminController
         $team = $this->teams->update($id, $request->all());
 
         if ($team) {
-            $this->setMessage('Saved successfgllyl!');
+            $this->setMessage('Updated a squad successfully!');
             return $this->respondWithArray([]);
         }
 

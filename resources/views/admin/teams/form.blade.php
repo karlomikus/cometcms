@@ -23,11 +23,8 @@
                         <div class="col-md-6">
                             <div class="form-group fg-connector form-group-inline">
                                 <label for="game" class="control-label">Primary game</label>
-                                <select class="form-control games-dropdown" id="game" name="game" v-model="squad.gameID">
-                                    @foreach($games as $game)
-                                        <option value="{{ $game->id }}" data-icon="{{ $game->image }}">{{ $game->name }}</option>
-                                    @endforeach
-                                </select>
+                                <select class="form-control games-dropdown" id="game" name="game" v-select="squad.gameId" :options="games"></select>
+                                {{--<select2 data="games"></select2>--}}
                             </div>
                         </div>
                     </div>
@@ -107,6 +104,7 @@
                     @if($team)
                         <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
                     @endif
+                    <pre>@{{ games | json }}</pre>
                 </div>
             </div>
             <div class="section section-main">

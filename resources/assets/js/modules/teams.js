@@ -7,11 +7,36 @@ Vue.filter('moment', function (value, format) {
     return moment(value).format(format);
 });
 
+Vue.config.debug = true;
+
+Vue.directive('select', {
+    twoWay: true,
+
+    params: ['options'],
+
+    bind: function () {
+        var self = this;
+        $(this.el).select2({
+            data: this.params.options
+        }).on('change', function () {
+            self.set(this.value)
+        });
+    },
+    update: function (value) {
+        $(this.el).select2();
+        $(this.el).val(value).trigger('change')
+    },
+    unbind: function () {
+        $(this.el).off().select2('destroy')
+    }
+});
+
 var vm = new Vue({
     el: '#squad-form',
 
     data: {
         teamID: null,
+        games: [],
         squad: {
             roster: [],
             history: null
@@ -29,9 +54,6 @@ var vm = new Vue({
 
     methods: {
         onReady: function () {
-            $('#game').select2({
-                templateResult: formatGame
-            });
             $('#search-users').focus(function () {
                 $('#found-users-list').dropdown();
             });
@@ -39,16 +61,27 @@ var vm = new Vue({
 
         initFormData: function () {
             this.teamID = $('#team-id').val();
-            this.$http.get('/admin/api/teams/' + this.teamID, function (response) {
-                response.data.roster.data = response.data.roster.data.map(function (obj) {
-                    if (obj.image == null) {
-                        obj.image = 'noavatar.jpg';
-                    }
-                    return obj;
-                });
 
-                this.squad = response.data;
-                this.squad.roster = response.data.roster.data;
+            if (this.teamID) {
+                this.$http.get('/admin/api/teams/' + this.teamID, function (response) {
+                    response.data.roster.data = response.data.roster.data.map(function (obj) {
+                        if (obj.image == null) {
+                            obj.image = 'noavatar.jpg';
+                        }
+                        return obj;
+                    });
+
+                    this.squad = response.data;
+                    this.squad.roster = response.data.roster.data;
+                }).error(function (response) {
+                    showAlert.error(response.message);
+                });
+            }
+
+            this.$http.get('/admin/api/games/', function (response) {
+                this.games = response.data;
+            }).error(function (response) {
+                showAlert.error(response.message);
             });
         },
 

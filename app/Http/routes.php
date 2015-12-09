@@ -36,6 +36,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/games/edit/{id}', 'Admin\GamesController@edit');
     Route::post('/games/edit/{id}', 'Admin\GamesController@update');
     Route::get('/games/delete/{id}', 'Admin\GamesController@delete');
+    Route::group(['prefix' => 'api'], function () {
+        Route::get('/games', 'Admin\GamesController@getAll');
+    });
 
     Route::get('/games/trash', 'Admin\GamesController@trash');
     Route::get('/games/restore/{id}', 'Admin\GamesController@restore');
