@@ -104,6 +104,7 @@ trait TraitApi
     protected function respondWithArray(array $data, $headers = [])
     {
         $data['message'] = $this->message;
+        $data['exception'] = \Session::get('exception');
         return response()->json($data, $this->statusCode, $headers);
     }
 }

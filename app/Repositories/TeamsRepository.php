@@ -61,7 +61,7 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             \DB::beginTransaction();
             $teamModel = parent::insert($data);
             if ($teamModel) {
-                $this->insertMembers($data['members'], $teamModel->id);
+                $this->insertMembers($data['roster'], $teamModel->id);
             }
         }
         catch (\Exception $e) {

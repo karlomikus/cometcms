@@ -29,6 +29,11 @@ class GamesRepository extends AbstractRepository implements GamesRepositoryInter
         $this->setUploadPath(base_path() . '/public/uploads/games/');
     }
 
+    public function all()
+    {
+        return $this->model->orderBy('name')->get();
+    }
+
     /**
      * @return mixed
      */

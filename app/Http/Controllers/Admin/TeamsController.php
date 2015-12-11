@@ -47,7 +47,14 @@ class TeamsController extends AdminController
 
     public function save(SaveTeamRequest $request)
     {
-        $team = $this->teams->insert($request->all());
+        $data = [
+            'name' => $request->get('name'),
+            'game_id' => $request->get('gameId'),
+            'description' => $request->get('description'),
+            'roster' => $request->get('roster'),
+        ];
+
+        $team = $this->teams->insert($data);
 
         if ($team) {
             $this->setMessage('Saved a squad successfully!');

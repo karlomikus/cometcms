@@ -9,28 +9,6 @@ Vue.filter('moment', function (value, format) {
 
 Vue.config.debug = true;
 
-Vue.directive('select', {
-    twoWay: true,
-
-    params: ['options'],
-
-    bind: function () {
-        var self = this;
-        $(this.el).select2({
-            data: this.params.options
-        }).on('change', function () {
-            self.set(this.value)
-        });
-    },
-    update: function (value) {
-        $(this.el).select2();
-        $(this.el).val(value).trigger('change')
-    },
-    unbind: function () {
-        $(this.el).off().select2('destroy')
-    }
-});
-
 var vm = new Vue({
     el: '#squad-form',
 
@@ -38,6 +16,9 @@ var vm = new Vue({
         teamID: null,
         games: [],
         squad: {
+            name: null,
+            description: null,
+            gameId: null,
             roster: [],
             history: null
         },
@@ -80,6 +61,12 @@ var vm = new Vue({
 
             this.$http.get('/admin/api/games/', function (response) {
                 this.games = response.data;
+                var self = this;
+                $('#game').select2({
+                    data: this.games
+                }).on('change', function (e, val, d) {
+                    self.squad.gameId = parseInt($(this).val());
+                });
             }).error(function (response) {
                 showAlert.error(response.message);
             });
