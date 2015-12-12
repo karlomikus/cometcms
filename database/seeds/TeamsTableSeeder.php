@@ -11,7 +11,7 @@ class TeamsTableSeeder extends Seeder {
 
         for ($i=0; $i < 5; $i++) {
             $team = Team::create([
-                'name' => ucfirst($faker->word),
+                'name' => $faker->company,
                 'description' => $faker->sentence(12),
                 'game_id' => 1
             ]);

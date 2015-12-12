@@ -25,7 +25,7 @@
                             @endif
                             @foreach($data as $user)
                                 <tr>
-                                    <td><a href="{{ url('admin/users/edit', [$user->id]) }}">{{ $user->name }}</a></td>
+                                    <td><a href="{{ url('admin/users/edit', [$user->id]) }}">{{ $user->profile->first_name }} {{ $user->profile->last_name }}</a><br><small>{{ $user->username }}</small></td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->created_at->format('d.m.Y - H:i:s') }}</td>
                                     <td>

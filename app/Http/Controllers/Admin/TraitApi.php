@@ -55,13 +55,9 @@ trait TraitApi
     public function respondWithError($msg, $statusCode = 500)
     {
         $this->setStatusCode($statusCode);
+        $this->setMessage($msg);
 
-        return $this->respondWithArray([
-            'data' => [
-                'http_status' => $this->statusCode,
-                'message' => $msg
-            ]
-        ]);
+        return $this->respondWithArray([]);
     }
 
     /**
@@ -104,7 +100,7 @@ trait TraitApi
     protected function respondWithArray(array $data, $headers = [])
     {
         $data['message'] = $this->message;
-        $data['exception'] = \Session::get('exception');
+
         return response()->json($data, $this->statusCode, $headers);
     }
 }

@@ -54,7 +54,7 @@
                                     <ul class="dropdown-menu" id="found-users-list">
                                         <li v-for="user in foundUsers">
                                             <a href="#" @click.prevent="addMember(user)">
-                                                @{{ user.name }} @{{ user.last_name }}<br>
+                                                @{{ user.firstName }} @{{ user.lastName }}<br>
                                                 <small>@{{ user.email }}</small>
                                             </a>
                                         </li>
@@ -77,7 +77,7 @@
                                     </div>
                                     <img alt="Avatar" :src="'/uploads/users/' + member.image">
                                     <div class="squad-member-info">
-                                        <h4>@{{ member.name }}</h4>
+                                        <h4>@{{ member.firstName }} @{{ member.lastName }}</h4>
                                     </div>
                                 </div>
                             </section>

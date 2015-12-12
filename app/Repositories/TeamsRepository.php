@@ -5,13 +5,15 @@ use App\Repositories\Contracts\TeamsRepositoryInterface;
 use App\Team;
 use App\Libraries\ImageUploadTrait as ImageUpload;
 use Carbon\Carbon;
+use DB;
 
 /**
  * Teams repository
  *
  * @package App\Repositories
  */
-class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface {
+class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface
+{
 
     use ImageUpload;
 
@@ -30,15 +32,15 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
     /**
      * Add members to specific team
      *
-     * @param  array $data    Array with member data
-     * @param  int   $teamID  ID of the team we are adding members to
+     * @param  array $data Array with member data
+     * @param  int $teamID ID of the team we are adding members to
      * @return void           Void since we use transaction in insert() method
      */
     public function insertMembers($data, $teamID)
     {
         // We go through each element since we need to get rid of garbage properties from client JSON
         foreach ($data as $member) {
-            \DB::table('team_roster')->insert([
+            DB::table('team_roster')->insert([
                 'user_id'  => $member['userId'],
                 'team_id'  => $teamID,
                 'position' => isset($member['position']) ? $member['position'] : null,
@@ -50,29 +52,25 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
 
     /**
      * Add new team and team members.
-     * Uses transactions, if transaction commits returns true.
      *
-     * @param  array $data Array of data
-     * @return bool        Was transaction commited
+     * @param  array $data
+     * @return Team Created team model instance
      */
     public function insert($data)
     {
-        try {
-            \DB::beginTransaction();
+        $transaction = DB::transaction(function () use ($data) {
             $teamModel = parent::insert($data);
-            if ($teamModel) {
-                $this->insertMembers($data['roster'], $teamModel->id);
+
+            if (!$teamModel) {
+                throw new \Exception('Unable to create a squad!');
             }
-        }
-        catch (\Exception $e) {
-            \DB::rollback();
-            \Session::flash('exception', $e->getMessage());
 
-            return false;
-        }
-        \DB::commit();
+            $this->insertMembers($data['roster'], $teamModel->id);
 
-        return true;
+            return $teamModel;
+        });
+
+        return $transaction;
     }
 
     /**
@@ -82,26 +80,19 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
      */
     public function update($id, $data)
     {
-        try {
-            \DB::beginTransaction();
+        $transaction = DB::transaction(function () use ($id, $data) {
             $teamModel = parent::update($id, $data);
 
-            if ($teamModel) {
-                //$this->deleteAllMembers($id);
-                $this->updateMembers($data['roster'], $id);
+            if (!$teamModel) {
+                throw new \Exception('Unable to update a squad!');
             }
-        }
-        catch (\Exception $e) {
-            \DB::rollback();
-            \Session::flash('exception', $e->getMessage());
 
-            dd($e);
+            $this->updateMembers($data['roster'], $id);
 
-            return false;
-        }
-        \DB::commit();
+            return $teamModel;
+        });
 
-        return true;
+        return $transaction;
     }
 
     /**

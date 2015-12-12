@@ -63,8 +63,9 @@ var vm = new Vue({
                 this.games = response.data;
                 var self = this;
                 $('#game').select2({
+                    placeholder: 'Select a game...',
                     data: this.games
-                }).on('change', function (e, val, d) {
+                }).on('change', function () {
                     self.squad.gameId = parseInt($(this).val());
                 });
             }).error(function (response) {

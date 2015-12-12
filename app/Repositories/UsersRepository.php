@@ -51,16 +51,19 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
      */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false)
     {
-        $sortColumn = (!$sortColumn) ? 'name' : $sortColumn;
+        $sortColumn = (!$sortColumn) ? 'profile.first_name' : $sortColumn;
         $order = (!$order) ? 'asc' : $order;
 
-        $model = $this->model->orderBy($sortColumn, $order);
+        $model = $this->model
+            ->with('profile')
+            ->join('users_profiles as profile', 'profile.user_id', '=', 'users.id')
+            ->orderBy($sortColumn, $order);
 
         if ($trash)
             $model->onlyTrashed();
 
         if ($searchTerm)
-            $model->where('name', 'LIKE', '%' . $searchTerm . '%')->orWhere('email', 'LIKE', '%' . $searchTerm . '%');
+            $model->where('profile.first_name', 'LIKE', '%' . $searchTerm . '%')->orWhere('profile.last_name', 'LIKE', '%' . $searchTerm . '%');
 
         $result['count'] = $model->count();
         $result['items'] = $model->with('roles')->skip($limit * ($page - 1))->take($limit)->get();
@@ -76,9 +79,16 @@ class UsersRepository extends AbstractRepository implements UsersRepositoryInter
      */
     public function searchUsersByName($string)
     {
-        $model = $this->model->orderBy('name');
+        $model = $this->model
+            ->join('users_profiles as profile', 'profile.user_id', '=', 'users.id')
+            ->with('profile')
+            ->orderBy('profile.first_name')
+            ->orderBy('profile.last_name')
+            ->where('profile.first_name', 'LIKE', '%' . $string . '%')
+            ->orWhere('profile.last_name', 'LIKE', '%' . $string . '%')
+            ->get();
 
-        return $model->where('name', 'LIKE', '%' . $string . '%')->get();
+        return $model;
     }
 
 }

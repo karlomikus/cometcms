@@ -14,7 +14,7 @@ class TeamTransformer extends TransformerAbstract
             'name'        => $team->name,
             'description' => $team->description,
             'gameId'      => (int) $team->game_id,
-            'history'     => $team->history
+            //'history'     => $team->history
         ];
     }
 

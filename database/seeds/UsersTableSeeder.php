@@ -136,7 +136,7 @@ class UsersTableSeeder extends Seeder {
         ]);
 
         $admin = User::create([
-            'name' => 'Karlo',
+            'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123')
         ]);
@@ -151,7 +151,7 @@ class UsersTableSeeder extends Seeder {
 
         for ($i=0; $i < 54; $i++) {
             $user = User::create([
-                'name' => $faker->name,
+                'username' => $faker->unique()->userName,
                 'email' => $faker->email,
                 'password' => Hash::make('demo123')
             ]);

@@ -34,6 +34,7 @@ class TeamsController extends AdminController
     public function create(Games $games)
     {
         $this->breadcrumbs->addCrumb('New', 'new');
+
         $template = [
             'team'      => null,
             'modelData' => 'null',
@@ -48,26 +49,29 @@ class TeamsController extends AdminController
     public function save(SaveTeamRequest $request)
     {
         $data = [
-            'name' => $request->get('name'),
-            'game_id' => $request->get('gameId'),
+            'name'        => $request->get('name'),
+            'game_id'     => $request->get('gameId'),
             'description' => $request->get('description'),
-            'roster' => $request->get('roster'),
+            'roster'      => $request->get('roster'),
         ];
 
-        $team = $this->teams->insert($data);
+        try {
+            $team = $this->teams->insert($data);
+            $this->setMessage('Squad saved successfully!');
 
-        if ($team) {
-            $this->setMessage('Saved a squad successfully!');
-            return $this->respondWithArray([]);
+            return $this->respondWithItem($team, new TeamTransformer());
         }
-
-        return $this->respondWithError('Error occured while saving a squad.', 500);
+        catch (\Exception $e) {
+            return $this->respondWithError($e->getMessage(), 500);
+        }
     }
 
     public function edit($id, Games $games)
     {
         $this->breadcrumbs->addCrumb('Edit squad', 'edit');
+
         $team = $this->teams->get($id);
+
         $template = [
             'team'      => $team,
             'pageTitle' => 'Editing a squad',
@@ -81,14 +85,22 @@ class TeamsController extends AdminController
 
     public function update($id, SaveTeamRequest $request)
     {
-        $team = $this->teams->update($id, $request->all());
+        $data = [
+            'name'        => $request->get('name'),
+            'game_id'     => $request->get('gameId'),
+            'description' => $request->get('description'),
+            'roster'      => $request->get('roster'),
+        ];
 
-        if ($team) {
-            $this->setMessage('Updated a squad successfully!');
-            return $this->respondWithArray([]);
+        try {
+            $team = $this->teams->update($id, $data);
+            $this->setMessage('Squad updated successfully!');
+
+            return $this->respondWithItem($team, new TeamTransformer());
         }
-
-        return $this->respondWithError('Error occured while updating a squad.', 500);
+        catch (\Exception $e) {
+            return $this->respondWithError($e->getMessage(), 500);
+        }
     }
 
     public function delete($id)
