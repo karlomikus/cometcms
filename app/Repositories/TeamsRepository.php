@@ -173,7 +173,16 @@ class TeamsRepository extends AbstractRepository implements TeamsRepositoryInter
             ->where('team_roster.team_id', $teamID)
             ->whereNotNull('team_roster.deleted_at')
             ->join('users', 'team_roster.user_id', '=', 'users.id')
-            ->get(['team_roster.position', 'team_roster.captain', 'team_roster.deleted_at as replaced', 'users.*']);
+            ->join('users_profiles as profile', 'profile.user_id', '=', 'users.id')
+            ->get([
+                'team_roster.position',
+                'team_roster.captain',
+                'team_roster.status',
+                'team_roster.deleted_at as replaced',
+                'profile.first_name',
+                'profile.last_name',
+                'profile.user_id'
+            ]);
 
         return $query;
     }

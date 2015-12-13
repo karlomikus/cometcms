@@ -1,4 +1,5 @@
 var Vue = require('Vue');
+var _ = require('underscore');
 Vue.use(require('vue-resource'));
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
@@ -15,12 +16,12 @@ var vm = new Vue({
     data: {
         teamID: null,
         games: [],
+        history: [],
         squad: {
             name: null,
             description: null,
             gameId: null,
-            roster: [],
-            history: null
+            roster: []
         },
         foundUsers: [],
         searchTerm: null,
@@ -31,6 +32,7 @@ var vm = new Vue({
     ready: function () {
         this.onReady();
         this.initFormData();
+        this.getHistory();
     },
 
     methods: {
@@ -118,6 +120,18 @@ var vm = new Vue({
             });
         },
 
+        getHistory: function () {
+            if (this.teamID) {
+                this.$http.get('/admin/api/teams/history/' + this.teamID, function (response) {
+                    this.history = _.groupBy(response.data, function (historyItem) {
+                        return historyItem.replacedOn;
+                    });
+                }).error(function (response) {
+                    showAlert.error(response.message);
+                });
+            }
+        },
+
         onSubmit: function () {
             this.isSubmitting = true;
             if (this.teamID) {
@@ -128,6 +142,7 @@ var vm = new Vue({
                 }).always(function () {
                     this.isSubmitting = false;
                 });
+                this.getHistory();
             } else {
                 this.$http.post('/admin/teams/', this.squad, function (response) {
                     showAlert.success(response.message);
