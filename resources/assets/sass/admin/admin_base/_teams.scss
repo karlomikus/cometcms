@@ -31,11 +31,20 @@
     margin: 10px auto;
   }
   .squad-member-info {
-    height: 80px;
+    height: 150px;
     padding: 10px;
     h4 {
       text-align: center;
       margin-top: 0;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 10px;
+      .form-control {
+        height: 28px;
+        padding: 2px 7px;
+        font-size: 14px;
+      }
     }
   }
 }

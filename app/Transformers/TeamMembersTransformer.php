@@ -12,7 +12,7 @@ class TeamMembersTransformer extends TransformerAbstract
             'userId'    => (int) $member->id,
             'firstName' => $member->profile->first_name,
             'lastName'  => $member->profile->last_name,
-            'image'     => $member->image,
+            'image'     => $member->profile->image,
             'status'    => $member->pivot->status,
             'position'  => $member->pivot->position,
             'captain'   => (bool) $member->pivot->captain

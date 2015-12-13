@@ -3,13 +3,18 @@ var _ = require('underscore');
 Vue.use(require('vue-resource'));
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
+Vue.config.debug = true;
 
+/**
+ * Datetime filter
+ */
 Vue.filter('moment', function (value, format) {
     return moment(value).format(format);
 });
 
-Vue.config.debug = true;
-
+/**
+ * TODO: Handle validation errors, selected gameID, member search dropdown status message
+ */
 var vm = new Vue({
     el: '#squad-form',
 
@@ -30,18 +35,25 @@ var vm = new Vue({
     },
 
     ready: function () {
-        this.onReady();
+        this.initMembersSearch();
         this.initFormData();
         this.getHistory();
     },
 
     methods: {
-        onReady: function () {
+
+        /**
+         * Setup member search
+         */
+        initMembersSearch: function () {
             $('#search-users').focus(function () {
                 $('#found-users-list').dropdown();
             });
         },
 
+        /**
+         * Setup form data
+         */
         initFormData: function () {
             this.teamID = $('#team-id').val();
 
@@ -56,9 +68,7 @@ var vm = new Vue({
 
                     this.squad = response.data;
                     this.squad.roster = response.data.roster.data;
-                }).error(function (response) {
-                    showAlert.error(response.message);
-                });
+                }).error(this.handleError);
             }
 
             this.$http.get('/admin/api/games/', function (response) {
@@ -70,16 +80,16 @@ var vm = new Vue({
                 }).on('change', function () {
                     self.squad.gameId = parseInt($(this).val());
                 });
-            }).error(function (response) {
-                showAlert.error(response.message);
-            });
+            }).error(this.handleError);
         },
 
+        /**
+         * Add new member to roster
+         * @param user
+         */
         addMember: function (user) {
-            user['position'] = null;
-            user['status'] = null;
-            user['captain'] = false;
-            user['userId'] = user.id;
+            // Vue - Change detection caveat
+            user = Object.assign({}, user, {position: null, captain: false, status: null, userId: user.id});
 
             var exists = $.grep(this.squad.roster, function (e) {
                 return e.userId === user.id;
@@ -90,68 +100,85 @@ var vm = new Vue({
             }
         },
 
+        /**
+         * Remove member index from array
+         * @param index
+         */
         removeMember: function (index) {
             this.squad.roster.splice(index, 1);
         },
 
+        /**
+         * Make selected member a captain
+         * @param index
+         */
         makeCaptain: function (index) {
             this.squad.roster.forEach(function (member, i) {
-                if (index == i) {
-                    member.captain = true;
-                } else {
-                    member.captain = false;
-                }
+                member.captain = index == i;
             });
         },
 
+        /**
+         * Get users by a search term
+         */
         getUsers: function () {
             if (this.searchTerm.length < 3) return;
-
+            var self = this;
             this.isSearching = true;
             this.$http.get('/admin/api/users', {q: this.searchTerm}, function (response) {
-                console.log(response.message);
                 this.foundUsers = response.data.map(function (obj) {
                     if (obj.image == null) {
                         obj.image = 'noavatar.jpg';
                     }
                     return obj;
                 });
-                this.isSearching = false;
+                self.isSearching = false;
             });
         },
 
+        /**
+         * Fetch squad history
+         */
         getHistory: function () {
             if (this.teamID) {
                 this.$http.get('/admin/api/teams/history/' + this.teamID, function (response) {
                     this.history = _.groupBy(response.data, function (historyItem) {
                         return historyItem.replacedOn;
                     });
-                }).error(function (response) {
-                    showAlert.error(response.message);
-                });
+                }).error(this.handleError);
             }
         },
 
+        /**
+         * Submit form
+         */
         onSubmit: function () {
             this.isSubmitting = true;
+            var self = this;
             if (this.teamID) {
                 this.$http.put('/admin/teams/' + this.teamID, this.squad, function (response) {
                     showAlert.success(response.message);
-                }).error(function (response) {
-                    showAlert.error(response.message);
-                }).always(function () {
-                    this.isSubmitting = false;
+                }).error(this.handleError).always(function () {
+                    self.isSubmitting = false;
                 });
                 this.getHistory();
             } else {
                 this.$http.post('/admin/teams/', this.squad, function (response) {
                     showAlert.success(response.message);
-                }).error(function (response) {
-                    showAlert.error(response.message);
-                }).always(function () {
-                    this.isSubmitting = false;
+                    var newTeamId = response.data.id;
+                    window.location.href = '/admin/teams/edit/' + newTeamId;
+                }).error(this.handleError).always(function () {
+                    self.isSubmitting = false;
                 });
             }
+        },
+
+        /**
+         * Handle errors
+         * @param response
+         */
+        handleError: function (response) {
+            showAlert.error(response.message);
         }
     }
 });

@@ -6477,11 +6477,18 @@ a.text-restore {
     display: block;
     margin: 10px auto; }
   .squad-member .squad-member-info {
-    height: 80px;
+    height: 150px;
     padding: 10px; }
     .squad-member .squad-member-info h4 {
       text-align: center;
-      margin-top: 0; }
+      margin-top: 0;
+      margin-bottom: 20px; }
+    .squad-member .squad-member-info .form-group {
+      margin-bottom: 10px; }
+      .squad-member .squad-member-info .form-group .form-control {
+        height: 28px;
+        padding: 2px 7px;
+        font-size: 14px; }
 
 /************************************
  * @group squad-index

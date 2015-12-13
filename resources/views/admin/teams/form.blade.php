@@ -58,6 +58,7 @@
                                                 <small>@{{ user.email }}</small>
                                             </a>
                                         </li>
+                                        <li v-if="foundUsers.length < 1" class="disabled"><a href="#">No users found!</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -78,6 +79,12 @@
                                     <img alt="Avatar" :src="'/uploads/users/' + member.image">
                                     <div class="squad-member-info">
                                         <h4>@{{ member.firstName }} @{{ member.lastName }}</h4>
+                                        <div class="form-group">
+                                            <input title="Status" placeholder="Member status..." type="text" class="form-control" v-model="member.status">
+                                        </div>
+                                        <div class="form-group">
+                                            <input title="Position" placeholder="Member position..." type="text" class="form-control" v-model="member.position">
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -99,7 +106,7 @@
                     </div>
                     <input id="team-id" type="hidden" value="{{ $team->id or null }}">
                     <button id="save-squad" class="btn btn-block btn-action" type="submit" :disabled="isSubmitting">Save squad</button>
-                    <a href="/admin/teams" class="btn btn-block btn-default">Cancel</a>
+                    <a href="/admin/teams" class="btn btn-block btn-primary">Cancel</a>
                     @if($team)
                         <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
                     @endif
