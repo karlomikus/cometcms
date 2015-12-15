@@ -14,7 +14,6 @@ use DB;
  */
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface
 {
-
     use ImageUpload;
 
     /**

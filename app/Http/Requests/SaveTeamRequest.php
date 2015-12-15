@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+
 class SaveTeamRequest extends Request {
 
     /**
@@ -35,4 +37,14 @@ class SaveTeamRequest extends Request {
         return $rules;
     }
 
+    protected function formatErrors(Validator $validator)
+    {
+        $errors = $validator->errors()->all();
+
+        $response = [
+            'data' => null,
+            'message' => $errors
+        ];
+        return $response;
+    }
 }

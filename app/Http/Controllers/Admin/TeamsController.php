@@ -52,11 +52,14 @@ class TeamsController extends AdminController
             'name'        => $request->get('name'),
             'game_id'     => $request->get('gameId'),
             'description' => $request->get('description'),
-            'roster'      => $request->get('roster'),
+            'roster'      => $request->get('roster')
         ];
 
         try {
             $team = $this->teams->insert($data);
+            if ($request->hasFile('image')) {
+                $this->teams->insertImage($team->id, $request->file('image'));
+            }
             $this->setMessage('Squad saved successfully!');
 
             return $this->respondWithItem($team, new TeamTransformer());

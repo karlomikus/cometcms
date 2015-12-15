@@ -13,30 +13,31 @@ Vue.filter('moment', function (value, format) {
 });
 
 /**
- * TODO: Handle validation errors, selected gameID, member search dropdown status message
+ * TODO: Member search dropdown status message, image upload
  */
 var vm = new Vue({
     el: '#squad-form',
 
     data: {
-        teamID: null,
-        games: [],
-        history: [],
         squad: {
+            id: null,
             name: null,
             description: null,
             gameId: null,
+            image: null,
             roster: []
         },
+        games: [],
+        history: [],
         foundUsers: [],
         searchTerm: null,
-        isSearching: false,
         isSubmitting: false
     },
 
     ready: function () {
         this.initMembersSearch();
         this.initFormData();
+        this.getGames();
         this.getHistory();
     },
 
@@ -55,10 +56,9 @@ var vm = new Vue({
          * Setup form data
          */
         initFormData: function () {
-            this.teamID = $('#team-id').val();
-
-            if (this.teamID) {
-                this.$http.get('/admin/api/teams/' + this.teamID, function (response) {
+            var squadID = parseInt($('#team-id').val());
+            if (squadID) {
+                this.$http.get('/admin/api/teams/' + squadID, function (response) {
                     response.data.roster.data = response.data.roster.data.map(function (obj) {
                         if (obj.image == null) {
                             obj.image = 'noavatar.jpg';
@@ -70,17 +70,6 @@ var vm = new Vue({
                     this.squad.roster = response.data.roster.data;
                 }).error(this.handleError);
             }
-
-            this.$http.get('/admin/api/games/', function (response) {
-                this.games = response.data;
-                var self = this;
-                $('#game').select2({
-                    placeholder: 'Select a game...',
-                    data: this.games
-                }).on('change', function () {
-                    self.squad.gameId = parseInt($(this).val());
-                });
-            }).error(this.handleError);
         },
 
         /**
@@ -123,8 +112,6 @@ var vm = new Vue({
          */
         getUsers: function () {
             if (this.searchTerm.length < 3) return;
-            var self = this;
-            this.isSearching = true;
             this.$http.get('/admin/api/users', {q: this.searchTerm}, function (response) {
                 this.foundUsers = response.data.map(function (obj) {
                     if (obj.image == null) {
@@ -132,7 +119,6 @@ var vm = new Vue({
                     }
                     return obj;
                 });
-                self.isSearching = false;
             });
         },
 
@@ -140,8 +126,8 @@ var vm = new Vue({
          * Fetch squad history
          */
         getHistory: function () {
-            if (this.teamID) {
-                this.$http.get('/admin/api/teams/history/' + this.teamID, function (response) {
+            if (this.squad.id) {
+                this.$http.get('/admin/api/teams/history/' + this.squad.id, function (response) {
                     this.history = _.groupBy(response.data, function (historyItem) {
                         return historyItem.replacedOn;
                     });
@@ -150,13 +136,36 @@ var vm = new Vue({
         },
 
         /**
+         * Fetch games for games dropdown
+         */
+        getGames: function () {
+            this.$http.get('/admin/api/games/', function (response) {
+                this.games = response.data;
+                var self = this;
+                var $game = $('#game');
+                $game.select2({
+                    placeholder: 'Select a game...',
+                    data: this.games,
+                    templateResult: formatGame
+                }).on('change', function () {
+                    self.squad.gameId = parseInt($(this).val());
+                });
+
+                if (this.squad.gameId) {
+                    $game.select2('val', this.squad.gameId);
+                }
+            }).error(this.handleError);
+        },
+
+        /**
          * Submit form
          */
         onSubmit: function () {
-            this.isSubmitting = true;
+            if(!$('#squad-form').valid()) return;
             var self = this;
-            if (this.teamID) {
-                this.$http.put('/admin/teams/' + this.teamID, this.squad, function (response) {
+            self.isSubmitting = true;
+            if (this.squad.id) {
+                this.$http.put('/admin/teams/' + this.squad.id, this.squad, function (response) {
                     showAlert.success(response.message);
                 }).error(this.handleError).always(function () {
                     self.isSubmitting = false;
@@ -178,7 +187,17 @@ var vm = new Vue({
          * @param response
          */
         handleError: function (response) {
-            showAlert.error(response.message);
+            var message = '';
+            if (_.isArray(response.message)) {
+                _.each(response.message, function (msg) {
+                    message += msg + '<br>';
+                });
+            }
+            else {
+                message = response.message;
+            }
+
+            showAlert.error(message);
         }
     }
 });

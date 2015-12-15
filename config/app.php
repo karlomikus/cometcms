@@ -205,6 +205,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Theme'     => Karlomikus\Theme\Facade\Theme::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
 	],
 
 ];

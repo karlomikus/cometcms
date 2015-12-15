@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group fg-connector form-group-inline">
+                            <div class="form-group form-group-inline">
                                 <label for="game" class="control-label">Primary game</label>
                                 <select class="form-control" id="game" name="game"></select>
                             </div>
@@ -39,7 +39,7 @@
                         <div class="col-md-12">
                             <div class="form-group form-group-inline">
                                 <label for="image" class="control-label">Image</label>
-                                <input class="form-control" type="file" name="image" id="image">
+                                <input class="form-control" type="file" name="image" id="image" v-model="squad.image">
                             </div>
                         </div>
                     </div>
