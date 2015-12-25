@@ -12,18 +12,18 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 /**
  * Comet\User
  *
- * @property integer $id 
- * @property string $name 
- * @property string $nickname 
- * @property string $email 
- * @property string $password 
- * @property string $image 
- * @property string $remember_token 
- * @property \Carbon\Carbon $deleted_at 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property-read \Comet\UsersProfile $profile 
- * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.role[] $roles 
+ * @property integer $id
+ * @property string $name
+ * @property string $nickname
+ * @property string $email
+ * @property string $password
+ * @property string $image
+ * @property string $remember_token
+ * @property \Carbon\Carbon $deleted_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Comet\UsersProfile $profile
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.role[] $roles
  * @method static \Illuminate\Database\Query\Builder|\Comet\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\User whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\User whereNickname($value)
@@ -34,6 +34,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Query\Builder|\Comet\User whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\User whereUpdatedAt($value)
+ * @property string $username
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 

@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Comet\UsersProfile
  *
- * @property integer $id 
- * @property integer $user_id 
- * @property string $first_name 
- * @property string $last_name 
- * @property string $image 
- * @property string $bio 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property-read \Comet\User $user 
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $image
+ * @property string $bio
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Comet\User $user
  * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereFirstName($value)

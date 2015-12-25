@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Comet\MatchRounds
  *
- * @property integer $id 
- * @property integer $match_id 
- * @property integer $map_id 
- * @property string $notes 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property \Carbon\Carbon $deleted_at 
- * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\RoundScores[] $scores 
- * @property-read \Comet\Map $map 
+ * @property integer $id
+ * @property integer $match_id
+ * @property integer $map_id
+ * @property string $notes
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\RoundScores[] $scores
+ * @property-read \Comet\Map $map
  * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereMatchId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereMapId($value)

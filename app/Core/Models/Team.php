@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Comet\Team
  *
- * @property integer $id 
- * @property string $name 
- * @property string $description 
- * @property string $image 
- * @property integer $game_id 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property \Carbon\Carbon $deleted_at 
- * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\User[] $roster 
+ * @property integer $id
+ * @property string $name
+ * @property string $description
+ * @property string $image
+ * @property integer $game_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\User[] $roster
  * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereDescription($value)
@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereDeletedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\Core\Models\Match[] $matches
  */
 class Team extends Model {
 

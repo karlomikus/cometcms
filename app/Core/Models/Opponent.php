@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Comet\Opponent
  *
- * @property integer $id 
- * @property string $name 
- * @property string $description 
- * @property string $image 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property \Carbon\Carbon $deleted_at 
+ * @property integer $id
+ * @property string $name
+ * @property string $description
+ * @property string $image
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
  * @method static \Illuminate\Database\Query\Builder|\Comet\Opponent whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Opponent whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Opponent whereDescription($value)

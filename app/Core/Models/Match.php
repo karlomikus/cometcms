@@ -7,23 +7,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Comet\Match
  *
- * @property integer $id 
- * @property integer $team_id 
- * @property integer $opponent_id 
- * @property integer $game_id 
- * @property string $matchlink 
- * @property string $opponent_participants 
- * @property string $standins 
- * @property \Carbon\Carbon $date 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property \Carbon\Carbon $deleted_at 
- * @property-read \Comet\Opponent $opponent 
- * @property-read \Comet\Team $team 
- * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\MatchRounds[] $rounds 
- * @property-read mixed $participants 
- * @property-read \Comet\Game $game 
- * @property-read mixed $outcome 
+ * @property integer $id
+ * @property integer $team_id
+ * @property integer $opponent_id
+ * @property integer $game_id
+ * @property string $matchlink
+ * @property string $opponent_participants
+ * @property string $standins
+ * @property \Carbon\Carbon $date
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
+ * @property-read \Comet\Opponent $opponent
+ * @property-read \Comet\Team $team
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\MatchRounds[] $rounds
+ * @property-read mixed $participants
+ * @property-read \Comet\Game $game
+ * @property-read mixed $outcome
  * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereTeamId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereOpponentId($value)

@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Comet\Map
  *
- * @property integer $id 
- * @property string $name 
- * @property string $image 
- * @property integer $game_id 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property \Carbon\Carbon $deleted_at 
- * @property-read \Comet\Game $game 
+ * @property integer $id
+ * @property string $name
+ * @property string $image
+ * @property integer $game_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
+ * @property-read \Comet\Game $game
  * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereImage($value)
