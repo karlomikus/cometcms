@@ -1,10 +1,10 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Libraries\GridView\GridViewInterface;
-use App\Repositories\Contracts\MapsRepositoryInterface;
-use App\Map;
-use App\Libraries\ImageUploadTrait as ImageUpload;
+use Comet\Libraries\GridView\GridViewInterface;
+use Comet\Repositories\Contracts\MapsRepositoryInterface;
+use Comet\Map;
+use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use League\Flysystem\Exception;
 
 /**
@@ -12,7 +12,7 @@ use League\Flysystem\Exception;
  *
  * Implements grid view and uses image uploading
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 class MapsRepository extends AbstractRepository implements MapsRepositoryInterface, GridViewInterface {
 

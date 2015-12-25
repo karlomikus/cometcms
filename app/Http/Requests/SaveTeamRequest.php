@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Requests;
+namespace Comet\Http\Requests;
 
 class SaveTeamRequest extends Request {
 

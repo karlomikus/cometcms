@@ -1,9 +1,9 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\UsersProfile
+ * Comet\UsersProfile
  *
  * @property integer $id 
  * @property integer $user_id 
@@ -13,15 +13,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $bio 
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
- * @property-read \App\User $user 
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereUserId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereFirstName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereLastName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereImage($value)
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereBio($value)
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\UsersProfile whereUpdatedAt($value)
+ * @property-read \Comet\User $user 
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereFirstName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereLastName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereImage($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereBio($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereUpdatedAt($value)
  */
 class UsersProfile extends Model {
 
@@ -34,7 +34,7 @@ class UsersProfile extends Model {
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('Comet\User');
     }
 
 }

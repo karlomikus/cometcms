@@ -1,16 +1,16 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Repositories\Contracts\TeamsRepositoryInterface;
-use App\Team;
-use App\Libraries\ImageUploadTrait as ImageUpload;
+use Comet\Repositories\Contracts\TeamsRepositoryInterface;
+use Comet\Team;
+use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use Carbon\Carbon;
 use DB;
 
 /**
  * Teams repository
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface
 {

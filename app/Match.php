@@ -1,10 +1,10 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Match
+ * Comet\Match
  *
  * @property integer $id 
  * @property integer $team_id 
@@ -17,23 +17,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
  * @property \Carbon\Carbon $deleted_at 
- * @property-read \App\Opponent $opponent 
- * @property-read \App\Team $team 
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\MatchRounds[] $rounds 
+ * @property-read \Comet\Opponent $opponent 
+ * @property-read \Comet\Team $team 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\MatchRounds[] $rounds 
  * @property-read mixed $participants 
- * @property-read \App\Game $game 
+ * @property-read \Comet\Game $game 
  * @property-read mixed $outcome 
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereTeamId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereOpponentId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereGameId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereMatchlink($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereOpponentParticipants($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereStandins($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereDate($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Match whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereTeamId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereOpponentId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereGameId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereMatchlink($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereOpponentParticipants($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereStandins($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereDate($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereDeletedAt($value)
  */
 class Match extends Model {
 
@@ -45,17 +45,17 @@ class Match extends Model {
 
     public function opponent()
     {
-        return $this->belongsTo('App\Opponent')->withTrashed();
+        return $this->belongsTo('Comet\Opponent')->withTrashed();
     }
 
     public function team()
     {
-        return $this->belongsTo('App\Team')->withTrashed();
+        return $this->belongsTo('Comet\Team')->withTrashed();
     }
 
     public function rounds()
     {
-        return $this->hasMany('App\MatchRounds')->withTrashed();
+        return $this->hasMany('Comet\MatchRounds')->withTrashed();
     }
 
     public function getParticipantsAttribute()
@@ -73,7 +73,7 @@ class Match extends Model {
 
     public function game()
     {
-        return $this->belongsTo('App\Game');
+        return $this->belongsTo('Comet\Game');
     }
 
     // public function getScoreAttribute()

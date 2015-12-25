@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Comet\Http\Controllers;
 
-use App\Http\Requests;
-use App\Repositories\Contracts\MatchesRepositoryInterface;
-use App\Http\Controllers\Local\LocalController;
+use Comet\Http\Requests;
+use Comet\Repositories\Contracts\MatchesRepositoryInterface;
+use Comet\Http\Controllers\Local\LocalController;
 
 class MatchesController extends LocalController {
 

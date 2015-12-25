@@ -1,5 +1,5 @@
 <?php
-namespace App\Services;
+namespace Comet\Services;
 
 class AlertsService {
 

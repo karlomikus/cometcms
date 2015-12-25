@@ -1,16 +1,16 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Post;
-use App\Libraries\GridView\GridViewInterface;
-use App\Repositories\Contracts\PostsRepositoryInterface;
+use Comet\Post;
+use Comet\Libraries\GridView\GridViewInterface;
+use Comet\Repositories\Contracts\PostsRepositoryInterface;
 
 /**
  * Games repository
  *
  * Implements grid view and uses image uploading trait
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 class PostsRepository extends AbstractRepository implements PostsRepositoryInterface, GridViewInterface {
 

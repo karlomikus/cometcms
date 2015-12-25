@@ -1,4 +1,4 @@
-<?php namespace App\Http\Requests;
+<?php namespace Comet\Http\Requests;
 
 class SavePostRequest extends Request {
 

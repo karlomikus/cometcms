@@ -1,13 +1,13 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Repositories\Contracts\AbstractRepositoryInterface as BaseRepositoryActions;
-use App\Repositories\Contracts\TrashableInterface as TrashActions;
+use Comet\Repositories\Contracts\AbstractRepositoryInterface as BaseRepositoryActions;
+use Comet\Repositories\Contracts\TrashableInterface as TrashActions;
 
 /**
  * Base repository class
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 abstract class AbstractRepository implements BaseRepositoryActions, TrashActions {
 

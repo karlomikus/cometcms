@@ -1,10 +1,10 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\MatchRounds
+ * Comet\MatchRounds
  *
  * @property integer $id 
  * @property integer $match_id 
@@ -13,15 +13,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
  * @property \Carbon\Carbon $deleted_at 
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\RoundScores[] $scores 
- * @property-read \App\Map $map 
- * @method static \Illuminate\Database\Query\Builder|\App\MatchRounds whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\MatchRounds whereMatchId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\MatchRounds whereMapId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\MatchRounds whereNotes($value)
- * @method static \Illuminate\Database\Query\Builder|\App\MatchRounds whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\MatchRounds whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\MatchRounds whereDeletedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\RoundScores[] $scores 
+ * @property-read \Comet\Map $map 
+ * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereMatchId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereMapId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereNotes($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereDeletedAt($value)
  */
 class MatchRounds extends Model {
 
@@ -35,12 +35,12 @@ class MatchRounds extends Model {
 
     public function scores()
     {
-        return $this->hasMany('App\RoundScores', 'round_id');
+        return $this->hasMany('Comet\RoundScores', 'round_id');
     }
 
     public function map()
     {
-        return $this->belongsTo('App\Map');
+        return $this->belongsTo('Comet\Map');
     }
 
 }

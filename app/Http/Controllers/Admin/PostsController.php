@@ -1,11 +1,11 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Comet\Http\Controllers\Admin;
 
 use Carbon\Carbon;
-use App\Http\Requests\SavePostRequest;
-use App\Libraries\GridView\GridView;
-use App\Http\Controllers\Admin\TraitTrashable as Trash;
-use App\Repositories\Contracts\PostsRepositoryInterface as Posts;
-use App\Repositories\Contracts\PostCategoriesRepositoryInterface as Categories;
+use Comet\Http\Requests\SavePostRequest;
+use Comet\Libraries\GridView\GridView;
+use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
+use Comet\Repositories\Contracts\PostsRepositoryInterface as Posts;
+use Comet\Repositories\Contracts\PostCategoriesRepositoryInterface as Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

@@ -1,4 +1,4 @@
-<?php namespace App\Exceptions;
+<?php namespace Comet\Exceptions;
 
 use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;

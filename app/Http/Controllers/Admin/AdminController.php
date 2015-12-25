@@ -1,12 +1,12 @@
 <?php
-namespace App\Http\Controllers\Admin;
+namespace Comet\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Services\AlertsService as Alerts;
+use Comet\Http\Controllers\Controller;
+use Comet\Services\AlertsService as Alerts;
 
 /**
  * Base admin controller
- * @package App\Http\Controllers\Admin
+ * @package Comet\Http\Controllers\Admin
  */
 class AdminController extends Controller {
 
@@ -16,7 +16,7 @@ class AdminController extends Controller {
     protected $alerts;
 
     /**
-     * @var \App\User|null Currently logged in user
+     * @var \Comet\User|null Currently logged in user
      */
     protected $currentUser;
 

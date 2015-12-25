@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Comet\Http\Controllers\Admin;
 
-use App\Libraries\GridView\GridView;
+use Comet\Libraries\GridView\GridView;
 use Illuminate\Http\Request;
 
 /**

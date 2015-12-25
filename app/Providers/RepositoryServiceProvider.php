@@ -1,5 +1,5 @@
 <?php
-namespace App\Providers;
+namespace Comet\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -12,14 +12,14 @@ class RepositoryServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('App\Repositories\Contracts\MatchesRepositoryInterface', 'App\Repositories\MatchesRepository');
-        $this->app->bind('App\Repositories\Contracts\TeamsRepositoryInterface', 'App\Repositories\TeamsRepository');
-        $this->app->bind('App\Repositories\Contracts\OpponentsRepositoryInterface', 'App\Repositories\OpponentsRepository');
-        $this->app->bind('App\Repositories\Contracts\GamesRepositoryInterface', 'App\Repositories\GamesRepository');
-        $this->app->bind('App\Repositories\Contracts\UsersRepositoryInterface', 'App\Repositories\UsersRepository');
-        $this->app->bind('App\Repositories\Contracts\RolesRepositoryInterface', 'App\Repositories\RolesRepository');
-        $this->app->bind('App\Repositories\Contracts\MapsRepositoryInterface', 'App\Repositories\MapsRepository');
-        $this->app->bind('App\Repositories\Contracts\PostsRepositoryInterface', 'App\Repositories\PostsRepository');
-        $this->app->bind('App\Repositories\Contracts\PostCategoriesRepositoryInterface', 'App\Repositories\PostCategoriesRepository');
+        $this->app->bind('Comet\Repositories\Contracts\MatchesRepositoryInterface', 'Comet\Repositories\MatchesRepository');
+        $this->app->bind('Comet\Repositories\Contracts\TeamsRepositoryInterface', 'Comet\Repositories\TeamsRepository');
+        $this->app->bind('Comet\Repositories\Contracts\OpponentsRepositoryInterface', 'Comet\Repositories\OpponentsRepository');
+        $this->app->bind('Comet\Repositories\Contracts\GamesRepositoryInterface', 'Comet\Repositories\GamesRepository');
+        $this->app->bind('Comet\Repositories\Contracts\UsersRepositoryInterface', 'Comet\Repositories\UsersRepository');
+        $this->app->bind('Comet\Repositories\Contracts\RolesRepositoryInterface', 'Comet\Repositories\RolesRepository');
+        $this->app->bind('Comet\Repositories\Contracts\MapsRepositoryInterface', 'Comet\Repositories\MapsRepository');
+        $this->app->bind('Comet\Repositories\Contracts\PostsRepositoryInterface', 'Comet\Repositories\PostsRepository');
+        $this->app->bind('Comet\Repositories\Contracts\PostCategoriesRepositoryInterface', 'Comet\Repositories\PostCategoriesRepository');
     }
 }

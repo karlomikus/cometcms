@@ -1,10 +1,10 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Comet\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Libraries\GridView\GridView;
-use App\Http\Requests\SaveOpponentRequest;
-use App\Http\Controllers\Admin\TraitTrashable as Trash;
-use App\Repositories\Contracts\OpponentsRepositoryInterface as Opponents;
+use Comet\Libraries\GridView\GridView;
+use Comet\Http\Requests\SaveOpponentRequest;
+use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
+use Comet\Repositories\Contracts\OpponentsRepositoryInterface as Opponents;
 
 /**
  * Opponents backend module. Uses trashable trait.

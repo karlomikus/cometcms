@@ -1,10 +1,10 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Map
+ * Comet\Map
  *
  * @property integer $id 
  * @property string $name 
@@ -13,14 +13,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
  * @property \Carbon\Carbon $deleted_at 
- * @property-read \App\Game $game 
- * @method static \Illuminate\Database\Query\Builder|\App\Map whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Map whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Map whereImage($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Map whereGameId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Map whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Map whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Map whereDeletedAt($value)
+ * @property-read \Comet\Game $game 
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereImage($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereGameId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereDeletedAt($value)
  */
 class Map extends Model {
 
@@ -34,7 +34,7 @@ class Map extends Model {
 
     public function game()
     {
-        return $this->belongsTo('App\Game');
+        return $this->belongsTo('Comet\Game');
     }
 
 }

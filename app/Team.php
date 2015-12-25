@@ -1,10 +1,10 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Team
+ * Comet\Team
  *
  * @property integer $id 
  * @property string $name 
@@ -14,15 +14,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
  * @property \Carbon\Carbon $deleted_at 
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $roster 
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereDescription($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereImage($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereGameId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Team whereDeletedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\User[] $roster 
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereDescription($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereImage($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereGameId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereDeletedAt($value)
  */
 class Team extends Model {
 

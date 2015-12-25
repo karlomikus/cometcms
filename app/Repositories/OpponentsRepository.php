@@ -1,16 +1,16 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Opponent;
-use App\Repositories\Contracts\OpponentsRepositoryInterface;
-use App\Libraries\GridView\GridViewInterface;
+use Comet\Opponent;
+use Comet\Repositories\Contracts\OpponentsRepositoryInterface;
+use Comet\Libraries\GridView\GridViewInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use App\Libraries\ImageUploadTrait as ImageUpload;
+use Comet\Libraries\ImageUploadTrait as ImageUpload;
 
 /**
  * Opponents Repository
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 class OpponentsRepository extends AbstractRepository implements OpponentsRepositoryInterface, GridViewInterface {
 

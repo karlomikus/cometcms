@@ -1,5 +1,5 @@
 <?php
-namespace App\Libraries\GridView;
+namespace Comet\Libraries\GridView;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -8,12 +8,12 @@ use PhpSpec\Exception\Exception;
 /**
  * Grid View
  *
- * @package App\Libraries\GridView
+ * @package Comet\Libraries\GridView
  */
 class GridView {
 
     /**
-     * @var \App\Libraries\GridView\GridViewInterface
+     * @var \Comet\Libraries\GridView\GridViewInterface
      */
     protected $dataSource;
     /**

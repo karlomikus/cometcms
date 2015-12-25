@@ -1,14 +1,14 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Repositories\Contracts\RolesRepositoryInterface;
-use App\Libraries\GridView\GridViewInterface;
-use App\Role, App\Permission;
+use Comet\Repositories\Contracts\RolesRepositoryInterface;
+use Comet\Libraries\GridView\GridViewInterface;
+use Comet\Role, Comet\Permission;
 
 /**
  * Roles repository
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 class RolesRepository extends AbstractRepository implements RolesRepositoryInterface, GridViewInterface {
 

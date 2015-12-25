@@ -1,11 +1,11 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Comet\Http\Controllers\Admin;
 
-use App\Repositories\Contracts\TeamsRepositoryInterface as Teams;
-use App\Repositories\Contracts\GamesRepositoryInterface as Games;
-use App\Http\Requests\SaveTeamRequest;
-use App\Transformers\TeamHistoryTransformer;
-use App\Transformers\TeamMembersTransformer;
-use App\Transformers\TeamTransformer;
+use Comet\Repositories\Contracts\TeamsRepositoryInterface as Teams;
+use Comet\Repositories\Contracts\GamesRepositoryInterface as Games;
+use Comet\Http\Requests\SaveTeamRequest;
+use Comet\Transformers\TeamHistoryTransformer;
+use Comet\Transformers\TeamMembersTransformer;
+use Comet\Transformers\TeamTransformer;
 
 class TeamsController extends AdminController
 {

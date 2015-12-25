@@ -1,5 +1,5 @@
 <?php
-namespace App\Libraries\GridView;
+namespace Comet\Libraries\GridView;
 
 use Illuminate\Support\ServiceProvider;
 

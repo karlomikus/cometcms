@@ -1,8 +1,8 @@
-<?php namespace App\Http\Controllers\Auth;
+<?php namespace Comet\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Comet\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use App\User;
+use Comet\User;
 use Validator;
 
 class AuthController extends Controller {

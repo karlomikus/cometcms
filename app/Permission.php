@@ -1,9 +1,9 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Zizaco\Entrust\EntrustPermission;
 
 /**
- * App\Permission
+ * Comet\Permission
  *
  * @property integer $id 
  * @property string $name 
@@ -12,12 +12,12 @@ use Zizaco\Entrust\EntrustPermission;
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.role[] $roles 
- * @method static \Illuminate\Database\Query\Builder|\App\Permission whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Permission whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Permission whereDisplayName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Permission whereDescription($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Permission whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Permission whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereDisplayName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereDescription($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereUpdatedAt($value)
  */
 class Permission extends EntrustPermission {
 

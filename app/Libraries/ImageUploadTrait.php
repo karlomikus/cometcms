@@ -1,5 +1,5 @@
 <?php
-namespace App\Libraries;
+namespace Comet\Libraries;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

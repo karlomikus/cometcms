@@ -1,6 +1,6 @@
-<?php namespace App\Http\Requests;
+<?php namespace Comet\Http\Requests;
 
-use App\Http\Requests\Request;
+use Comet\Http\Requests\Request;
 
 class SaveOpponentRequest extends Request {
 

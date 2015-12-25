@@ -140,18 +140,19 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
-        'App\Providers\RepositoryServiceProvider',
-        'Barryvdh\Debugbar\ServiceProvider',
-		'Zizaco\Entrust\EntrustServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
-		'App\Libraries\GridView\GridViewServiceProvider',
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+		Illuminate\Html\HtmlServiceProvider::class,
 		Karlomikus\Theme\ThemeServiceProvider::class,
 		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+		Comet\Providers\AppServiceProvider::class,
+		Comet\Providers\BusServiceProvider::class,
+		Comet\Providers\ConfigServiceProvider::class,
+		Comet\Providers\EventServiceProvider::class,
+		Comet\Providers\RouteServiceProvider::class,
+        Comet\Providers\RepositoryServiceProvider::class,
+		Comet\Libraries\GridView\GridViewServiceProvider::class,
 	],
 
 	/*

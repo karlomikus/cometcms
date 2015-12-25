@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
 class EventRepository extends AbstractRepository
 {

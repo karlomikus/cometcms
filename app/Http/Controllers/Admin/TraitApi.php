@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Admin;
+namespace Comet\Http\Controllers\Admin;
 
 use League\Fractal\Manager;
 use League\Fractal\Resource\Collection;

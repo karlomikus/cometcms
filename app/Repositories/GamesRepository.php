@@ -1,19 +1,19 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Game, App\Map;
-use App\Libraries\GridView\GridViewInterface;
-use App\Repositories\Contracts\GamesRepositoryInterface;
-use App\Repositories\Contracts\MapsRepositoryInterface;
+use Comet\Game, Comet\Map;
+use Comet\Libraries\GridView\GridViewInterface;
+use Comet\Repositories\Contracts\GamesRepositoryInterface;
+use Comet\Repositories\Contracts\MapsRepositoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use App\Libraries\ImageUploadTrait as ImageUpload;
+use Comet\Libraries\ImageUploadTrait as ImageUpload;
 
 /**
  * Games repository
  *
  * Implements grid view and uses image uploading trait
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 class GamesRepository extends AbstractRepository implements GamesRepositoryInterface, GridViewInterface {
 

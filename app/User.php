@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
- * App\User
+ * Comet\User
  *
  * @property integer $id 
  * @property string $name 
@@ -21,18 +21,18 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property \Carbon\Carbon $deleted_at 
  * @property \Carbon\Carbon $created_at 
  * @property \Carbon\Carbon $updated_at 
- * @property-read \App\UsersProfile $profile 
+ * @property-read \Comet\UsersProfile $profile 
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.role[] $roles 
- * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereNickname($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereImage($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereDeletedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereNickname($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereEmail($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereImage($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\User whereUpdatedAt($value)
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -68,7 +68,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function profile()
     {
-        return $this->hasOne('App\UsersProfile');
+        return $this->hasOne('Comet\UsersProfile');
     }
 
 }

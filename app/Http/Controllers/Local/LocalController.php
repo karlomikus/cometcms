@@ -1,18 +1,18 @@
 <?php
-namespace App\Http\Controllers\Local;
+namespace Comet\Http\Controllers\Local;
 
-use App\Http\Controllers\Controller;
+use Comet\Http\Controllers\Controller;
 use Karlomikus\Theme\Theme;
 
 /**
  * Base public controller
  *
- * @package App\Http\Controllers\Public
+ * @package Comet\Http\Controllers\Public
  */
 class LocalController extends Controller {
 
     /**
-     * @var \App\User|null Currently logged in user
+     * @var \Comet\User|null Currently logged in user
      */
     protected $currentUser;
 

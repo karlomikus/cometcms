@@ -1,10 +1,10 @@
-<?php namespace App;
+<?php namespace Comet;
 
 use Zizaco\Entrust\EntrustRole;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Role
+ * Comet\Role
  *
  * @property integer $id 
  * @property string $name 
@@ -14,12 +14,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $updated_at 
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('auth.model[] $users 
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.permission[] $perms 
- * @method static \Illuminate\Database\Query\Builder|\App\Role whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Role whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Role whereDisplayName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Role whereDescription($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Role whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Role whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Role whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Role whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Role whereDisplayName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Role whereDescription($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Role whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Comet\Role whereUpdatedAt($value)
  */
 class Role extends EntrustRole {
 

@@ -1,18 +1,18 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php namespace Comet\Http\Controllers\Admin;
 
-use App\Libraries\GridView\GridView;
-use App\Repositories\Contracts\GamesRepositoryInterface as Games;
-use App\Repositories\Contracts\MapsRepositoryInterface as Maps;
-use App\Transformers\GameTransformer;
+use Comet\Libraries\GridView\GridView;
+use Comet\Repositories\Contracts\GamesRepositoryInterface as Games;
+use Comet\Repositories\Contracts\MapsRepositoryInterface as Maps;
+use Comet\Transformers\GameTransformer;
 use Illuminate\Http\Request;
-use App\Http\Requests\SaveGameRequest;
+use Comet\Http\Requests\SaveGameRequest;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Admin\TraitTrashable as Trash;
+use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
 
 /**
  * Games Controller
  *
- * @package App\Http\Controllers\Admin
+ * @package Comet\Http\Controllers\Admin
  */
 class GamesController extends AdminController {
 

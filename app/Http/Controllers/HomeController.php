@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Comet\Http\Controllers;
 
-use App\Http\Controllers\Local\LocalController;
+use Comet\Http\Controllers\Local\LocalController;
 
 class HomeController extends LocalController {
 

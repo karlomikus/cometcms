@@ -1,15 +1,15 @@
 <?php
-namespace App\Repositories;
+namespace Comet\Repositories;
 
-use App\Match, App\Repositories\Contracts\MatchesRepositoryInterface, App\Libraries\GridView\GridViewInterface;
-use App\MatchRounds;
-use App\RoundScores;
+use Comet\Match, Comet\Repositories\Contracts\MatchesRepositoryInterface, Comet\Libraries\GridView\GridViewInterface;
+use Comet\MatchRounds;
+use Comet\RoundScores;
 use Carbon\Carbon;
 
 /**
  * Matches repository
  *
- * @package App\Repositories
+ * @package Comet\Repositories
  */
 class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface, GridViewInterface {
 

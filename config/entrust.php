@@ -19,7 +19,7 @@ return array(
     | the role if it is in a different namespace.
     |
     */
-    'role' => 'App\Role',
+    'role' => 'Comet\Role',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return array(
     | Update the permission if it is in a different namespace.
     |
     */
-    'permission' => 'App\Permission',
+    'permission' => 'Comet\Permission',
 
     /*
     |--------------------------------------------------------------------------

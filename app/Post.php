@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Comet;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,11 +26,11 @@ class Post extends Model {
 
     public function author()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('Comet\User', 'user_id');
     }
 
     public function category()
     {
-        return $this->belongsTo('App\PostCategory', 'post_category_id', 'id');
+        return $this->belongsTo('Comet\PostCategory', 'post_category_id', 'id');
     }
 }
