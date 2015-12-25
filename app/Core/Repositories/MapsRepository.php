@@ -1,11 +1,11 @@
 <?php
 namespace Comet\Core\Repositories;
 
-use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Core\Repositories\Contracts\MapsRepositoryInterface;
 use Comet\Core\Models\Map;
-use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use League\Flysystem\Exception;
+use Comet\Libraries\GridView\GridViewInterface;
+use Comet\Libraries\ImageUploadTrait as ImageUpload;
+use Comet\Core\Repositories\Contracts\MapsRepositoryInterface;
 
 /**
  * Maps repository
@@ -14,8 +14,8 @@ use League\Flysystem\Exception;
  *
  * @package Comet\Repositories
  */
-class MapsRepository extends EloquentRepository implements MapsRepositoryInterface, GridViewInterface {
-
+class MapsRepository extends EloquentRepository implements MapsRepositoryInterface, GridViewInterface
+{
     use ImageUpload;
 
     /**

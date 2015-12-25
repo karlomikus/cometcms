@@ -9,8 +9,8 @@ use Comet\Core\Repositories\Contracts\PostCategoriesRepositoryInterface;
  *
  * @package Comet\Repositories
  */
-class PostCategoriesRepository extends EloquentRepository implements PostCategoriesRepositoryInterface {
-
+class PostCategoriesRepository extends EloquentRepository implements PostCategoriesRepositoryInterface 
+{
 	/**
 	 * @param PostCategory $postCategory
 	 */

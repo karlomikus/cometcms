@@ -12,8 +12,8 @@ use Comet\Core\Repositories\Contracts\PostsRepositoryInterface;
  *
  * @package Comet\Repositories
  */
-class PostsRepository extends EloquentRepository implements PostsRepositoryInterface, GridViewInterface {
-
+class PostsRepository extends EloquentRepository implements PostsRepositoryInterface, GridViewInterface
+{
     /**
      * @param Post $post
      */
@@ -51,5 +51,4 @@ class PostsRepository extends EloquentRepository implements PostsRepositoryInter
 
         return $result;
     }
-
 }

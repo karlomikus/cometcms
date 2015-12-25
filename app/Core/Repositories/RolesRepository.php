@@ -1,17 +1,18 @@
 <?php
 namespace Comet\Core\Repositories;
 
-use Comet\Core\Repositories\Contracts\RolesRepositoryInterface;
+use Comet\Core\Models\Role;
+use Comet\Core\Models\Permission;
 use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Core\Models\Role, Comet\Core\Models\Permission;
+use Comet\Core\Repositories\Contracts\RolesRepositoryInterface;
 
 /**
  * Roles repository
  *
  * @package Comet\Repositories
  */
-class RolesRepository extends EloquentRepository implements RolesRepositoryInterface, GridViewInterface {
-
+class RolesRepository extends EloquentRepository implements RolesRepositoryInterface, GridViewInterface
+{
     /**
      * Permission model instance
      *
@@ -86,5 +87,4 @@ class RolesRepository extends EloquentRepository implements RolesRepositoryInter
 
         return $result;
     }
-
 }

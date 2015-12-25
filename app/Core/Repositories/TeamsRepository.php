@@ -1,11 +1,11 @@
 <?php
 namespace Comet\Core\Repositories;
 
-use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface;
+use DB;
+use Carbon\Carbon;
 use Comet\Core\Models\Team;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
-use Carbon\Carbon;
-use DB;
+use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface;
 
 /**
  * Teams repository

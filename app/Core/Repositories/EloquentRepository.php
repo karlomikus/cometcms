@@ -1,8 +1,8 @@
 <?php
 namespace Comet\Core\Repositories;
 
-use Comet\Core\Contracts\RepositoryInterface;
 use Comet\Core\Contracts\TrashableInterface;
+use Comet\Core\Contracts\RepositoryInterface;
 
 /**
  * Base repository class
@@ -201,5 +201,4 @@ abstract class EloquentRepository implements RepositoryInterface, TrashableInter
     {
         return $this->model;
     }
-
 }

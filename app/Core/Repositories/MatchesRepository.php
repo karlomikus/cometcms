@@ -1,20 +1,20 @@
 <?php
 namespace Comet\Core\Repositories;
 
+use Carbon\Carbon;
 use Comet\Core\Models\Match;
-use Comet\Core\Repositories\Contracts\MatchesRepositoryInterface;
-use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Core\Models\MatchRounds;
 use Comet\Core\Models\RoundScores;
-use Carbon\Carbon;
+use Comet\Libraries\GridView\GridViewInterface;
+use Comet\Core\Repositories\Contracts\MatchesRepositoryInterface;
 
 /**
  * Matches repository
  *
  * @package Comet\Repositories
  */
-class MatchesRepository extends EloquentRepository implements MatchesRepositoryInterface, GridViewInterface {
-
+class MatchesRepository extends EloquentRepository implements MatchesRepositoryInterface, GridViewInterface
+{
     /**
      * Rounds (games) model instance
      *
@@ -312,5 +312,4 @@ class MatchesRepository extends EloquentRepository implements MatchesRepositoryI
             ->groupBy('month')
             ->get();
     }
-
 }
