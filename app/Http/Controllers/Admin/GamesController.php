@@ -3,7 +3,7 @@
 use Comet\Libraries\GridView\GridView;
 use Comet\Repositories\Contracts\GamesRepositoryInterface as Games;
 use Comet\Repositories\Contracts\MapsRepositoryInterface as Maps;
-use Comet\Transformers\GameTransformer;
+use Comet\Core\Transformers\GameTransformer;
 use Illuminate\Http\Request;
 use Comet\Http\Requests\SaveGameRequest;
 use Illuminate\Support\Str;

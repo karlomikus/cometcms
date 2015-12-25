@@ -3,9 +3,9 @@
 use Comet\Repositories\Contracts\TeamsRepositoryInterface as Teams;
 use Comet\Repositories\Contracts\GamesRepositoryInterface as Games;
 use Comet\Http\Requests\SaveTeamRequest;
-use Comet\Transformers\TeamHistoryTransformer;
-use Comet\Transformers\TeamMembersTransformer;
-use Comet\Transformers\TeamTransformer;
+use Comet\Core\Transformers\TeamHistoryTransformer;
+use Comet\Core\Transformers\TeamMembersTransformer;
+use Comet\Core\Transformers\TeamTransformer;
 
 class TeamsController extends AdminController
 {
