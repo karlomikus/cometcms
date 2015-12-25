@@ -1,4 +1,5 @@
-<?php namespace Comet;
+<?php
+namespace Comet\Core\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -68,7 +69,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function profile()
     {
-        return $this->hasOne('Comet\UsersProfile');
+        return $this->hasOne(UsersProfile::class);
     }
 
 }

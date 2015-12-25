@@ -1,7 +1,7 @@
 <?php
 namespace Comet\Repositories;
 
-use Comet\Post;
+use Comet\Core\Models\Post;
 use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Repositories\Contracts\PostsRepositoryInterface;
 

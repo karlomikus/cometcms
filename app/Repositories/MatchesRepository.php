@@ -1,9 +1,9 @@
 <?php
 namespace Comet\Repositories;
 
-use Comet\Match, Comet\Repositories\Contracts\MatchesRepositoryInterface, Comet\Libraries\GridView\GridViewInterface;
-use Comet\MatchRounds;
-use Comet\RoundScores;
+use Comet\Core\Models\Match, Comet\Repositories\Contracts\MatchesRepositoryInterface, Comet\Libraries\GridView\GridViewInterface;
+use Comet\Core\Models\MatchRounds;
+use Comet\Core\Models\RoundScores;
 use Carbon\Carbon;
 
 /**

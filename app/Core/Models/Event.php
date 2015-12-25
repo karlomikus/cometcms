@@ -1,6 +1,5 @@
 <?php
-
-namespace Comet;
+namespace Comet\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,11 +12,11 @@ class Event extends Model
 
     public function game()
     {
-        return $this->belongsTo('Comet\Game');
+        return $this->belongsTo(Game::class);
     }
 
     public function country()
     {
-        return $this->belongsTo('Comet\Country');
+        return $this->belongsTo(Country::class);
     }
 }

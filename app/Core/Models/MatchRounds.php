@@ -1,4 +1,5 @@
-<?php namespace Comet;
+<?php
+namespace Comet\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,12 +36,12 @@ class MatchRounds extends Model {
 
     public function scores()
     {
-        return $this->hasMany('Comet\RoundScores', 'round_id');
+        return $this->hasMany(RoundScores::class, 'round_id');
     }
 
     public function map()
     {
-        return $this->belongsTo('Comet\Map');
+        return $this->belongsTo(Map::class);
     }
 
 }

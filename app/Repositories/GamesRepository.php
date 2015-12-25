@@ -1,7 +1,7 @@
 <?php
 namespace Comet\Repositories;
 
-use Comet\Game, Comet\Map;
+use Comet\Core\Models\Game, Comet\Core\Models\Map;
 use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Repositories\Contracts\GamesRepositoryInterface;
 use Comet\Repositories\Contracts\MapsRepositoryInterface;

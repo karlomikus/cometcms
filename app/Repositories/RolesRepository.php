@@ -3,7 +3,7 @@ namespace Comet\Repositories;
 
 use Comet\Repositories\Contracts\RolesRepositoryInterface;
 use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Role, Comet\Permission;
+use Comet\Core\Models\Role, Comet\Core\Models\Permission;
 
 /**
  * Roles repository

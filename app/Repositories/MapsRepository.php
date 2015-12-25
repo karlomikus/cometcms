@@ -3,7 +3,7 @@ namespace Comet\Repositories;
 
 use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Repositories\Contracts\MapsRepositoryInterface;
-use Comet\Map;
+use Comet\Core\Models\Map;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use League\Flysystem\Exception;
 

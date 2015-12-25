@@ -1,4 +1,5 @@
-<?php namespace Comet;
+<?php
+namespace Comet\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,7 +35,7 @@ class UsersProfile extends Model {
 
     public function user()
     {
-        return $this->belongsTo('Comet\User');
+        return $this->belongsTo(User::class);
     }
 
 }

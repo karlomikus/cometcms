@@ -1,4 +1,5 @@
-<?php namespace Comet;
+<?php
+namespace Comet\Core\Models;
 
 use Zizaco\Entrust\EntrustRole;
 use Illuminate\Database\Eloquent\SoftDeletes;

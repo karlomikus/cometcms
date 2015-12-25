@@ -1,4 +1,5 @@
-<?php namespace Comet;
+<?php
+namespace Comet\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,17 +46,17 @@ class Match extends Model {
 
     public function opponent()
     {
-        return $this->belongsTo('Comet\Opponent')->withTrashed();
+        return $this->belongsTo(Opponent::class)->withTrashed();
     }
 
     public function team()
     {
-        return $this->belongsTo('Comet\Team')->withTrashed();
+        return $this->belongsTo(Team::class)->withTrashed();
     }
 
     public function rounds()
     {
-        return $this->hasMany('Comet\MatchRounds')->withTrashed();
+        return $this->hasMany(MatchRounds::class)->withTrashed();
     }
 
     public function getParticipantsAttribute()
@@ -73,7 +74,7 @@ class Match extends Model {
 
     public function game()
     {
-        return $this->belongsTo('Comet\Game');
+        return $this->belongsTo(Game::class);
     }
 
     // public function getScoreAttribute()

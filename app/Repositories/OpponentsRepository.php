@@ -1,7 +1,7 @@
 <?php
 namespace Comet\Repositories;
 
-use Comet\Opponent;
+use Comet\Core\Models\Opponent;
 use Comet\Repositories\Contracts\OpponentsRepositoryInterface;
 use Comet\Libraries\GridView\GridViewInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

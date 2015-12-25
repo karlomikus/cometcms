@@ -2,7 +2,7 @@
 namespace Comet\Repositories;
 
 use Comet\Repositories\Contracts\TeamsRepositoryInterface;
-use Comet\Team;
+use Comet\Core\Models\Team;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use Carbon\Carbon;
 use DB;

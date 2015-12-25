@@ -1,7 +1,7 @@
 <?php
 namespace Comet\Repositories;
 
-use Comet\PostCategory;
+use Comet\Core\Models\PostCategory;
 use Comet\Repositories\Contracts\PostCategoriesRepositoryInterface;
 
 /**

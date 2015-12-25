@@ -1,4 +1,5 @@
-<?php namespace Comet;
+<?php
+namespace Comet\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,7 +35,7 @@ class Map extends Model {
 
     public function game()
     {
-        return $this->belongsTo('Comet\Game');
+        return $this->belongsTo(Game::class);
     }
 
 }
