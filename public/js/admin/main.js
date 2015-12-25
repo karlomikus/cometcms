@@ -5,8 +5,8 @@ function formatGame (game) {
         return game.text;
     }
     var gameIcon = 'noicon.png';
-    if (game.element.dataset.icon) {
-        gameIcon = game.element.dataset.icon;
+    if (game.image) {
+        gameIcon = game.image;
     }
     return $('<span><img src="/uploads/games/' + gameIcon + '" class="img-game" /> ' + game.text + '</span>');
 }

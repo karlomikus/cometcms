@@ -14,7 +14,6 @@ use DB;
  */
 class TeamsRepository extends EloquentRepository implements TeamsRepositoryInterface
 {
-
     use ImageUpload;
 
     /**
