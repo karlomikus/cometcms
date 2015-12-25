@@ -12,14 +12,14 @@ class RepositoryServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('Comet\Repositories\Contracts\MatchesRepositoryInterface', 'Comet\Repositories\MatchesRepository');
-        $this->app->bind('Comet\Repositories\Contracts\TeamsRepositoryInterface', 'Comet\Repositories\TeamsRepository');
-        $this->app->bind('Comet\Repositories\Contracts\OpponentsRepositoryInterface', 'Comet\Repositories\OpponentsRepository');
-        $this->app->bind('Comet\Repositories\Contracts\GamesRepositoryInterface', 'Comet\Repositories\GamesRepository');
-        $this->app->bind('Comet\Repositories\Contracts\UsersRepositoryInterface', 'Comet\Repositories\UsersRepository');
-        $this->app->bind('Comet\Repositories\Contracts\RolesRepositoryInterface', 'Comet\Repositories\RolesRepository');
-        $this->app->bind('Comet\Repositories\Contracts\MapsRepositoryInterface', 'Comet\Repositories\MapsRepository');
-        $this->app->bind('Comet\Repositories\Contracts\PostsRepositoryInterface', 'Comet\Repositories\PostsRepository');
-        $this->app->bind('Comet\Repositories\Contracts\PostCategoriesRepositoryInterface', 'Comet\Repositories\PostCategoriesRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\MatchesRepositoryInterface', 'Comet\Core\Repositories\MatchesRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\TeamsRepositoryInterface', 'Comet\Core\Repositories\TeamsRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\OpponentsRepositoryInterface', 'Comet\Core\Repositories\OpponentsRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\GamesRepositoryInterface', 'Comet\Core\Repositories\GamesRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\UsersRepositoryInterface', 'Comet\Core\Repositories\UsersRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\RolesRepositoryInterface', 'Comet\Core\Repositories\RolesRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\MapsRepositoryInterface', 'Comet\Core\Repositories\MapsRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\PostsRepositoryInterface', 'Comet\Core\Repositories\PostsRepository');
+        $this->app->bind('Comet\Core\Repositories\Contracts\PostCategoriesRepositoryInterface', 'Comet\Core\Repositories\PostCategoriesRepository');
     }
 }

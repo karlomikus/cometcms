@@ -1,15 +1,15 @@
 <?php
-namespace Comet\Repositories;
+namespace Comet\Core\Repositories;
 
 use Comet\Core\Models\PostCategory;
-use Comet\Repositories\Contracts\PostCategoriesRepositoryInterface;
+use Comet\Core\Repositories\Contracts\PostCategoriesRepositoryInterface;
 
 /**
  * Post categories repository
  *
  * @package Comet\Repositories
  */
-class PostCategoriesRepository extends AbstractRepository implements PostCategoriesRepositoryInterface {
+class PostCategoriesRepository extends EloquentRepository implements PostCategoriesRepositoryInterface {
 
 	/**
 	 * @param PostCategory $postCategory

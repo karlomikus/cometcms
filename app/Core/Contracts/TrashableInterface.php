@@ -1,5 +1,5 @@
 <?php
-namespace Comet\Repositories\Contracts;
+namespace Comet\Core\Contracts;
 
 interface TrashableInterface {
 

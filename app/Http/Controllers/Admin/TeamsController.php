@@ -1,7 +1,7 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
-use Comet\Repositories\Contracts\TeamsRepositoryInterface as Teams;
-use Comet\Repositories\Contracts\GamesRepositoryInterface as Games;
+use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface as Teams;
+use Comet\Core\Repositories\Contracts\GamesRepositoryInterface as Games;
 use Comet\Http\Requests\SaveTeamRequest;
 use Comet\Core\Transformers\TeamHistoryTransformer;
 use Comet\Core\Transformers\TeamMembersTransformer;

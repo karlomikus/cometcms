@@ -1,7 +1,7 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
 use Comet\Libraries\GridView\GridView;
-use Comet\Repositories\Contracts\RolesRepositoryInterface as Roles;
+use Comet\Core\Repositories\Contracts\RolesRepositoryInterface as Roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Comet\Http\Requests\SaveRoleRequest;

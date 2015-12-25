@@ -1,7 +1,9 @@
 <?php
-namespace Comet\Repositories;
+namespace Comet\Core\Repositories;
 
-use Comet\Core\Models\Match, Comet\Repositories\Contracts\MatchesRepositoryInterface, Comet\Libraries\GridView\GridViewInterface;
+use Comet\Core\Models\Match;
+use Comet\Core\Repositories\Contracts\MatchesRepositoryInterface;
+use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Core\Models\MatchRounds;
 use Comet\Core\Models\RoundScores;
 use Carbon\Carbon;
@@ -11,7 +13,7 @@ use Carbon\Carbon;
  *
  * @package Comet\Repositories
  */
-class MatchesRepository extends AbstractRepository implements MatchesRepositoryInterface, GridViewInterface {
+class MatchesRepository extends EloquentRepository implements MatchesRepositoryInterface, GridViewInterface {
 
     /**
      * Rounds (games) model instance

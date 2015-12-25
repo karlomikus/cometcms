@@ -1,8 +1,8 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
 use Comet\Libraries\GridView\GridView;
-use Comet\Repositories\Contracts\GamesRepositoryInterface as Games;
-use Comet\Repositories\Contracts\MapsRepositoryInterface as Maps;
+use Comet\Core\Repositories\Contracts\GamesRepositoryInterface as Games;
+use Comet\Core\Repositories\Contracts\MapsRepositoryInterface as Maps;
 use Comet\Core\Transformers\GameTransformer;
 use Illuminate\Http\Request;
 use Comet\Http\Requests\SaveGameRequest;

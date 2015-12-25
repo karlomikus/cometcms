@@ -1,15 +1,15 @@
 <?php
-namespace Comet\Repositories;
+namespace Comet\Core\Repositories;
 
-use Comet\Repositories\Contracts\AbstractRepositoryInterface as BaseRepositoryActions;
-use Comet\Repositories\Contracts\TrashableInterface as TrashActions;
+use Comet\Core\Contracts\RepositoryInterface;
+use Comet\Core\Contracts\TrashableInterface;
 
 /**
  * Base repository class
  *
  * @package Comet\Repositories
  */
-abstract class AbstractRepository implements BaseRepositoryActions, TrashActions {
+abstract class EloquentRepository implements RepositoryInterface, TrashableInterface {
 
     /**
      * Specific model instance

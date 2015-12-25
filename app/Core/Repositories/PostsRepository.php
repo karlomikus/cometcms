@@ -1,9 +1,9 @@
 <?php
-namespace Comet\Repositories;
+namespace Comet\Core\Repositories;
 
 use Comet\Core\Models\Post;
 use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Repositories\Contracts\PostsRepositoryInterface;
+use Comet\Core\Repositories\Contracts\PostsRepositoryInterface;
 
 /**
  * Games repository
@@ -12,7 +12,7 @@ use Comet\Repositories\Contracts\PostsRepositoryInterface;
  *
  * @package Comet\Repositories
  */
-class PostsRepository extends AbstractRepository implements PostsRepositoryInterface, GridViewInterface {
+class PostsRepository extends EloquentRepository implements PostsRepositoryInterface, GridViewInterface {
 
     /**
      * @param Post $post

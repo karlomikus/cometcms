@@ -2,8 +2,8 @@
 
 use Comet\Libraries\GridView\GridView;
 use Comet\Http\Requests\SaveUserRequest;
-use Comet\Repositories\Contracts\UsersRepositoryInterface;
-use Comet\Repositories\Contracts\RolesRepositoryInterface;
+use Comet\Core\Repositories\Contracts\UsersRepositoryInterface;
+use Comet\Core\Repositories\Contracts\RolesRepositoryInterface;
 use Comet\Core\Models\Role;
 use Comet\Core\Transformers\UserTransformer;
 use Illuminate\Http\Request;

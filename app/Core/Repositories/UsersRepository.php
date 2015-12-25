@@ -1,8 +1,8 @@
 <?php
-namespace Comet\Repositories;
+namespace Comet\Core\Repositories;
 
 use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Repositories\Contracts\UsersRepositoryInterface;
+use Comet\Core\Repositories\Contracts\UsersRepositoryInterface;
 use Comet\Core\Models\User;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 
@@ -11,7 +11,7 @@ use Comet\Libraries\ImageUploadTrait as ImageUpload;
  *
  * @package Comet\Repositories
  */
-class UsersRepository extends AbstractRepository implements UsersRepositoryInterface, GridViewInterface {
+class UsersRepository extends EloquentRepository implements UsersRepositoryInterface, GridViewInterface {
 
     use ImageUpload;
 

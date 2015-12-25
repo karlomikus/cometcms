@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Comet\Libraries\GridView\GridView;
 use Comet\Http\Requests\SaveOpponentRequest;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
-use Comet\Repositories\Contracts\OpponentsRepositoryInterface as Opponents;
+use Comet\Core\Repositories\Contracts\OpponentsRepositoryInterface as Opponents;
 
 /**
  * Opponents backend module. Uses trashable trait.

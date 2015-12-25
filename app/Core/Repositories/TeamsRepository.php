@@ -1,7 +1,7 @@
 <?php
-namespace Comet\Repositories;
+namespace Comet\Core\Repositories;
 
-use Comet\Repositories\Contracts\TeamsRepositoryInterface;
+use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface;
 use Comet\Core\Models\Team;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use Carbon\Carbon;
@@ -12,7 +12,7 @@ use DB;
  *
  * @package Comet\Repositories
  */
-class TeamsRepository extends AbstractRepository implements TeamsRepositoryInterface
+class TeamsRepository extends EloquentRepository implements TeamsRepositoryInterface
 {
 
     use ImageUpload;

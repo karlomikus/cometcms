@@ -4,8 +4,8 @@ use Carbon\Carbon;
 use Comet\Http\Requests\SavePostRequest;
 use Comet\Libraries\GridView\GridView;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
-use Comet\Repositories\Contracts\PostsRepositoryInterface as Posts;
-use Comet\Repositories\Contracts\PostCategoriesRepositoryInterface as Categories;
+use Comet\Core\Repositories\Contracts\PostsRepositoryInterface as Posts;
+use Comet\Core\Repositories\Contracts\PostCategoriesRepositoryInterface as Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
