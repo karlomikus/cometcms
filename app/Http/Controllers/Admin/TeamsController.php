@@ -1,45 +1,43 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
-use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface as Teams;
-use Comet\Core\Repositories\Contracts\GamesRepositoryInterface as Games;
+use Comet\Core\Gateways\TeamGateway;
 use Comet\Http\Requests\SaveTeamRequest;
+use Comet\Core\Transformers\TeamTransformer;
 use Comet\Core\Transformers\TeamHistoryTransformer;
 use Comet\Core\Transformers\TeamMembersTransformer;
-use Comet\Core\Transformers\TeamTransformer;
 
 class TeamsController extends AdminController
 {
     use TraitApi;
 
-    protected $teams;
+    private $gateway;
 
-    public function __construct(Teams $teams)
+    public function __construct(TeamGateway $gateway)
     {
         parent::__construct();
 
-        $this->teams = $teams;
+        $this->gateway = $gateway;
         $this->breadcrumbs->addCrumb('Squads', 'teams');
     }
 
     public function index()
     {
         $template = [
-            'data'      => $this->teams->all(),
-            'pageTitle' => 'Squads'
+            'pageTitle' => 'Squads',
+            'data'      => $this->gateway->getTeams(),
         ];
 
         return view('admin.teams.index', $template);
     }
 
-    public function create(Games $games)
+    public function create()
     {
         $this->breadcrumbs->addCrumb('New', 'new');
 
         $template = [
-            'team'      => null,
-            'modelData' => 'null',
-            'games'     => $games->all(),
             'pageTitle' => 'Create new squad',
+            'games'     => $this->gateway->getAllGames(),
+            'team'      => null,
             'history'   => null
         ];
 
@@ -48,18 +46,14 @@ class TeamsController extends AdminController
 
     public function save(SaveTeamRequest $request)
     {
-        $data = [
-            'name'        => $request->get('name'),
-            'game_id'     => $request->get('gameId'),
-            'description' => $request->get('description'),
-            'roster'      => $request->get('roster')
-        ];
-
         try {
-            $team = $this->teams->insert($data);
-            if ($request->hasFile('image')) {
-                $this->teams->insertImage($team->id, $request->file('image'));
-            }
+            $team = $this->gateway->addTeam(
+                $request->get('name'),
+                $request->get('gameId'),
+                $request->get('description'),
+                $request->get('roster'),
+                $request->file('image')
+            );
             $this->setMessage('Squad saved successfully!');
 
             return $this->respondWithItem($team, new TeamTransformer());
@@ -69,18 +63,15 @@ class TeamsController extends AdminController
         }
     }
 
-    public function edit($id, Games $games)
+    public function edit($id)
     {
         $this->breadcrumbs->addCrumb('Edit squad', 'edit');
 
-        $team = $this->teams->get($id);
-
         $template = [
-            'team'      => $team,
             'pageTitle' => 'Editing a squad',
-            'modelData' => $this->teams->getTeamData($id),
-            'games'     => $games->all(),
-            'history'   => $this->teams->getMembersHistory($id)
+            'team'      => $this->gateway->getTeam($id),
+            'history'   => $this->gateway->getTeamHistory($id),
+            'games'     => $this->gateway->getAllGames()
         ];
 
         return view('admin.teams.form', $template);
@@ -88,15 +79,14 @@ class TeamsController extends AdminController
 
     public function update($id, SaveTeamRequest $request)
     {
-        $data = [
-            'name'        => $request->get('name'),
-            'game_id'     => $request->get('gameId'),
-            'description' => $request->get('description'),
-            'roster'      => $request->get('roster'),
-        ];
-
         try {
-            $team = $this->teams->update($id, $data);
+            $team = $this->gateway->updateTeam(
+                $id,
+                $request->get('name'),
+                $request->get('gameId'),
+                $request->get('description'),
+                $request->get('roster')
+            );
             $this->setMessage('Squad updated successfully!');
 
             return $this->respondWithItem($team, new TeamTransformer());
@@ -108,7 +98,7 @@ class TeamsController extends AdminController
 
     public function delete($id)
     {
-        if ($this->teams->delete($id)) {
+        if ($this->gateway->delete($id)) {
             $this->alerts->alertSuccess('Squad deleted successfully!');
         }
         else {
@@ -122,15 +112,14 @@ class TeamsController extends AdminController
 
     public function get($teamID)
     {
-        $data = $this->teams->getTeamData($teamID);
-        $data['history'] = $this->teams->getMembersHistory($teamID);
+        $data = $this->gateway->getTeamMembers($teamID); // TODO REFACTOR
 
         return $this->respondWithItem($data, new TeamTransformer());
     }
 
     public function getHistory($teamID)
     {
-        $data = $this->teams->getMembersHistory($teamID);
+        $data = $this->gateway->getTeamHistory($teamID);
 
         return $this->respondWithCollection($data, new TeamHistoryTransformer());
     }

@@ -1,8 +1,9 @@
 <?php
 namespace Comet\Core\Repositories;
 
+use Comet\Core\Models\Map;
+use Comet\Core\Models\Game;
 use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Core\Models\Game, Comet\Core\Models\Map;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Comet\Core\Repositories\Contracts\GamesRepositoryInterface;

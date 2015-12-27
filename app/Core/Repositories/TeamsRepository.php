@@ -102,10 +102,12 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
      */
     public function deleteAllMembers($teamID)
     {
+        $deletedAt = Carbon::now()->toDateTimeString();
+        
         return \DB::table('team_roster')
             ->where('team_id', '=', $teamID)
             ->whereNull('deleted_at')
-            ->update(['deleted_at' => Carbon::now()->toDateTimeString()]);
+            ->update(['deleted_at' => $deletedAt]);
     }
 
     /**
