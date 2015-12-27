@@ -20,6 +20,6 @@ use Zizaco\Entrust\EntrustPermission;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Permission whereUpdatedAt($value)
  */
-class Permission extends EntrustPermission {
-
+class Permission extends EntrustPermission
+{
 }

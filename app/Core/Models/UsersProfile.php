@@ -1,8 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Comet\UsersProfile
  *
@@ -24,8 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\UsersProfile whereUpdatedAt($value)
  */
-class UsersProfile extends Model {
-
+class UsersProfile extends EloquentModel
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -37,5 +35,4 @@ class UsersProfile extends Model {
     {
         return $this->belongsTo(User::class);
     }
-
 }

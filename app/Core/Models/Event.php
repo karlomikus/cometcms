@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -23,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Comet\Core\Models\Game $game
  * @property-read \Comet\Core\Models\Country $country
  */
-class Event extends Model
+class Event extends EloquentModel
 {
     use SoftDeletes;
 

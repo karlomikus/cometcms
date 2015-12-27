@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -19,8 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Game whereImage($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Game whereDeletedAt($value)
  */
-class Game extends Model {
-
+class Game extends EloquentModel
+{
     use SoftDeletes;
 
     public $timestamps = false;
@@ -35,5 +34,4 @@ class Game extends Model {
     {
         return $this->hasMany(Map::class);
     }
-
 }

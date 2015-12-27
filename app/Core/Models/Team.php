@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -26,8 +25,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Team whereDeletedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\Comet\Core\Models\Match[] $matches
  */
-class Team extends Model {
-
+class Team extends EloquentModel
+{
     use SoftDeletes;
 
     protected $hidden = ['created_at', 'updated_at'];
@@ -47,5 +46,4 @@ class Team extends Model {
     {
         return $this->hasMany(Match::class);
     }
-
 }

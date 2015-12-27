@@ -2,7 +2,6 @@
 namespace Comet\Core\Models;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -36,8 +35,8 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Query\Builder|\Comet\User whereUpdatedAt($value)
  * @property string $username
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
-
+class User extends EloquentModel implements AuthenticatableContract, CanResetPasswordContract
+{
 	use Authenticatable, CanResetPassword, EntrustUserTrait, SoftDeletes;
 
 	/**
@@ -72,5 +71,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasOne(UsersProfile::class);
     }
-
 }

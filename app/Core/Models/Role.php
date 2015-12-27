@@ -23,10 +23,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Role whereUpdatedAt($value)
  * @property string $deleted_at
  */
-class Role extends EntrustRole {
-
+class Role extends EntrustRole
+{
     use SoftDeletes;
 
     protected $guarded = ['id'];
-
 }

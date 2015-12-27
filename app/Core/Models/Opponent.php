@@ -22,8 +22,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Opponent whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Opponent whereDeletedAt($value)
  */
-class Opponent extends Model {
-
+class Opponent extends Model
+{
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
@@ -31,5 +31,4 @@ class Opponent extends Model {
 	protected $fillable = ['name', 'description', 'image'];
     
     protected $hidden = ['created_at', 'updated_at'];
-
 }

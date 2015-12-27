@@ -1,8 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Comet\Country
  *
@@ -13,8 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Country whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Country whereCode($value)
  */
-class Country extends Model {
-
-	//
-
+class Country extends EloquentModel
+{
 }

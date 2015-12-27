@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -24,8 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\MatchRounds whereDeletedAt($value)
  */
-class MatchRounds extends Model {
-
+class MatchRounds extends EloquentModel
+{
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
@@ -43,5 +42,4 @@ class MatchRounds extends Model {
     {
         return $this->belongsTo(Map::class);
     }
-
 }

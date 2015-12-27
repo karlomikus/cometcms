@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -23,8 +22,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Map whereDeletedAt($value)
  */
-class Map extends Model {
-
+class Map extends EloquentModel
+{
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
@@ -37,5 +36,4 @@ class Map extends Model {
     {
         return $this->belongsTo(Game::class);
     }
-
 }

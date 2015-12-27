@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -36,8 +35,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\Match whereDeletedAt($value)
  */
-class Match extends Model {
-
+class Match extends EloquentModel
+{
     use SoftDeletes;
 
     protected $guarded = ['id'];
@@ -112,5 +111,4 @@ class Match extends Model {
 
         return 'draw';
     }
-
 }

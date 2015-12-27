@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -24,8 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Comet\Core\Models\User $author
  * @property-read \Comet\Core\Models\PostCategory $category
  */
-class Post extends Model {
-
+class Post extends EloquentModel
+{
     use SoftDeletes;
 
     protected $fillable = [

@@ -1,7 +1,6 @@
 <?php
 namespace Comet\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -22,8 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\Comet\RoundScores whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Comet\RoundScores whereDeletedAt($value)
  */
-class RoundScores extends Model {
-
+class RoundScores extends EloquentModel
+{
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
@@ -31,5 +30,5 @@ class RoundScores extends Model {
     protected $hidden = ['created_at', 'updated_at'];
 
     protected $guarded = ['id'];
-    
+
 }
