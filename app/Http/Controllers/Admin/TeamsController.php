@@ -1,6 +1,7 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
 use Comet\Core\Gateways\TeamGateway;
+use Comet\Core\Gateways\MetaGateway;
 use Comet\Http\Requests\SaveTeamRequest;
 use Comet\Core\Transformers\TeamTransformer;
 use Comet\Core\Transformers\TeamHistoryTransformer;
@@ -12,11 +13,14 @@ class TeamsController extends AdminController
 
     private $gateway;
 
-    public function __construct(TeamGateway $gateway)
+    private $meta;
+
+    public function __construct(TeamGateway $gateway, MetaGateway $meta)
     {
         parent::__construct();
 
         $this->gateway = $gateway;
+        $this->meta = $meta;
         $this->breadcrumbs->addCrumb('Squads', 'teams');
     }
 
@@ -36,7 +40,7 @@ class TeamsController extends AdminController
 
         $template = [
             'pageTitle' => 'Create new squad',
-            'games'     => $this->gateway->getAllGames(),
+            'games'     => $this->meta->getAllGames(),
             'team'      => null,
             'history'   => null
         ];
@@ -71,7 +75,7 @@ class TeamsController extends AdminController
             'pageTitle' => 'Editing a squad',
             'team'      => $this->gateway->getTeam($id),
             'history'   => $this->gateway->getTeamHistory($id),
-            'games'     => $this->gateway->getAllGames()
+            'games'     => $this->meta->getAllGames()
         ];
 
         return view('admin.teams.form', $template);

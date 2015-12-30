@@ -3,22 +3,14 @@ namespace Comet\Core\Gateways;
 
 use Comet\Core\Models\Team;
 use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface as Teams;
-use Comet\Core\Contracts\Repositories\GamesRepositoryInterface as Games;
 
 class TeamGateway
 {
     private $teams;
-    private $games;
 
-    public function __construct(Teams $teams, Games $games)
+    public function __construct(Teams $teams)
     {
         $this->teams = $teams;
-        $this->games = $games;
-    }
-
-    public function getAllGames()
-    {
-        return $this->games->all();
     }
 
     public function getTeams()

@@ -1,8 +1,7 @@
 <?php
 namespace Comet\Core\Gateways;
 
-use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface as Teams;
-use Comet\Core\Repositories\Contracts\GamesRepositoryInterface as Games;
+use Comet\Core\Contracts\Repositories\GamesRepositoryInterface as Games;
 use Comet\Core\Contracts\Repositories\CountriesRepositoryInterface as Countries;
 
 class MetaGateway
