@@ -21,5 +21,6 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->bind('Comet\Core\Repositories\Contracts\MapsRepositoryInterface', 'Comet\Core\Repositories\MapsRepository');
         $this->app->bind('Comet\Core\Repositories\Contracts\PostsRepositoryInterface', 'Comet\Core\Repositories\PostsRepository');
         $this->app->bind('Comet\Core\Repositories\Contracts\PostCategoriesRepositoryInterface', 'Comet\Core\Repositories\PostCategoriesRepository');
+        $this->app->bind('Comet\Core\Contracts\Repositories\CountriesRepositoryInterface', 'Comet\Core\Repositories\CountriesRepository');
     }
 }
