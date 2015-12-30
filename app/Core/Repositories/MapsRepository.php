@@ -5,7 +5,7 @@ use Comet\Core\Models\Map;
 use League\Flysystem\Exception;
 use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
-use Comet\Core\Repositories\Contracts\MapsRepositoryInterface;
+use Comet\Core\Contracts\Repositories\MapsRepositoryInterface;
 
 /**
  * Maps repository

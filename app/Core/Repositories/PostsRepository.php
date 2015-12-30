@@ -3,7 +3,7 @@ namespace Comet\Core\Repositories;
 
 use Comet\Core\Models\Post;
 use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Core\Repositories\Contracts\PostsRepositoryInterface;
+use Comet\Core\Contracts\Repositories\PostsRepositoryInterface;
 
 /**
  * Games repository

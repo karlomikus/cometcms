@@ -1,17 +1,16 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
+use Comet\Core\Models\Role;
+use Illuminate\Http\Request;
 use Comet\Libraries\GridView\GridView;
 use Comet\Http\Requests\SaveUserRequest;
-use Comet\Core\Repositories\Contracts\UsersRepositoryInterface;
-use Comet\Core\Repositories\Contracts\RolesRepositoryInterface;
-use Comet\Core\Models\Role;
 use Comet\Core\Transformers\UserTransformer;
-use Illuminate\Http\Request;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
+use Comet\Core\Contracts\Repositories\UsersRepositoryInterface;
+use Comet\Core\Contracts\Repositories\RolesRepositoryInterface;
 
 class UsersController extends AdminController
 {
-
     use Trash, TraitApi;
 
     protected $users;

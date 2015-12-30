@@ -1,10 +1,10 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
-use Comet\Libraries\GridView\GridView;
-use Comet\Core\Repositories\Contracts\RolesRepositoryInterface as Roles;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Comet\Libraries\GridView\GridView;
 use Comet\Http\Requests\SaveRoleRequest;
+use Comet\Core\Contracts\Repositories\RolesRepositoryInterface as Roles;
 
 class RolesController extends AdminController {
 

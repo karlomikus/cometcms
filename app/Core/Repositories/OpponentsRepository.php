@@ -5,7 +5,7 @@ use Comet\Core\Models\Opponent;
 use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Comet\Core\Repositories\Contracts\OpponentsRepositoryInterface;
+use Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface;
 
 /**
  * Opponents Repository

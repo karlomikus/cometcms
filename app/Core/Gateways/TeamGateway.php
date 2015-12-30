@@ -2,8 +2,8 @@
 namespace Comet\Core\Gateways;
 
 use Comet\Core\Models\Team;
-use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface as Teams;
-use Comet\Core\Repositories\Contracts\GamesRepositoryInterface as Games;
+use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface as Teams;
+use Comet\Core\Contracts\Repositories\GamesRepositoryInterface as Games;
 
 class TeamGateway
 {

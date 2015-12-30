@@ -1,14 +1,14 @@
 <?php
 namespace Comet\Http\Controllers\Admin;
 
-use Comet\Core\Repositories\Contracts\GamesRepositoryInterface as Games;
-use Comet\Core\Repositories\Contracts\MapsRepositoryInterface as Maps;
-use Comet\Core\Repositories\Contracts\MatchesRepositoryInterface as Matches;
-use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface as Teams;
-use Comet\Core\Repositories\Contracts\OpponentsRepositoryInterface as Opponents;
 use Illuminate\Http\Request;
-use Comet\Http\Requests\SaveMatchRequest;
 use Comet\Libraries\GridView\GridView;
+use Comet\Http\Requests\SaveMatchRequest;
+use Comet\Core\Contracts\Repositories\MapsRepositoryInterface as Maps;
+use Comet\Core\Contracts\Repositories\GamesRepositoryInterface as Games;
+use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface as Teams;
+use Comet\Core\Contracts\Repositories\MatchesRepositoryInterface as Matches;
+use Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface as Opponents;
 
 class MatchesController extends AdminController {
 

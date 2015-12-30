@@ -5,7 +5,7 @@ use DB;
 use Carbon\Carbon;
 use Comet\Core\Models\Team;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
-use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface;
+use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
 
 /**
  * Teams repository

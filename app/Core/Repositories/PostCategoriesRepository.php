@@ -2,7 +2,7 @@
 namespace Comet\Core\Repositories;
 
 use Comet\Core\Models\PostCategory;
-use Comet\Core\Repositories\Contracts\PostCategoriesRepositoryInterface;
+use Comet\Core\Contracts\Repositories\PostCategoriesRepositoryInterface;
 
 /**
  * Post categories repository

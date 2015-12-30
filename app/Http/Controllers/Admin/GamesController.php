@@ -1,13 +1,13 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
-use Comet\Libraries\GridView\GridView;
-use Comet\Core\Repositories\Contracts\GamesRepositoryInterface as Games;
-use Comet\Core\Repositories\Contracts\MapsRepositoryInterface as Maps;
-use Comet\Core\Transformers\GameTransformer;
-use Illuminate\Http\Request;
-use Comet\Http\Requests\SaveGameRequest;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Comet\Libraries\GridView\GridView;
+use Comet\Http\Requests\SaveGameRequest;
+use Comet\Core\Transformers\GameTransformer;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
+use Comet\Core\Contracts\Repositories\GamesRepositoryInterface as Games;
+use Comet\Core\Contracts\Repositories\MapsRepositoryInterface as Maps;
 
 /**
  * Games Controller

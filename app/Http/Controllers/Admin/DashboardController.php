@@ -1,8 +1,8 @@
 <?php
 namespace Comet\Http\Controllers\Admin;
 
-use Comet\Core\Repositories\Contracts\MatchesRepositoryInterface;
-use Comet\Core\Repositories\Contracts\TeamsRepositoryInterface;
+use Comet\Core\Contracts\Repositories\MatchesRepositoryInterface;
+use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
 use Comet\Services\StatisticsService;
 
 class DashboardController extends AdminController {

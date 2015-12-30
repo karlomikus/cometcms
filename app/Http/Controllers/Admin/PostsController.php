@@ -1,13 +1,13 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
 use Carbon\Carbon;
-use Comet\Http\Requests\SavePostRequest;
-use Comet\Libraries\GridView\GridView;
-use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
-use Comet\Core\Repositories\Contracts\PostsRepositoryInterface as Posts;
-use Comet\Core\Repositories\Contracts\PostCategoriesRepositoryInterface as Categories;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Comet\Libraries\GridView\GridView;
+use Comet\Http\Requests\SavePostRequest;
+use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
+use Comet\Core\Contracts\Repositories\PostsRepositoryInterface as Posts;
+use Comet\Core\Contracts\Repositories\PostCategoriesRepositoryInterface as Categories;
 
 /**
  * Posts backend module. Uses trashable trait.

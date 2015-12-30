@@ -6,7 +6,7 @@ use Comet\Core\Models\Match;
 use Comet\Core\Models\MatchRounds;
 use Comet\Core\Models\RoundScores;
 use Comet\Libraries\GridView\GridViewInterface;
-use Comet\Core\Repositories\Contracts\MatchesRepositoryInterface;
+use Comet\Core\Contracts\Repositories\MatchesRepositoryInterface;
 
 /**
  * Matches repository

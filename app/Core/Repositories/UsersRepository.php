@@ -4,7 +4,7 @@ namespace Comet\Core\Repositories;
 use Comet\Core\Models\User;
 use Comet\Libraries\GridView\GridViewInterface;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
-use Comet\Core\Repositories\Contracts\UsersRepositoryInterface;
+use Comet\Core\Contracts\Repositories\UsersRepositoryInterface;
 
 /**
  * Users Repository

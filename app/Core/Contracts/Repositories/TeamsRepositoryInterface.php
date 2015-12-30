@@ -1,5 +1,5 @@
 <?php
-namespace Comet\Core\Repositories\Contracts;
+namespace Comet\Core\Contracts\Repositories;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
