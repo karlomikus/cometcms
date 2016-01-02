@@ -1,6 +1,7 @@
 <?php
 
-use Comet\Core\Gateways\TeamGateway;
+use Comet\Core\Services\TeamService;
+use Comet\Core\Exceptions\TeamException;
 use Comet\Core\Repositories\TeamsRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -14,7 +15,7 @@ class TeamServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->team = $this->app['Comet\Core\Gateways\TeamGateway'];
+        $this->team = $this->app[TeamService::class];
     }
 
     /** @test */
@@ -44,5 +45,24 @@ class TeamServiceTest extends TestCase
         $this->assertEquals('Test', $team->name);
         $this->assertEquals(1, $team->game_id);
         $this->assertEquals('Content', $team->description);
+    }
+
+    /** @test */
+    public function a_team_must_have_at_least_one_member()
+    {
+        $this->setExpectedException(TeamException::class);
+        $this->team->addTeam('No Members', 1, 'Test', [], null);
+    }
+
+    /** @test */
+    public function a_team_must_have_a_game_assigned()
+    {
+        
+    }
+
+    /** @test */
+    public function a_member_of_team_must_be_a_valid_user()
+    {
+
     }
 }

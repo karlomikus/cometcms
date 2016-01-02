@@ -1,6 +1,6 @@
 <?php namespace Comet\Http\Controllers\Admin;
 
-use Comet\Core\Gateways\TeamGateway;
+use Comet\Core\Services\TeamService;
 use Comet\Core\Gateways\MetaGateway;
 use Comet\Http\Requests\SaveTeamRequest;
 use Comet\Core\Transformers\TeamTransformer;
@@ -11,15 +11,15 @@ class TeamsController extends AdminController
 {
     use TraitApi;
 
-    private $gateway;
+    private $service;
 
     private $meta;
 
-    public function __construct(TeamGateway $gateway, MetaGateway $meta)
+    public function __construct(TeamService $service, MetaGateway $meta)
     {
         parent::__construct();
 
-        $this->gateway = $gateway;
+        $this->service = $service;
         $this->meta = $meta;
         $this->breadcrumbs->addCrumb('Squads', 'teams');
     }
@@ -28,7 +28,7 @@ class TeamsController extends AdminController
     {
         $template = [
             'pageTitle' => 'Squads',
-            'data'      => $this->gateway->getTeams(),
+            'data'      => $this->service->getTeams(),
         ];
 
         return view('admin.teams.index', $template);
@@ -51,7 +51,7 @@ class TeamsController extends AdminController
     public function save(SaveTeamRequest $request)
     {
         try {
-            $team = $this->gateway->addTeam(
+            $team = $this->service->addTeam(
                 $request->get('name'),
                 $request->get('gameId'),
                 $request->get('description'),
@@ -73,8 +73,8 @@ class TeamsController extends AdminController
 
         $template = [
             'pageTitle' => 'Editing a squad',
-            'team'      => $this->gateway->getTeam($id),
-            'history'   => $this->gateway->getTeamHistory($id),
+            'team'      => $this->service->getTeam($id),
+            'history'   => $this->service->getTeamHistory($id),
             'games'     => $this->meta->getAllGames()
         ];
 
@@ -84,7 +84,7 @@ class TeamsController extends AdminController
     public function update($id, SaveTeamRequest $request)
     {
         try {
-            $team = $this->gateway->updateTeam(
+            $team = $this->service->updateTeam(
                 $id,
                 $request->get('name'),
                 $request->get('gameId'),
@@ -102,7 +102,7 @@ class TeamsController extends AdminController
 
     public function delete($id)
     {
-        if ($this->gateway->delete($id)) {
+        if ($this->service->delete($id)) {
             $this->alerts->alertSuccess('Squad deleted successfully!');
         }
         else {
@@ -116,14 +116,14 @@ class TeamsController extends AdminController
 
     public function get($teamID)
     {
-        $data = $this->gateway->getTeamMembers($teamID); // TODO REFACTOR
+        $data = $this->service->getTeamMembers($teamID); // TODO REFACTOR
 
         return $this->respondWithItem($data, new TeamTransformer());
     }
 
     public function getHistory($teamID)
     {
-        $data = $this->gateway->getTeamHistory($teamID);
+        $data = $this->service->getTeamHistory($teamID);
 
         return $this->respondWithCollection($data, new TeamHistoryTransformer());
     }
