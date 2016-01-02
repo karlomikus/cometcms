@@ -4,6 +4,7 @@ namespace Comet\Core\Repositories;
 use DB;
 use Carbon\Carbon;
 use Comet\Core\Models\Team;
+use Comet\Core\Exceptions\TeamException;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
 
@@ -17,8 +18,6 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
     use ImageUpload;
 
     /**
-     * Initiate the repository with team model
-     *
      * @param Team $team Model
      */
     public function __construct(Team $team)
@@ -31,12 +30,17 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
     /**
      * Add members to specific team
      *
-     * @param  array $data Array with member data
-     * @param  int $teamID ID of the team we are adding members to
-     * @return void           Void since we use transaction in insert() method
+     * @param  array $data
+     * @param  int $teamID
+     * @throws TeamException
+     * @return void
      */
-    public function insertMembers($data, $teamID)
+    public function insertMembers(array $data, $teamID)
     {
+        if (empty($data)) {
+            throw new TeamException('A team must have at least one valid member!');
+        }
+
         // We go through each element since we need to get rid of garbage properties from client JSON
         foreach ($data as $member) {
             DB::table('team_roster')->insert([
@@ -83,7 +87,7 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
             $teamModel = parent::update($id, $data);
 
             if (!$teamModel) {
-                throw new \Exception('Unable to update a squad!');
+                throw new TeamException('Unable to update a squad!');
             }
 
             $this->updateMembers($data['roster'], $id);
@@ -103,7 +107,7 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
     public function deleteAllMembers($teamID)
     {
         $deletedAt = Carbon::now()->toDateTimeString();
-        
+
         return \DB::table('team_roster')
             ->where('team_id', '=', $teamID)
             ->whereNull('deleted_at')
@@ -186,16 +190,5 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
             ]);
 
         return $query;
-    }
-
-    /**
-     * Get members of a specific team
-     *
-     * @param $teamID
-     * @return mixed
-     */
-    public function getTeamData($teamID)
-    {
-        return $this->model->where('id', '=', $teamID)->with('roster')->first();
     }
 }

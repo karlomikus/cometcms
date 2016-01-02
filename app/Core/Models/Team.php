@@ -4,7 +4,7 @@ namespace Comet\Core\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Comet\Team
+ * Team model
  *
  * @property integer $id
  * @property string $name
@@ -34,6 +34,8 @@ class Team extends EloquentModel
     protected $fillable = ['name', 'description', 'image', 'game_id'];
 
     protected $dates = ['deleted_at'];
+
+    protected $with = ['roster'];
 
     public function roster()
     {

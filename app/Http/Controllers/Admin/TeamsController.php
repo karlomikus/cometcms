@@ -116,7 +116,7 @@ class TeamsController extends AdminController
 
     public function get($teamID)
     {
-        $data = $this->service->getTeamMembers($teamID); // TODO REFACTOR
+        $data = $this->service->getTeam($teamID);
 
         return $this->respondWithItem($data, new TeamTransformer());
     }

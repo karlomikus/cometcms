@@ -2,7 +2,6 @@
 namespace Comet\Core\Services;
 
 use Comet\Core\Models\Team;
-use Comet\Core\Exceptions\TeamException;
 use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface as Teams;
 
 class TeamService
@@ -10,7 +9,7 @@ class TeamService
     private $teams;
 
     /**
-     * @param Teams $teams Teams repository instance
+     * @param Teams $teams Teams repository
      */
     public function __construct(Teams $teams)
     {
@@ -28,7 +27,7 @@ class TeamService
     }
 
     /**
-     * Get a team by it's identifierž
+     * Get a team by it's identifier
      *
      * @param  int $id
      * @return Team
@@ -42,7 +41,7 @@ class TeamService
      * Fetch team's member history
      *
      * @param  int $id
-     * @return collection
+     * @return Collection
      */
     public function getTeamHistory($id)
     {
@@ -50,14 +49,14 @@ class TeamService
     }
 
     /**
-     * Get team with all it's members
+     * Fetch team's roster
      *
      * @param  int $id
-     * @return Team
+     * @return Collection
      */
     public function getTeamMembers($id)
     {
-        return $this->teams->getTeamData($id);
+        return $this->teams->get($id)->roster;
     }
 
     /**
@@ -72,10 +71,6 @@ class TeamService
      */
     public function addTeam($name, $gameId, $description, $roster, $image = null)
     {
-        if (empty($roster)) {
-            throw new TeamException('A team must have at least one valid member!');
-        }
-
         $data = [
             'name' => $name,
             'game_id' => $gameId,

@@ -3,24 +3,23 @@ namespace Comet\Core\Contracts\Repositories;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-interface TeamsRepositoryInterface {
-
-    /**
-     * Get members of a specific team
-     *
-     * @param $teamID
-     * @return mixed
-     */
-    public function getTeamData($teamID);
-
+interface TeamsRepositoryInterface
+{
     /**
      * Add members to specific team
      *
-     * @param  array $data Array with member data
-     * @param  int $teamID ID of the team we are adding members to
-     * @return void           Void since we use transaction in insert() method
+     * @param array $data
+     * @param int $teamID
+     * @throws TeamException
+     * @return void
      */
-    public function insertMembers($data, $teamID);
+    public function insertMembers(array $data, $teamID);
+
+    /**
+     * @param $roster
+     * @param $teamID
+     */
+    public function updateMembers($roster, $teamID);
 
     /**
      * Delete all members from specific team
@@ -30,4 +29,11 @@ interface TeamsRepositoryInterface {
      */
     public function deleteAllMembers($teamID);
 
-} 
+    /**
+     * Get all roster changes since team creation
+     *
+     * @param $teamID
+     * @return array
+     */
+    public function getMembersHistory($teamID);
+}
