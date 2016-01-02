@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Map;
+use Comet\Core\Models\Map;
 
 class MapsTableSeeder extends Seeder {
 

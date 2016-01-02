@@ -1,7 +1,7 @@
 <?php
 
+use Comet\Core\Models\Post;
 use Illuminate\Database\Seeder;
-use App\Post;
 
 class PostsTableSeeder extends Seeder {
 

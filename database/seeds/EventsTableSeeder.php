@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Event;
+use Comet\Core\Models\Event;
 
 class EventsTableSeeder extends Seeder {
 

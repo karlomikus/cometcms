@@ -1,7 +1,7 @@
 <?php
 namespace Comet\Services;
 
-use Comet\Core\Repositories\Contracts\MatchesRepositoryInterface;
+use Comet\Core\Contracts\Repositories\MatchesRepositoryInterface;
 use Carbon\Carbon;
 
 class StatisticsService {

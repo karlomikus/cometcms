@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Game;
+use Comet\Core\Models\Game;
 
 class GamesTableSeeder extends Seeder {
 

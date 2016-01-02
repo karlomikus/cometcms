@@ -1,7 +1,10 @@
 <?php
 
+use Comet\Core\Models\User;
+use Comet\Core\Models\Role;
 use Illuminate\Database\Seeder;
-use App\User, App\UsersProfile, App\Role, App\Permission;
+use Comet\Core\Models\Permission;
+use Comet\Core\Models\UsersProfile;
 
 class UsersTableSeeder extends Seeder {
 

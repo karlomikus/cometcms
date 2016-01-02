@@ -1,7 +1,7 @@
 <?php
 
+use Comet\Core\Models\Team;
 use Illuminate\Database\Seeder;
-use App\Team;
 
 class TeamsTableSeeder extends Seeder {
 

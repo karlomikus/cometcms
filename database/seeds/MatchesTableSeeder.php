@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Match, App\MatchRounds, App\RoundScores;
+use Comet\Core\Models\Match, Comet\Core\Models\MatchRounds, Comet\Core\Models\RoundScores;
 
 class MatchesTableSeeder extends Seeder {
 
