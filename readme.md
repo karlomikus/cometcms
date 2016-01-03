@@ -1,15 +1,16 @@
 # Comet CMS
 
-This is a "playground" application where I test code stuff on a "real" application
+This is a playground application where I test code stuff on a "real" application
 
 ## Included
 
-- SOLID Principles (albeit WIP constantly)
 - Vue.js integration
-- Modules (WIP)
-- Defined gulp tasks
-- Custom design
+- Gulp tasks
+- Custom web design
 - Database migrations and seeding
+- Tests
+- SOLID Principles (WIP)
+- Modules (WIP)
 
 ## Installation
 
@@ -18,3 +19,5 @@ This is a "playground" application where I test code stuff on a "real" applicati
 3. Setup db configs
 4. Run migrations and seeding: `$ php artisan migrate --seed`
 5. (optional) Install npm dependencies `$ npm install --no-bin-links`
+6. Login to application with email: admin@admin.com and password: admin123
+7. Visit /admin for admin dashboard
