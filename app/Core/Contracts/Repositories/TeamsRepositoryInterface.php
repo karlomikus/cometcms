@@ -36,4 +36,21 @@ interface TeamsRepositoryInterface
      * @return array
      */
     public function getMembersHistory($teamID);
+
+    /**
+     * Get user ID's of all team members
+     *
+     * @param  int $teamID
+     * @return array
+     */
+    public function getTeamMembersUserIDs($teamID);
+
+    /**
+     * Compare changes of current roster with given roster
+     *
+     * @param  int  $teamID
+     * @param  array  $roster
+     * @return boolean
+     */
+    public function hasRosterChanges($teamID, $roster);
 }

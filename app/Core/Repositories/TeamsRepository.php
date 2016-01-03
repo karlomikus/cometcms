@@ -63,9 +63,8 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
     {
         $transaction = DB::transaction(function () use ($data) {
             $teamModel = parent::insert($data);
-
             if (!$teamModel) {
-                throw new \Exception('Unable to create a squad!');
+                throw new TeamException('Unable to create a squad!');
             }
 
             $this->insertMembers($data['roster'], $teamModel->id);
@@ -108,59 +107,48 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
     {
         $deletedAt = Carbon::now()->toDateTimeString();
 
-        return \DB::table('team_roster')
+        return DB::table('team_roster')
             ->where('team_id', '=', $teamID)
             ->whereNull('deleted_at')
             ->update(['deleted_at' => $deletedAt]);
     }
 
     /**
+     * Delete a team and all it's members
+     *
      * @param $teamID
      * @return bool
      */
     public function delete($teamID)
     {
-        try {
-            \DB::beginTransaction();
+        $transaction = DB::transaction(function () use ($teamID) {
             $this->deleteAllMembers($teamID);
-            parent::delete($teamID);
-        }
-        catch (\Exception $e) {
-            \DB::rollback();
 
-            \Session::flash('exception', $e->getMessage());
+            return parent::delete($teamID);
+        });
 
-            return false;
-        }
-
-        \DB::commit();
-
-        return true;
+        return $transaction;
     }
 
     /**
+     * Update members or create new roster
+     *
      * @param $roster
      * @param $teamID
      */
     public function updateMembers($roster, $teamID)
     {
-        $table = \DB::table('team_roster');
-
-        // Get original team members user IDs and compare it to the ones we get from the form
-        $orgMembers = array_pluck($table->where('team_id', $teamID)->whereNull('deleted_at')->get(['user_id']), 'user_id');
-        $formMembers = array_pluck($roster, 'userId');
-
-        // If they are the same then we can just update the meta data
-        if ($orgMembers === $formMembers) {
+        // Just update current roster info if there are no roster changes
+        if (!$this->hasRosterChanges($teamID, $roster)) {
             foreach ($roster as $member) {
-                \DB::table('team_roster')->where('id', $member['id'])->update([
+                DB::table('team_roster')->where('id', $member['id'])->update([
                     'position' => isset($member['position']) ? $member['position'] : null,
                     'status'   => isset($member['status']) ? $member['status'] : null,
                     'captain'  => isset($member['captain']) ? (int) $member['captain'] : 0
                 ]);
             }
         }
-        else { // Else we need to soft delete old roster and create new one
+        else { // Soft delete the old roster and create a new one
             $this->deleteAllMembers($teamID);
             $this->insertMembers($roster, $teamID);
         }
@@ -174,7 +162,7 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
      */
     public function getMembersHistory($teamID)
     {
-        $query = \DB::table('team_roster')
+        $query = DB::table('team_roster')
             ->where('team_roster.team_id', $teamID)
             ->whereNotNull('team_roster.deleted_at')
             ->join('users', 'team_roster.user_id', '=', 'users.id')
@@ -190,5 +178,33 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
             ]);
 
         return $query;
+    }
+
+    /**
+     * Get user ID's of all team members
+     *
+     * @param  int $teamID
+     * @return array
+     */
+    public function getTeamMembersUserIDs($teamID)
+    {
+        $table = DB::table('team_roster');
+
+        return array_pluck($table->where('team_id', $teamID)->whereNull('deleted_at')->get(['user_id']), 'user_id');
+    }
+
+    /**
+     * Compare changes of current roster with given roster
+     *
+     * @param  int  $teamID
+     * @param  array  $roster
+     * @return boolean
+     */
+    public function hasRosterChanges($teamID, $roster)
+    {
+        $currentMembers = $this->getTeamMembersUserIDs($teamID);
+        $newMembers = array_pluck($roster, 'userId');
+
+        return !($currentMembers === $newMembers);
     }
 }

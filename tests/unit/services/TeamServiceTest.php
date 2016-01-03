@@ -63,7 +63,7 @@ class TeamServiceTest extends TestCase
     /** @test */
     public function it_can_create_a_team()
     {
-        $team = $this->team->addTeam('Test', 1, 'Content', $this->members, null);
+        $team = $this->team->addTeam('Test', 1, 'Content', $this->members);
 
         $this->assertEquals('Test', $team->name);
         $this->assertEquals(1, $team->game_id);
@@ -74,13 +74,16 @@ class TeamServiceTest extends TestCase
     public function a_team_must_have_at_least_one_member()
     {
         $this->setExpectedException(TeamException::class);
-        $this->team->addTeam('No Members', 1, 'Test', [], null);
+
+        $this->team->addTeam('No Members', 1, 'Test', []);
     }
 
     /** @test */
     public function a_team_must_have_a_game_assigned()
     {
+        $this->setExpectedException(\Exception::class);
         
+        $this->team->addTeam('Test', null, 'Content', $this->members);
     }
 
     /** @test */
@@ -97,6 +100,6 @@ class TeamServiceTest extends TestCase
     /** @test */
     public function a_team_can_only_have_one_captain()
     {
-        
+
     }
 }

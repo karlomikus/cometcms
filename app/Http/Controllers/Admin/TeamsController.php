@@ -1,5 +1,7 @@
-<?php namespace Comet\Http\Controllers\Admin;
+<?php
+namespace Comet\Http\Controllers\Admin;
 
+use Exception;
 use Comet\Core\Services\TeamService;
 use Comet\Core\Gateways\MetaGateway;
 use Comet\Http\Requests\SaveTeamRequest;
@@ -26,26 +28,24 @@ class TeamsController extends AdminController
 
     public function index()
     {
-        $template = [
-            'pageTitle' => 'Squads',
-            'data'      => $this->service->getTeams(),
-        ];
+        $data = $this->service->getTeams();
 
-        return view('admin.teams.index', $template);
+        return view('admin.teams.index')
+            ->with('pageTitle', 'Squads')
+            ->with('data', $data);
     }
 
     public function create()
     {
         $this->breadcrumbs->addCrumb('New', 'new');
 
-        $template = [
-            'pageTitle' => 'Create new squad',
-            'games'     => $this->meta->getAllGames(),
-            'team'      => null,
-            'history'   => null
-        ];
+        $games = $this->meta->getAllGames();
 
-        return view('admin.teams.form', $template);
+        return view('admin.teams.form')
+            ->with('pageTitle', 'Create new squad')
+            ->with('games', $games)
+            ->with('team', null)
+            ->with('history', null);
     }
 
     public function save(SaveTeamRequest $request)
@@ -61,8 +61,7 @@ class TeamsController extends AdminController
             $this->setMessage('Squad saved successfully!');
 
             return $this->respondWithItem($team, new TeamTransformer());
-        }
-        catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->respondWithError($e->getMessage(), 500);
         }
     }
@@ -71,14 +70,15 @@ class TeamsController extends AdminController
     {
         $this->breadcrumbs->addCrumb('Edit squad', 'edit');
 
-        $template = [
-            'pageTitle' => 'Editing a squad',
-            'team'      => $this->service->getTeam($id),
-            'history'   => $this->service->getTeamHistory($id),
-            'games'     => $this->meta->getAllGames()
-        ];
+        $games = $this->meta->getAllGames();
+        $history = $this->service->getTeamHistory($id);
+        $team = $this->service->getTeam($id);
 
-        return view('admin.teams.form', $template);
+        return view('admin.teams.form')
+            ->with('pageTitle', 'Editing a squad')
+            ->with('games', $games)
+            ->with('team', $team)
+            ->with('history', $history);
     }
 
     public function update($id, SaveTeamRequest $request)
@@ -94,24 +94,14 @@ class TeamsController extends AdminController
             $this->setMessage('Squad updated successfully!');
 
             return $this->respondWithItem($team, new TeamTransformer());
-        }
-        catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->respondWithError($e->getMessage(), 500);
         }
     }
 
     public function delete($id)
     {
-        if ($this->service->delete($id)) {
-            $this->alerts->alertSuccess('Squad deleted successfully!');
-        }
-        else {
-            $this->alerts->alertError('Unable to delete squad!');
-        }
-
-        $this->alerts->getAlerts();
-
-        return redirect('admin/teams');
+        // TODO
     }
 
     public function get($teamID)
