@@ -4,8 +4,8 @@ namespace Comet\Services;
 use Comet\Core\Contracts\Repositories\MatchesRepositoryInterface;
 use Carbon\Carbon;
 
-class StatisticsService {
-
+class StatisticsService
+{
     /**
      * @var MatchesRepositoryInterface
      */
@@ -22,12 +22,13 @@ class StatisticsService {
         $won = $draw = $lost = 0;
 
         foreach ($scores as $score) {
-            if ($score->home > $score->guest)
+            if ($score->home > $score->guest) {
                 $won++;
-            elseif ($score->home < $score->guest)
+            } elseif ($score->home < $score->guest) {
                 $lost++;
-            else
+            } else {
                 $draw++;
+            }
         }
 
         $result = [
@@ -47,12 +48,13 @@ class StatisticsService {
 
         $group = [];
         foreach ($scores as $score) {
-            if ($score->home > $score->guest)
+            if ($score->home > $score->guest) {
                 $group[Carbon::parse($score->date)->format('m')]['won'] = $won++;
-            elseif ($score->home < $score->guest)
+            } elseif ($score->home < $score->guest) {
                 $group[Carbon::parse($score->date)->format('m')]['lost'] = $lost++;
-            else
+            } else {
                 $group[Carbon::parse($score->date)->format('m')]['draw'] = $draw++;
+            }
         }
 
         return $group;
@@ -69,5 +71,4 @@ class StatisticsService {
 
         return $data;
     }
-
-} 
+}

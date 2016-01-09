@@ -3,7 +3,22 @@ namespace Comet\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class RepositoryServiceProvider extends ServiceProvider {
+class RepositoryServiceProvider extends ServiceProvider
+{
+    private $namespace = 'Comet\Core\Contracts\Repositories\\';
+
+    private $repos = [
+        'MatchesRepositoryInterface' => 'Comet\Core\Repositories\MatchesRepository',
+        'TeamsRepositoryInterface' => 'Comet\Core\Repositories\TeamsRepository',
+        'OpponentsRepositoryInterface' => 'Comet\Core\Repositories\OpponentsRepository',
+        'GamesRepositoryInterface' => 'Comet\Core\Repositories\GamesRepository',
+        'UsersRepositoryInterface' => 'Comet\Core\Repositories\UsersRepository',
+        'RolesRepositoryInterface' => 'Comet\Core\Repositories\RolesRepository',
+        'MapsRepositoryInterface' => 'Comet\Core\Repositories\MapsRepository',
+        'PostsRepositoryInterface' => 'Comet\Core\Repositories\PostsRepository',
+        'PostCategoriesRepositoryInterface' => 'Comet\Core\Repositories\PostCategoriesRepository',
+        'CountriesRepositoryInterface' => 'Comet\Core\Repositories\CountriesRepository',
+    ];
 
     /**
      * Register the service provider.
@@ -12,15 +27,8 @@ class RepositoryServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->bind('Comet\Core\Contracts\Repositories\MatchesRepositoryInterface', 'Comet\Core\Repositories\MatchesRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\TeamsRepositoryInterface', 'Comet\Core\Repositories\TeamsRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface', 'Comet\Core\Repositories\OpponentsRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\GamesRepositoryInterface', 'Comet\Core\Repositories\GamesRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\UsersRepositoryInterface', 'Comet\Core\Repositories\UsersRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\RolesRepositoryInterface', 'Comet\Core\Repositories\RolesRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\MapsRepositoryInterface', 'Comet\Core\Repositories\MapsRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\PostsRepositoryInterface', 'Comet\Core\Repositories\PostsRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\PostCategoriesRepositoryInterface', 'Comet\Core\Repositories\PostCategoriesRepository');
-        $this->app->bind('Comet\Core\Contracts\Repositories\CountriesRepositoryInterface', 'Comet\Core\Repositories\CountriesRepository');
+        foreach ($this->repos as $contract => $impl) {
+            $this->app->bind($this->namespace . $contract, $impl);
+        }
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Comet\Services;
 
-class AlertsService {
-
+class AlertsService
+{
     // VALIDATION ERRORS, SYSTEM MESSAGES, EXCEPTIONS
     private $alerts;
     private $exceptionMessage;
