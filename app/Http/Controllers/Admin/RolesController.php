@@ -6,8 +6,8 @@ use Comet\Libraries\GridView\GridView;
 use Comet\Http\Requests\SaveRoleRequest;
 use Comet\Core\Contracts\Repositories\RolesRepositoryInterface as Roles;
 
-class RolesController extends AdminController {
-
+class RolesController extends AdminController
+{
     /**
      * @var Roles
      */
@@ -71,8 +71,7 @@ class RolesController extends AdminController {
                 $role->attachPermissions($perms);
             }
             $this->alerts->alertSuccess('New role created successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Role creation failed!');
         }
 
@@ -122,8 +121,7 @@ class RolesController extends AdminController {
                 $role->attachPermissions($perms);
             }
             $this->alerts->alertSuccess('Role edited successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Role edit failed!');
         }
 
@@ -136,8 +134,7 @@ class RolesController extends AdminController {
     {
         if ($this->roles->delete($id)) {
             $this->alerts->alertSuccess('Role deleted successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to delete a role!');
         }
 
@@ -145,5 +142,4 @@ class RolesController extends AdminController {
 
         return redirect('admin/roles');
     }
-
 }

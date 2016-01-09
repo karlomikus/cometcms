@@ -10,8 +10,8 @@ use PhpSpec\Exception\Exception;
  *
  * @package Comet\Libraries\GridView
  */
-class GridView {
-
+class GridView
+{
     /**
      * @var \Comet\Libraries\GridView\GridViewInterface
      */
@@ -75,5 +75,4 @@ class GridView {
 
         return $result;
     }
-
 }

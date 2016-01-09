@@ -1,7 +1,7 @@
 <?php namespace Comet\Http\Requests;
 
-class SaveRoleRequest extends Request {
-
+class SaveRoleRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,5 +23,4 @@ class SaveRoleRequest extends Request {
             'display_name' => 'required|min:3'
         ];
     }
-
 }

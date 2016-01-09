@@ -9,8 +9,8 @@ use Karlomikus\Theme\Theme;
  *
  * @package Comet\Http\Controllers\Public
  */
-class LocalController extends Controller {
-
+class LocalController extends Controller
+{
     /**
      * @var \Comet\User|null Currently logged in user
      */
@@ -32,9 +32,8 @@ class LocalController extends Controller {
         $this->currentUser = \Auth::user();
         $this->theme = $theme;
 
-        start_measure('theme_setup','Time for theme setup');
+        start_measure('theme_setup', 'Time for theme setup');
         $this->theme->set('foundation');
         stop_measure('theme_setup');
     }
-
 }

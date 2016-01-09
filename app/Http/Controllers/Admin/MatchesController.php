@@ -10,8 +10,8 @@ use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface as Teams;
 use Comet\Core\Contracts\Repositories\MatchesRepositoryInterface as Matches;
 use Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface as Opponents;
 
-class MatchesController extends AdminController {
-
+class MatchesController extends AdminController
+{
     use TraitTrashable;
 
     protected $matches;
@@ -76,8 +76,7 @@ class MatchesController extends AdminController {
 
         if ($this->matches->insert($data)) {
             $this->alerts->alertSuccess('Match saved successfully.');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to save a match.');
         }
 
@@ -106,10 +105,11 @@ class MatchesController extends AdminController {
     {
         $data = $request->all();
 
-        if ($this->matches->update($id, $data))
+        if ($this->matches->update($id, $data)) {
             $this->alerts->alertSuccess('Match updated successfully.');
-        else
+        } else {
             $this->alerts->alertError('Unable to update a match.');
+        }
 
         // Browsers are dumb and can't follow 302 redirect from ajax call
         // return redirect('admin/matches')->with('alerts', $this->getAlerts());
@@ -121,8 +121,7 @@ class MatchesController extends AdminController {
     {
         if ($this->matches->delete($id)) {
             $this->alerts->alertSuccess('Match deleted succesfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to delete a match!');
         }
 
@@ -144,5 +143,4 @@ class MatchesController extends AdminController {
 
         return response()->json($data);
     }
-
-} 
+}

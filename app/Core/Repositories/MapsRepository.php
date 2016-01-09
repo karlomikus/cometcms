@@ -52,8 +52,7 @@ class MapsRepository extends EloquentRepository implements MapsRepositoryInterfa
             }
 
             return true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
 
             return false;
@@ -76,8 +75,9 @@ class MapsRepository extends EloquentRepository implements MapsRepositoryInterfa
 
         $totalMaps = count($mapNames);
         for ($i = 0; $i < $totalMaps; $i ++) {
-            if (!empty($mapNames[$i]))
+            if (!empty($mapNames[$i])) {
                 $this->insertMap($mapNames[$i], $gameID, $mapImages[$i]);
+            }
         }
     }
 
@@ -102,7 +102,9 @@ class MapsRepository extends EloquentRepository implements MapsRepositoryInterfa
         // Convert string values to integer
         $formMapIDs = array_map('intval', $formMapIDs);
         // Get current database map values
-        $currentMaps = array_values(array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray()));
+        $currentMaps = array_values(
+            array_flatten($this->model->select('id')->where('game_id', '=', $gameID)->get()->toArray())
+        );
         // Count maps coming from form
         $totalMaps = count($formMapIDs);
 
@@ -110,8 +112,7 @@ class MapsRepository extends EloquentRepository implements MapsRepositoryInterfa
         for ($i = 0; $i < $totalMaps; $i ++) {
             if (empty($formMapIDs[$i])) { // Map doesn't exist
                 $this->insertMap($maps[$i], $gameID, $files[$i]);
-            }
-            else { // Update existing map
+            } else { // Update existing map
                 if ($files[$i]) {
                     $this->updateImage($formMapIDs[$i], $files[$i]);
                 }
@@ -167,11 +168,13 @@ class MapsRepository extends EloquentRepository implements MapsRepositoryInterfa
     {
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if ($trash)
+        if ($trash) {
             $model->onlyTrashed();
+        }
 
-        if ($searchTerm)
+        if ($searchTerm) {
             $model->where('name', 'LIKE', '%' . $searchTerm . '%');
+        }
 
         $result['count'] = $model->count();
         $result['items'] = $model->skip($limit * ($page - 1))->take($limit)->get();

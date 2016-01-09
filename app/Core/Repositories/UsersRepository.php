@@ -59,11 +59,14 @@ class UsersRepository extends EloquentRepository implements UsersRepositoryInter
             ->join('users_profiles as profile', 'profile.user_id', '=', 'users.id')
             ->orderBy($sortColumn, $order);
 
-        if ($trash)
+        if ($trash) {
             $model->onlyTrashed();
+        }
 
-        if ($searchTerm)
-            $model->where('profile.first_name', 'LIKE', '%' . $searchTerm . '%')->orWhere('profile.last_name', 'LIKE', '%' . $searchTerm . '%');
+        if ($searchTerm) {
+            $model->where('profile.first_name', 'LIKE', '%' . $searchTerm . '%')
+                ->orWhere('profile.last_name', 'LIKE', '%' . $searchTerm . '%');
+        }
 
         $result['count'] = $model->count();
         $result['items'] = $model->with('roles')->skip($limit * ($page - 1))->take($limit)->get();

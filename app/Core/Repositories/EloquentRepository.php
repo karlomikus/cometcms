@@ -9,8 +9,8 @@ use Comet\Core\Contracts\RepositoryInterface;
  *
  * @package Comet\Repositories
  */
-abstract class EloquentRepository implements RepositoryInterface, TrashableInterface {
-
+abstract class EloquentRepository implements RepositoryInterface, TrashableInterface
+{
     /**
      * Specific model instance
      *
@@ -62,8 +62,7 @@ abstract class EloquentRepository implements RepositoryInterface, TrashableInter
 
         try {
             $model = $this->model->create($data);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 
@@ -84,8 +83,7 @@ abstract class EloquentRepository implements RepositoryInterface, TrashableInter
         try {
             $model = $this->model->withTrashed()->find($id);
             $model->update($data);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 
@@ -104,8 +102,7 @@ abstract class EloquentRepository implements RepositoryInterface, TrashableInter
 
         try {
             $deleted = $this->model->find($id)->delete();
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 
@@ -146,8 +143,7 @@ abstract class EloquentRepository implements RepositoryInterface, TrashableInter
         try {
             $this->model->withTrashed()->find($id)->forceDelete();
             $removed = true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 
@@ -166,8 +162,7 @@ abstract class EloquentRepository implements RepositoryInterface, TrashableInter
         try {
             $this->model->onlyTrashed()->restore();
             $restored = true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 
@@ -189,8 +184,7 @@ abstract class EloquentRepository implements RepositoryInterface, TrashableInter
                 $this->deleteFromTrash($model->id);
             }
             $emptied = true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
         }
 

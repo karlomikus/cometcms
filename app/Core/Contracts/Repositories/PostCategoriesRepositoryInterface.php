@@ -1,6 +1,7 @@
 <?php
 namespace Comet\Core\Contracts\Repositories;
 
-interface PostCategoriesRepositoryInterface {
+interface PostCategoriesRepositoryInterface
+{
 
 }

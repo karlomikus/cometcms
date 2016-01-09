@@ -1,7 +1,6 @@
 <?php namespace Comet\Events;
 
-abstract class Event {
-
-	//
+abstract class Event
+{
 
 }

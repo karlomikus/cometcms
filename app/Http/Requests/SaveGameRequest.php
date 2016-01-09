@@ -1,8 +1,8 @@
 <?php
 namespace Comet\Http\Requests;
 
-class SaveGameRequest extends Request {
-
+class SaveGameRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -35,5 +35,4 @@ class SaveGameRequest extends Request {
 
         return $rules;
     }
-
 }

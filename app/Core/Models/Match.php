@@ -104,10 +104,11 @@ class Match extends EloquentModel
     {
         // home_score and guest_score come from separate query
         // TODO: Add check for missing scores
-        if ($this->home_score > $this->guest_score)
+        if ($this->home_score > $this->guest_score) {
             return 'win';
-        elseif ($this->home_score < $this->guest_score)
+        } elseif ($this->home_score < $this->guest_score) {
             return 'lose';
+        }
 
         return 'draw';
     }

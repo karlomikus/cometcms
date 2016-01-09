@@ -40,11 +40,13 @@ class PostsRepository extends EloquentRepository implements PostsRepositoryInter
 
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if ($trash)
+        if ($trash) {
             $model->onlyTrashed();
+        }
 
-        if ($searchTerm)
+        if ($searchTerm) {
             $model->where('title', 'LIKE', '%' . $searchTerm . '%')->orWhere('slug', 'LIKE', '%' . $searchTerm . '%');
+        }
 
         $result['count'] = $model->count();
         $result['items'] = $model->with('author', 'category')->skip($limit * ($page - 1))->take($limit)->get();

@@ -3,31 +3,30 @@ namespace Comet\Libraries;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-trait ImageUploadTrait {
-
-    private $_path;
+trait ImageUploadTrait
+{
+    private $imageUploadPath;
 
     /**
      * Uploads and inserts image to database
      *
-     * @param int           $id     Model entity ID
-     * @param UploadedFile  $file   File object
+     * @param int $id Model entity ID
+     * @param UploadedFile $file File object
      * @return bool
      */
     public function insertImage($id, UploadedFile $file)
     {
-        // Set image name: [$id].jpg 
+        // Set image name: [$id].jpg
         $imageName = $id . '.' . $file->getClientOriginalExtension();
 
         try {
-            $file->move($this->_path, $imageName);
+            $file->move($this->imageUploadPath, $imageName);
 
             // Call default repository method to update image name
             parent::update($id, ['image' => $imageName]);
 
             return true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \Session::flash('exception', $e->getMessage());
 
             return false;
@@ -36,8 +35,8 @@ trait ImageUploadTrait {
 
     /**
      * Updates model image property
-     * 
-     * @param  int          $id   Model entity ID
+     *
+     * @param  int $id Model entity ID
      * @param  UploadedFile $file File object
      * @return bool
      */
@@ -49,21 +48,22 @@ trait ImageUploadTrait {
 
     /**
      * Deletes the file from disk and database
-     * 
-     * @param  int  $id  Model entity ID
+     *
+     * @param  int $id Model entity ID
      * @return bool
      */
     public function deleteImage($id)
     {
         $model = parent::get($id);
-        $filename = $this->_path . $model->image;
-        
+        $filename = $this->imageUploadPath . $model->image;
+
         if (file_exists($filename) && is_file($filename)) {
             parent::update($id, ['image' => null]);
 
             // Don't delete images during development process
-            if (\App::environment('local'))
+            if (\App::environment('local')) {
                 return true;
+            }
 
             return unlink($filename);
         }
@@ -73,12 +73,11 @@ trait ImageUploadTrait {
 
     /**
      * Set upload path
-     * 
+     *
      * @param string $path Full upload path
      */
     public function setUploadPath($path)
     {
-        $this->_path = $path;
+        $this->imageUploadPath = $path;
     }
-
 }

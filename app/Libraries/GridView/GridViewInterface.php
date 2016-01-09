@@ -1,8 +1,8 @@
 <?php
 namespace Comet\Libraries\GridView;
 
-interface GridViewInterface {
-
+interface GridViewInterface
+{
     /**
      * Returns paged results for a specific page
      *
@@ -15,5 +15,4 @@ interface GridViewInterface {
      * @return array
      */
     public function getByPageGrid($page, $limit, $sortColumn, $order, $searchTerm = null, $trash = false);
-
 }

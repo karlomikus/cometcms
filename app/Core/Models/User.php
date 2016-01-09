@@ -37,28 +37,28 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  */
 class User extends EloquentModel implements AuthenticatableContract, CanResetPasswordContract
 {
-	use Authenticatable, CanResetPassword, EntrustUserTrait, SoftDeletes;
+    use Authenticatable, CanResetPassword, EntrustUserTrait, SoftDeletes;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = ['username', 'email', 'password', 'image'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['username', 'email', 'password', 'image'];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = ['password', 'remember_token'];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 
     protected $dates = ['deleted_at'];
 

@@ -1,9 +1,7 @@
 <?php namespace Comet\Http\Requests;
 
-use Comet\Http\Requests\Request;
-
-class SaveOpponentRequest extends Request {
-
+class SaveOpponentRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,5 +24,4 @@ class SaveOpponentRequest extends Request {
             'image' => 'image'
         ];
     }
-
 }

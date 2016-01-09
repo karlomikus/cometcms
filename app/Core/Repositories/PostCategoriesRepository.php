@@ -9,18 +9,18 @@ use Comet\Core\Contracts\Repositories\PostCategoriesRepositoryInterface;
  *
  * @package Comet\Repositories
  */
-class PostCategoriesRepository extends EloquentRepository implements PostCategoriesRepositoryInterface 
+class PostCategoriesRepository extends EloquentRepository implements PostCategoriesRepositoryInterface
 {
-	/**
-	 * @param PostCategory $postCategory
-	 */
-	public function __construct(PostCategory $postCategory)
-	{
-		parent::__construct($postCategory);
-	}
+    /**
+     * @param PostCategory $postCategory
+     */
+    public function __construct(PostCategory $postCategory)
+    {
+        parent::__construct($postCategory);
+    }
 
-	public function getOrInsert($data)
-	{
-		return $this->model->firstOrCreate($data);
-	}
+    public function getOrInsert($data)
+    {
+        return $this->model->firstOrCreate($data);
+    }
 }

@@ -11,8 +11,8 @@ use Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface as Opponents;
  *
  * @category Admin controllers
  */
-class OpponentsController extends AdminController {
-
+class OpponentsController extends AdminController
+{
     use Trash;
 
     /**
@@ -76,8 +76,7 @@ class OpponentsController extends AdminController {
                 $this->opponents->insertImage($opponent->id, $request->file('image'));
             }
             $this->alerts->alertSuccess('New opponent created successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Opponent creation failed!');
         }
 
@@ -120,8 +119,7 @@ class OpponentsController extends AdminController {
                 $this->opponents->updateImage($id, $request->file('image'));
             }
             $this->alerts->alertSuccess('Opponent succesfully edited!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Failed to edit an opponent!');
         }
 
@@ -138,8 +136,7 @@ class OpponentsController extends AdminController {
     {
         if ($this->opponents->delete($id)) {
             $this->alerts->alertSuccess('Opponent moved to trash succesfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to trash an opponent!');
         }
 
@@ -163,5 +160,4 @@ class OpponentsController extends AdminController {
 
         return response()->json(['success' => $fileDeleted, 'message' => $message]);
     }
-
 }

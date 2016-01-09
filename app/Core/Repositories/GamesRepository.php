@@ -75,11 +75,13 @@ class GamesRepository extends EloquentRepository implements GamesRepositoryInter
 
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if ($trash)
+        if ($trash) {
             $model->onlyTrashed();
+        }
 
-        if ($searchTerm)
+        if ($searchTerm) {
             $model->where('name', 'LIKE', '%' . $searchTerm . '%')->orWhere('code', 'LIKE', '%' . $searchTerm . '%');
+        }
 
         $result['count'] = $model->count();
         $result['items'] = $model->with('maps')->skip($limit * ($page - 1))->take($limit)->get();

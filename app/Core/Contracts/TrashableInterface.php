@@ -1,18 +1,19 @@
 <?php
 namespace Comet\Core\Contracts;
 
-interface TrashableInterface {
+interface TrashableInterface
+{
 
     /**
      * Get all trashed items
-     * 
+     *
      * @return mixed
      */
     public function getTrash();
 
     /**
      * Restore one item from trash
-     * 
+     *
      * @param  int $id ID of item to restore
      * @return bool
      */
@@ -20,7 +21,7 @@ interface TrashableInterface {
 
     /**
      * Permanently delete one item. This affects all his references.
-     * 
+     *
      * @param  int $id ID of item to delete
      * @return bool
      */
@@ -28,16 +29,15 @@ interface TrashableInterface {
 
     /**
      * Restore all items from trash
-     * 
+     *
      * @return bool
      */
     public function restoreAll();
 
     /**
      * Permanently delete all items from trash
-     * 
+     *
      * @return bool
      */
     public function emptyAll();
-
 }

@@ -57,11 +57,13 @@ class OpponentsRepository extends EloquentRepository implements OpponentsReposit
 
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if ($trash)
+        if ($trash) {
             $model->onlyTrashed();
+        }
 
-        if ($searchTerm)
+        if ($searchTerm) {
             $model->where('name', 'LIKE', '%' . $searchTerm . '%');
+        }
 
         $result['count'] = $model->count();
         $result['items'] = $model->skip($limit * ($page - 1))->take($limit)->get();

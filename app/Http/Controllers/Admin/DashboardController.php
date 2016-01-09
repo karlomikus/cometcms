@@ -5,8 +5,8 @@ use Comet\Core\Contracts\Repositories\MatchesRepositoryInterface;
 use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
 use Comet\Services\StatisticsService;
 
-class DashboardController extends AdminController {
-
+class DashboardController extends AdminController
+{
     protected $stats;
     private $matches;
 
@@ -28,5 +28,4 @@ class DashboardController extends AdminController {
 
         return view('admin.dashboard.index', $template);
     }
-
-} 
+}

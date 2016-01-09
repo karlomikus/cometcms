@@ -63,8 +63,7 @@ class UsersController extends AdminController
                 $this->users->insertImage($user->id, $request->file('image'));
             }
             $this->alerts->alertSuccess('New user created successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('User creation failed!');
         }
 
@@ -103,8 +102,7 @@ class UsersController extends AdminController
             }
 
             $this->alerts->alertSuccess('User edited successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Error while updating the user!');
         }
 
@@ -117,8 +115,7 @@ class UsersController extends AdminController
     {
         if ($this->users->delete($id)) {
             $this->alerts->alertSuccess('User deleted succesfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Error deleting a user!');
         }
 
@@ -137,8 +134,7 @@ class UsersController extends AdminController
             if (count($result) == 0) {
                 $this->setMessage('No users found!');
             }
-        }
-        else {
+        } else {
             $this->setMessage('Search string must contain at least 3 characters!');
         }
 

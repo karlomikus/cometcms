@@ -8,8 +8,8 @@ use Comet\Services\AlertsService as Alerts;
  * Base admin controller
  * @package Comet\Http\Controllers\Admin
  */
-class AdminController extends Controller {
-
+class AdminController extends Controller
+{
     /**
      * @var Alerts Alerts instance
      */
@@ -40,4 +40,4 @@ class AdminController extends Controller {
         $this->breadcrumbs->setDivider('');
         view()->share('breadcrumbs', $this->breadcrumbs);
     }
-} 
+}

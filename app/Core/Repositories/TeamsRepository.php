@@ -147,8 +147,7 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
                     'captain'  => isset($member['captain']) ? (int) $member['captain'] : 0
                 ]);
             }
-        }
-        else { // Soft delete the old roster and create a new one
+        } else { // Soft delete the old roster and create a new one
             $this->deleteAllMembers($teamID);
             $this->insertMembers($roster, $teamID);
         }

@@ -14,11 +14,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class PostCategory extends EloquentModel
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
-	protected $fillable = [
-		'name'
-	];
+    protected $fillable = [
+        'name'
+    ];
 
-	protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 }

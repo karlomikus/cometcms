@@ -74,13 +74,15 @@ class RolesRepository extends EloquentRepository implements RolesRepositoryInter
 
         $model = $this->model->orderBy($sortColumn, $order);
 
-        if ($trash)
+        if ($trash) {
             $model->onlyTrashed();
+        }
 
-        if ($searchTerm)
+        if ($searchTerm) {
             $model->where('name', 'LIKE', '%' . $searchTerm . '%')
                 ->orWhere('display_name', 'LIKE', '%' . $searchTerm . '%')
                 ->orWhere('description', 'LIKE', '%' . $searchTerm . '%');
+        }
 
         $result['count'] = $model->count();
         $result['items'] = $model->skip($limit * ($page - 1))->take($limit)->get();

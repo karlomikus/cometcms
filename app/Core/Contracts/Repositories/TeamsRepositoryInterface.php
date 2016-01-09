@@ -1,8 +1,6 @@
 <?php
 namespace Comet\Core\Contracts\Repositories;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 interface TeamsRepositoryInterface
 {
     /**
@@ -48,8 +46,8 @@ interface TeamsRepositoryInterface
     /**
      * Compare changes of current roster with given roster
      *
-     * @param  int  $teamID
-     * @param  array  $roster
+     * @param  int $teamID
+     * @param  array $roster
      * @return boolean
      */
     public function hasRosterChanges($teamID, $roster);

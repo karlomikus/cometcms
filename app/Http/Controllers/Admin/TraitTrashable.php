@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 /**
  * Implements general methods for trash actions used by most of the controllers.
  */
-trait TraitTrashable {
-
+trait TraitTrashable
+{
     /**
      * @var
      */
@@ -78,14 +78,13 @@ trait TraitTrashable {
     {
         if ($this->data->restoreFromTrash($id)) {
             $this->alerts->alertSuccess('Item restored successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to restore an item!');
         }
 
         $this->alerts->getAlerts();
 
-         return redirect($this->redirectUrl);
+        return redirect($this->redirectUrl);
     }
 
     /**
@@ -98,8 +97,7 @@ trait TraitTrashable {
     {
         if ($this->data->deleteFromTrash($id)) {
             $this->alerts->alertSuccess('Item and it\'s references successfully deleted!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to delete an item!');
         }
 
@@ -117,8 +115,7 @@ trait TraitTrashable {
     {
         if ($this->data->restoreAll()) {
             $this->alerts->alertSuccess('Successfully restored all items from trash!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to restore all items from trash!');
         }
 
@@ -136,8 +133,7 @@ trait TraitTrashable {
     {
         if ($this->data->emptyAll()) {
             $this->alerts->alertSuccess('Successfully deleted all items from trash!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to empty the trash!');
         }
 
@@ -145,5 +141,4 @@ trait TraitTrashable {
 
         redirect($this->redirectUrl);
     }
-
 }

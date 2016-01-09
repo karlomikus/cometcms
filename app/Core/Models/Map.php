@@ -28,7 +28,7 @@ class Map extends EloquentModel
 
     protected $dates = ['deleted_at'];
 
-	protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     protected $fillable = ['name', 'image', 'game_id'];
 

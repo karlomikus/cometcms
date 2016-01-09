@@ -14,8 +14,8 @@ use Comet\Core\Contracts\Repositories\MapsRepositoryInterface as Maps;
  *
  * @package Comet\Http\Controllers\Admin
  */
-class GamesController extends AdminController {
-
+class GamesController extends AdminController
+{
     use Trash, TraitApi;
 
     /**
@@ -86,14 +86,12 @@ class GamesController extends AdminController {
             // Insert maps
             if ($request->has('mapname')) {
                 $maps->insertMaps($formMaps, $game->id, $request->file('mapimage'));
-            }
-            else { // Insert default map
+            } else { // Insert default map
                 $maps->insertMap('Default map', $game->id);
             }
 
             $this->alerts->alertSuccess('New game created successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Game creation failed!');
         }
 
@@ -138,12 +136,16 @@ class GamesController extends AdminController {
             }
 
             if ($request->has('mapname')) {
-                $maps->updateMaps($request->input('mapname'), $request->input('mapid'), $id, $request->file('mapimage'));
+                $maps->updateMaps(
+                    $request->input('mapname'),
+                    $request->input('mapid'),
+                    $id,
+                    $request->file('mapimage')
+                );
             }
 
             $this->alerts->alertSuccess('Game edited successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Game edit failed!');
         }
 
@@ -160,8 +162,7 @@ class GamesController extends AdminController {
     {
         if ($this->games->delete($gameID)) {
             $this->alerts->alertSuccess('Game moved to trash successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to trash a game!');
         }
 

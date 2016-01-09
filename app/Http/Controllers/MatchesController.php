@@ -4,8 +4,8 @@ use Comet\Http\Requests;
 use Comet\Repositories\Contracts\MatchesRepositoryInterface;
 use Comet\Http\Controllers\Local\LocalController;
 
-class MatchesController extends LocalController {
-
+class MatchesController extends LocalController
+{
     protected $matches;
 
     public function __construct(MatchesRepositoryInterface $matches)
@@ -15,7 +15,7 @@ class MatchesController extends LocalController {
         $this->matches = $matches;
     }
 
-	public function index()
+    public function index()
     {
         $data['matches'] = $this->matches->all();
 
@@ -33,5 +33,4 @@ class MatchesController extends LocalController {
     {
         return redirect('/matches');
     }
-
 }

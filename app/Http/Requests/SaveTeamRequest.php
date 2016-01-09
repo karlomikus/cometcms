@@ -3,8 +3,8 @@ namespace Comet\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 
-class SaveTeamRequest extends Request {
-
+class SaveTeamRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +23,9 @@ class SaveTeamRequest extends Request {
     public function rules()
     {
         $rules = [
-            'name'     => 'required|min:3',
-            'gameId'     => 'required|integer',
-            'image' => 'image',
+            'name'   => 'required|min:3',
+            'gameId' => 'required|integer',
+            'image'  => 'image',
             'roster' => 'required|array'
         ];
 
@@ -42,9 +42,10 @@ class SaveTeamRequest extends Request {
         $errors = $validator->errors()->all();
 
         $response = [
-            'data' => null,
+            'data'    => null,
             'message' => $errors
         ];
+
         return $response;
     }
 }

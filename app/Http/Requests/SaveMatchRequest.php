@@ -1,8 +1,8 @@
 <?php
 namespace Comet\Http\Requests;
 
-class SaveMatchRequest extends Request {
-
+class SaveMatchRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -58,5 +58,4 @@ class SaveMatchRequest extends Request {
 
         return $messages;
     }
-
 }

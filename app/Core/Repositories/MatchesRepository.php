@@ -91,16 +91,20 @@ class MatchesRepository extends EloquentRepository implements MatchesRepositoryI
             ->join('games', 'games.id', '=', 'matches.game_id')
             ->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
             ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
-            ->select('matches.*', \DB::raw('sum(round_scores.home) as home_score, sum(round_scores.guest) as guest_score'))
+            ->select('matches.*', \DB::raw(
+                'sum(round_scores.home) as home_score, sum(round_scores.guest) as guest_score'
+            ))
             ->groupBy('matches.id');
 
-        if ($trash)
+        if ($trash) {
             $model->onlyTrashed();
+        }
 
-        if ($searchTerm)
+        if ($searchTerm) {
             $model->where('opponents.name', 'LIKE', '%' . $searchTerm . '%')
                 ->orWhere('teams.name', 'LIKE', '%' . $searchTerm . '%')
                 ->orWhere('games.name', 'LIKE', '%' . $searchTerm . '%');
+        }
 
         $model->orderBy($sortColumn, $order)->with('team', 'opponent', 'game');
         $result['count'] = $this->model->count();
@@ -119,7 +123,9 @@ class MatchesRepository extends EloquentRepository implements MatchesRepositoryI
         $model = $this->model
             ->join('match_rounds', 'match_rounds.match_id', '=', 'matches.id')
             ->join('round_scores', 'round_scores.round_id', '=', 'match_rounds.id')
-            ->select('matches.id', \DB::raw('sum(round_scores.home) as home, sum(round_scores.guest) as guest'), 'matches.date')
+            ->select('matches.id', \DB::raw(
+                'sum(round_scores.home) as home, sum(round_scores.guest) as guest'
+            ), 'matches.date')
             ->groupBy('matches.id');
 
         return $model->get();
@@ -183,8 +189,7 @@ class MatchesRepository extends EloquentRepository implements MatchesRepositoryI
                     ]);
                 }
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollback();
 
             dd($e->getMessage());
@@ -277,8 +282,7 @@ class MatchesRepository extends EloquentRepository implements MatchesRepositoryI
                     ]);
                 }
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollback();
 
             return false;

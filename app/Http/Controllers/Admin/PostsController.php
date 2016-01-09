@@ -14,8 +14,8 @@ use Comet\Core\Contracts\Repositories\PostCategoriesRepositoryInterface as Categ
  *
  * @category Admin controllers
  */
-class PostsController extends AdminController {
-
+class PostsController extends AdminController
+{
     use Trash;
 
     /**
@@ -81,8 +81,7 @@ class PostsController extends AdminController {
 
         if ($post) {
             $this->alerts->alertSuccess('New post created successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Post creation failed!');
         }
 
@@ -117,8 +116,7 @@ class PostsController extends AdminController {
 
         if ($post) {
             $this->alerts->alertSuccess('Post successfully edited!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Failed to edit a post!');
         }
 
@@ -131,8 +129,7 @@ class PostsController extends AdminController {
     {
         if ($this->posts->delete($id)) {
             $this->alerts->alertSuccess('Post moved to trash successfully!');
-        }
-        else {
+        } else {
             $this->alerts->alertError('Unable to trash this post!');
         }
 
@@ -140,5 +137,4 @@ class PostsController extends AdminController {
 
         return redirect('admin/posts');
     }
-
 }

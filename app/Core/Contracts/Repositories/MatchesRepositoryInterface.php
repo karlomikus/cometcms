@@ -1,8 +1,8 @@
 <?php
 namespace Comet\Core\Contracts\Repositories;
 
-interface MatchesRepositoryInterface {
-
+interface MatchesRepositoryInterface
+{
     /**
      * Get match round data
      *
@@ -13,7 +13,7 @@ interface MatchesRepositoryInterface {
 
     /**
      * Render JSON for use in viewmodels
-     * 
+     *
      * @param  int $matchID Match ID
      * @return mixed
      */
@@ -21,10 +21,9 @@ interface MatchesRepositoryInterface {
 
     /**
      * Deletes all rounds and it's scores for a given match ID
-     * 
+     *
      * @param  int $matchID Match ID
      * @return void
      */
     public function deleteRoundsAndScores($matchID);
-
 }
