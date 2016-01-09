@@ -204,6 +204,6 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
         $currentMembers = $this->getTeamMembersUserIDs($teamID);
         $newMembers = array_pluck($roster, 'userId');
 
-        return !($currentMembers === $newMembers);
+        return !($currentMembers == $newMembers);
     }
 }

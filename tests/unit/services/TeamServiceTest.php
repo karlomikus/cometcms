@@ -82,7 +82,7 @@ class TeamServiceTest extends TestCase
     public function a_team_must_have_a_game_assigned()
     {
         $this->setExpectedException(\Exception::class);
-        
+
         $this->team->addTeam('Test', null, 'Content', $this->members);
     }
 
