@@ -1,7 +1,9 @@
-<?php namespace Comet\Http\Controllers\Admin;
+<?php
+namespace Comet\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Comet\Libraries\GridView\GridView;
+use Comet\Core\Services\OpponentService;
 use Comet\Http\Requests\SaveOpponentRequest;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
 use Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface as Opponents;
@@ -15,19 +17,19 @@ class OpponentsController extends AdminController
 {
     use Trash;
 
-    /**
-     * Local repository instance
-     */
     private $opponents;
+
+    protected $service;
 
     /**
      * @param Opponents $opponents
      */
-    public function __construct(Opponents $opponents)
+    public function __construct(Opponents $opponents, OpponentService $service)
     {
         parent::__construct();
 
         $this->opponents = $opponents;
+        $this->service = $service;
         $this->trashInit($this->opponents, 'admin/opponents/trash', 'admin.opponents.trash');
         $this->breadcrumbs->addCrumb('Opponents', 'opponents');
     }
@@ -35,14 +37,21 @@ class OpponentsController extends AdminController
     /**
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $grid = new GridView($this->opponents);
-        $data = $grid->gridPage(15);
+        $options = [
+            'page' => $request->query('page'),
+            'limit' => $request->query('limit', 5),
+            'search' => $request->query('search'),
+            'order' => $request->query('order', 'name'),
+            'direction' => $request->query('dir', 'asc')
+        ];
 
-        $data['pageTitle'] = 'Opponents';
+        $grid = $this->service->getGridView($options);
 
-        return view('admin.opponents.index', $data);
+        return view('admin.opponents.index')
+            ->with('pageTitle', 'Opponents')
+            ->with('grid', $grid);
     }
 
     /**

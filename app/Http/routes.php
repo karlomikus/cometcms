@@ -129,8 +129,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/roles/delete/{id}', 'Admin\RolesController@delete');
 });
 
-Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
+// Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/'));
 
-Entrust::routeNeedsPermission('admin/matches/new', 'create-match');
-Entrust::routeNeedsPermission('admin/matches/edit', 'edit-match');
-Entrust::routeNeedsPermission('admin/matches/delete', 'delete-match');
+// Entrust::routeNeedsPermission('admin/matches/new', 'create-match');
+// Entrust::routeNeedsPermission('admin/matches/edit', 'edit-match');
+// Entrust::routeNeedsPermission('admin/matches/delete', 'delete-match');
+
+// Route::get('admin/opponents/test', 'Admin\OpponentsController@test');

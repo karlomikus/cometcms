@@ -15,6 +15,8 @@ return [
 
     'debug' => env('APP_DEBUG'),
 
+    'env' => env('APP_ENV', 'production'),
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -113,13 +115,11 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Routing\ControllerServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -142,9 +142,9 @@ return [
          */
         Barryvdh\Debugbar\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
         Karlomikus\Theme\ThemeServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         Comet\Providers\AppServiceProvider::class,
         Comet\Providers\EventServiceProvider::class,
@@ -202,9 +202,9 @@ return [
 
         // Aplication specific facades
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Form'      => Illuminate\Html\FormFacade::class,
         'Theme'     => Karlomikus\Theme\Facade\Theme::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'Form'      => Collective\Html\FormFacade::class,
     ],
 
 ];

@@ -70,4 +70,9 @@ class OpponentsRepository extends EloquentRepository implements OpponentsReposit
 
         return $result;
     }
+
+    public function part($page, $limit)
+    {
+        return $this->model->skip($limit * ($page - 1))->take($limit)->get();
+    }
 }
