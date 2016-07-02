@@ -1,6 +1,7 @@
 <?php
 namespace Comet\Http\Controllers\Admin;
 
+use Creitive\Breadcrumbs\Breadcrumbs;
 use Comet\Http\Controllers\Controller;
 use Comet\Services\AlertsService as Alerts;
 
@@ -27,7 +28,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        \Debugbar::disable();
+        \Debugbar::enable();
         // Alerts
         $this->alerts = new Alerts();
 
@@ -35,7 +36,7 @@ class AdminController extends Controller
         $this->currentUser = \Auth::user();
 
         // Breadcrumbs
-        $this->breadcrumbs = new \Creitive\Breadcrumbs\Breadcrumbs;
+        $this->breadcrumbs = new Breadcrumbs;
         $this->breadcrumbs->addCrumb('Dashboard', '/admin');
         $this->breadcrumbs->setDivider('');
         view()->share('breadcrumbs', $this->breadcrumbs);

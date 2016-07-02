@@ -1,6 +1,8 @@
 <?php
 namespace Comet\Core\Team;
 
+use Comet\Core\Team\Exceptions\TeamException;
+use Comet\Core\Team\Contracts\TeamServiceContract;
 use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
 
 /**
@@ -8,7 +10,7 @@ use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
  *
  * @package Comet\Core\Team
  */
-class TeamService
+class TeamService implements TeamServiceContract
 {
     private $teams;
 
@@ -75,6 +77,10 @@ class TeamService
      */
     public function addTeam($name, $gameId, $description, $roster, $image = null)
     {
+        if (empty($roster)) {
+            throw new TeamException('A team must have at least one valid member!');
+        }
+
         $data = [
             'name' => $name,
             'game_id' => $gameId,
@@ -112,5 +118,20 @@ class TeamService
         $team = $this->teams->update($id, $data);
 
         return $team;
+    }
+
+    /**
+     * Compare changes of current roster with given roster
+     *
+     * @param  int  $teamID
+     * @param  array  $roster
+     * @return boolean
+     */
+    public function hasRosterChanges($teamID, $roster)
+    {
+        $currentMembers = $this->teams->getTeamMembersUserIDs($teamID);
+        $newMembers = array_pluck($roster, 'userId');
+
+        return !($currentMembers == $newMembers);
     }
 }

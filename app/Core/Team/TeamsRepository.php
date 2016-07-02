@@ -4,7 +4,7 @@ namespace Comet\Core\Team;
 use DB;
 use Carbon\Carbon;
 use Comet\Core\Team\Team;
-use Comet\Core\Exceptions\TeamException;
+use Comet\Core\Team\Exceptions\TeamException;
 use Comet\Core\Common\EloquentRepository;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
 use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
@@ -38,10 +38,6 @@ class TeamsRepository extends EloquentRepository implements TeamsRepositoryInter
      */
     public function insertMembers(array $data, $teamID)
     {
-        if (empty($data)) {
-            throw new TeamException('A team must have at least one valid member!');
-        }
-
         // We go through each element since we need to get rid of garbage properties from client JSON
         foreach ($data as $member) {
             DB::table('team_roster')->insert([

@@ -1,5 +1,5 @@
 <?php
-namespace Comet\Core\Team;
+namespace Comet\Core\Team\Transformers;
 
 use League\Fractal\TransformerAbstract;
 

@@ -1,9 +1,8 @@
 <?php
-namespace Comet\Core\Exceptions;
+namespace Comet\Core\Team\Exceptions;
 
 use Exception;
 
 class TeamException extends Exception
 {
-
 }

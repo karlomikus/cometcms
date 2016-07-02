@@ -5,27 +5,54 @@ use Exception;
 use Comet\Core\Team\TeamService;
 use Comet\Core\Gateways\MetaGateway;
 use Comet\Http\Requests\SaveTeamRequest;
-use Comet\Core\Team\TeamTransformer;
-use Comet\Core\Team\TeamHistoryTransformer;
-use Comet\Core\Team\TeamMembersTransformer;
+use Comet\Core\Team\Transformers\TeamTransformer;
+use Comet\Core\Team\Transformers\TeamHistoryTransformer;
+use Comet\Core\Team\Transformers\TeamMembersTransformer;
 
+/**
+ * Teams (Squads) Controller
+ *
+ * @package Comet\Http\Controllers\Admin
+ * @author Karlo Mikus <contact@karlomikus.com>
+ */
 class TeamsController extends AdminController
 {
     use TraitApi;
 
+    /**
+     * Team Service
+     *
+     * @var TeamServiceInterface
+     */
     private $service;
 
-    private $meta;
+    /**
+     * Aggregate Service
+     *
+     * @var AggregateServiceInterface
+     */
+    private $aggregate;
 
-    public function __construct(TeamService $service, MetaGateway $meta)
+    /**
+     * Create a controller instance
+     *
+     * @param TeamService $service
+     * @param MetaGateway $aggregate
+     */
+    public function __construct(TeamService $service, MetaGateway $aggregate)
     {
         parent::__construct();
 
         $this->service = $service;
-        $this->meta = $meta;
+        $this->aggregate = $aggregate;
         $this->breadcrumbs->addCrumb('Squads', 'teams');
     }
 
+    /**
+     * List all squads
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $data = $this->service->getTeams();
@@ -35,11 +62,16 @@ class TeamsController extends AdminController
             ->with('data', $data);
     }
 
+    /**
+     * Show create new squad form
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         $this->breadcrumbs->addCrumb('New', 'new');
 
-        $games = $this->meta->getAllGames();
+        $games = $this->aggregate->getAllGames();
 
         return view('admin.teams.form')
             ->with('pageTitle', 'Create new squad')
@@ -48,6 +80,12 @@ class TeamsController extends AdminController
             ->with('history', null);
     }
 
+    /**
+     * Save a squad
+     *
+     * @param  SaveTeamRequest $request
+     * @return \Illuminate\Http\Response
+     */
     public function save(SaveTeamRequest $request)
     {
         try {
@@ -66,11 +104,17 @@ class TeamsController extends AdminController
         }
     }
 
+    /**
+     * Show edit squad form
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $this->breadcrumbs->addCrumb('Edit squad', 'edit');
 
-        $games = $this->meta->getAllGames();
+        $games = $this->aggregate->getAllGames();
         $history = $this->service->getTeamHistory($id);
         $team = $this->service->getTeam($id);
 
@@ -81,6 +125,13 @@ class TeamsController extends AdminController
             ->with('history', $history);
     }
 
+    /**
+     * Update a squad
+     *
+     * @param  int $id
+     * @param  SaveTeamRequest $request
+     * @return \Illuminate\Http\Response
+     */
     public function update($id, SaveTeamRequest $request)
     {
         try {
@@ -99,11 +150,23 @@ class TeamsController extends AdminController
         }
     }
 
+    /**
+     * Delete a team
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function delete($id)
     {
         // TODO
     }
 
+    /**
+     * Get a team data
+     *
+     * @param  int $teamID
+     * @return \Illuminate\Http\Response
+     */
     public function get($teamID)
     {
         $data = $this->service->getTeam($teamID);
@@ -111,6 +174,12 @@ class TeamsController extends AdminController
         return $this->respondWithItem($data, new TeamTransformer());
     }
 
+    /**
+     * Get squad members history
+     *
+     * @param  int $teamID
+     * @return \Illuminate\Http\Response
+     */
     public function getHistory($teamID)
     {
         $data = $this->service->getTeamHistory($teamID);

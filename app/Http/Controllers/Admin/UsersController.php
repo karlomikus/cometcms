@@ -4,7 +4,7 @@ use Comet\Core\Models\Role;
 use Illuminate\Http\Request;
 use Comet\Libraries\GridView\GridView;
 use Comet\Http\Requests\SaveUserRequest;
-use Comet\Core\User\UserTransformer;
+use Comet\Core\User\Transformers\UserTransformer;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
 use Comet\Core\Contracts\Repositories\UsersRepositoryInterface;
 use Comet\Core\Contracts\Repositories\RolesRepositoryInterface;

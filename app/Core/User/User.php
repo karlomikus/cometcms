@@ -1,49 +1,34 @@
 <?php
 namespace Comet\Core\User;
 
-use Comet\Core\User\UsersProfile;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Comet\Core\Role\Role;
+use Comet\Core\User\Profile;
+use Comet\Core\User\Models\UserBaseModel;
 
 /**
  * User
  *
  * @package Comet\Core\User
  */
-class User extends Authenticatable
+class User extends UserBaseModel
 {
-    use EntrustUserTrait;
-
     /**
-     * The database table used by the model.
+     * Users roles
      *
-     * @var string
+     * @return Collection
      */
-    protected $table = 'users';
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
     /**
-     * The attributes that are mass assignable.
+     * Users profile
      *
-     * @var array
-     */
-    protected $fillable = ['username', 'email', 'password', 'image'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
-
-    protected $dates = ['deleted_at'];
-
-    /**
-     * User profile
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return Profile
      */
     public function profile()
     {
-        return $this->hasOne(UsersProfile::class);
+        return $this->hasOne(Profile::class);
     }
 }
