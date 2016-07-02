@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Comet\Libraries\GridView\GridView;
 use Comet\Http\Requests\SaveGameRequest;
-use Comet\Core\Transformers\GameTransformer;
+use Comet\Core\Game\GameTransformer;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
 use Comet\Core\Contracts\Repositories\GamesRepositoryInterface as Games;
 use Comet\Core\Contracts\Repositories\MapsRepositoryInterface as Maps;

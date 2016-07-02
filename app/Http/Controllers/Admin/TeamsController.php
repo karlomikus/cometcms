@@ -5,9 +5,9 @@ use Exception;
 use Comet\Core\Team\TeamService;
 use Comet\Core\Gateways\MetaGateway;
 use Comet\Http\Requests\SaveTeamRequest;
-use Comet\Core\Transformers\TeamTransformer;
-use Comet\Core\Transformers\TeamHistoryTransformer;
-use Comet\Core\Transformers\TeamMembersTransformer;
+use Comet\Core\Team\TeamTransformer;
+use Comet\Core\Team\TeamHistoryTransformer;
+use Comet\Core\Team\TeamMembersTransformer;
 
 class TeamsController extends AdminController
 {
