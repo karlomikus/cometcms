@@ -3,7 +3,7 @@ namespace Comet\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Comet\Libraries\GridView\GridView;
-use Comet\Core\Services\OpponentService;
+use Comet\Core\Opponent\OpponentService;
 use Comet\Http\Requests\SaveOpponentRequest;
 use Comet\Http\Controllers\Admin\TraitTrashable as Trash;
 use Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface as Opponents;

@@ -8,16 +8,16 @@ class RepositoryServiceProvider extends ServiceProvider
     private $namespace = 'Comet\Core\Contracts\Repositories\\';
 
     private $repos = [
-        'MatchesRepositoryInterface' => 'Comet\Core\Repositories\MatchesRepository',
-        'TeamsRepositoryInterface' => 'Comet\Core\Repositories\TeamsRepository',
-        'OpponentsRepositoryInterface' => 'Comet\Core\Repositories\OpponentsRepository',
-        'GamesRepositoryInterface' => 'Comet\Core\Repositories\GamesRepository',
-        'UsersRepositoryInterface' => 'Comet\Core\Repositories\UsersRepository',
-        'RolesRepositoryInterface' => 'Comet\Core\Repositories\RolesRepository',
-        'MapsRepositoryInterface' => 'Comet\Core\Repositories\MapsRepository',
-        'PostsRepositoryInterface' => 'Comet\Core\Repositories\PostsRepository',
-        'PostCategoriesRepositoryInterface' => 'Comet\Core\Repositories\PostCategoriesRepository',
-        'CountriesRepositoryInterface' => 'Comet\Core\Repositories\CountriesRepository',
+        'MatchesRepositoryInterface'        => 'Comet\Core\Match\MatchesRepository',
+        'TeamsRepositoryInterface'          => 'Comet\Core\Team\TeamsRepository',
+        'OpponentsRepositoryInterface'      => 'Comet\Core\Opponent\OpponentsRepository',
+        'GamesRepositoryInterface'          => 'Comet\Core\Game\GamesRepository',
+        'UsersRepositoryInterface'          => 'Comet\Core\User\UsersRepository',
+        'RolesRepositoryInterface'          => 'Comet\Core\Role\RolesRepository',
+        'MapsRepositoryInterface'           => 'Comet\Core\Map\MapsRepository',
+        'PostsRepositoryInterface'          => 'Comet\Core\Post\PostsRepository',
+        'PostCategoriesRepositoryInterface' => 'Comet\Core\Post\PostCategoriesRepository',
+        'CountriesRepositoryInterface'      => 'Comet\Core\Country\CountriesRepository',
     ];
 
     /**

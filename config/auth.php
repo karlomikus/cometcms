@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Comet\Core\Models\User::class,
+            'model' => Comet\Core\User\User::class,
         ],
 
         // 'users' => [

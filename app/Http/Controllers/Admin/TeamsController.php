@@ -2,7 +2,7 @@
 namespace Comet\Http\Controllers\Admin;
 
 use Exception;
-use Comet\Core\Services\TeamService;
+use Comet\Core\Team\TeamService;
 use Comet\Core\Gateways\MetaGateway;
 use Comet\Http\Requests\SaveTeamRequest;
 use Comet\Core\Transformers\TeamTransformer;

@@ -19,7 +19,7 @@ return array(
     | the role if it is in a different namespace.
     |
     */
-    'role' => Comet\Core\Models\Role::class,
+    'role' => Comet\Core\Role\Role::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return array(
     | Update the permission if it is in a different namespace.
     |
     */
-    'permission' => Comet\Core\Models\Permission::class,
+    'permission' => Comet\Core\Role\Permission::class,
 
     /*
     |--------------------------------------------------------------------------
