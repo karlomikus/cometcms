@@ -1,6 +1,8 @@
-var Vue = require('Vue');
-var _ = require('underscore');
-Vue.use(require('vue-resource'));
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+import _ from 'underscore';
+
+Vue.use(VueResource);
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
 Vue.config.debug = true;
@@ -15,7 +17,7 @@ Vue.filter('moment', function (value, format) {
 /**
  * TODO: Member search dropdown status message, image upload
  */
-var vm = new Vue({
+new Vue({
     el: '#squad-form',
 
     data: {
@@ -58,7 +60,7 @@ var vm = new Vue({
         initFormData: function () {
             var squadID = parseInt($('#team-id').val());
             if (squadID) {
-                this.$http.get('/admin/api/teams/' + squadID, function (response) {
+                this.$http.get('/admin/api/teams/' + squadID).then((response) => {
                     response.data.roster.data = response.data.roster.data.map(function (obj) {
                         if (obj.image == null) {
                             obj.image = 'noavatar.jpg';
@@ -68,7 +70,9 @@ var vm = new Vue({
 
                     this.squad = response.data;
                     this.squad.roster = response.data.roster.data;
-                }).error(this.handleError);
+                }, (response) => {
+                    this.handleError(response);
+                });
             }
         },
 
@@ -127,11 +131,13 @@ var vm = new Vue({
          */
         getHistory: function () {
             if (this.squad.id) {
-                this.$http.get('/admin/api/teams/history/' + this.squad.id, function (response) {
+                this.$http.get('/admin/api/teams/history/' + this.squad.id).then((response) => {
                     this.history = _.groupBy(response.data, function (historyItem) {
                         return historyItem.replacedOn;
                     });
-                }).error(this.handleError);
+                }, (response) => {
+                    this.handleError(response);
+                });
             }
         },
 
@@ -139,7 +145,7 @@ var vm = new Vue({
          * Fetch games for games dropdown
          */
         getGames: function () {
-            this.$http.get('/admin/api/games/', function (response) {
+            this.$http.get('/admin/api/games/').then((response) => {
                 this.games = response.data;
                 var self = this;
                 var $game = $('#game');
@@ -154,7 +160,9 @@ var vm = new Vue({
                 if (this.squad.gameId) {
                     $game.select2('val', this.squad.gameId);
                 }
-            }).error(this.handleError);
+            }, (response) => {
+                this.handleError(response);
+            });
         },
 
         /**

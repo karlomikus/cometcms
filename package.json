@@ -1,22 +1,17 @@
 {
   "private": true,
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
+  },
   "devDependencies": {
-    "gulp": "^3.8.8"
+    "gulp": "^3.9.1",
+    "laravel-elixir": "^5.0.0"
   },
   "dependencies": {
-    "Select2": "github:select2/select2",
-    "bootstrap": "3.3.4",
-    "bootstrap-sass": "3.3.4",
-    "chart.js": "1.0.2",
-    "jquery": "2.1.4",
-    "jquery-datetimepicker": "^2.4.0",
-    "jquery-validation": "1.14.0",
-    "knockout": "3.3.0",
-    "laravel-elixir": "*",
-    "moment": "2.10.6",
-    "simplemde": "1.7.1",
+    "simplemde": "1.11.2",
     "underscore": "^1.8.3",
-    "vue": "^1.0.10",
-    "vue-resource": "^0.1.17"
+    "vue": "^1.0.26",
+    "vue-resource": "^0.9.3"
   }
 }

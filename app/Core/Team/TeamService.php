@@ -90,10 +90,30 @@ class TeamService implements TeamServiceContract
 
         $team = $this->teams->insert($data);
         if ($image) {
-            $this->teams->insertImage($team->id, $image);
+            $this->addTeamImage($team->id, $image);
         }
 
         return $team;
+    }
+
+    /**
+     * Uploads and inserts image to database
+     *
+     * @param int $id Model entity ID
+     * @param UploadedFile $file File object
+     * @return bool
+     */
+    public function updateTeamImage($id, UploadedFile $file)
+    {
+        // $imageName = $id . '.' . $file->getClientOriginalExtension();
+
+        // try {
+        //     $file->move($this->imageUploadPath, $imageName);
+
+        //     return $this->teams->update($id, ['image' => $imageName]);
+        // } catch (\Exception $e) {
+        //     return null;
+        // }
     }
 
     /**
