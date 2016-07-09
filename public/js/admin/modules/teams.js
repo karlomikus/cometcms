@@ -13078,7 +13078,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _vue2.default.use(_vueResource2.default);
 
-_vue2.default.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
 _vue2.default.config.debug = true;
 
 /**
@@ -13091,7 +13090,7 @@ _vue2.default.filter('moment', function (value, format) {
 /**
  * TODO: Member search dropdown status message, image upload
  */
-var vm = new _vue2.default({
+new _vue2.default({
     el: '#squad-form',
 
     data: {
@@ -13107,7 +13106,8 @@ var vm = new _vue2.default({
         history: [],
         foundUsers: [],
         searchTerm: null,
-        isSubmitting: false
+        isSubmitting: false,
+        token: null
     },
 
     ready: function ready() {
@@ -13115,18 +13115,22 @@ var vm = new _vue2.default({
         this.initFormData();
         this.getGames();
         this.getHistory();
+        _vue2.default.http.headers.common['X-CSRF-TOKEN'] = this.token;
     },
+
 
     methods: {
 
         /**
          * Setup member search
          */
+
         initMembersSearch: function initMembersSearch() {
             $('#search-users').focus(function () {
                 $('#found-users-list').dropdown();
             });
         },
+
 
         /**
          * Setup form data
@@ -13137,20 +13141,21 @@ var vm = new _vue2.default({
             var squadID = parseInt($('#team-id').val());
             if (squadID) {
                 this.$http.get('/admin/api/teams/' + squadID).then(function (response) {
-                    response.data.roster.data = response.data.roster.data.map(function (obj) {
+                    response.data.data.roster.data = response.data.data.roster.data.map(function (obj) {
                         if (obj.image == null) {
                             obj.image = 'noavatar.jpg';
                         }
                         return obj;
                     });
 
-                    _this.squad = response.data;
-                    _this.squad.roster = response.data.roster.data;
+                    _this.squad = response.data.data;
+                    _this.squad.roster = response.data.data.roster.data;
                 }, function (response) {
-                    _this.handleError(response);
+                    _this.handleError(response.data);
                 });
             }
         },
+
 
         /**
          * Add new member to roster
@@ -13169,6 +13174,7 @@ var vm = new _vue2.default({
             }
         },
 
+
         /**
          * Remove member index from array
          * @param index
@@ -13176,6 +13182,7 @@ var vm = new _vue2.default({
         removeMember: function removeMember(index) {
             this.squad.roster.splice(index, 1);
         },
+
 
         /**
          * Make selected member a captain
@@ -13187,13 +13194,16 @@ var vm = new _vue2.default({
             });
         },
 
+
         /**
          * Get users by a search term
          */
         getUsers: function getUsers() {
+            var _this2 = this;
+
             if (this.searchTerm.length < 3) return;
-            this.$http.get('/admin/api/users', { q: this.searchTerm }, function (response) {
-                this.foundUsers = response.data.map(function (obj) {
+            this.$http.get('/admin/api/users?q=' + this.searchTerm).then(function (response) {
+                _this2.foundUsers = response.data.data.map(function (obj) {
                     if (obj.image == null) {
                         obj.image = 'noavatar.jpg';
                     }
@@ -13202,77 +13212,85 @@ var vm = new _vue2.default({
             });
         },
 
+
         /**
          * Fetch squad history
          */
         getHistory: function getHistory() {
-            var _this2 = this;
+            var _this3 = this;
 
             if (this.squad.id) {
                 this.$http.get('/admin/api/teams/history/' + this.squad.id).then(function (response) {
-                    _this2.history = _underscore2.default.groupBy(response.data, function (historyItem) {
+                    _this3.history = _underscore2.default.groupBy(response.data.data, function (historyItem) {
                         return historyItem.replacedOn;
                     });
                 }, function (response) {
-                    _this2.handleError(response);
+                    _this3.handleError(response);
                 });
             }
         },
+
 
         /**
          * Fetch games for games dropdown
          */
         getGames: function getGames() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.$http.get('/admin/api/games/').then(function (response) {
-                _this3.games = response.data;
-                var self = _this3;
+                _this4.games = response.data.data;
+                var self = _this4;
                 var $game = $('#game');
                 $game.select2({
                     placeholder: 'Select a game...',
-                    data: _this3.games,
+                    data: _this4.games,
                     templateResult: formatGame
                 }).on('change', function () {
                     self.squad.gameId = parseInt($(this).val());
                 });
 
-                if (_this3.squad.gameId) {
-                    $game.select2('val', _this3.squad.gameId);
+                if (_this4.squad.gameId) {
+                    $game.select2('val', _this4.squad.gameId);
                 }
             }, function (response) {
-                _this3.handleError(response);
+                _this4.handleError(response);
             });
         },
 
+
         /**
          * Submit form
+         * @return {void}
          */
         onSubmit: function onSubmit() {
+            var _this5 = this;
+
             if (!$('#squad-form').valid()) return;
-            var self = this;
-            self.isSubmitting = true;
+            this.isSubmitting = true;
+
             if (this.squad.id) {
-                this.$http.put('/admin/teams/' + this.squad.id, this.squad, function (response) {
-                    showAlert.success(response.message);
-                }).error(this.handleError).always(function () {
-                    self.isSubmitting = false;
+                this.$http.put('/admin/teams/' + this.squad.id, this.squad).then(function (response) {
+                    showAlert.success(response.data.message);
+                    _this5.isSubmitting = false;
+                }, function (response) {
+                    _this5.handleError(response.data);
                 });
                 this.getHistory();
             } else {
-                this.$http.post('/admin/teams/', this.squad, function (response) {
+                this.$http.post('/admin/teams/', this.squad).then(function (response) {
                     showAlert.success(response.message);
-                    var newTeamId = response.data.id;
-                    window.location.href = '/admin/teams/edit/' + newTeamId;
-                }).error(this.handleError).always(function () {
-                    self.isSubmitting = false;
+                    window.location.href = '/admin/teams/edit/' + response.data.data.id;
+                }, function (response) {
+                    _this5.handleError(response.data);
                 });
             }
         },
 
+
         /**
-         * Handle errors
-         * @param response
+         * Handle response errors
+         * @param  {object} response
+         * @return {void}
          */
         handleError: function handleError(response) {
             var message = '';
@@ -13283,6 +13301,7 @@ var vm = new _vue2.default({
             } else {
                 message = response.message;
             }
+            this.isSubmitting = false;
 
             showAlert.error(message);
         }

@@ -7,10 +7,16 @@
     </div>
 @endsection
 
+@push('page-scripts')
+    <script src="{{ asset('/js/admin/lib/select2.full.min.js') }}"></script>
+    <script src="{{ asset('/js/admin/modules/teams.js') }}"></script>
+@endpush
+
 @section('content')
     <div class="container">
         <div id="alerts-container"></div>
-        {!! Form::open(['id' => 'squad-form', 'class' => 'row', 'files' => true, 'v-on:submit.prevent' => 'onSubmit']) !!}
+        <form method="post" action="{{ url()->current() }}" id="squad-form" class="row" enctype="multipart/form-data" @submit.prevent="onSubmit">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" v-model="token">
             <div class="col-md-9">
                 <div class="section section-main">
                     <div class="row">
@@ -92,46 +98,41 @@
                     </div>
                 </div>
             </div>
-        <div class="col-md-3">
-            <div class="section section-main">
-                <div class="section-body" style="position: relative;">
-                    <div class="section-loader" v-if="isSubmitting">
-                        <div class="loader-inner line-scale-pulse-out">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
+            <div class="col-md-3">
+                <div class="section section-main">
+                    <div class="section-body" style="position: relative;">
+                        <div class="section-loader" v-if="isSubmitting">
+                            <div class="loader-inner line-scale-pulse-out">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </div>
+                        <input id="team-id" type="hidden" value="{{ $team->id or null }}">
+                        <button id="save-squad" class="btn btn-block btn-action" type="submit" :disabled="isSubmitting">Save squad</button>
+                        <a href="/admin/teams" class="btn btn-block btn-primary">Cancel</a>
+                        @if($team)
+                            <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
+                        @endif
                     </div>
-                    <input id="team-id" type="hidden" value="{{ $team->id or null }}">
-                    <button id="save-squad" class="btn btn-block btn-action" type="submit" :disabled="isSubmitting">Save squad</button>
-                    <a href="/admin/teams" class="btn btn-block btn-primary">Cancel</a>
-                    @if($team)
-                        <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
-                    @endif
                 </div>
-            </div>
-            <div class="section section-main">
-                <div class="row" v-if="history">
-                    <div class="col-md-12">
-                        <div class="squad-history-item" v-for="(date, roster) in history">
-                            <h3 data-toggle="collapse" data-target="#history-id-@{{ $index }}">@{{ date | moment 'DD.MM.YYYY' }}</h3>
-                            <div class="collapse" id="history-id-@{{ $index }}">
-                                <ul class="list-group">
-                                    <li class="list-group-item" v-for="member in roster">@{{ member.firstName }} @{{ member.lastName }} (@{{ member.position }})</li>
-                                </ul>
+                <div class="section section-main">
+                    <div class="row" v-if="history">
+                        <div class="col-md-12">
+                            <div class="squad-history-item" v-for="(date, roster) in history">
+                                <h3 data-toggle="collapse" data-target="#history-id-@{{ $index }}">@{{ date | moment 'DD.MM.YYYY' }}</h3>
+                                <div class="collapse" id="history-id-@{{ $index }}">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" v-for="member in roster">@{{ member.firstName }} @{{ member.lastName }} (@{{ member.position }})</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {!! Form::close() !!}
+        </form>
     </div>
-@endsection
-
-@section('page-scripts')
-    <script src="{{ asset('/js/admin/lib/select2.full.min.js') }}"></script>
-    <script src="{{ asset('/js/admin/modules/teams.js') }}"></script>
 @endsection

@@ -4,7 +4,6 @@ import _ from 'underscore';
 
 Vue.use(VueResource);
 
-Vue.http.headers.common['X-CSRF-TOKEN'] = $('input[name="_token"]').val();
 Vue.config.debug = true;
 
 /**
@@ -33,14 +32,16 @@ new Vue({
         history: [],
         foundUsers: [],
         searchTerm: null,
-        isSubmitting: false
+        isSubmitting: false,
+        token: null
     },
 
-    ready: function () {
+    ready() {
         this.initMembersSearch();
         this.initFormData();
         this.getGames();
         this.getHistory();
+        Vue.http.headers.common['X-CSRF-TOKEN'] = this.token;
     },
 
     methods: {
@@ -48,7 +49,7 @@ new Vue({
         /**
          * Setup member search
          */
-        initMembersSearch: function () {
+        initMembersSearch() {
             $('#search-users').focus(function () {
                 $('#found-users-list').dropdown();
             });
@@ -57,21 +58,21 @@ new Vue({
         /**
          * Setup form data
          */
-        initFormData: function () {
-            var squadID = parseInt($('#team-id').val());
+        initFormData() {
+            let squadID = parseInt($('#team-id').val());
             if (squadID) {
                 this.$http.get('/admin/api/teams/' + squadID).then((response) => {
-                    response.data.roster.data = response.data.roster.data.map(function (obj) {
+                    response.data.data.roster.data = response.data.data.roster.data.map(obj => {
                         if (obj.image == null) {
                             obj.image = 'noavatar.jpg';
                         }
                         return obj;
                     });
 
-                    this.squad = response.data;
-                    this.squad.roster = response.data.roster.data;
+                    this.squad = response.data.data;
+                    this.squad.roster = response.data.data.roster.data;
                 }, (response) => {
-                    this.handleError(response);
+                    this.handleError(response.data);
                 });
             }
         },
@@ -80,11 +81,11 @@ new Vue({
          * Add new member to roster
          * @param user
          */
-        addMember: function (user) {
+        addMember(user) {
             // Vue - Change detection caveat
             user = Object.assign({}, user, {position: null, captain: false, status: null, userId: user.id});
 
-            var exists = $.grep(this.squad.roster, function (e) {
+            let exists = $.grep(this.squad.roster, e => {
                 return e.userId === user.id;
             });
 
@@ -97,7 +98,7 @@ new Vue({
          * Remove member index from array
          * @param index
          */
-        removeMember: function (index) {
+        removeMember(index) {
             this.squad.roster.splice(index, 1);
         },
 
@@ -105,8 +106,8 @@ new Vue({
          * Make selected member a captain
          * @param index
          */
-        makeCaptain: function (index) {
-            this.squad.roster.forEach(function (member, i) {
+        makeCaptain(index) {
+            this.squad.roster.forEach((member, i) => {
                 member.captain = index == i;
             });
         },
@@ -114,10 +115,10 @@ new Vue({
         /**
          * Get users by a search term
          */
-        getUsers: function () {
+        getUsers() {
             if (this.searchTerm.length < 3) return;
-            this.$http.get('/admin/api/users', {q: this.searchTerm}, function (response) {
-                this.foundUsers = response.data.map(function (obj) {
+            this.$http.get('/admin/api/users?q=' + this.searchTerm).then((response) => {
+                this.foundUsers = response.data.data.map(obj => {
                     if (obj.image == null) {
                         obj.image = 'noavatar.jpg';
                     }
@@ -129,10 +130,10 @@ new Vue({
         /**
          * Fetch squad history
          */
-        getHistory: function () {
+        getHistory() {
             if (this.squad.id) {
                 this.$http.get('/admin/api/teams/history/' + this.squad.id).then((response) => {
-                    this.history = _.groupBy(response.data, function (historyItem) {
+                    this.history = _.groupBy(response.data.data, function (historyItem) {
                         return historyItem.replacedOn;
                     });
                 }, (response) => {
@@ -144,11 +145,11 @@ new Vue({
         /**
          * Fetch games for games dropdown
          */
-        getGames: function () {
+        getGames() {
             this.$http.get('/admin/api/games/').then((response) => {
-                this.games = response.data;
-                var self = this;
-                var $game = $('#game');
+                this.games = response.data.data;
+                let self = this;
+                let $game = $('#game');
                 $game.select2({
                     placeholder: 'Select a game...',
                     data: this.games,
@@ -167,43 +168,46 @@ new Vue({
 
         /**
          * Submit form
+         * @return {void}
          */
-        onSubmit: function () {
+        onSubmit() {
             if(!$('#squad-form').valid()) return;
-            var self = this;
-            self.isSubmitting = true;
+            this.isSubmitting = true;
+
             if (this.squad.id) {
-                this.$http.put('/admin/teams/' + this.squad.id, this.squad, function (response) {
-                    showAlert.success(response.message);
-                }).error(this.handleError).always(function () {
-                    self.isSubmitting = false;
+                this.$http.put('/admin/teams/' + this.squad.id, this.squad).then((response) => {
+                    showAlert.success(response.data.message);
+                    this.isSubmitting = false;
+                }, (response) => {
+                    this.handleError(response.data);
                 });
                 this.getHistory();
             } else {
-                this.$http.post('/admin/teams/', this.squad, function (response) {
+                this.$http.post('/admin/teams/', this.squad).then((response) => {
                     showAlert.success(response.message);
-                    var newTeamId = response.data.id;
-                    window.location.href = '/admin/teams/edit/' + newTeamId;
-                }).error(this.handleError).always(function () {
-                    self.isSubmitting = false;
+                    window.location.href = '/admin/teams/edit/' + response.data.data.id;
+                }, (response) => {
+                    this.handleError(response.data);
                 });
             }
         },
 
         /**
-         * Handle errors
-         * @param response
+         * Handle response errors
+         * @param  {object} response
+         * @return {void}
          */
-        handleError: function (response) {
-            var message = '';
+        handleError(response) {
+            let message = '';
             if (_.isArray(response.message)) {
-                _.each(response.message, function (msg) {
+                _.each(response.message, msg => {
                     message += msg + '<br>';
                 });
             }
             else {
                 message = response.message;
             }
+            this.isSubmitting = false;
 
             showAlert.error(message);
         }

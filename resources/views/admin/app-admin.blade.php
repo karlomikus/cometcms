@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>CometCMS App</title>
-    
+
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300|Montserrat|Raleway:300,500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('css/admin/main.css') }}">
@@ -107,6 +107,6 @@
 <script src="{{ asset('js/admin/dependencies.js') }}"></script>
 @yield('page-scripts-before')
 <script src="{{ asset('js/admin/main.js') }}"></script>
-@yield('page-scripts')
+@stack('page-scripts')
 </body>
 </html>
