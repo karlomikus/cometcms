@@ -13102,12 +13102,13 @@ new _vue2.default({
             image: null,
             roster: []
         },
-        games: [],
-        history: [],
+        games: _page.games,
+        history: _page.history,
         foundUsers: [],
         searchTerm: null,
         isSubmitting: false,
-        token: null
+        token: null,
+        teamID: null
     },
 
     ready: function ready() {
@@ -13133,25 +13134,17 @@ new _vue2.default({
 
 
         /**
-         * Setup form data
+         * Initiate form defaults
+         * @return {void}
          */
         initFormData: function initFormData() {
-            var _this = this;
-
-            var squadID = parseInt($('#team-id').val());
-            if (squadID) {
-                this.$http.get('/admin/api/teams/' + squadID).then(function (response) {
-                    response.data.data.roster.data = response.data.data.roster.data.map(function (obj) {
-                        if (obj.image == null) {
-                            obj.image = 'noavatar.jpg';
-                        }
-                        return obj;
-                    });
-
-                    _this.squad = response.data.data;
-                    _this.squad.roster = response.data.data.roster.data;
-                }, function (response) {
-                    _this.handleError(response.data);
+            if (this.teamID) {
+                this.squad = _page.squad;
+                this.squad.roster = _page.squad.roster.data.map(function (obj) {
+                    if (obj.image == null) {
+                        obj.image = 'noavatar.jpg';
+                    }
+                    return obj;
                 });
             }
         },
@@ -13199,11 +13192,11 @@ new _vue2.default({
          * Get users by a search term
          */
         getUsers: function getUsers() {
-            var _this2 = this;
+            var _this = this;
 
             if (this.searchTerm.length < 3) return;
             this.$http.get('/admin/api/users?q=' + this.searchTerm).then(function (response) {
-                _this2.foundUsers = response.data.data.map(function (obj) {
+                _this.foundUsers = response.data.data.map(function (obj) {
                     if (obj.image == null) {
                         obj.image = 'noavatar.jpg';
                     }
@@ -13214,47 +13207,42 @@ new _vue2.default({
 
 
         /**
-         * Fetch squad history
+         * Get team history
+         * @return {void}
          */
         getHistory: function getHistory() {
-            var _this3 = this;
+            var _this2 = this;
 
-            if (this.squad.id) {
-                this.$http.get('/admin/api/teams/history/' + this.squad.id).then(function (response) {
-                    _this3.history = _underscore2.default.groupBy(response.data.data, function (historyItem) {
+            if (this.teamID) {
+                this.$http.get('/admin/api/teams/history/' + this.teamID).then(function (response) {
+                    _this2.history = _underscore2.default.groupBy(response.data.data, function (historyItem) {
                         return historyItem.replacedOn;
                     });
                 }, function (response) {
-                    _this3.handleError(response);
+                    _this2.handleError(response);
                 });
             }
         },
 
 
         /**
-         * Fetch games for games dropdown
+         * Handle games dropdown
+         * @return {void}
          */
         getGames: function getGames() {
-            var _this4 = this;
-
-            this.$http.get('/admin/api/games/').then(function (response) {
-                _this4.games = response.data.data;
-                var self = _this4;
-                var $game = $('#game');
-                $game.select2({
-                    placeholder: 'Select a game...',
-                    data: _this4.games,
-                    templateResult: formatGame
-                }).on('change', function () {
-                    self.squad.gameId = parseInt($(this).val());
-                });
-
-                if (_this4.squad.gameId) {
-                    $game.select2('val', _this4.squad.gameId);
-                }
-            }, function (response) {
-                _this4.handleError(response);
+            var self = this;
+            var $game = $('#game');
+            $game.select2({
+                placeholder: 'Select a game...',
+                data: this.games,
+                templateResult: formatGame
+            }).on('change', function () {
+                self.squad.gameId = parseInt($(this).val());
             });
+
+            if (this.squad.gameId) {
+                $game.select2('val', this.squad.gameId);
+            }
         },
 
 
@@ -13263,7 +13251,7 @@ new _vue2.default({
          * @return {void}
          */
         onSubmit: function onSubmit() {
-            var _this5 = this;
+            var _this3 = this;
 
             if (!$('#squad-form').valid()) return;
             this.isSubmitting = true;
@@ -13271,9 +13259,9 @@ new _vue2.default({
             if (this.squad.id) {
                 this.$http.put('/admin/teams/' + this.squad.id, this.squad).then(function (response) {
                     showAlert.success(response.data.message);
-                    _this5.isSubmitting = false;
+                    _this3.isSubmitting = false;
                 }, function (response) {
-                    _this5.handleError(response.data);
+                    _this3.handleError(response.data);
                 });
                 this.getHistory();
             } else {
@@ -13281,7 +13269,7 @@ new _vue2.default({
                     showAlert.success(response.message);
                     window.location.href = '/admin/teams/edit/' + response.data.data.id;
                 }, function (response) {
-                    _this5.handleError(response.data);
+                    _this3.handleError(response.data);
                 });
             }
         },

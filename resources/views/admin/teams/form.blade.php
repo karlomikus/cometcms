@@ -8,6 +8,12 @@
 @endsection
 
 @push('page-scripts')
+    <script>
+        var _page = {
+            squad: {!! json_encode($team) !!},
+            games: {!! json_encode($games) !!}
+        };
+    </script>
     <script src="{{ asset('/js/admin/lib/select2.full.min.js') }}"></script>
     <script src="{{ asset('/js/admin/modules/teams.js') }}"></script>
 @endpush
@@ -16,7 +22,9 @@
     <div class="container">
         <div id="alerts-container"></div>
         <form method="post" action="{{ url()->current() }}" id="squad-form" class="row" enctype="multipart/form-data" @submit.prevent="onSubmit">
+            <pre>@{{ $data | json }}</pre>
             <input type="hidden" name="_token" value="{{ csrf_token() }}" v-model="token">
+            <input type="hidden" id="team-id" value="{{ $team['id'] or null }}" v-model="teamID">
             <div class="col-md-9">
                 <div class="section section-main">
                     <div class="row">
@@ -110,11 +118,10 @@
                                 <div></div>
                             </div>
                         </div>
-                        <input id="team-id" type="hidden" value="{{ $team->id or null }}">
                         <button id="save-squad" class="btn btn-block btn-action" type="submit" :disabled="isSubmitting">Save squad</button>
                         <a href="/admin/teams" class="btn btn-block btn-primary">Cancel</a>
                         @if($team)
-                            <a href="{{ url('admin/teams/delete', ['id' => $team->id]) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
+                            <a href="{{ url('admin/teams/delete', $team['id']) }}" class="btn btn-block btn-danger" data-confirm="Are you sure you want to delete this squad?">Delete squad</a>
                         @endif
                     </div>
                 </div>

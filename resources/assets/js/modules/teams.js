@@ -28,12 +28,13 @@ new Vue({
             image: null,
             roster: []
         },
-        games: [],
-        history: [],
+        games: _page.games,
+        history: _page.history,
         foundUsers: [],
         searchTerm: null,
         isSubmitting: false,
-        token: null
+        token: null,
+        teamID: null
     },
 
     ready() {
@@ -56,23 +57,17 @@ new Vue({
         },
 
         /**
-         * Setup form data
+         * Initiate form defaults
+         * @return {void}
          */
         initFormData() {
-            let squadID = parseInt($('#team-id').val());
-            if (squadID) {
-                this.$http.get('/admin/api/teams/' + squadID).then((response) => {
-                    response.data.data.roster.data = response.data.data.roster.data.map(obj => {
-                        if (obj.image == null) {
-                            obj.image = 'noavatar.jpg';
-                        }
-                        return obj;
-                    });
-
-                    this.squad = response.data.data;
-                    this.squad.roster = response.data.data.roster.data;
-                }, (response) => {
-                    this.handleError(response.data);
+            if (this.teamID) {
+                this.squad = _page.squad;
+                this.squad.roster = _page.squad.roster.data.map(obj => {
+                    if (obj.image == null) {
+                        obj.image = 'noavatar.jpg';
+                    }
+                    return obj;
                 });
             }
         },
@@ -128,11 +123,12 @@ new Vue({
         },
 
         /**
-         * Fetch squad history
+         * Get team history
+         * @return {void}
          */
         getHistory() {
-            if (this.squad.id) {
-                this.$http.get('/admin/api/teams/history/' + this.squad.id).then((response) => {
+            if (this.teamID) {
+                this.$http.get('/admin/api/teams/history/' + this.teamID).then((response) => {
                     this.history = _.groupBy(response.data.data, function (historyItem) {
                         return historyItem.replacedOn;
                     });
@@ -143,27 +139,23 @@ new Vue({
         },
 
         /**
-         * Fetch games for games dropdown
+         * Handle games dropdown
+         * @return {void}
          */
         getGames() {
-            this.$http.get('/admin/api/games/').then((response) => {
-                this.games = response.data.data;
-                let self = this;
-                let $game = $('#game');
-                $game.select2({
-                    placeholder: 'Select a game...',
-                    data: this.games,
-                    templateResult: formatGame
-                }).on('change', function () {
-                    self.squad.gameId = parseInt($(this).val());
-                });
-
-                if (this.squad.gameId) {
-                    $game.select2('val', this.squad.gameId);
-                }
-            }, (response) => {
-                this.handleError(response);
+            let self = this;
+            let $game = $('#game');
+            $game.select2({
+                placeholder: 'Select a game...',
+                data: this.games,
+                templateResult: formatGame
+            }).on('change', function () {
+                self.squad.gameId = parseInt($(this).val());
             });
+
+            if (this.squad.gameId) {
+                $game.select2('val', this.squad.gameId);
+            }
         },
 
         /**

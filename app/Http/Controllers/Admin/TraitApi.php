@@ -75,6 +75,20 @@ trait TraitApi
         return $this->respondWithArray($rootScope->toArray());
     }
 
+    protected function transformCollection($collection, $callback)
+    {
+        $resource = new Collection($collection, $callback);
+
+        return $this->getFractalManager()->createData($resource)->toArray()['data'];
+    }
+
+    protected function transformItem($item, $callback)
+    {
+        $resource = new Item($item, $callback);
+
+        return $this->getFractalManager()->createData($resource)->toArray()['data'];
+    }
+
     /**
      * Respond with transformed collection
      *

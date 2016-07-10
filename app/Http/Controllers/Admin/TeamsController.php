@@ -3,6 +3,7 @@ namespace Comet\Http\Controllers\Admin;
 
 use Exception;
 use Comet\Core\Team\TeamService;
+use Comet\Core\Game\GameTransformer;
 use Comet\Core\Gateways\MetaGateway;
 use Comet\Http\Requests\SaveTeamRequest;
 use Comet\Core\Team\Transformers\TeamTransformer;
@@ -71,13 +72,13 @@ class TeamsController extends AdminController
     {
         $this->breadcrumbs->addCrumb('New', 'new');
 
-        $games = $this->aggregate->getAllGames();
+        $pageTitle = 'Create new squad';
+        $team = null;
+        $games = $this->transformCollection($this->aggregate->getAllGames(), new GameTransformer);
 
-        return view('admin.teams.form')
-            ->with('pageTitle', 'Create new squad')
-            ->with('games', $games)
-            ->with('team', null)
-            ->with('history', null);
+        $data = compact('pageTitle', 'team', 'games');
+
+        return view('admin.teams.form', $data);
     }
 
     /**
@@ -114,15 +115,21 @@ class TeamsController extends AdminController
     {
         $this->breadcrumbs->addCrumb('Edit squad', 'edit');
 
-        $games = $this->aggregate->getAllGames();
-        $history = $this->service->getTeamHistory($id);
-        $team = $this->service->getTeam($id);
+        $pageTitle = 'Editing a squad';
 
-        return view('admin.teams.form')
-            ->with('pageTitle', 'Editing a squad')
-            ->with('games', $games)
-            ->with('team', $team)
-            ->with('history', $history);
+        $games = $this->transformCollection(
+            $this->aggregate->getAllGames(),
+            new GameTransformer
+        );
+
+        $team = $this->transformItem(
+            $this->service->getTeam($id),
+            new TeamTransformer
+        );
+
+        $data = compact('pageTitle', 'games', 'team');
+
+        return view('admin.teams.form', $data);
     }
 
     /**
@@ -162,7 +169,7 @@ class TeamsController extends AdminController
     }
 
     /**
-     * Get a team data
+     * Get a team data (API)
      *
      * @param  int $teamID
      * @return \Illuminate\Http\Response
@@ -175,7 +182,7 @@ class TeamsController extends AdminController
     }
 
     /**
-     * Get squad members history
+     * Get squad members history (API)
      *
      * @param  int $teamID
      * @return \Illuminate\Http\Response

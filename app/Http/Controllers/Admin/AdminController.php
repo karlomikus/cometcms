@@ -28,7 +28,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        \Debugbar::enable();
+        \Debugbar::disable();
         // Alerts
         $this->alerts = new Alerts();
 
