@@ -22,7 +22,6 @@
     <div class="container">
         <div id="alerts-container"></div>
         <form method="post" action="{{ url()->current() }}" id="squad-form" class="row" enctype="multipart/form-data" @submit.prevent="onSubmit">
-            <pre>@{{ $data | json }}</pre>
             <input type="hidden" name="_token" value="{{ csrf_token() }}" v-model="token">
             <input type="hidden" id="team-id" value="{{ $team['id'] or null }}" v-model="teamID">
             <div class="col-md-9">
