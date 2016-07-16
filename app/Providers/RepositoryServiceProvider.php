@@ -5,19 +5,17 @@ use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-    private $namespace = 'Comet\Core\Contracts\Repositories\\';
-
     private $repos = [
-        'MatchesRepositoryInterface'        => 'Comet\Core\Match\MatchesRepository',
-        'TeamsRepositoryInterface'          => 'Comet\Core\Team\TeamsRepository',
-        'OpponentsRepositoryInterface'      => 'Comet\Core\Opponent\OpponentsRepository',
-        'GamesRepositoryInterface'          => 'Comet\Core\Game\GamesRepository',
-        'UsersRepositoryInterface'          => 'Comet\Core\User\UsersRepository',
-        'RolesRepositoryInterface'          => 'Comet\Core\Role\RolesRepository',
-        'MapsRepositoryInterface'           => 'Comet\Core\Map\MapsRepository',
-        'PostsRepositoryInterface'          => 'Comet\Core\Post\PostsRepository',
-        'PostCategoriesRepositoryInterface' => 'Comet\Core\Post\PostCategoriesRepository',
-        'CountriesRepositoryInterface'      => 'Comet\Core\Country\CountriesRepository',
+        'Comet\Core\Contracts\Repositories\MatchesRepositoryInterface'        => 'Comet\Core\Match\MatchesRepository',
+        'Comet\Core\Team\Contracts\TeamsRepositoryContract'          => 'Comet\Core\Team\TeamsRepository',
+        'Comet\Core\Contracts\Repositories\OpponentsRepositoryInterface'      => 'Comet\Core\Opponent\OpponentsRepository',
+        'Comet\Core\Contracts\Repositories\GamesRepositoryInterface'          => 'Comet\Core\Game\GamesRepository',
+        'Comet\Core\Contracts\Repositories\UsersRepositoryInterface'          => 'Comet\Core\User\UsersRepository',
+        'Comet\Core\Contracts\Repositories\RolesRepositoryInterface'          => 'Comet\Core\Role\RolesRepository',
+        'Comet\Core\Contracts\Repositories\MapsRepositoryInterface'           => 'Comet\Core\Map\MapsRepository',
+        'Comet\Core\Contracts\Repositories\PostsRepositoryInterface'          => 'Comet\Core\Post\PostsRepository',
+        'Comet\Core\Contracts\Repositories\PostCategoriesRepositoryInterface' => 'Comet\Core\Post\PostCategoriesRepository',
+        'Comet\Core\Contracts\Repositories\CountriesRepositoryInterface'      => 'Comet\Core\Country\CountriesRepository',
     ];
 
     /**
@@ -28,7 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         foreach ($this->repos as $contract => $impl) {
-            $this->app->bind($this->namespace . $contract, $impl);
+            $this->app->bind($contract, $impl);
         }
     }
 }

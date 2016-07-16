@@ -4,17 +4,17 @@ namespace Comet\Core\Team;
 use DB;
 use Carbon\Carbon;
 use Comet\Core\Team\Team;
-use Comet\Core\Team\Exceptions\TeamException;
 use Comet\Core\Common\EloquentRepository;
+use Comet\Core\Team\Exceptions\TeamException;
 use Comet\Libraries\ImageUploadTrait as ImageUpload;
-use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
+use Comet\Core\Team\Contracts\TeamsRepositoryContract;
 
 /**
  * Teams repository
  *
  * @package Comet\Repositories
  */
-class TeamsRepository extends EloquentRepository implements TeamsRepositoryInterface
+class TeamsRepository extends EloquentRepository implements TeamsRepositoryContract
 {
     use ImageUpload;
 

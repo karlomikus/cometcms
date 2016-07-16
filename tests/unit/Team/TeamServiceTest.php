@@ -1,8 +1,9 @@
 <?php
+namespace CometTests\Unit\Team;
 
-use Comet\Core\Services\TeamService;
-use Comet\Core\Exceptions\TeamException;
-use Comet\Core\Repositories\TeamsRepository;
+use CometTests\TestCase;
+use Comet\Core\Team\TeamService;
+use Comet\Core\Team\Exceptions\TeamException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TeamServiceTest extends TestCase
@@ -13,12 +14,15 @@ class TeamServiceTest extends TestCase
 
     protected $members;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
         $this->team = $this->app[TeamService::class];
+    }
 
+    protected function setUpMembers()
+    {
         $this->members[] = [
             'userId' => 1,
             'position' => 'Test position',
@@ -52,6 +56,7 @@ class TeamServiceTest extends TestCase
     /** @test */
     public function it_can_get_a_specific_team()
     {
+        $this->setUpMembers();
         $this->team->addTeam('Test', 1, 'Content', $this->members);
         $team = $this->team->getTeam(6);
 
@@ -63,6 +68,7 @@ class TeamServiceTest extends TestCase
     /** @test */
     public function it_can_create_a_team()
     {
+        $this->setUpMembers();
         $team = $this->team->addTeam('Test', 1, 'Content', $this->members);
 
         $this->assertEquals('Test', $team->name);
@@ -81,6 +87,7 @@ class TeamServiceTest extends TestCase
     /** @test */
     public function a_team_must_have_a_game_assigned()
     {
+        $this->setUpMembers();
         $this->setExpectedException(\Exception::class);
 
         $this->team->addTeam('Test', null, 'Content', $this->members);
@@ -89,6 +96,7 @@ class TeamServiceTest extends TestCase
     /** @test */
     public function a_member_of_team_must_be_a_valid_user()
     {
+        $this->setUpMembers();
         $member = $this->members[0];
         $memberAttributes = array_keys($member);
         $validAttributes = ['userId', 'position', 'status', 'captain'];

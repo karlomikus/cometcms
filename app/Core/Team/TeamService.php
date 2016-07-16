@@ -1,9 +1,10 @@
 <?php
 namespace Comet\Core\Team;
 
+use Illuminate\Http\UploadedFile;
 use Comet\Core\Team\Exceptions\TeamException;
 use Comet\Core\Team\Contracts\TeamServiceContract;
-use Comet\Core\Contracts\Repositories\TeamsRepositoryInterface;
+use Comet\Core\Team\Contracts\TeamsRepositoryContract;
 
 /**
  * Team Service
@@ -17,7 +18,7 @@ class TeamService implements TeamServiceContract
     /**
      * @param Teams $teams Teams repository
      */
-    public function __construct(TeamsRepositoryInterface $teams)
+    public function __construct(TeamsRepositoryContract $teams)
     {
         $this->teams = $teams;
     }
@@ -74,6 +75,7 @@ class TeamService implements TeamServiceContract
      * @param array $roster
      * @param File|null $image
      * @throws TeamException
+     * @return Team
      */
     public function addTeam($name, $gameId, $description, $roster, $image = null)
     {

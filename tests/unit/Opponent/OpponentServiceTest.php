@@ -1,5 +1,7 @@
 <?php
+namespace CometTests\Unit\Opponent;
 
+use CometTests\TestCase;
 use Comet\Core\Services\OpponentService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 

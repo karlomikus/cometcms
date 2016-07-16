@@ -74,7 +74,7 @@
       color: $color-primary-dark;
     }
     &:hover, &:active, &:focus {
-      background-color: #f7f7f7;
+      background-color: $table-bg-hover;
     }
   }
 }

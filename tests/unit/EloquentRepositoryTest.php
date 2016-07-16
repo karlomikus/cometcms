@@ -1,5 +1,7 @@
 <?php
+namespace CometTests\Unit;
 
+use CometTests\TestCase;
 use Comet\Core\Models\EloquentModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

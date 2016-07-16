@@ -1,5 +1,7 @@
 <?php
+namespace CometTests\Unit\Team;
 
+use CometTests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TeamsRepositoryTest extends TestCase
