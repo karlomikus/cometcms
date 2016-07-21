@@ -15,7 +15,10 @@
     "erusev/parsedown": "1.5.*",
     "karlomikus/theme": "1.*",
     "orchestra/html": "~3.0",
-    "creitive/laravel5-breadcrumbs": "^1.0"
+    "creitive/laravel5-breadcrumbs": "^1.0",
+    "behat/behat": "^3.1",
+    "behat/mink": "^1.7",
+    "behat/mink-extension": "^2.2"
   },
   "require-dev": {
     "symfony/dom-crawler": "~3.0",
@@ -26,7 +29,9 @@
     "fzaninotto/Faker": "dev-master",
     "barryvdh/laravel-ide-helper": "dev-master",
     "doctrine/dbal": "~2.3",
-    "barryvdh/laravel-debugbar": "dev-master"
+    "barryvdh/laravel-debugbar": "dev-master",
+    "behat/mink-selenium2-driver": "^1.3",
+    "laracasts/behat-laravel-extension": "^1.0"
   },
   "autoload": {
     "classmap": [
